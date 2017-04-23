@@ -1,0 +1,72 @@
+%!TEX TS-program = xelatex
+
+\documentclass[draft, oneside, final]{vutinfth}
+
+% -- Packages ------------------------------------------------------------------
+
+\usepackage{fontspec}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{nag}
+\usepackage{hyperref}
+\usepackage[acronym, toc]{glossaries}
+
+% -- Attributes ----------------------------------------------------------------
+
+\newcommand{\authorname}{René Schwaiger}
+\newcommand{\thesistitle}{Parsing of Configuration Files}
+
+\setauthor{}{\authorname}{}{male}
+\setadvisor{Ao.Univ.Prof. Dipl.-Ing. Dr.techn.}{Franz Puntigam}{}{male}
+\setfirstassistant{Markus Raab}{Markus Raab}{}{male}
+
+\setaddress{Waldmüllergasse 9}
+\setregnumber{0425176}
+\setdate{\day}{\month}{\year}
+\settitle{\thesistitle}{Parsing von Konfigurationsdateien}
+
+\setthesis{master}
+\setmasterdegree{dipl.}
+
+\setcurriculum{Computer Engineering}{Technische Informatik}
+
+% -- Package Settings ----------------------------------------------------------
+
+\hypersetup{
+  pdfauthor = {\authorname},
+  pdftitle = {\thesistitle},
+  pdfsubject = {Comparison of Different Parsing Methods},
+  pdfkeywords = {Parsing, Configuration, Elektra}
+}
+
+\nonzeroparskip
+\setlength{\parindent}{0pt}
+
+\makeindex
+\makeglossaries
+
+\setmainfont[Mapping=tex-text]{Seravek}
+\setsansfont[Mapping=tex-text]{Ubuntu}
+\setmonofont[Scale=MatchLowercase]{Menlo}
+
+% -- Document ------------------------------------------------------------------
+
+\begin{document}
+
+\frontmatter
+
+\addtitlepage{naustrian}
+\addtitlepage{english}
+\addstatementpage
+
+\selectlanguage{english}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Introduction}
+
+\backmatter
+
+\end{document}
