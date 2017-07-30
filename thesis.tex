@@ -33,12 +33,21 @@
 
 \setcurriculum{Computer Engineering}{Technische Informatik}
 
-% -- Package Settings ----------------------------------------------------------
+% -- Settings ------------------------------------------------------------------
+
+% Bibliography
+\addbibresource{References.bib}
 
 % Colors
 \definecolor{Red}{rgb}{0.84, 0.15, 0.19}
 \definecolor{Blue}{rgb}{0, 0.41, 0.60}
 
+% Fonts
+\setmainfont[Mapping=tex-text]{Seravek}
+\setsansfont[Mapping=tex-text]{Ubuntu}
+\setmonofont[Scale=MatchLowercase]{Menlo}
+
+% Hyperref
 \hypersetup{
   pdfauthor = {\authorname},
   pdftitle = {\thesistitle},
@@ -51,21 +60,18 @@
   urlcolor=Red
 }
 
-\nonzeroparskip
-\setlength{\parindent}{0pt}
-
+% Glossary
 \makeindex
 \makeglossaries
 
-\setmainfont[Mapping=tex-text]{Seravek}
-\setsansfont[Mapping=tex-text]{Ubuntu}
-\setmonofont[Scale=MatchLowercase]{Menlo}
+% Indentation & Paragraphs
+\nonzeroparskip
+\setlength{\parindent}{0pt}
 
 % Section & Paragraph Style
 \titleformat{\section}{\large\sffamily\bfseries}{}{0pt}{\thesection~}
   [{\color{Red}\hrule}]
 
-\addbibresource{References.bib}
 
 % -- Document ------------------------------------------------------------------
 
