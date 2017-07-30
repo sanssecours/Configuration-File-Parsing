@@ -8,6 +8,8 @@
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{nag}
+\usepackage{titlesec}
+\usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage[acronym, toc]{glossaries}
 
@@ -32,11 +34,20 @@
 
 % -- Package Settings ----------------------------------------------------------
 
+% Colors
+\definecolor{Red}{rgb}{0.84, 0.15, 0.19}
+\definecolor{Blue}{rgb}{0, 0.41, 0.60}
+
 \hypersetup{
   pdfauthor = {\authorname},
   pdftitle = {\thesistitle},
   pdfsubject = {Comparison of Different Parsing Methods},
-  pdfkeywords = {Parsing, Configuration, Elektra}
+  pdfkeywords = {Parsing, Configuration, Elektra},
+  colorlinks=true,
+  linkcolor=black,
+  anchorcolor=black,
+  citecolor=Red,
+  urlcolor=Red
 }
 
 \nonzeroparskip
@@ -48,6 +59,10 @@
 \setmainfont[Mapping=tex-text]{Seravek}
 \setsansfont[Mapping=tex-text]{Ubuntu}
 \setmonofont[Scale=MatchLowercase]{Menlo}
+
+% Section & Paragraph Style
+\titleformat{\section}{\large\sffamily\bfseries}{}{0pt}{\thesection~}
+  [{\color{Red}\hrule}]
 
 % -- Document ------------------------------------------------------------------
 
