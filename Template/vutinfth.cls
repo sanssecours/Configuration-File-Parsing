@@ -28,7 +28,7 @@
 %% vutinfth.dtx
 %% Copyright (C) 2014-2016 by Thomas Auzinger <thomas@auzinger.name>
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{vutinfth}
+\ProvidesClass{Template/vutinfth}
     [2016/11/12 v1.6 TU Wien Faculty of Informatics thesis template]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
