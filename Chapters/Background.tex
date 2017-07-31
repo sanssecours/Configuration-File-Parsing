@@ -4,6 +4,14 @@
 
 The book \citetitle{grune2007parsing}~\cite{grune2007parsing} provides a good overview of various up-to-date parsing algorithms. It covers the most popular techniques (such as LL- and LR-Parsing~\cite{knuth1965translation}) and also less well known methods up to 2007. The book also describes various classification possibilities for parsing techniques \cite[p. 85]{grune2007parsing}. The most common classification is the division into bottom-up and top-down parsers.
 
+\begin{figure}
+   \centering
+   \subfloat[A top-down parser predicts and matches rules from the start symbol downwards.]{\includegraphics[width=.35\textwidth]{Top-Down}}
+   \qquad
+   \subfloat[A bottom-up parser recognizes text starting with the terminal symbols.]{\includegraphics[width=.35\textwidth]{Bottom-Up}}
+   \caption{Matching in top-down and bottom-up parsers}
+ \end{figure}
+
 In \emph{top-down parsing} the parser starts with a hypothesis about the structure of the given data. The parser then tries to predict and match parts of the structure, starting from larger parts working its way down-to smaller elements.
 
 We can further categorize parsing into \emph{directional} and \emph{non-directional} methods. Directional methods read the input from left to right, while non-directional methods can use an arbitrary order. This implies that directional methods are simpler and faster, but less powerful, than their non-directional counterparts. As part of this thesis we only consider directional methods, since they are faster and powerful enough to parse configuration data.
@@ -39,8 +47,22 @@ Most parsing techniques can be categorized as either top-down or bottom-up. Howe
 
 A method that can be categorized as either top-down technique with bottom-up recognition, or bottom-up technique with a top-down component~\cite[p. 206]{grune2007parsing} is \emph{Earley Parsing}~\cite{earley1970efficient}. Earley parsing is able to handle any context free grammar. This means the technique is as powerful as GLR parsing. This advantage comes at the cost of run-time. While LL parsing and LR parsing run in linear time depending on the length of the input ($O(n)$), Earley Parsing has an upper boundary of $O(n³)$. However, in \citeyear{leo1991general} \citeauthor{leo1991general} showed that an improved version of the algorithm handles most LR(k) grammars in linear time~\cite{kegler2011marpa, leo1991general, wikipedia2016Earley}. In \citeyear{aycock2002practical} \citeauthor{aycock2002practical} described improvements to the algorithm. Their version of Earley Parsing boosts the run-time in cases where the grammar contains nullable (empty) grammar rules. Recently \citeauthor{kegler2011marpa} incorporated the changes proposed by \citeauthor{leo1991general}, \citeauthor{aycock2002practical} in \href{http://savage.net.au/Marpa.html}{Marpa}~\cite{kegler2011marpa}.
 
+\begin{figure}
+  \centering
+    \includegraphics[width=0.45\textwidth]{Chomsky-PEGs}
+  \caption{Both the Chomsky grammar on the left and the PEG on the right describe the same language $ \{ aⁿ bⁿ | n ≥ 0 \} $}
+\end{figure}
+
 All the methods we mentioned until now work with a description that is based on a (context-free) Chomsky grammar. These grammars describe a way to \emph{generate} words and sentences of a given language. Another way to specify the structure of a language is to give a description on how to \emph{recognize}~\cite[p. 506]{grune2007parsing} the words and sentences of a language. One popular recognition system are \glspl{PEG}. They were introduced by \citeauthor{ford2004parsing} in the paper \citetitle{ford2004parsing}~\cite{ford2004parsing}. \citeauthor{ford2002packrat} also describes how to write an efficient (top-down) parser that handles these types of grammars in linear time~\cite{ford2002packrat}. This method, called Packrat parsing, uses a specialized version of memoziation~\cite[p. 1]{ford2002packrat} to save intermediate results of the parsing process.
 
 Just like Packrat parsing, \emph{combinatory parsing}~\cite{frost1992constructing, hutton1992higher} specifies a method to create recursive descent parsers. As the name suggests, the focus in combinatory parsing is the composability of parsers. The technique is usually used in functional programming languages, such as Haskell. These languages support higher order functions, i.e. functions that take other functions as their parameters~\cite[p. 564]{grune2007parsing}. In combinatory parsing the parser creator typically starts by specifying parser (functions) for the simplest parts of the grammar (terminals). She or he then goes on to combine these simpler parsers into more powerful parsers for more complex rules (non-terminals). Combinatory parsing has similar problems as other top-down techniques such as LL parsing. One of these problems are left recursive grammar rules, i.e. rules that include references to themselves in the leftmost part of the right-hand side. Recently \citeauthor{frost2007modular} described a method to handle left recursive rules in combinatory parsing efficiently in the article \citetitle{frost2007modular}~\cite{frost2007modular}.
 
-A method that is not a parsing technique per se, but a way to specify conversions of data from a source structure to a target structure and back is \emph{bidirectional programming}~\cite{foster2005combinators, bohannon2006relational}. The specification that allows this conversion is called a lens~\cite{foster2005combinators}. A programming language used to specify such lenses is Boomerang~\cite{bohannon2008boomerang}. The research of the Boomerang project lead to the creation of another project that uses lenses to parse configuration data: \href{http://augeas.net}{Augeas}. Augeas converts configuration data into a tree like representation. \citeauthor{berlakovich2016universal} implemented an Augeas plugin for Elektra as part of his Bachelor thesis~\cite{berlakovich2016universal}.
+A method that is not a parsing technique per se, but a way to specify conversions of data from a source structure to a target structure and back is \emph{bidirectional programming}~\cite{foster2005combinators, bohannon2006relational}. The specification that allows this conversion is called a lens~\cite{foster2005combinators}.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=.5\textwidth]{Lens.pdf}
+  \caption{Lenses provide a way to both parse (get) and write (put) structured data \newline (Source: \href{http://www.seas.upenn.edu/~harmony/manual.pdf}{Boomerang Programmer’s Manual})}
+\end{figure}
+
+A programming language used to specify such lenses is Boomerang~\cite{bohannon2008boomerang}. The research of the Boomerang project lead to the creation of another project that uses lenses to parse configuration data: \href{http://augeas.net}{Augeas}. Augeas converts configuration data into a tree like representation. \citeauthor{berlakovich2016universal} implemented an Augeas plugin for Elektra as part of his Bachelor thesis~\cite{berlakovich2016universal}.
