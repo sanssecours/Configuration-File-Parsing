@@ -5,6 +5,12 @@
 
 \emph{Parsing} is the process of taking input and converting it into a data structure~\cite{wikipedia2016Parser, grune2007parsing}. Research around this topic focuses on how to process the input and the general computational complexity of algorithms to handle certain kind of \emph{formal languages}.
 
+\begin{figure}
+  \centering
+    \includegraphics[width=.8\textwidth]{Parsing.pdf}
+  \caption{Simplified view of the parsing process}
+\end{figure}
+
 This thesis concerns itself with the parsing process of languages that are able to express configuration data (e.g. INI, TOML, YAML). These languages form an interesting subpart of formal languages, since most computer programs only store and access key-value based persistent configuration data.
 
 Just like people disagree about the “best” configuration format, there is currently no consensus, as to which is the ideal way to parse configuration data. There are many possible ways to parse and store data. Notable examples include:
@@ -24,6 +30,12 @@ As part of this thesis we will tackle this problem, by using different parsing t
 \label{sec:Aim_Of_The_Work}
 
 Elektra~\cite{raab2010modular} is a plugin based framework that stores configuration parameters in a \glsdesc{KDB}. Elektra reads and stores configuration data via so-called \emph{storage plugins}. In this thesis we will compare various ways of parsing by writing and generating parsing code for different storage plugins.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=.3\textwidth]{Figures/Elektra.pdf}
+  \caption{Architecture diagramm of Elektra}
+\end{figure}
 
 For this purpose we wrote a storage plugin that parses a minimal subset of \glstext{YAML}, a human readable configuration language. We started by writing new parsing code using different techniques. The parsing code is configurable at compile time. We used the following parsing technologies:
 
