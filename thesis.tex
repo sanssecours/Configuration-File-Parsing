@@ -232,6 +232,37 @@ Just like Packrat parsing, \emph{combinatory parsing}~\cite{frost1992constructin
 
 A method that is not a parsing technique per se, but a way to specify conversions of data from a source structure to a target structure and back is \emph{bidirectional programming}~\cite{foster2005combinators, bohannon2006relational}. The specification that allows this conversion is called a lens~\cite{foster2005combinators}. A programming language used to specify such lenses is Boomerang~\cite{bohannon2008boomerang}. The research of the Boomerang project lead to the creation of another project that uses lenses to parse configuration data: \href{http://augeas.net}{Augeas}. Augeas converts configuration data into a tree like representation. \citeauthor{berlakovich2016universal} implemented an Augeas plugin for Elektra as part of his Bachelor thesis~\cite{berlakovich2016universal}.
 
+\chapter{Comparison}
+
+In the evaluation phase of the work we concentrated on the criteria listed below.
+
+\begin{description}
+
+  \item[Run-time Performance]~\\[0.1cm]
+  We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we could determine median execution times. At the end of the phase we determined the fastest parsing code and therefore also answered the second scientific question: “Are hand-written parsers or generated parsers faster?”.
+
+  \item[Memory Usage]~\\[0.1cm]
+  We determined the memory usage of the different parsing implementation using \href{http://valgrind.org}{Valgrind's} heap profiler \href{http://valgrind.org/docs/manual/ms-manual.html}{Massif}.
+
+  \item[Code Size]~\\[0.1cm]
+  We counted the lines of the different implementations using the tool \href{https://github.com/AlDanial/cloc}{cloc}.
+
+  \item[Code Complexity]~\\[0.1cm]
+  For the measurement of the code complexity we determined
+  \begin{itemize}
+    \item the cyclomatic complexity~\cite{mccabe1976complexity}, and
+    \item the Halstead complexity measures~\cite{halstead1977elements}
+  \end{itemize}
+  of the generated code.
+
+  \item[Ease of Extensibility and Composability]~\\[0.1cm]
+  Since there is no common way to measure either of this attributes we only looked into them from a more informal point of view. In this part of the evaluation we will describe some of the features we found that hinder or enhance the extensibility and composability of the used parsing methods. At this stage we will also answer the first scientific question, and argue why certain parsing libraries allow us to stay closer to the definition of the configuration language.
+
+  \item[Error Reporting]~\\[0.1cm]
+  For this subtask we created YAML input files, that contain certain errors. We will defined reference error messages that describe the problem in a way that is as user-friendly as possible. We then look how far we can approximate the ideal messages with the different parsing methods.
+
+\end{description}
+
 \backmatter
 
 % -- Glossary & References -----------------------------------------------------
