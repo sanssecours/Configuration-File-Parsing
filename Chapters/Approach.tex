@@ -1,0 +1,588 @@
+\chapter{Approach}
+
+\section{Discussion}
+
+In the discussion 9 participants answered questions about the usefulness of certain YAML features for \href{https://www.libelektra.org}{Elektra}, a cross-plattform configuration library. Since YAML is not trivial, we introduced the format in a presentation. After we talked about a certain part of YAML, we answered questions the participants had about the information presented so far. Afterwards we asked the participants to fill in parts of a questionnaire about the newly introduced feature set. The questionnaire consisted of a checkbox for each feature. A checked box means that the participant considers the feature useful for Elektra, while a checkbox without a mark means the opposite.
+
+\subsection{Participants}
+
+All of the 9 participants were at least partially familiar with Elektra. Some also had previous experience with YAML. Seven of them listened to the presentation, while one participant was late and another one participated via eMail. The eMail participant received a copy of the presentation slides and the questionnaire.
+
+\subsection{Results}
+
+In the following bar charts the term “Yes” refers to a checked box for the specific feature. The term “?” means that the participant did not know enough about a part of YAML and therefore marked the checkbox for one feature, or the heading for multiple features, with a question mark. The value before the term “No” specifies the number of unchecked boxes minus the number of boxes marked with “?”.
+
+\subsubsection{Scalars}
+
+\paragraph{Flow Scalars}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=3, value=Yes, color=orange]{3}
+      \bcbar[text=6, value=No, color=Aqua]{6}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      Plain String
+    \end{minted}
+  \end{minipage}
+  \caption{Plain Flow Scalar}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=2, value=Yes, color=orange]{2}
+      \bcbar[text=7, value=No, color=Aqua]{7}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      'Single Quoted ''String'''
+    \end{minted}
+  \end{minipage}
+  \caption{Single Quoted Flow Scalar}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=8, value=Yes, color=orange]{8}
+      \bcbar[text=1, value=No, color=Aqua]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      "Double\n Quoted\n \"String\""
+    \end{minted}
+  \end{minipage}
+  \caption{Double Quoted Flow Scalar}
+\end{figure}
+
+\paragraph{Block Scalars}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=2, value=Yes, color=orange]{2}
+      \bcbar[text=6, value=No, color=Aqua]{6}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      > # "Folded Style"
+        Folded
+        Style
+    \end{minted}
+  \end{minipage}
+  \caption{Folded Block Scalar}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=2, value=Yes, color=orange]{2}
+      \bcbar[text=6, value=No, color=Aqua]{6}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      | # "Literal\nStyle"
+        Literal
+        Style
+    \end{minted}
+  \end{minipage}
+  \caption{Literal Block Scalar}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=1, value=Yes, color=orange]{1}
+      \bcbar[text=7, value=No, color=Aqua]{7}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble, showspaces, spacecolor = lightgray, space=·]{yaml}
+      >1 # "  1 Space Indentation"
+         1 Space Indentation
+    \end{minted}
+  \end{minipage}
+  \caption{Indentation Header}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=0, value=$\quad$Yes, color=orange]{0}
+      \bcbar[text=8, value=No, color=Aqua]{8}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble, showspaces, spacecolor = lightgray, space=·, escapeinside=||]{yaml}
+      >- # "No Trailing Whitespace"
+         No Trailing Whitespace
+        | |
+        | |
+      # ↑ Newlines Above Stripped
+    \end{minted}
+  \end{minipage}
+  \caption{Chomping Header}
+\end{figure}
+
+\subsubsection{Lists}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=5, value=Yes, color=orange]{5}
+      \bcbar[text=4, value=No, color=Aqua]{4}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      [🍎, 🍊,
+        [Sugar, Eggs, Chocolate]
+      ]
+    \end{minted}
+  \end{minipage}
+  \caption{Flow Style}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=7, value=Yes, color=orange]{7}
+      \bcbar[text=2, value=No, color=Aqua]{2}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      - 🍎
+      - 🍊
+      - - Sugar
+        - Eggs
+        - Chocolate
+    \end{minted}
+  \end{minipage}
+  \caption{Block Style}
+\end{figure}
+
+\subsubsection{Mappings}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=5, value=Yes, color=orange]{5}
+      \bcbar[text=4, value=No, color=Aqua]{4}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      { Austria: Vienna,
+        South Africa: {
+          Executive: Pretoria,
+          Judicial: Bloemfontein,
+          Legislative: Cape Town}
+      }
+    \end{minted}
+  \end{minipage}
+  \caption{Flow Style}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=7, value=Yes, color=orange]{7}
+      \bcbar[text=2, value=No, color=Aqua]{2}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      Austria: Vienna
+      South Africa:
+        Executive:   Pretoria
+        Judicial:    Bloemfontein
+        Legislative: Cape Town
+    \end{minted}
+  \end{minipage}
+  \caption{Block Style}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=0, value=$\quad$Yes, color=orange]{0}
+      \bcbar[text=9, value=No, color=Aqua]{9}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      ?
+      - { 'pretty': complex key }
+      - - 😱
+      - Still part of the key
+      : value
+    \end{minted}
+  \end{minipage}
+  \caption{Support for Complex Keys}
+\end{figure}
+
+\subsubsection{Multiple Documents}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=0, value=$\quad$Yes, color=orange]{0}
+      \bcbar[text=9, value=No, color=Aqua]{9}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      "Hello First Document"
+      ...
+      'Second Document'
+      ...
+      Third Document
+    \end{minted}
+  \end{minipage}
+  \caption{Support Streams}
+\end{figure}
+
+\subsubsection{Types}
+
+\paragraph{Directives}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=1, value=Yes, color=orange]{1}
+      \bcbar[text=7, value=No, color=Aqua]{7}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      %YAML 1.2
+    \end{minted}
+  \end{minipage}
+  \caption{YAML Version}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=3, value=Yes, color=orange]{3}
+      \bcbar[text=5, value=No, color=Aqua]{5}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      %TAG !       tag:yaml.org,2002:
+      %TAG !!      tag:yaml.org,2002:
+      %TAG !name! tag:yaml.org,2002:
+      ---
+    \end{minted}
+  \end{minipage}
+  \caption{Tag Handle Definition}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=2, value=Yes, color=orange]{2}
+      \bcbar[text=6, value=No, color=Aqua]{6}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      %TAG !name! tag:yaml.org,2002:
+      ---
+      !name!str 6 # "6"
+    \end{minted}
+  \end{minipage}
+  \caption{Named Tag Handle}
+\end{figure}
+
+\paragraph{Tags}
+
+\paragraph{Tag Shorthands}~\\
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=4, value=Yes, color=orange]{4}
+      \bcbar[text=4, value=No, color=Aqua]{4}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+      \bcxlabel{}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      !suffix value
+    \end{minted}
+  \end{minipage}
+  \caption{Primary Tag Handle}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=3, value=Yes, color=orange]{3}
+      \bcbar[text=5, value=No, color=Aqua]{5}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      !!suffix value
+    \end{minted}
+  \end{minipage}
+  \caption{Secondary Tag Handle}
+\end{figure}
+
+\begin{figure}[H]
+\paragraph{Verbatim Tags}~\\
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=0, value=$\quad$Yes, color=orange]{0}
+      \bcbar[text=8, value=No, color=Aqua]{8}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      !<!ruby/object:Set> value
+    \end{minted}
+  \end{minipage}
+  \caption{Local Verbatim Tags}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=0, value=$\quad$Yes, color=orange]{0}
+      \bcbar[text=8, value=No, color=Aqua]{8}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      !<tag:yaml.org,2002:str> value
+    \end{minted}
+  \end{minipage}
+  \caption{Global Verbatim Tags}
+\end{figure}
+
+\paragraph{Other Tags}~\\
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=0, value=$\quad$Yes, color=orange]{0}
+      \bcbar[text=8, value=No, color=Aqua]{8}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      ! value
+    \end{minted}
+  \end{minipage}
+  \caption{Non-Specific Tag}
+\end{figure}
+
+\paragraph{Schemas}
+
+\textbf{Remark:} One participant checked the box for the core schema without ticking the boxes for the failsafe and JSON schema. Since the core schema is an extended superset of the other two schemas, we counted the participants answers as a “Yes” vote for the failsafe and JSON schema.
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=5, value=Yes, color=orange]{5}
+      \bcbar[text=3, value=No, color=Aqua]{3}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+      \bcxlabel{}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \begin{itemize}
+      \item String
+      \item Sequence
+      \item Map
+    \end{itemize}
+  \end{minipage}
+  \caption{Failsafe Schema}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=5, value=Yes, color=orange]{5}
+      \bcbar[text=3, value=No, color=Aqua]{3}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    Failsafe Schema + JSON Types:
+    \begin{itemize}
+      \item Null
+      \item Boolean
+      \item Integer
+      \item Float
+    \end{itemize}
+  \end{minipage}
+  \caption{JSON Schema}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=3, value=Yes, color=orange]{3}
+      \bcbar[text=5, value=No, color=Aqua]{5}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    JSON Schema +
+    \begin{itemize}
+      \item Octal/Hex: \code{0o123}, \code{0xfefe}
+      \item Multiple Notations for same value:
+            \code{null}, \code{Null}, \code{~}
+    \end{itemize}
+  \end{minipage}
+  \caption{Core Schema}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=3, value=Yes, color=orange]{3}
+      \bcbar[text=5, value=No, color=Aqua]{5}
+      \bcbar[text=1, value=?, color=DarkTurquoise]{1}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{itemize}
+      \item Ordered Map
+      \item Set
+      \item Binary
+      \item Time
+      \item …
+    \end{itemize}
+  \end{minipage}
+  \caption{Additional Types}
+\end{figure}
+
+\paragraph{Which Additional Types:}
+\begin{itemize}
+  \item “” (No answer)
+  \item “binary”
+  \item “date (but implemented in plugins)”
+\end{itemize}
+
+\subsubsection{References}
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{bchart}[max=9, width=0.85\textwidth]
+      \bcbar[text=7, value=Yes, color=orange]{7}
+      \bcbar[text=2, value=No, color=Aqua]{2}
+    \end{bchart}
+  \end{minipage}
+  \begin{minipage}[t]{0pt}~\end{minipage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \begin{minted}[autogobble]{yaml}
+      flowers: &flowers
+        🌳🌸🌼
+      garden:
+        - *flowers # 🌳🌸🌼
+        - *flowers # 🌳🌸🌼
+    \end{minted}
+  \end{minipage}
+  \caption{Support Anchors \& Aliases}
+\end{figure}

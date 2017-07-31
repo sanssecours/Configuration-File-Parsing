@@ -1,17 +1,21 @@
 %!TEX TS-program = xelatex
 
-\documentclass[draft, oneside, final]{Template/vutinfth}
+\documentclass[draft, oneside, final, svgnames]{Template/vutinfth}
 
 % -- Packages ------------------------------------------------------------------
 
+\usepackage{bchart}
 \usepackage[sorting=ynt, style=alphabetic, backend=biber]{biblatex}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{fontspec}
 \usepackage{float}
 \usepackage{microtype}
+\usepackage{minted}
+\usepackage{morewrites}
 \usepackage{nag}
 \usepackage{subfig}
+\usepackage{tcolorbox}
 \usepackage{titlesec}
 \usepackage{unicode-math}
 \usepackage{xcolor}
@@ -43,10 +47,45 @@
 % Bibliography
 \addbibresource{References.bib}
 
+% Boxes
+\newtcbox{\codebox}{
+  on line,
+  arc = 2pt,
+  colback = gray!10!white,
+  boxsep = 2pt,
+  left = 1pt,
+  right = 1pt,
+  top = 1pt,
+  bottom = 1pt,
+  boxrule = 0pt,
+  bottomrule = 0pt,
+  toprule = 0pt
+}
+
+\newtcolorbox{code-boxed}{
+  on line,
+  arc=2pt,
+  colback=gray!10!white,
+  boxsep=2pt,
+  left=1pt,
+  right=1pt,
+  top=1pt,
+  bottom=1pt,
+  boxrule=0pt,
+  bottomrule=0pt,
+  toprule=0pt
+}
+
+% Code
+\usemintedstyle{rainbow_dash}
+\BeforeBeginEnvironment{minted}{\begin{code-boxed}}
+\AfterEndEnvironment{minted}{\end{code-boxed}}
+
 % Captions
 \captionsetup{format=hang}
 
 % Colors
+\definecolor{Aqua}{rgb}{0, 0.56, 1}
 \definecolor{Red}{rgb}{0.84, 0.15, 0.19}
 \definecolor{Blue}{rgb}{0, 0.41, 0.60}
 
@@ -83,6 +122,12 @@
 \titleformat{\section}{\large\sffamily\bfseries}{}{0pt}{\thesection~}
   [{\color{Red}\hrule}]
 
+% -- Macros --------------------------------------------------------------------
+
+\newcommand{\code}[1]{
+  \codebox{\mintinline{yaml}|#1|}
+}
+
 % -- Glossary ------------------------------------------------------------------
 
 \newacronym{ANTLR}{ANTLR}{Another Tool for Language Recognition}
@@ -111,6 +156,7 @@
 
 \include{Chapters/Introduction}
 \include{Chapters/Background}
+\include{Chapters/Approach}
 \include{Chapters/Comparison}
 
 \backmatter
