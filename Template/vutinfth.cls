@@ -61,7 +61,7 @@
 \RequirePackage{calc}%
 \RequirePackage{etoolbox}%
 \RequirePackage{graphicx}%
-\graphicspath{{graphics/}}%
+\graphicspath{{Template/Graphics/}}%
 \newcommand{\@namexdef}[1]{\expandafter\xdef\csname#1\endcsname}%
 \newcommand{\ifestrequal}[4]{%
   \begingroup
