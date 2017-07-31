@@ -29,7 +29,7 @@ As part of this thesis we will tackle this problem, by using different parsing t
 \section{Aim of the Work}
 \label{sec:Aim_Of_The_Work}
 
-Elektra~\cite{raab2010modular} is a plugin based framework that stores configuration parameters in a \glsdesc{KDB}. Elektra reads and stores configuration data via so-called \emph{storage plugins}. In this thesis we will compare various ways of parsing by writing and generating parsing code for different storage plugins.
+Elektra~\cite{raab2010modular} is a plugin based framework that stores configuration parameters in a \glsdesc{KDB}. Elektra reads and stores configuration data via so-called \emph{storage plugins}.
 
 \begin{figure}[H]
   \centering
@@ -37,7 +37,7 @@ Elektra~\cite{raab2010modular} is a plugin based framework that stores configura
   \caption{Architecture diagramm of Elektra}
 \end{figure}
 
-For this purpose we wrote a storage plugin that parses a minimal subset of \glstext{YAML}, a human readable configuration language. We started by writing new parsing code using different techniques. The parsing code is configurable at compile time. We used the following parsing technologies:
+In this thesis we will compare various ways of parsing by writing and generating parsing code for different storage plugins. For this purpose we wrote a storage plugin that parses a minimal subset of \glstext{YAML}, a human readable configuration language. We started by writing new parsing code using different techniques. The parsing code is configurable at compile time. We used the following parsing technologies:
 
 \begin{itemize}
   \item Handwritten Parser (Recursive Descent)
