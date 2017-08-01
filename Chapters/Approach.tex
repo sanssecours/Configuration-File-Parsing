@@ -566,3 +566,27 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \caption{Support Anchors \& Aliases}
 \end{figure}
+
+\subsection{Interpretation}
+
+The results of the survey showed that the participants preferred double quoted flow scalars over single quoted and plain scalars. A reasons for this could be that those scalars are familiar from other languages such as C, and that they are able to express arbitrary data. Asked about block scalar styles most of the Elektra developers did not think that any of the two styles were necessary.
+
+In contrast to the decision about block scalars the participants preferred the block styles of sequences and mappings (collections) over the respective flow style. However, they also decided that a minimally useful YAML subset should include flow collections.
+
+The Elektra developers decided against most of the specialized type features of YAML. Only the result count for and against primary tag handles resulted in a draw. In this case we decided to implement the feature, since it allows us to explicitly specify application specific types.
+
+The questions about general type support (schemas) showed that a minimal YAML subset should include all types of the JSON Schema.
+
+One of the few specialized features deemed necessary by the participants were anchors and aliases. These two elements allow can be used to reference the same data multiple times in the same document.
+
+\subsubsection{Summary}
+
+According to the results of the discussion we decided to implement the following YAML features for a minimal YAML parser:
+
+\begin{itemize}
+  \item Double Quoted Flow Scalars
+  \item Block and Flow Collections
+  \item JSON Schema
+  \item Primary Tag Handle
+  \item References
+\end{itemize}
