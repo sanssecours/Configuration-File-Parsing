@@ -1,7 +1,7 @@
 \chapter{Introduction}
 
 \section{Motivation \& Problem Statement}
-\label{sec:Motivation}
+\label{sec:motivation}
 
 \emph{Parsing} is the process of taking input and converting it into a data structure~\cite{wikipedia2016Parser, grune2007parsing}. Research around this topic focuses on how to process the input and the general computational complexity of algorithms to handle certain kind of \emph{formal languages}.
 
@@ -27,7 +27,7 @@ Currently the possibility to compare different parsing techniques is limited. Th
 As part of this thesis we will tackle this problem, by using different parsing techniques within a common configuration framework. This integration eliminates the problem of comparing the parsing process under different circumstances, since the data structures the parsers create will always be the same. In this novel approach we will use \href{http://web.libelektra.org}{Elektra}, a key-value database, as configuration framework. Elektra’s storage plugin interface will act as foundation for the parsing process. In the end the thesis should provide answers about which parsing techniques provide an ideal balance between performance and usability.
 
 \section{Aim of the Work}
-\label{sec:Aim_Of_The_Work}
+\label{sec:aim_of_the_work}
 
 Elektra~\cite{raab2010modular} is a plugin based framework that stores configuration parameters in a \glsdesc{KDB}. Elektra reads and stores configuration data via so-called \emph{storage plugins}.
 
@@ -78,12 +78,12 @@ The methodological approach for this thesis consists of the following steps:
 
 \begin{description}[style=multiline, leftmargin=3.4cm, font=\bfseries]
 
-  \item[Literature Review] We determined the current status of parsing libraries suitable for configuration file parsing. After that we chose appropriate libraries for the parsing techniques listed in the section “\nameref{sec:Aim_Of_The_Work}”. In this part of the thesis we also investigated possible answers to our research questions according to the current state of literature.
+  \item[Literature Review] We determined the current status of parsing libraries suitable for configuration file parsing. After that we chose appropriate libraries for the parsing techniques listed in the section “\nameref{sec:aim_of_the_work}”. In this part of the thesis we also investigated possible answers to our research questions according to the current state of literature.
 
   \item[YAML Subset] To determine a minimal usable subset of YAML we discussed common features required for a new Elektra storage plugin with some of the current developers as part of an presentation and subsequent discussion.
 
   \item[Implementation] First we implemented parsing code for the minimal YAML subset. In this phase we also added other necessary code to Elektra. After that we chose one of the parsing methods to create a more complete \glstext{YAML} parser.
 
-  \item[Comparison] As noted in “\nameref{sec:Aim_Of_The_Work}” we compared the different implementations of our minimal YAML subset parsers.
+  \item[Comparison] As noted in “\nameref{sec:aim_of_the_work}” we compared the different implementations of our minimal YAML subset parsers.
 
 \end{description}
