@@ -28,9 +28,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       Plain String
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Plain Flow Scalar}
 \end{figure}
@@ -45,9 +45,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       'Single Quoted ''String'''
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Single Quoted Flow Scalar}
 \end{figure}
@@ -62,9 +62,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       "Double\n Quoted\n \"String\""
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Double Quoted Flow Scalar}
 \end{figure}
@@ -82,11 +82,11 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       > # "Folded Style"
         Folded
         Style
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Folded Block Scalar}
 \end{figure}
@@ -102,11 +102,11 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       | # "Literal\nStyle"
         Literal
         Style
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Literal Block Scalar}
 \end{figure}
@@ -122,10 +122,10 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble, showspaces, spacecolor = lightgray, space=·]{yaml}
+    \begin{yamlcode*}{showspaces, spacecolor = lightgray, space=·}
       >1 # "  1 Space Indentation"
          1 Space Indentation
-    \end{minted}
+    \end{yamlcode*}
   \end{minipage}
   \caption{Indentation Header}
 \end{figure}
@@ -141,13 +141,13 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble, showspaces, spacecolor = lightgray, space=·, escapeinside=||]{yaml}
+    \begin{yamlcode*}{showspaces, spacecolor = lightgray, space=·, escapeinside=||}
       >- # "No Trailing Whitespace"
          No Trailing Whitespace
         | |
         | |
       # ↑ Newlines Above Stripped
-    \end{minted}
+    \end{yamlcode*}
   \end{minipage}
   \caption{Chomping Header}
 \end{figure}
@@ -164,11 +164,11 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       [🍎, 🍊,
         [Sugar, Eggs, Chocolate]
       ]
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Flow Style}
 \end{figure}
@@ -183,13 +183,13 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       - 🍎
       - 🍊
       - - Sugar
         - Eggs
         - Chocolate
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Block Style}
 \end{figure}
@@ -206,14 +206,14 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       { Austria: Vienna,
         South Africa: {
           Executive: Pretoria,
           Judicial: Bloemfontein,
           Legislative: Cape Town}
       }
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Flow Style}
 \end{figure}
@@ -228,13 +228,13 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       Austria: Vienna
       South Africa:
         Executive:   Pretoria
         Judicial:    Bloemfontein
         Legislative: Cape Town
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Block Style}
 \end{figure}
@@ -249,13 +249,13 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       ?
       - { 'pretty': complex key }
       - - 😱
       - Still part of the key
       : value
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Support for Complex Keys}
 \end{figure}
@@ -272,13 +272,13 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       "Hello First Document"
       ...
       'Second Document'
       ...
       Third Document
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Support Streams}
 \end{figure}
@@ -298,9 +298,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       %YAML 1.2
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{YAML Version}
 \end{figure}
@@ -316,12 +316,12 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       %TAG !       tag:yaml.org,2002:
       %TAG !!      tag:yaml.org,2002:
       %TAG !name! tag:yaml.org,2002:
       ---
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Tag Handle Definition}
 \end{figure}
@@ -337,11 +337,11 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       %TAG !name! tag:yaml.org,2002:
       ---
       !name!str 6 # "6"
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Named Tag Handle}
 \end{figure}
@@ -362,9 +362,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       !suffix value
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Primary Tag Handle}
 \end{figure}
@@ -380,9 +380,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       !!suffix value
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Secondary Tag Handle}
 \end{figure}
@@ -399,9 +399,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       !<!ruby/object:Set> value
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Local Verbatim Tags}
 \end{figure}
@@ -417,9 +417,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       !<tag:yaml.org,2002:str> value
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Global Verbatim Tags}
 \end{figure}
@@ -437,9 +437,9 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       ! value
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Non-Specific Tag}
 \end{figure}
@@ -556,13 +556,13 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    \begin{minted}[autogobble]{yaml}
+    \begin{yamlcode}
       flowers: &flowers
         🌳🌸🌼
       garden:
         - *flowers # 🌳🌸🌼
         - *flowers # 🌳🌸🌼
-    \end{minted}
+    \end{yamlcode}
   \end{minipage}
   \caption{Support Anchors \& Aliases}
 \end{figure}
