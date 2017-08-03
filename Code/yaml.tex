@@ -1,0 +1,31 @@
+{\small
+{\color{color02} NEL} {\color{color03} \textbf{=}} {\color{color04} \%x85}{\color{color05} \\}{\color{color02} WSLF}
+{\color{color03} \textbf{=}} {\color{color04} \textbf{WSP}} {\color{color03} \textbf{/}}
+{\color{color04} \textbf{LF}}{\color{color05} \\\\}{\color{color06} ; Printable
+characters from C0 set\\}{\color{color02} printable} {\color{color03} \textbf{=}}
+{\color{color04} \textbf{HTAB}} {\color{color03} \textbf{/}} {\color{color04} \textbf{LF}}
+{\color{color03} \textbf{/}} {\color{color04} \textbf{CR}}{\color{color05} \\}{\color{color06} ;
+Printable ASCII\\}{\color{color02} printable} {\color{color03} \textbf{=/}} {\color{color04} \%x20}{\color{color03} \textbf{-}}{\color{color04} 7e}{\color{color05} \\}{\color{color06} ;
+Next Line from C1 set\\}{\color{color02} printable} {\color{color03} \textbf{=/}}
+{\color{color02} NEL}{\color{color05} \\}{\color{color06} ; Characters after C1
+set -- Surrogate pairs\\}{\color{color02} printable} {\color{color03} \textbf{=/}}
+{\color{color04} \%xa0}{\color{color03} \textbf{-}}{\color{color04} d7ff}{\color{color05} \\}{\color{color06} ;
+Private use characters -- Replacement character\\}{\color{color02} printable}
+{\color{color03} \textbf{=/}} {\color{color04} \%xe00}{\color{color03} \textbf{-}}{\color{color04} fffd}{\color{color05} \\}{\color{color06} ;
+All Unicode Character Starting from the Supplementary Multilingual Plain\\}{\color{color02} printable}
+{\color{color03} \textbf{=/}} {\color{color04} \%x10000}{\color{color03} \textbf{-}}{\color{color04} 10ffff}{\color{color05} \\\\}{\color{color02} pairs}
+{\color{color03} \textbf{=}} {\color{color03} \textbf{*}}{\color{color02} WSLF}
+{\color{color07} \texttt{"}\{\texttt{"}} {\color{color02} pair} {\color{color02} optionalAdditionalPairs}
+{\color{color07} \texttt{"}\}\texttt{"}} {\color{color03} \textbf{*}}{\color{color02} WSLF}{\color{color05} \\}{\color{color02} optionalAdditionalPairs}
+{\color{color03} \textbf{=}} {\color{color03} \textbf{*(}}{\color{color07} \texttt{"},\texttt{"}}
+{\color{color02} pair}{\color{color03} \textbf{)}}{\color{color05} \\}{\color{color02} pair}
+{\color{color03} \textbf{=}} {\color{color02} key} {\color{color07} \texttt{"}:\texttt{"}}
+{\color{color02} value}{\color{color05} \\}{\color{color02} key} {\color{color03} \textbf{=}}
+{\color{color02} doubleQuotedSpace}{\color{color05} \\}{\color{color02} value}
+{\color{color03} \textbf{=}} {\color{color02} doubleQuotedSpace}{\color{color05} \\}{\color{color02} doubleQuotedSpace}
+{\color{color03} \textbf{=}} {\color{color03} \textbf{*}}{\color{color02} WSLF}
+{\color{color02} doubleQuoted} {\color{color03} \textbf{*}}{\color{color02} WSLF}{\color{color05} \\}{\color{color02} doubleQuoted}
+{\color{color03} \textbf{=}} {\color{color04} \textbf{DQUOTE}} {\color{color02} content}
+{\color{color04} \textbf{DQUOTE}}{\color{color05} \\}{\color{color02} content}
+{\color{color03} \textbf{=}} {\color{color03} \textbf{*}}{\color{color02} printable}
+}

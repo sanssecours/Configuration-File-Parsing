@@ -1,6 +1,6 @@
 %!TEX TS-program = xelatex
 
-\documentclass[draft, oneside, final, svgnames]{Template/vutinfth}
+\documentclass[draft, oneside, final, x11names, svgnames]{Template/vutinfth}
 
 % -- Packages ------------------------------------------------------------------
 
@@ -80,7 +80,32 @@
 \usemintedstyle{rainbow_dash}
 \BeforeBeginEnvironment{minted}{\begin{code-boxed}}
 \AfterEndEnvironment{minted}{\end{code-boxed}}
+\newminted{c}{autogobble}
 \newminted{yaml}{autogobble}
+
+% Source: https://tex.stackexchange.com/questions/188003
+\makeatletter
+\newenvironment{tabminted}{%
+  \let\FV@ListVSpace\relax
+  \minted
+}{%
+  \endminted
+  \unskip
+  \aftergroup\@tabmintedend
+}
+\newcommand*{\tabminted@finalstrut}[1]{%
+  \ifdim\prevdepth>0pt
+    \ifdim\dp#1>\prevdepth
+      \vskip\dimexpr(\dp#1)-\prevdepth\relax
+    \fi
+  \else
+    \vskip\dimexpr(\dp#1)\relax
+  \fi
+}
+\newcommand*{\@tabmintedend}{%
+  \let\@finalstrut\tabminted@finalstrut
+}
+\makeatother
 
 % Captions
 \captionsetup{format=hang}
@@ -89,6 +114,13 @@
 \definecolor{Aqua}{rgb}{0, 0.56, 1}
 \definecolor{Red}{rgb}{0.84, 0.15, 0.19}
 \definecolor{Blue}{rgb}{0, 0.41, 0.60}
+
+\definecolor{color02}{rgb}{0.19,0.52,0.58}
+\definecolor{color03}{rgb}{0.17,0.36,0.80}
+\definecolor{color04}{rgb}{0.35,0.09,0.73}
+\definecolor{color05}{rgb}{0.30,0.30,0.30}
+\definecolor{color06}{rgb}{0.00,0.50,1.00}
+\definecolor{color07}{rgb}{0.00,0.80,0.40}
 
 % Fonts
 \setmainfont[Mapping=tex-text]{Seravek}
@@ -131,12 +163,21 @@
 
 % -- Macros --------------------------------------------------------------------
 
+\newcommand{\code}[1]{
+  \codebox{\texttt{#1}}
+}
+
+\newcommand{\cc}[1]{
+  \codebox{\mintinline{c}|#1|}
+}
+
 \newcommand{\yaml}[1]{
   \codebox{\mintinline{yaml}|#1|}
 }
 
 % -- Glossary ------------------------------------------------------------------
 
+\newacronym{ABNF}{ABNF}{augmented Backus-Naur form}
 \newacronym{ANTLR}{ANTLR}{Another Tool for Language Recognition}
 \newacronym{BNF}{BNF}{Backus-Naur form}
 \newacronym{KDB}{KDB}{key database}
@@ -165,6 +206,7 @@
 \include{Chapters/Introduction}
 \include{Chapters/Background}
 \include{Chapters/Approach}
+\include{Chapters/Implementation}
 \include{Chapters/Comparison}
 
 \backmatter
