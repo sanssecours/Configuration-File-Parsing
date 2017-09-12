@@ -36,7 +36,7 @@ Elektra~\cite{raab2010modular} is a plugin based framework that stores configura
   \caption{Architecture diagramm of Elektra}
 \end{figure}
 
-In this thesis we will compare various ways of parsing by writing and generating parsing code for different storage plugins. For this purpose we wrote a storage plugin that parses a minimal subset of \glstext{YAML}, a human readable configuration language. We started by writing new parsing code using different techniques. The parsing code is configurable at compile time. We used the following parsing technologies:
+As part of this thesis we compare various ways of parsing. For that purpose we wrote and generated parsing code for different storage plugins. All of these storage plugins parse a minimal subset of \glstext{YAML}, a human readable configuration language. We used the following parsing technologies:
 
 \begin{itemize}
   \item Handwritten Parser (Recursive Descent)
@@ -48,7 +48,7 @@ In this thesis we will compare various ways of parsing by writing and generating
   \item Bidirectional Programming (\href{http://augeas.net}{Augeas})
 \end{itemize}
 
-We compared the parsing code according to the following criteria:
+We compare the parsing code according to the following criteria:
 
 \begin{itemize}
   \item Run-Time Performance
@@ -59,7 +59,7 @@ We compared the parsing code according to the following criteria:
   \item Error Reporting
 \end{itemize}
 
-After we finished the parsing code and comparison of the minimal (but challenging) YAML subset, we wrote a more complete \glstext{YAML} parser using the most promising technique.
+After we finished the parsing code and compared of the minimal (but challenging) YAML subset implemented by the storage plugins, we wrote a more complete \glstext{YAML} parser using the most promising technique.
 
 In the scope of the above comparison we answered the following questions:
 
