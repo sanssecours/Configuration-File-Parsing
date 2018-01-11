@@ -1,6 +1,8 @@
 \chapter{Implementation}
 
-\section{Recursive Descent Parser}
+\section{Parsers}
+
+\subsection{Recursive Descent Parser}
 
 The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{version of the YAML plugin} developed in the course of this thesis used a handwritten recursive descent parser. As already described in “\nameref{sec:state_of_the_art}” this technique is quite popular, since there is a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
 
