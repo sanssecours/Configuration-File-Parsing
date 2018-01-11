@@ -88,3 +88,13 @@ Since the first steps with a hand-written recursive descent parser showed that t
   \caption{ABNF grammar for a very small regular subset of YAML}
   \label{cod:abnf_recurive_descent}
 \end{figure}
+
+The official \href{http://yaml.org}{YAML website} prominently lists known YAML parsers. Since we decided to use C or C++ as programming language – to improve the comparability of the parsers – we are left with three basic options:
+
+\begin{itemize}
+  \item Syck (YAML 1.0)
+  \item \href{https://github.com/yaml/libyaml}{libyaml} (YAML 1.1)
+  \item \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} (YAML 1.2)
+\end{itemize}
+
+. Out of these options Syck is not actively maintained any more. This leaves only \code{libyaml} and \code{yaml-cpp}. We decided to use \code{yaml-cpp}, since it supports the latest version of YAML. With the help of the library we added the first plugin with full YAML support called \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} to Elektra.
