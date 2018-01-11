@@ -1,6 +1,6 @@
 \chapter{Background}
 
-In the first part of the thesis we look at the current state of parsing techniques according to the literature.
+In the first part of the thesis we look at the current state of parsing techniques according to the literature. After that we provide a short overview of Elektra, the key-value storage framework we use in the thesis.
 
 \section{State of the Art}
 \label{sec:state_of_the_art}
@@ -9,9 +9,9 @@ The book \citetitle{grune2007parsing}~\cite{grune2007parsing} provides a good ov
 
 \begin{figure}[H]
    \centering
-   \subfloat[A top-down parser predicts and matches rules from the start symbol downwards.]{\includegraphics[width=.3\textwidth]{Top-Down}}
+   \subfloat[A top-down parser predicts and matches rules from the start symbol downwards.]{\includegraphics[width=.25\textwidth]{Top-Down}}
    \qquad
-   \subfloat[A bottom-up parser recognizes text starting with the terminal symbols.]{\includegraphics[width=.3\textwidth]{Bottom-Up}}
+   \subfloat[A bottom-up parser recognizes text starting with the terminal symbols.]{\includegraphics[width=.25\textwidth]{Bottom-Up}}
    \caption{Matching in top-down and bottom-up parsers}
  \end{figure}
 
@@ -68,3 +68,89 @@ A method that is not a parsing technique per se, but a way to specify conversion
 \end{figure}
 
 A programming language used to specify such lenses is Boomerang~\cite{bohannon2008boomerang}. The research of the Boomerang project lead to the creation of another project that uses lenses to parse configuration data: \href{http://augeas.net}{Augeas}. Augeas converts configuration data into a tree like representation. \citeauthor{berlakovich2016universal} implemented an Augeas plugin for Elektra as part of his Bachelor thesis~\cite{berlakovich2016universal}.
+
+\section{Elektra}
+
+\subsection{Keys and Key Sets}
+
+In this section we describe some of the concepts of Elektra, the software that provides the common storage facility for our YAML parsers. Elektra is a framework that stores data in a \emph{global hierarchical key-value database}.
+
+The most basic entity in Elektra is the \cc{Key} structure. A concrete instance of a \cc{Key} contains at least one non-empty attribute, which is the \emph{name} of the \cc{Key}. In the remainder of the thesis we will also often use the term \emph{key} - please notice the non-gray background – to refer to the name of a \cc{Key}.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.6\textwidth]{Figures/Key.pdf}
+  \caption{In Elektra a \cc{Key} stores a single \textcolor{Aqua}{key}-\textcolor{Purple3}{value} pair. The first part of the name specifies the \textcolor{orange}{namespace} (NS).}
+  \label{fig:Figures_Key}
+\end{figure}
+
+Besides the name an instance of a \cc{Key} usually also stores a value. Figure~\ref{fig:Figures_Key} shows an example \cc{Key} with the \textcolor{Aqua}{name} \code{system/elektra/version/infos/licence} and the \textcolor{Purple3}{value} \code{BSD}.
+
+Since Elektra stores data in a hierarchical database, a key consists of parts – separated by \code{/} – that determine the location in the database. The key in Figure~\ref{fig:Figures_Key} consists of 5 parts. The first part \code{system} is the \textcolor{orange}{namespace} (NS) of the key. Elektra uses namespaces to specify context dependent data. For example, user specific data is stored under the namespace \code{user}. Elektra uses 5 namespaces to separate data:
+
+\begin{itemize}[style=multiline, leftmargin=1.8cm]
+  \item [\code{system}] specifies data values for the whole system,
+  \item [\code{user}] contains data for the current user,
+  \item [\code{dir}] stores data for the current directory,
+  \item [\code{spec}] contains specification of other keys, and
+  \item [\code{proc}] stores in memory data
+\end{itemize}
+
+. We can use a so-called \emph{cascading} key to select the most appropriate namespace. A cascading key does not start with a namespace but rather with a leading slash. Let us look at an example. If our database contains the keys:
+
+\begin{itemize}
+  \item \code{system/key}
+  \item \code{user/key}
+\end{itemize}
+
+, then Elektra will select the key \code{user/key} if we use the cascading key \code{/key} to retrieve data. If the database also contains a key \code{dir/key} for the current working directory, then Elektra will select this key instead.
+
+As we already saw in the example above usually we store not only one, but multiple key-value pairs in the database. For this purpose Elektra provides the structure \cc{KeySet}. A \cc{KeySet} contains a set of \cc{Key} objects, where the name of each \cc{Key} has to be different. If we add a new entry with an already existing name to the \cc{KeySet}, then Elektra will just overwrite the old \cc{Key} with the same name.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.6\textwidth]{Figures/KeySet.pdf}
+  \caption{Elektra uses \cc{KeySet} structures to save multiple key-value pairs}
+  \label{fig:Figures_KeySet}
+\end{figure}
+
+Elektra also uses the \cc{KeySet} structure to add \emph{metadata} to single keys. For this purpose each \cc{Key} may store a \cc{KeySet} containing simple key-value pairs. Figure~\ref{fig:Figures_Metadata} shows an example \cc{Key} containing two meta keys \code{comment} and \code{check/type}.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.4\textwidth]{Figures/Metadata.pdf}
+  \caption{Elektra uses a \cc{KeySet} to save metadata for a \cc{Key}}
+  \label{fig:Figures_Metadata}
+\end{figure}
+
+\FloatBarrier
+\subsection{Plugins}
+
+Apart from basic features most of Elektra’s functionality is realized as \emph{plugin}. This has the advantage, that Elektra’s core can stay minimal only requiring \href{https://en.wikipedia.org/wiki/C99}{C99}, while plugins are able to implement and use OS specific features.
+
+There are many different plugin categories, but the most basic ones are resolver and storage plugins. Elektra needs at least one resolver and one storage plugin. The resolver plugin is responsible for resolving filenames and replacing files on disk. Storage plugins on the other hand parse configuration files and convert read data to a \cc{KeySet}. They are also responsible for writing a modified \cc{KeySet} back to a given file.
+
+In this thesis we are mostly interested in storage plugins. However, we will also use other plugins to implement common functionality for our YAML storage plugins. For this purpose we use the plugin interface of Elektra to pass key sets between plugins.
+
+The order in which Elektra calls a certain plugin is specified via the \emph{contract} of the plugin. For example, a typical storage plugin will use the positions \code{getstorage} and \code{setstorage}. Plugins at the position \code{getstorage} will be called when Elektra tries to read a configuration file, while Elektra calls \code{setstorage} plugins when it is time to write a \cc{KeySet} back to a file. A plugin that wants to further process data will usually use the position \code{postgetstorage} right after \code{getstorage}, and \code{presetstorage} the position before \code{setstorage}.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.9\textwidth]{Figures/Plugins.pdf}
+  \caption{Elektra uses multiple plugins to process data}
+  \label{fig:Figures_Plugins}
+\end{figure}
+
+Figure~\ref{fig:Figures_Plugins} shows a example, where Elektra uses a YAML plugin to read and write data, while a Base64 plugin (see also section “\nameref{sec:base64}”) encodes and decodes binary values. Such a combination of multiple plugins working together is called a \emph{backend}.
+
+In Elektra we \emph{mount} a backend at a certain position of the key-value database. For example, if we mount the backend described above at \code{user/yaml}, then the YAML plugin is responsible for storing and retrieving values below this mountpoint. If we want to save a new \cc{Key} with the name \code{user/yaml/pinky} and the value \code{pie}, then Elektra
+
+\begin{enumerate}
+  \item uses the YAML plugin to convert the current YAML configuration file to a \cc{KeySet},
+  \item decodes every binary \cc{Key} with the Base64 plugin,
+  \item adds \code{user/yaml/pinky} to the \cc{KeySet},
+  \item encoded every binary \cc{Key} with the Base64 plugin, and
+  \item then stores the result to the configuration file using the YAML plugin
+\end{enumerate}
+
+.
