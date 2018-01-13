@@ -8,12 +8,18 @@ In the first part of the thesis we look at the current state of parsing techniqu
 The book \citetitle{grune2007parsing}~\cite{grune2007parsing} provides a good overview of various up-to-date parsing algorithms. It covers the most popular techniques (such as LL- and LR-Parsing~\cite{knuth1965translation}) and also less well known methods up to 2007. The book also describes various classification possibilities for parsing techniques \cite[p. 85]{grune2007parsing}. The most common classification is the division into bottom-up and top-down parsers.
 
 \begin{figure}[H]
-   \centering
-   \subfloat[A top-down parser predicts and matches rules from the start symbol downwards.]{\includegraphics[width=.25\textwidth]{Top-Down}}
-   \qquad
-   \subfloat[A bottom-up parser recognizes text starting with the terminal symbols.]{\includegraphics[width=.25\textwidth]{Bottom-Up}}
-   \caption{Matching in top-down and bottom-up parsers}
- \end{figure}
+  \centering
+  \begin{subfigure}[t]{.25\textwidth}
+    \includegraphics[width=\linewidth]{Top-Down}
+    \caption{A top-down parser predicts and matches rules from the start symbol downwards.}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[t]{.25\textwidth}
+    \includegraphics[width=\linewidth]{Bottom-Up}
+    \caption{A bottom-up parser recognizes text starting with the terminal symbols.}
+  \end{subfigure}
+  \caption{Matching in top-down and bottom-up parsers}
+\end{figure}
 
 In \emph{top-down parsing} the parser starts with a hypothesis about the structure of the given data. The parser then tries to predict and match parts of the structure, starting from larger parts working its way down-to smaller elements.
 
