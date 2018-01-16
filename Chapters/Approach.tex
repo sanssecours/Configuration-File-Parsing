@@ -1,6 +1,8 @@
 \chapter{Approach}
 
-Since the YAML standard is quite extensive~\cite{ben2009yaml} – the document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules – we decided to first determine a useful subset of YAML. For this purpose we discussed the format with other Elektra developers.
+Since the YAML standard is quite extensive~\cite{ben2009yaml} – the document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules – we decided to first determine a useful subset of YAML. For this purpose we discussed the format with other Elektra developers. The first part of this chapter contains a review detailing this discussion.
+
+After that we describe how we mapped Elektra’s two basic types, \cc{Key} and \cc{KeySet} to YAML.
 
 \section{Discussion}
 
@@ -590,3 +592,148 @@ According to the results of the discussion we decided to implement the following
   \item Primary Tag Handle
   \item References
 \end{itemize}
+
+\section{Mapping Between Elektra’s Data Types and YAML}
+
+\begin{sloppypar}
+  There are basically two more or less obvious solutions to map data between Elektra’s \cc{KeySet} structure and a YAML file. Since a \cc{KeySet} behaves similar to a map (see also section~“\nameref{sec:keyset}”), connecting a certain key to a certain value, we could use YAML’s map type directly.
+\end{sloppypar}
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.5\textwidth]{Figures/Keys.pdf}
+  \caption{An exemplary \cc{KeySet}}
+  \label{fig:Figures_Keys}
+\end{figure}
+
+For example, the \cc{KeySet} shown in figure~\ref{fig:Figures_Keys} would then map to the following YAML data, if we use \code{/user/yaml} as mountpoint:
+
+\begin{yamlcode}
+  bloc:
+  bloc/party:
+  bloc/party/little: "thoughts"
+  bloc/party/silent: "alarm"
+\end{yamlcode}
+
+. As we can see the resulting YAML file contains quite a lot of unnecessary redundant data.
+
+In our second solution we take the hierarchical nature of the database into account and split on each part of a key. The result of this approach is the following YAML file:
+
+\begin{yamlcode}
+  bloc:
+    party:
+      little: "thoughts"
+      silent: "alarm"
+\end{yamlcode}
+
+. The second solution removed unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the YAML data from above.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{Tree}
+    \caption{Initial representation}
+    \label{fig:Tree}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{TreeExtended}
+    \caption{We add an additional value}
+    \label{fig:TreeExtended}
+  \end{subfigure}\\
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{TreeExtended+}
+    \caption{We add an additional \cc{Key} containing a value}
+    \label{fig:TreeExtended+}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{TreeExtended++}
+    \caption{The new \cc{Key} overwrites the value of the node \code{block}}
+    \label{fig:TreeExtended++}
+  \end{subfigure}
+  \caption{The tree-like representation of YAML data shows the problem with adding non-leaf values}
+\end{figure}
+
+As we can see in Figure~\ref{fig:Tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:TreeExtended} shows the resulting tree. We could now save \code{chain} as a map key inside \code{bloc}:
+
+\begin{yamlcode}
+  bloc:
+    chain:
+    party:
+      little: "thoughts"
+      silent: "alarm"
+\end{yamlcode}
+
+. However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:TreeExtended++}).
+
+Another option to fix our problem would be to use YAML’s list type, and to store the value of a \cc{Key} and the data below the \cc{Key} as first and second element of the list:
+
+\begin{yamlcode}
+  bloc:
+    - chain                 # First element stores value
+    - party:                # Second element stores data below
+      -                     # `user/yaml/bloc/party` contains no value
+      - little: "thoughts"
+        silent: "alarm"
+\end{yamlcode}
+
+. However, this format is quite complicated. If we add support for Elektra’s array type – mapping arrays to YAML list – the situation is even worse.
+
+To solve the problem we used another approach. We reserve the name \yaml{___dirdata} to save values in non-leaf nodes. The code below shows the mapping of our example data:
+
+\begin{yamlcode}
+  bloc:
+    ___dirdata: "chain"
+    party:
+      little: "thoughts"
+      silent: "alarm"
+\end{yamlcode}
+
+. Since we reserved the name \yaml{___dirdata} the value below this key will always be a leaf of the tree.
+
+\subsection{Mapping Arrays}
+
+Quite naturally we want to map Elektra arrays to YAML lists.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.6\textwidth]{ArrayValue.pdf}
+  \caption{The \cc{KeySet} above describes an array containing three elements}
+  \label{fig:ArrayValue}
+\end{figure}
+
+If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:ArrayValue} would result in the YAML data:
+
+\begin{yamlcode}
+  array:
+    - "First Element"
+    - "Second Element"
+    - "Third Element"
+\end{yamlcode}
+
+. We are left with the problem, where to save the data of the \emph{parent} \cc{Key} of the array elements \code{user/array}. We can not use the same approach as before:
+
+\begin{yamlcode}
+  array:
+    ___dirdata: "Array Value"
+    - "First Element"
+    - "Second Element"
+    - "Third Element"
+\end{yamlcode}
+
+, since the result would be a YAML node that is neither list nor map. To fix this problem we decided to convert the \yaml{___dirdata} node to a list element:
+
+\begin{yamlcode}
+  array:
+    - "___dirdata: Array Value"
+    - "First Element"
+    - "Second Element"
+    - "Third Element"
+\end{yamlcode}
+
+. This approach produces valid YAML data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.

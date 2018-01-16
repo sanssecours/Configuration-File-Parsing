@@ -112,6 +112,7 @@ Since Elektra stores data in a hierarchical database, a key consists of parts â€
 , then Elektra will select the key \code{user/key} if we use the cascading key \code{/key} to retrieve data. If the database also contains a key \code{dir/key} for the current working directory, then Elektra will select this key instead.
 
 \subsection{\cc{KeySet}}
+\label{sec:keyset}
 
 As we already saw in the example before usually we store not only one, but multiple key-value pairs in the database. For this purpose Elektra provides the structure \cc{KeySet}. A \cc{KeySet} contains a set of \cc{Key} objects, where the name of each \cc{Key} has to be different. If we add a new \cc{Key} with an already existing name to the \cc{KeySet}, then Elektra will just overwrite the old \cc{Key} with the same name.
 
