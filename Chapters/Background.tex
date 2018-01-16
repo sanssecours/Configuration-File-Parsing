@@ -77,9 +77,9 @@ A programming language used to specify such lenses is Boomerang~\cite{bohannon20
 
 \section{Elektra}
 
-\subsection{Keys and Key Sets}
-
 In this section we describe some of the concepts of Elektra, the software that provides the common storage facility for our YAML parsers. Elektra is a framework that stores data in a \emph{global hierarchical key-value database}.
+
+\subsection{\cc{Key}}
 
 The most basic entity in Elektra is the \cc{Key} structure. A concrete instance of a \cc{Key} contains at least one non-empty attribute, which is the \emph{name} of the \cc{Key}. In the remainder of the thesis we will also often use the term \emph{key} - please notice the non-gray background â€“ to refer to the name of a \cc{Key}.
 
@@ -111,7 +111,9 @@ Since Elektra stores data in a hierarchical database, a key consists of parts â€
 
 , then Elektra will select the key \code{user/key} if we use the cascading key \code{/key} to retrieve data. If the database also contains a key \code{dir/key} for the current working directory, then Elektra will select this key instead.
 
-As we already saw in the example above usually we store not only one, but multiple key-value pairs in the database. For this purpose Elektra provides the structure \cc{KeySet}. A \cc{KeySet} contains a set of \cc{Key} objects, where the name of each \cc{Key} has to be different. If we add a new entry with an already existing name to the \cc{KeySet}, then Elektra will just overwrite the old \cc{Key} with the same name.
+\subsection{\cc{KeySet}}
+
+As we already saw in the example before usually we store not only one, but multiple key-value pairs in the database. For this purpose Elektra provides the structure \cc{KeySet}. A \cc{KeySet} contains a set of \cc{Key} objects, where the name of each \cc{Key} has to be different. If we add a new \cc{Key} with an already existing name to the \cc{KeySet}, then Elektra will just overwrite the old \cc{Key} with the same name.
 
 \begin{figure}
   \centering
@@ -119,6 +121,31 @@ As we already saw in the example above usually we store not only one, but multip
   \caption{Elektra uses \cc{KeySet} structures to save multiple key-value pairs}
   \label{fig:Figures_KeySet}
 \end{figure}
+
+A \cc{KeySet} allows us to structure data in a fashion similar to a map (a.k.a. hash, map, hashmap, dictionary). Maps are an important data structure, especially in high level programming languages like \href{https://www.python.org}{Python} or \href{https://www.ruby-lang.org}{Ruby}. Let us look at an example. We take the last three \cc{Key} objects in Figure~\ref{fig:Figures_KeySet}, remove the namespace and translate the data to a Python dictionary:
+
+\begin{pythoncode}
+  sound = {'pirate': 'arr', 'ninja': 'woosh'}
+\end{pythoncode}
+
+. We see that a value in a \cc{KeySet} also maps to a value in the dictionary, while the last part of the key (name) maps to the key in the dictionary.
+
+Apart from the map another important data structure is the array (a.k.a. list). Elektra also supports arrays. For that purpose Elektra adds the character \code{\#}, and the index to array elements. For example, the following Python list:
+
+\begin{pythoncode}
+  characters = ['pirate', 'ninja']
+\end{pythoncode}
+
+would translate to the \code{KeySet} shown in Figure~\ref{fig:Array}.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.6\textwidth]{Array.pdf}
+  \caption{Elektra uses the character \code{\#} to mark array elements}
+  \label{fig:Array}
+\end{figure}
+
+Since Elektra orders a \code{KeySet} alphabetically a \cc{Key} with name \code{\#10} would appear before a \cc{Key} with name \code{\#2}. To fix that problem Elektra adds underscores to keys with larger indizes. For example, the 11th element of an array ends with the name \code{\#\_10}.
 
 Elektra also uses the \cc{KeySet} structure to add \emph{metadata} to single keys. For this purpose each \cc{Key} may store a \cc{KeySet} containing simple key-value pairs. Figure~\ref{fig:Figures_Metadata} shows an example \cc{Key} containing two meta keys \code{comment} and \code{check/type}.
 
