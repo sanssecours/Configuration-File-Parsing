@@ -118,3 +118,36 @@ The new \emph{meta mode} uses metadata to mark a key-value pair that contains a 
   \caption{The Base64 plugin decodes and encodes binary data}
   \label{fig:Figures_Base64}
 \end{figure}
+
+\subsection{Directory Value}
+
+We already described the problem of storing a value in a non-leaf (directory) \cc{Key} in the Section~“\nameref{sec:mapping_elektra_yaml}”. Since the problem is independent of the parser engine and also relevant to other plugins, we implemented the functionality in a plugin named Directory Value.
+
+The Directory Value plugin adds an additional \cc{Key} with the prefix \yaml{___dirdata} for every non-array \cc{Key} that has children and contains a value in the \code{set} direction (position \code{preset}). For example, for the \cc{KeySet} shown in Figure~\ref{fig:KeySetLarge}, the plugin adds the \cc{Key}
+
+\begin{itemize}
+  \item \code{user/yaml/bloc/\_\_\_dirdata} and
+  \item \code{user/yaml/bloc/party/\_\_\_dirdata}
+\end{itemize}
+
+. The plugin then moves the data stored in the parent \cc{Key} to the newly created \cc{Key}.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{.4\textwidth}
+    \includegraphics[width=\linewidth]{KeySetLarge}
+    \caption{We use the \cc{KeySet} above as input for the Directory Value plugin at the \code{preset} position.}
+    \label{fig:KeySetLarge}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[t]{.48\textwidth}
+    \includegraphics[width=\linewidth]{KeySetLargeExtended}
+    \caption{The \cc{KeySet} above shows the result of the conversion at the \code{preset} position.}
+    \label{fig:KeySetLargeExtended}
+  \end{subfigure}
+  \caption{The Directory Value plugin adds data at the position \code{preset} (\ref{fig:KeySetLarge}) and then restores the old data (\ref{fig:KeySetLargeExtended}) at the position \code{postget}.}
+\end{figure}
+
+In addition the plugin insert a new \cc{Key} for every array parent that stores a (non-binary) value, at the first position of the array. In our example, the plugin adds a new \cc{Key} with the value \code{\_\_\_dirdata: Array Value} at the first position of \code{user/yaml/array}, and increases the index of all other array elements by one.
+
+Figure~\ref{fig:KeySetLargeExtended} shows the \cc{KeySet} after the whole conversion at the position \code{preset}. This \cc{KeySet} is also the input for the Directory Value plugin at the position \code{postget}
