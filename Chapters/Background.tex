@@ -69,7 +69,7 @@ A method that is not a parsing technique per se, but a way to specify conversion
 
 \begin{figure}[H]
   \centering
-    \includegraphics[width=.4\textwidth]{Lens.pdf}
+    \includegraphics[width=.4\textwidth]{Lens}
   \caption{Lenses provide a way to both parse (get) and write (put) structured data \newline (Source: \href{http://www.seas.upenn.edu/~harmony/manual.pdf}{Boomerang Programmer’s Manual})}
 \end{figure}
 
@@ -85,14 +85,14 @@ The most basic entity in Elektra is the \cc{Key} structure. A concrete instance 
 
 \begin{figure}
   \centering
-    \includegraphics[width=.6\textwidth]{Figures/Key.pdf}
+    \includegraphics[width=.6\textwidth]{Key.pdf}
   \caption{In Elektra a \cc{Key} stores a single \textcolor{Aqua}{key}-\textcolor{Purple3}{value} pair. The first part of the name specifies the \textcolor{orange}{namespace} (NS).}
-  \label{fig:Figures_Key}
+  \label{fig:key}
 \end{figure}
 
-Besides the name an instance of a \cc{Key} usually also stores a value. Figure~\ref{fig:Figures_Key} shows an example \cc{Key} with the \textcolor{Aqua}{name} \code{system/elektra/version/infos/licence} and the \textcolor{Purple3}{value} \code{BSD}.
+Besides the name an instance of a \cc{Key} usually also stores a value. Figure~\ref{fig:key} shows an example \cc{Key} with the \textcolor{Aqua}{name} \code{system/elektra/version/infos/licence} and the \textcolor{Purple3}{value} \code{BSD}.
 
-Since Elektra stores data in a hierarchical database, a key consists of parts – separated by \code{/} – that determine the location in the database. The key in Figure~\ref{fig:Figures_Key} consists of 5 parts. The first part \code{system} is the \textcolor{orange}{namespace} (NS) of the key. Elektra uses namespaces to specify context dependent data. For example, user specific data is stored under the namespace \code{user}. Elektra uses 5 namespaces to separate data:
+Since Elektra stores data in a hierarchical database, a key consists of parts – separated by \code{/} – that determine the location in the database. The key in Figure~\ref{fig:key} consists of 5 parts. The first part \code{system} is the \textcolor{orange}{namespace} (NS) of the key. Elektra uses namespaces to specify context dependent data. For example, user specific data is stored under the namespace \code{user}. Elektra uses 5 namespaces to separate data:
 
 \begin{itemize}[style=multiline, leftmargin=1.8cm]
   \item [\code{system}] specifies data values for the whole system,
@@ -118,12 +118,12 @@ As we already saw in the example before usually we store not only one, but multi
 
 \begin{figure}
   \centering
-    \includegraphics[width=.6\textwidth]{Figures/KeySet.pdf}
+    \includegraphics[width=.6\textwidth]{KeySet}
   \caption{Elektra uses \cc{KeySet} structures to save multiple key-value pairs}
-  \label{fig:Figures_KeySet}
+  \label{fig:keyset}
 \end{figure}
 
-A \cc{KeySet} allows us to structure data in a fashion similar to a map (a.k.a. hash, map, hashmap, dictionary). Maps are an important data structure, especially in high level programming languages like \href{https://www.python.org}{Python} or \href{https://www.ruby-lang.org}{Ruby}. Let us look at an example. We take the last three \cc{Key} objects in Figure~\ref{fig:Figures_KeySet}, remove the namespace and translate the data to a Python dictionary:
+A \cc{KeySet} allows us to structure data in a fashion similar to a map (a.k.a. hash, map, hashmap, dictionary). Maps are an important data structure, especially in high level programming languages like \href{https://www.python.org}{Python} or \href{https://www.ruby-lang.org}{Ruby}. Let us look at an example. We take the last three \cc{Key} objects in Figure~\ref{fig:keyset}, remove the namespace and translate the data to a Python dictionary:
 
 \begin{pythoncode}
   sound = {'pirate': 'arr', 'ninja': 'woosh'}
@@ -137,24 +137,24 @@ Apart from the map another important data structure is the array (a.k.a. list). 
   characters = ['pirate', 'ninja']
 \end{pythoncode}
 
-would translate to the \code{KeySet} shown in Figure~\ref{fig:Array}.
+would translate to the \code{KeySet} shown in Figure~\ref{fig:array}.
 
 \begin{figure}
   \centering
-    \includegraphics[width=.6\textwidth]{Array.pdf}
+    \includegraphics[width=.6\textwidth]{Array}
   \caption{Elektra uses the character \code{\#} to mark array elements}
-  \label{fig:Array}
+  \label{fig:array}
 \end{figure}
 
 Since Elektra orders a \code{KeySet} alphabetically a \cc{Key} with name \code{\#10} would appear before a \cc{Key} with name \code{\#2}. To fix that problem Elektra adds underscores to keys with larger indizes. For example, the 11th element of an array ends with the name \code{\#\_10}.
 
-Elektra also uses the \cc{KeySet} structure to add \emph{metadata} to single keys. For this purpose each \cc{Key} may store a \cc{KeySet} containing simple key-value pairs. Figure~\ref{fig:Figures_Metadata} shows an example \cc{Key} containing two meta keys \code{comment} and \code{check/type}.
+Elektra also uses the \cc{KeySet} structure to add \emph{metadata} to single keys. For this purpose each \cc{Key} may store a \cc{KeySet} containing simple key-value pairs. Figure~\ref{fig:metadata} shows an example \cc{Key} containing two meta keys \code{comment} and \code{check/type}.
 
 \begin{figure}
   \centering
-    \includegraphics[width=.4\textwidth]{Figures/Metadata.pdf}
+    \includegraphics[width=.4\textwidth]{Metadata}
   \caption{Elektra uses a \cc{KeySet} to save metadata for a \cc{Key}}
-  \label{fig:Figures_Metadata}
+  \label{fig:metadata}
 \end{figure}
 
 \FloatBarrier
@@ -171,12 +171,12 @@ The order in which Elektra calls a certain plugin is specified via the \emph{con
 
 \begin{figure}
   \centering
-    \includegraphics[width=.9\textwidth]{Figures/Plugins.pdf}
+    \includegraphics[width=.9\textwidth]{Plugins}
   \caption{Elektra uses multiple plugins to process data}
-  \label{fig:Figures_Plugins}
+  \label{fig:plugins}
 \end{figure}
 
-Figure~\ref{fig:Figures_Plugins} shows a example, where Elektra uses a YAML plugin to read and write data, while a Base64 plugin (see also section “\nameref{sec:base64}”) encodes and decodes binary values. Such a combination of multiple plugins working together is called a \emph{backend}.
+Figure~\ref{fig:plugins} shows a example, where Elektra uses a YAML plugin to read and write data, while a Base64 plugin (see also section “\nameref{sec:base64}”) encodes and decodes binary values. Such a combination of multiple plugins working together is called a \emph{backend}.
 
 In Elektra we \emph{mount} a backend at a certain position of the key-value database. For example, if we mount the backend described above at \code{user/yaml}, then the YAML plugin is responsible for storing and retrieving values below this mountpoint. If we want to save a new \cc{Key} with the name \code{user/yaml/pinky} and the value \code{pie}, then Elektra
 

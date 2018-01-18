@@ -602,12 +602,12 @@ According to the results of the discussion we decided to implement the following
 
 \begin{figure}
   \centering
-    \includegraphics[width=.5\textwidth]{Figures/Keys.pdf}
+    \includegraphics[width=.5\textwidth]{Keys}
   \caption{An exemplary \cc{KeySet}}
-  \label{fig:Figures_Keys}
+  \label{fig:keys}
 \end{figure}
 
-For example, the \cc{KeySet} shown in figure~\ref{fig:Figures_Keys} would then map to the following YAML data, if we use \code{/user/yaml} as mountpoint:
+For example, the \cc{KeySet} shown in figure~\ref{fig:keys} would then map to the following YAML data, if we use \code{/user/yaml} as mountpoint:
 
 \begin{yamlcode}
   bloc:
@@ -635,32 +635,31 @@ In our second solution we take the hierarchical nature of the database into acco
     \centering
     \includegraphics[height=4cm]{Tree}
     \caption{Initial representation}
-    \label{fig:Tree}
+    \label{fig:tree}
   \end{subfigure}
   \qquad
   \begin{subfigure}[t]{.4\textwidth}
     \centering
     \includegraphics[height=4cm]{TreeExtended}
     \caption{We add an additional value}
-    \label{fig:TreeExtended}
+    \label{fig:tree_extended}
   \end{subfigure}\\
   \begin{subfigure}[t]{.4\textwidth}
     \centering
     \includegraphics[height=4cm]{TreeExtended+}
     \caption{We add an additional \cc{Key} containing a value}
-    \label{fig:TreeExtended+}
   \end{subfigure}
   \quad
   \begin{subfigure}[t]{.4\textwidth}
     \centering
     \includegraphics[height=4cm]{TreeExtended++}
     \caption{The new \cc{Key} overwrites the value of the node \code{block}}
-    \label{fig:TreeExtended++}
+    \label{fig:tree_extended++}
   \end{subfigure}
   \caption{The tree-like representation of YAML data shows the problem with adding non-leaf values}
 \end{figure}
 
-As we can see in Figure~\ref{fig:Tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:TreeExtended} shows the resulting tree. We could now save \code{chain} as a map key inside \code{bloc}:
+As we can see in Figure~\ref{fig:tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:tree_extended} shows the resulting tree. We could now save \code{chain} as a map key inside \code{bloc}:
 
 \begin{yamlcode}
   bloc:
@@ -670,7 +669,7 @@ As we can see in Figure~\ref{fig:Tree} the only nodes that store values are the 
       silent: "alarm"
 \end{yamlcode}
 
-. However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:TreeExtended++}).
+. However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:tree_extended++}).
 
 Another option to fix our problem would be to use YAML’s list type, and to store the value of a \cc{Key} and the data below the \cc{Key} as first and second element of the list:
 
@@ -703,12 +702,12 @@ Quite naturally we want to map Elektra arrays to YAML lists.
 
 \begin{figure}
   \centering
-    \includegraphics[width=.6\textwidth]{ArrayValue.pdf}
+    \includegraphics[width=.6\textwidth]{ArrayValue}
   \caption{The \cc{KeySet} above describes an array containing three elements}
-  \label{fig:ArrayValue}
+  \label{fig:array_value}
 \end{figure}
 
-If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:ArrayValue} would result in the YAML data:
+If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_value} would result in the YAML data:
 
 \begin{yamlcode}
   array:
