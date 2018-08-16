@@ -575,24 +575,89 @@ The results of the survey showed that the participants preferred double quoted f
 
 In contrast to the decision about block scalars the participants preferred the block styles of sequences and mappings (collections) over the respective flow style. However, they also decided that a minimally useful YAML subset should include flow collections.
 
-The Elektra developers decided against most of the specialized type features of YAML. Only the result count for and against primary tag handles resulted in a draw. In this case we decided to implement the feature, since it allows us to explicitly specify application specific types.
+The Elektra developers decided against most of the specialized type features of YAML. Only the result count for and against primary tag handles resulted in a draw.
 
 The questions about general type support (schemas) showed that a minimal YAML subset should include all types of the JSON Schema.
 
 One of the few specialized features deemed necessary by the participants were anchors and aliases. These two elements can be used to reference the same data multiple times in the same document.
 
-\subsubsection{Summary}
+\subsubsection{Summary/Decision}
+\label{sec:discussion_summary_decision}
 
-According to the results of the discussion we decided to implement the following YAML features for a minimal YAML parser:
+The list below contains a summary of the YAML features that should be part of a minimal YAML subset according to the results of the discussion:
 
 \begin{itemize}
-  \item Double Quoted Flow Scalars
-  \item Block and Flow Collections
-  \item JSON Schema
-  \item Primary Tag Handle
+  \item Double quoted flow scalars
+  \item Block and flow collections
+  \item JSON schema
+  \item Primary tag handle
   \item References
 \end{itemize}
 
+. In the end we decided to drop some features in the list above and implement the following list of items for the YAML subset:
+
+\begin{itemize}
+  \item Double quoted scalars
+  \item Single quoted scalars
+  \item Plain flow scalars
+  \item Block collections
+  \item Core schema (no tag support)
+\end{itemize}
+
+. The most notable difference to the result of the discussion are the missing support for data types, references and flow collections.
+
+\textbf{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of YAML’s data types to the ones supported by Elektra, is not trivial, and hence we decided to not support tags.
+
+We also decided against supporting \textbf{references}, since this feature allow us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
+
+\textbf{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the YAML documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant whitespace is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” YAML subset.
+
+\begin{figure}
+  \begin{yamlcode}
+    - Abbreviation:
+       - At First: Yet Another Markup Language
+       - Today: YAML Ain’t Markup Language
+    - Current Version: YAML 1.2 (2009)
+    - Superset of JSON
+    - Two Styles: Flow Style (Indicator Based) and
+                  Block Style (Indentation Based)
+    - 3 Different Data Types:
+      - Scalar:
+        - "Hello World"
+        - '👋 🌍'
+        - 123
+      - Sequence: [Text, 'Text', "Text", 123.5]
+      - Map: {🔑: Value, see-no-evil monkey: 🙈}
+    - Design Goal: “YAML is easily readable by humans.”
+  \end{yamlcode}
+  \caption{A YAML document that contains only block collections and flow scalars}
+  \label{fig:block_collection}
+\end{figure}
+
+\begin{figure}
+\begin{yamlcode}
+  [{'Abbreviation':
+    [{'At First': 'Yet Another Markup Language'},
+     {'Today': 'YAML Ain’t Markup Language'}]},
+   {'Current Version': 'YAML 1.2 (2009)'},
+   'Superset of JSON',
+   {'Two Styles': 'Flow Style (Indicator Based) and
+                   Block Style (Indentation Based)'},
+   {'3 Different Data Types':
+     [{'Scalar': ['Hello World', '👋 🌍', 123]},
+      {'Sequence': ['Text', 'Text', 'Text', 123.5]},
+      {'Map': {'see-no-evil monkey':
+       '🙈', '🔑': 'Value'}}]},
+   {'Design Goal':
+    '“YAML is easily readable by humans.”'}]
+\end{yamlcode}
+  \caption{The YAML document above stores the same data as the one in Figure~\ref{fig:block_collection}, but uses flow collections instead of block collections}
+  \label{fig:flow_collection}
+\end{figure}
+
+In conclusion we should also mention that other YAML subsets such as \href{https://github.com/crdoconnor/strictyaml}{StrictYAML}, and \href{https://metacpan.org/pod/YAML::Tiny}{YAML Tiny} also do not support references, and only have very limited support for tags and flow collections~\cite{connor2018strictyaml, kennedy2018yamltiny}.
+
+\newpage
 \section{Mapping Between Elektra’s Data Types and YAML}
 \label{sec:mapping_elektra_yaml}
 
