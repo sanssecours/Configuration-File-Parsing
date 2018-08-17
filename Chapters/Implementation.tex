@@ -115,6 +115,12 @@ One of the first problems we encountered using ANTLR was the significant leading
 
 We first tried to parse different levels of whitespace using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of whitespace. This approach worked, but only for a constant amount of whitespace. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading whitespace matched in the current rule, then the generated parser would be unable to parse our simple example input.
 
+\subsubsection{Indent \& Detend Tokens}
+
+Since the initial attempt for our ANTLR grammar did not show promising results, we looked at how other ANTLR grammars handle significant whitespace.
+
+Bart Kiers created a \href{https://github.com/antlr/grammars-v4/blob/master/python3/Python3.g4}{ANTLR grammar for Python 3}, which captures the start of a document and newline characters inside the lexer. The grammar then uses application-specific code~\cite[p. 48]{parr2013definitive} to fill a stack with the current amount of indentation and emits \code{INDENT} and \code{DETEND} tokens accordingly. Since this method looked promising, we created a \href{https://github.com/sanssecours/Yan-LR/compare/363be1e...188e5d4}{basic YAML parser that used the same algorithm}. While this approach worked for some YAML documents, we found simple input where the algorithm did not show the expected result. Another problem with this approach are complex lexer rules for YAML scalars. The cause of this problem is that the parameterized BNF rules of the YAML specification do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
