@@ -106,11 +106,13 @@ While most of the problems of adding a YAML storage plugin deal with the parsing
 \subsection{Base64}
 \label{sec:base64}
 
-One of the first plugins we used to improve the YAML support of Elektra was the \href{https://www.libelektra.org/plugins/base64}{Base64} plugin of Peter Nirschl. The plugin en- and decodes binary values using the Base64 algorithm~\cite{josefsson2006base16}.
+One of the first plugins we used to improve the YAML support of Elektra was the \href{https://www.libelektra.org/plugins/base64}{Base64} plugin of Peter Nirschl~\cite{nirschl2018crypto}. The plugin en- and decodes binary values using the Base64 algorithm~\cite{josefsson2006base16}.
 
 Since Elektra supports values containing binary data, we can use the Base64 plugin to encode this data and store it using ASCII values in a YAML file. However, the plugin used a common prefix to mark base64-encoded data. For example, if we want to store the decimal numbers 104 (0x68) and 105 (0x69), then the plugin would encode this values as \code{aGk=} and add the prefix \code{@BASE64}. The resulting value would then be \yaml{"@BASE64aGk="}. In YAML a value should not contain a prefix though. Instead YAML marks base64 encoded data with the tag (data type) \yaml{!!binary}. We therefore need to store the two values above as \yaml{!!binary "aGk="} in a YAML file. For this purpose we added a new mode to the Base64 plugin.
 
 The new \emph{meta mode} uses metadata to mark a key-value pair that contains a base64-encoded value. Instead of a prefix Base64 adds a meta-key \code{type} with the value \code{binary}. Figure~\ref{fig:base64} shows an example, where Elektra uses the Base64 plugin to encode and decode the bytes 0x68 and 0x69 (code points for the ASCII string \yaml{hi}).
+
+We should mention here that we only added support for the Base64 encoded data to the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin, since we decided to not support tags for our YAML subset (see Section “\nameref{sec:discussion_summary_decision}”).
 
 \begin{figure}
   \centering
