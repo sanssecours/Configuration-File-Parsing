@@ -99,6 +99,22 @@ The official \href{http://yaml.org}{YAML website} prominently lists known YAML p
 
 . Out of these options Syck is not actively maintained any more. This leaves only \code{libyaml} and \code{yaml-cpp}. We decided to use \code{yaml-cpp}, since it supports the latest version of YAML (\code{YAML 1.2}). With the help of the library we \href{https://github.com/ElektraInitiative/libelektra/pull/1613}{added the first plugin with full YAML support} called \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} to Elektra.
 
+\subsection{ALL(*) Parser}
+
+The first parser generator we used as part of the thesis was \gls{ANTLR} 4. As we already described in the section “\nameref{sec:state_of_the_art}” ANTLR 4 generates parsing code that uses an adaptive LL algorithm called ALL(*). As target language for the generated parser we used the \href{https://github.com/antlr/antlr4/pull/1210}{C++ target for ANTLR}, which was added to the official repository of ANTLR 4 in 2016.
+
+\subsubsection{Initial Attempt}
+
+One of the first problems we encountered using ANTLR was the significant leading whitespace used to describe the structure of YAML block \glspl{collection}. In YAML increased leading whitespace starts a new child element, while decreasing amount of leading whitespace ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, YAML’s reference grammar does not use \code{INDENT} and \code{DETEND} tokens, but uses parameterized BNF productions instead. According to the authors of the YAML specification, this is necessary to describe the indentation rules of YAML~\cite{benevansdot2009yaml}:
+
+\begin{quote}
+  Many productions use an explicit indentation level parameter. This is less elegant than Python’s “indent” and “undent” [sic] conceptual tokens. However it is required to formally express YAML’s indentation rules.
+\end{quote}
+
+.
+
+We first tried to parse different levels of whitespace using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of whitespace. This approach worked, but only for a constant amount of whitespace. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading whitespace matched in the current rule, then the generated parser would be unable to parse our simple example input.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
