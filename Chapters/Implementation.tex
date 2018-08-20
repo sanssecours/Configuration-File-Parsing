@@ -202,4 +202,13 @@ In addition the plugin insert a new \cc{Key} for every array parent that stores 
 
 Figure~\ref{fig:keyset_large_extended} shows the \cc{KeySet} after the whole conversion at the position \code{preset}. This \cc{KeySet} is also the input for the Directory Value plugin at the position \code{postget}.
 
-% \subsection{YAML Smith}
+\subsection{YAML Smith}
+
+Elektra’s storage plugins needs to both
+
+\begin{enumerate}
+  \item convert a configuration file to a \cc{KeySet}, and
+  \item convert a \cc{KeySet} to a configuration file
+\end{enumerate}
+
+. Since the second task is always the same, regardless of the parser library we use, we created a plugin called \href{http://libelektra.org/plugins/yamlsmith}{YAML Smith} that takes care of this task.
