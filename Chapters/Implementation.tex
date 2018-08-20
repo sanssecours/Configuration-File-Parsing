@@ -119,6 +119,34 @@ Since the initial attempt for our ANTLR grammar did not show promising results, 
 
 Bart Kiers created a \href{https://github.com/antlr/grammars-v4/blob/master/python3/Python3.g4}{ANTLR grammar for Python 3}, which captures the start of a document and newline characters inside the lexer. The grammar then uses application-specific code~\cite[p. 48]{parr2013definitive} to fill a stack with the current amount of indentation and emits \code{INDENT} and \code{DETEND} tokens accordingly. Since this method looked promising, we created a \href{https://github.com/sanssecours/Yan-LR/compare/363be1e...188e5d4}{basic YAML parser that used the same algorithm}. While this approach worked for some YAML documents, we found simple input where the algorithm did not show the expected result. Another problem with this approach are complex lexer rules for YAML scalars. The cause of this problem is that the parameterized BNF rules of the YAML specification do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
 
+\subsubsection{Custom Lexer}
+
+For the \href{https://www.libelektra.org/plugins/yanlr}{final version of our ANTLR parser} we looked at the source code of various YAML parsing libraries. One of the most widely used parsing libraries is \href{https://github.com/yaml/libyaml}{LibYAML}. LibYAML is especially interesting since it was implemented by Kirill Simonov under the guidance of one of the authors of the YAML specification: Clark Evans~\cite{libyaml2018pyyaml}.
+
+Unfortunately LibYAML’s code uses C macros quite heavily and is therefore not very readable. A quick look at the code and comments showed us that LibYAML’s handwritten lexer already takes care of issues such as proper detection of plain scalars and \glspl{simpleKey}. Since the lexer uses a turing-complete language to scan the input, it is also able to handle nested block \glspl{collection}.
+
+The source code of LibYAML showed us that we can take care of most of YAML’s  complexity in the lexer. For further information we looked at \href{https://github.com/llvm-mirror/llvm/blob/master/lib/Support/YAMLParser.cpp}{LLVM’s YAML parser} (written in C++) and \href{https://bitbucket.org/asomov/snakeyaml-engine}{SnakeYAML Engine} (written in Java). The lexer of both of these tools use the same basic ideas as LibYAML. However, the code of these libraries is easier to read than LibYAML’s, since they are written in higher level programming languages.
+
+The most interesting part in the lexer of the libraries described above, is probably how they are able to add tokens for \glspl{simpleKey}. The list below describes how the algorithm works (in SnakeYAML Engine).
+
+\begin{itemize}
+
+  \item The lexer keeps a list of tokens and stores how many of those token it has emitted. The lexer can not simply emit a token unconditionally, since it might have to scan additional tokens to check if the current token starts a \gls{simpleKey}.
+
+  \item When the lexer scans a YAML token that can possibly start a simple key at the current position it adds this token as simple key candidate. For each simple key candidate the lexer also stores the current position in the token list. This way it can insert a key token at this position later, if a key candidate does indeed start a mapping key.
+
+  \item The lexer only emits the current token, if there are currently no candidates for simple keys. If there are simple key candidates it scans further ahead. Later it
+
+  \begin{enumerate}
+    \item removes simple key candidates if the current lexer position is more than 1024 characters ahead of the start position of the key candidate, or if the key candidate does not start in the current line.
+
+    \item adds a key token for a candidate if it locates a key value symbol (\yaml{:}) for the key candidate.
+  \end{enumerate}
+
+\end{itemize}
+
+. We used the algorithm described above in the final version of our basic YAML parser. For that purpose we wrote a custom YAML lexer for ANTLR. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
@@ -173,3 +201,5 @@ The Directory Value plugin adds an additional \cc{Key} with the prefix \yaml{___
 In addition the plugin insert a new \cc{Key} for every array parent that stores a (non-binary) value, at the first position of the array. In our example, the plugin adds a new \cc{Key} with the value \code{\_\_\_dirdata: Array Value} at the first position of \code{user/yaml/array}, and increases the index of all other array elements by one.
 
 Figure~\ref{fig:keyset_large_extended} shows the \cc{KeySet} after the whole conversion at the position \code{preset}. This \cc{KeySet} is also the input for the Directory Value plugin at the position \code{postget}.
+
+% \subsection{YAML Smith}
