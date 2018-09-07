@@ -147,6 +147,16 @@ The most interesting part in the lexer of the libraries described above, is prob
 
 . We used the algorithm described above in the final version of our basic ANTLR storage plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. For that purpose we wrote a custom YAML lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
 
+\subsection{LALR(1) Parser}
+
+After we finished the initial version of the ANTLR plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR} we developed a C++ plugin, that uses a \href{https://www.gnu.org/software/bison}{Bison} parser, called \href{https://www.libelektra.org/plugins/yambi}{YAMBi}.
+
+For the lexer of the plugin we used a slightly modified version of Yan LR’s lexer. This was necessary since Bison, unlike ANTLR, does not provide helper methods to operate on a character stream. For that purpose we wrote a simple class that mimics the behavior of ANTLR’s \cpp{ANTLRInputStream}.
+
+Apart from the parsing algorithm, another difference between Yan LR and YAMBi is the approach on how to translate YAML data to a \cpp{KeySet}. For YAN LR we use a listener interface that operates on the parse tree created by ANTLR. Bison only offers parser actions. These actions contain code that will be called after the parser matches certain parts of the grammar.
+
+YAMBi uses parser actions to call methods of a class that stores temporary data used to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating a code path in Yan LR that operates on parsing data that is available via ANTLR’s listener interface, since the listener operates on a completed parse tree, but not available yet in the corresponding grammar rule of the Bison parser. We solved this problem by by adding an additional grammar rule to the Bison grammar and moving the code into a later phase of the parse process.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
