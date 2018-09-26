@@ -157,6 +157,20 @@ Apart from the parsing algorithm, another difference between Yan LR and YAMBi is
 
 YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a YAML mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. We solved this problem by adding an additional action to the Bison grammar and moving the code to add the empty key into a later phase of the parsing process.
 
+\subsection{Earley Parser}
+
+For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. Unlike ANTLR and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
+
+\begin{shellcode}
+elements : element          # 0
+         | elements element # elements(0 1)
+         ;
+\end{shellcode}
+
+states that the rule \code{elements} should return the same node \code{element} produced (\code{0}), if it matches a single \code{element}. If the rule \code{elements} matched a rule \code{elements} followed by the rule \code{element} (second line), then YAEP creates a new node with the name \code{elements} that contains the nodes produced by the rule \code{elements} as first child (\code{0}) and the node produced by \code{element} as second child (\code{1}).
+
+Since the output of our storage plugin \href{https://www.libelektra.org/plugins/yawn}{YAwn} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the ANTLR plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
