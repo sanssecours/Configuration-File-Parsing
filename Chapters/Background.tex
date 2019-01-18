@@ -148,6 +148,8 @@ would translate to the \code{KeySet} shown in Figure~\ref{fig:array}.
 
 Since Elektra orders a \code{KeySet} alphabetically a \cc{Key} with name \code{\#10} would appear before a \cc{Key} with name \code{\#2}. To fix that problem Elektra adds underscores to keys with larger indizes. For example, the 11th element of an array ends with the name \code{\#\_10}.
 
+One important difference between Python’s list type and Elektra’s array type is that arrays do not need to be continuous. For example, it is possible for an Elektra array to only contain elements with the names \code{\#1} and \code{\#3}, while \cc{Key} entries with name \code{\#0} and \code{\#2} are missing.
+
 Elektra also uses the \cc{KeySet} structure to add \emph{metadata} to single keys. For this purpose each \cc{Key} may store a \cc{KeySet} containing simple key-value pairs. Figure~\ref{fig:metadata} shows an example \cc{Key} containing two meta keys \code{comment} and \code{check/type}.
 
 \begin{figure}
