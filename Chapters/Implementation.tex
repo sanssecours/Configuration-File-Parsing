@@ -171,6 +171,26 @@ states that the rule \code{elements} should return the same node \code{element} 
 
 Since the output of our storage plugin \href{https://www.libelektra.org/plugins/yawn}{YAwn} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the ANTLR plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
 
+\subsection{PEG Parser}
+
+All of the previously described parsing generators and libraries divide the parsing process into two distinct phases:
+
+\begin{enumerate}
+  \item lexing (generating a stream of symbols from the textual input), and
+  \item parsing (forming a data structures from the stream of symbols emitted by the lexer)
+\end{enumerate}
+
+. Figure \ref{fig:lexing_parsing} shows a graphical example of this process.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=\textwidth]{LexingParsing}
+  \caption{A lot of parser engines use two distinct phases (lexing and parsing) to process input}
+  \label{fig:lexing_parsing}
+\end{figure}
+
+Unlike ANTLR, Bison and YAEP the library we used for our \href{https://libelektra.org/plugins/yaypeg}{\gls{PEG} parser plugin} (\href{https://github.com/taocpp/PEGTL}{PEGTL}) does not use a lexing phase. The \gls{PEGTL} uses C++ templates to combine simple matching functions into more elaborate parsers.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
