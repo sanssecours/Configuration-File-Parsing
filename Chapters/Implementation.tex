@@ -158,6 +158,7 @@ Apart from the parsing algorithm, another difference between Yan LR and YAMBi is
 YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a YAML mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. To solve this problem we added an \href{https://master.libelektra.org/src/plugins/yambi/parser.ypp#L64-L67}{additional action} to the Bison grammar and moved the code that adds an empty key into a later phase of the parsing process.
 
 \subsection{Earley Parser}
+\label{sec:earley_parser}
 
 For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. Unlike ANTLR and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
 
@@ -189,7 +190,68 @@ All of the previously described parsing generators and libraries divide the pars
   \label{fig:lexing_parsing}
 \end{figure}
 
-Unlike ANTLR, Bison and YAEP the library we used for our \href{https://libelektra.org/plugins/yaypeg}{\gls{PEG} parser plugin} (\href{https://github.com/taocpp/PEGTL}{PEGTL}) does not use a lexing phase. The \gls{PEGTL} uses C++ templates to combine simple matching functions into more elaborate parsers.
+Unlike ANTLR, Bison and YAEP, the library we used for our \href{https://libelektra.org/plugins/yaypeg}{\gls{PEG} parser plugin} (\href{https://github.com/taocpp/PEGTL}{PEGTL}) does not use a separate lexing phase. Instead the \gls{PEGTL} parses the input in one go using C++ templates to combine simple matching functions into more elaborate parsers. The process of combining parsers this way is also known under the name “parser combinators” (see also Section “\nameref{sec:state_of_the_art}”). Besides the possibility to
+
+\begin{itemize}
+  \item create \emph{custom matching function} the library also supports,
+  \item \emph{actions} to react to matched input, and
+  \item \emph{custom state} to store contextual data
+\end{itemize}
+
+. Using the above features we were able to create a parser with rules that are similar to the ones described by the \href{http://yaml.org/spec/1.2/spec}{YAML specification}. The translation of some of the rule from the YAML specification was trivial. For example the rule:
+
+\begin{ccode}
+ns-plain-first(c) ::= ( ns-char - c-indicator )
+                    | ( ( "?" | ":" | "-" )
+                        /* Followed by an ns-plain-safe(c)) */ )
+\end{ccode}
+
+translates to the following code:
+
+\begin{cppcode}
+  struct ns_plain_first : sor<seq<not_at<c_indicator>, ns_char>,
+                              seq<one<'?', ':', '-'>, ns_plain_safe>> {};
+\end{cppcode}
+
+. The rule \cc{sor} represents ordered choice, meaning that it tries to match it’s template arguments:
+
+\begin{enumerate}
+  \item \cc{seq<not_at<c_indicator>, ns_char}
+  \item \cc{seq<one<'?', ':', '-'>, ns_plain_safe>}
+\end{enumerate}
+
+in order and succeeds if one of them matches, or fails if all of them fail. The rule \cc{seq} on the other hand tries to match all it’s template arguments in sequence and either succeeds, if all of them succeed, or fails, if one of them fails. This leaves the rules \cc{one}, which tries to match any of the given characters, and \cc{not_at}, which represents the PEG predicate \cc{!} that checks that the current input does not match the rule given as argument.
+
+While translating the above rule was not that hard, other rules that contained nested contextual data such as:
+
+\begin{ccode}
+l+block-sequence(n) ::= ( s-indent(n+m) c-l-block-seq-entry(n+m) )+
+                        /* For some fixed auto-detected m > 0 */
+\end{ccode}
+
+proved more difficult. To translate these kind of rules we added a custom state that contains a stack for the indentation (the values \cc{n} and \cc{n+m} above). In the above example a metarule puts the value \cc{n+m} on the stack before the parser tries to match \cc{s-indent(n+m)} and \cc{c-l-block-seq-entry(n+m)} multiple times. Afterwards the metarule removes the last value from the stack leaving the previous value \cc{n}. We called the general metarule that makes this possible \cc{with_updated_state}:
+
+\begin{cppcode}
+  template <typename UpdateStateRule,
+            typename RevertStateRule,
+            typename... Rules>
+  struct with_updated_state :
+  seq<UpdateStateRule,
+      sor<seq<Rules...>,
+          seq<RevertStateRule, failure>>,
+      RevertStateRule> {};
+\end{cppcode}
+
+. As we can see above \cc{with_updated_state} first invokes the rule \cc{UpdateStateRule} to update the state, then it tries to match a sequence of all rules stored in the template parameter pack \cc{Rules}. Depending on the success of \cc{seq<Rules>},
+
+\begin{enumerate}
+  \item the rule \cc{with_updated_state} either applies \cc{RevertStateRule} (third argument of \cc{sor}) and succeeds, if \cc{seq<Rules>} succeed, or
+  \item it applies \cc{RevertStateRule} and fails (second argument of \cc{sor}), if \cc{seq<Rules>} failed
+\end{enumerate}
+
+. We used \cc{with_updated_state} to create rules to updated nested versions of the indentation (\cc{n} and \cc{m} in the YAML spec) and context (\cc{c} in the YAML spec).
+
+For the conversion of the parsed data we used the AST building facility provided by PEGTL and custom tree walking code similar to the one used in the YAwn plugin (see Section “\nameref{sec:earley_parser}”).
 
 \section{Additional Plugins}
 
