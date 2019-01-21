@@ -5,7 +5,7 @@
 	<key>ApplicationVersion</key>
 	<array>
 		<string>com.omnigroup.OmniGraffle7</string>
-		<string>181.4.0.297378</string>
+		<string>192.21.0.323236</string>
 	</array>
 	<key>CreationDate</key>
 	<string>2018-01-17 16:04:51 +0000</string>
@@ -14,7 +14,7 @@
 	<key>FileType</key>
 	<string>flat</string>
 	<key>GraphDocumentVersion</key>
-	<integer>14</integer>
+	<integer>16</integer>
 	<key>GuidesLocked</key>
 	<string>NO</string>
 	<key>GuidesVisible</key>
@@ -28,7 +28,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2018-01-18 10:20:44 +0000</string>
+	<string>2019-01-21 16:46:26 +0000</string>
 	<key>Modifier</key>
 	<string>René Schwaiger</string>
 	<key>MovementHandleVisible</key>
@@ -100,7 +100,7 @@
 				<key>Class</key>
 				<string>GraffleShapes.CanvasBackgroundGraphic</string>
 				<key>ID</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>Style</key>
 				<dict>
 					<key>shadow</key>
@@ -219,7 +219,7 @@
 								mwGbAJsAhoaG
 								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red0\green128\blue255;}
 {\*\expandedcolortbl;;\csgenericrgb\c0\c50196\c100000;}
@@ -238,6 +238,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -275,7 +282,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -374,7 +381,7 @@
 								mwGbAJsAhoaG
 								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red0\green128\blue255;}
 {\*\expandedcolortbl;;\csgenericrgb\c0\c50196\c100000;}
@@ -441,6 +448,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -478,7 +492,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -535,7 +549,7 @@
 								<key>Align</key>
 								<integer>0</integer>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red15\green128\blue255;}
 {\*\expandedcolortbl;;\cssrgb\c0\c58980\c100000;}
@@ -592,11 +606,18 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{54.335402506163504, 80.999998311433302}, {31.57763960027026, 17.99999962476295}}</string>
+					<string>{{58.749998686670324, 80.999998311433274}, {40.577639412651735, 17.99999962476295}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
 					<dict>
+						<key>Color</key>
+						<dict>
+							<key>space</key>
+							<string>gg22</string>
+							<key>w</key>
+							<string>0</string>
+						</dict>
 						<key>Size</key>
 						<real>12</real>
 					</dict>
@@ -634,7 +655,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -710,7 +731,7 @@
 						EJsAmwGbAJsAhoaG
 						</data>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red89\green24\blue187;}
 {\*\expandedcolortbl;;\csgenericrgb\c34902\c9412\c73333;}
@@ -729,6 +750,13 @@
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
 					<dict>
+						<key>Color</key>
+						<dict>
+							<key>space</key>
+							<string>gg22</string>
+							<key>w</key>
+							<string>0</string>
+						</dict>
 						<key>Font</key>
 						<string>Avenir-Book</string>
 					</dict>
@@ -778,7 +806,7 @@
 						mwCbAIaGhg==
 						</data>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red89\green24\blue187;}
 {\*\expandedcolortbl;;\csgenericrgb\c34902\c9412\c73333;}
@@ -860,7 +888,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red253\green128\blue8;}
 {\*\expandedcolortbl;;\cssrgb\c100000\c57811\c0;}
@@ -879,6 +907,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -916,7 +951,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1015,7 +1050,7 @@
 								hoaG
 								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red255\green128\blue0;}
 {\*\expandedcolortbl;;\csgenericrgb\c100000\c50000\c0;}
@@ -1082,6 +1117,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1119,7 +1161,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1217,7 +1259,7 @@
 								hg==
 								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red255\green128\blue0;}
 {\*\expandedcolortbl;;\csgenericrgb\c100000\c50000\c0;}
@@ -1284,6 +1326,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1321,7 +1370,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1339,6 +1388,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
 								<string>Avenir-Book</string>
 							</dict>
@@ -1367,7 +1423,7 @@
 								<key>Align</key>
 								<integer>0</integer>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1386,6 +1442,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
 								<string>Avenir-Book</string>
 							</dict>
@@ -1414,7 +1477,7 @@
 								<key>Align</key>
 								<integer>0</integer>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1481,6 +1544,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1518,7 +1588,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1536,6 +1606,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
 								<string>Avenir-Book</string>
 							</dict>
@@ -1562,7 +1639,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1581,6 +1658,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
 								<string>Avenir-Book</string>
 							</dict>
@@ -1609,7 +1693,7 @@
 								<key>Align</key>
 								<integer>0</integer>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1676,6 +1760,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1713,7 +1804,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1767,8 +1858,51 @@
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kw1GaXJzdCBF
+								bGVtZW50hoQC
+								aUkBDZKEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoPvrN09g3qN
+								LT+D5pEfPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAACE
+								hIQHTlNBcnJh
+								eQCUmQCGgQAC
+								hARbMWZdJIaS
+								hJaWBk5TRm9u
+								dIaShISEBk5T
+								Rm9udB6UmSCE
+								BVszMmNdBgAA
+								ABgAAAD//kEA
+								dgBlAG4AaQBy
+								AC0AQgBvAG8A
+								awCEAWYQmwCb
+								AZsAmwCGhoY=
+								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red28\green173\blue40;}
 {\*\expandedcolortbl;;\csgenericrgb\c10824\c67794\c15583;}
@@ -1823,8 +1957,52 @@
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxJ1c2VyL3lh
+								bWwvYXJyYXkv
+								IzGGhAJpSQES
+								koSEhAxOU0Rp
+								Y3Rpb25hcnkA
+								lIQBaQOShJaW
+								B05TQ29sb3KG
+								koSEhAdOU0Nv
+								bG9yAJSEAWMB
+								hARmZmZmg++s
+								3T2Deo0tP4Pm
+								kR8+AYaShJaW
+								EE5TUGFyYWdy
+								YXBoU3R5bGWG
+								koSEhBdOU011
+								dGFibGVQYXJh
+								Z3JhcGhTdHls
+								ZQCEhBBOU1Bh
+								cmFncmFwaFN0
+								eWxlAJSEBEND
+								QFMAAISEhAdO
+								U0FycmF5AJSZ
+								AIaBAAKEBFsx
+								Zl0khpKElpYG
+								TlNGb250hpKE
+								hIQGTlNGb250
+								HpSZIIQFWzMy
+								Y10GAAAAGAAA
+								AP/+QQB2AGUA
+								bgBpAHIALQBC
+								AG8AbwBrAIQB
+								ZhCbAJsBmwCb
+								AIaGhg==
+								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red28\green173\blue40;}
 {\*\expandedcolortbl;;\csgenericrgb\c10824\c67794\c15583;}
@@ -1891,6 +2069,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1928,7 +2113,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1985,7 +2170,7 @@
 								<key>Align</key>
 								<integer>0</integer>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red16\green128\blue128;}
 {\*\expandedcolortbl;;\cssrgb\c0\c56905\c57462;}
@@ -2040,8 +2225,52 @@
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxJ1c2VyL3lh
+								bWwvYXJyYXkv
+								IzKGhAJpSQES
+								koSEhAxOU0Rp
+								Y3Rpb25hcnkA
+								lIQBaQOShJaW
+								B05TQ29sb3KG
+								koSEhAdOU0Nv
+								bG9yAJSEAWMB
+								hARmZmZmg83M
+								TD6DmpkZP4Oa
+								mRk/AYaShJaW
+								EE5TUGFyYWdy
+								YXBoU3R5bGWG
+								koSEhBdOU011
+								dGFibGVQYXJh
+								Z3JhcGhTdHls
+								ZQCEhBBOU1Bh
+								cmFncmFwaFN0
+								eWxlAJSEBEND
+								QFMAAISEhAdO
+								U0FycmF5AJSZ
+								AIaBAAKEBFsx
+								Zl0khpKElpYG
+								TlNGb250hpKE
+								hIQGTlNGb250
+								HpSZIIQFWzMy
+								Y10GAAAAGAAA
+								AP/+QQB2AGUA
+								bgBpAHIALQBC
+								AG8AbwBrAIQB
+								ZhCbAJsBmwCb
+								AIaGhg==
+								</data>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;\red51\green153\blue153;}
 {\*\expandedcolortbl;;\csgenericrgb\c20000\c60000\c60000;}
@@ -2108,6 +2337,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -2145,7 +2381,7 @@
 							<key>Text</key>
 							<dict>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -2163,6 +2399,13 @@
 							<string>ShapedGraphic</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>space</key>
+									<string>gg22</string>
+									<key>w</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
 								<string>Avenir-Book</string>
 							</dict>
@@ -2191,10 +2434,10 @@
 								<key>Align</key>
 								<integer>0</integer>
 								<key>Text</key>
-								<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
-{\colortbl;\red255\green255\blue255;\red128\green0\blue255;}
-{\*\expandedcolortbl;;\cssrgb\c58188\c21569\c100000;}
+{\colortbl;\red255\green255\blue255;\red89\green24\blue187;}
+{\*\expandedcolortbl;;\csgenericrgb\c34902\c9412\c73333;}
 \deftab720
 \pard\pardeftab720\partightenfactor0
 
@@ -2253,6 +2496,13 @@
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
 					<dict>
+						<key>Color</key>
+						<dict>
+							<key>space</key>
+							<string>gg22</string>
+							<key>w</key>
+							<string>0</string>
+						</dict>
 						<key>Size</key>
 						<real>12</real>
 					</dict>
@@ -2290,7 +2540,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -2403,16 +2653,20 @@
 		<key>Sidebar</key>
 		<true/>
 		<key>SidebarWidth</key>
-		<integer>200</integer>
+		<integer>244</integer>
 		<key>Sidebar_Tab</key>
 		<integer>0</integer>
 		<key>VisibleRegion</key>
-		<string>{{-177.5, -46}, {873, 803}}</string>
+		<string>{{456.625, 16.5}, {207.25, 200.75}}</string>
+		<key>WindowInfo_InspectorTab</key>
+		<array>
+			<string>com.omnigroup.OmniGraffle.inspectorGroup.object</string>
+		</array>
 		<key>ZoomValues</key>
 		<array>
 			<array>
 				<string>Canvas 1</string>
-				<real>1</real>
+				<real>4</real>
 				<real>1</real>
 			</array>
 		</array>
@@ -2422,9 +2676,9 @@
 	<key>copyLinkedImagesKey</key>
 	<false/>
 	<key>createSinglePDFKey</key>
-	<false/>
+	<integer>0</integer>
 	<key>exportAreaKey</key>
-	<integer>4</integer>
+	<integer>1</integer>
 	<key>exportQualityKey</key>
 	<real>100</real>
 	<key>exportSizesKey</key>
@@ -2444,8 +2698,6 @@
 	<integer>8</integer>
 	<key>marginWidthKey</key>
 	<real>0.0</real>
-	<key>previewTypeKey</key>
-	<integer>0</integer>
 	<key>readOnlyKey</key>
 	<false/>
 	<key>resolutionForBMPKey</key>
