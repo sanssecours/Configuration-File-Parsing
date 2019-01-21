@@ -279,7 +279,7 @@ We should mention here that we only added support for the Base64 encoded data to
 
 \subsection{Directory Value}
 
-We already described the problem of storing a value in a non-leaf (directory) \cc{Key} in the Section~“\nameref{sec:mapping_elektra_yaml}”. Since the problem is independent of the parser engine and also relevant to other plugins, we implemented the functionality in a plugin named Directory Value.
+We already described the problem of storing a value in a non-leaf (directory) \cc{Key} in the Section~“\nameref{sec:mapping_elektra_yaml}”. Since the problem is independent of the parser engine and also relevant to other plugins, we implemented the functionality in a plugin named \href{http://libelektra.org/plugins/directoryvalue}{Directory Value}.
 
 The Directory Value plugin adds an additional \cc{Key} with the prefix \yaml{___dirdata} for every non-array \cc{Key} that has children and contains a value in the \code{set} direction (position \code{preset}). For example, for the \cc{KeySet} shown in Figure~\ref{fig:keyset_large}, the plugin adds the \cc{Key}
 
