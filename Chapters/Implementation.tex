@@ -268,6 +268,32 @@ As described in the previous section “\nameref{sec:peg_parser}” we already u
 
 . In the end we did not think the effort to create yet another parser was worth the time, since at least in theory PEGTL seemed to be the better choice.
 
+\subsection{Augeas Lens}
+
+Augeas~\cite{lutterkort2008augeas} is a tool that uses so-called
+lenses to edit configuration data. The main advantage of lenses is that they
+handle both the parsing and writing process. Since Elektra already includes a
+plugin for Augeas~\cite{berlakovich2016universal}, it sounds like a YAML
+lens is the ideal tool to convert YAML data to a \cc{KeySet}. In reality there
+are multiple problems with this approach. Besides the issues mentioned by
+\citeauthor{berlakovich2016universal} in his bachelor thesis~\cite{berlakovich2016universal}, one of
+the main problems is that YAML is a context-sensitive
+language~\cite{lutterkort2017augeas}, while Augeas offers only full support for
+regular languages. With this in mind we tested the official YAML lens with Elektra’s \href{https://www.libelektra.org/manpages/kdb}{\cc{kdb} tool}. Since even the conversion of a single single key-value pair failed, we used the tool \href{https://github.com/raphink/augeas-sandbox/blob/master/augcheck}{\cc{augcheck}} to make sure the YAML lens is able to parse our example data. This tool showed us that the \href{https://github.com/hercules-team/augeas/blob/d555a995a06ac81cab62d016d6eaff8a7ba64a2e/lenses/tests/test_yaml.aug}{YAML lens} currently supports nested mappings, such as
+
+\begin{yamlcode}
+  root:
+    key: value
+\end{yamlcode}
+
+, but is unable to handle a non-nested mapping:
+
+\begin{yamlcode}
+  key: value
+\end{yamlcode}
+
+, and other simple data. With the current state of the YAML lens and the problems of the Augeas plugin in mind, we decided to not look any further into developing an Augeas lens for our YAML subset.
+
 \section{Additional Plugins}
 
 While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
