@@ -258,11 +258,11 @@ For the conversion of the parsed data to a \cc{KeySet} we used the parse tree fa
 
 \subsection{Parser Combinator}
 
-As described in the previous section “\nameref{sec:peg_parser}” we already used a parser combinator library to create a parser for our basic YAML subset. Initially we also wanted to use a second parser combinator library called \href{https://github.com/orangeduck/mpc}{mpc}. However we decided against using mpc since
+As described in the previous section “\nameref{sec:peg_parser}” we already used a parser combinator library to create a parser for our basic YAML subset. Initially we also wanted to use a second parser combinator library called \href{https://github.com/orangeduck/mpc}{mpc}. However we decided against using mpc, since
 
 \begin{itemize}
   \item the parser engine \href{https://github.com/orangeduck/mpc#does-mpc-support-unicode}{only supports ASCII} encoded data,
-  \item requires manual memory management, since it is written in C, and
+  \item requires manual memory management – mpc is written in C – and
   \item does not provide built-in support for advanced features such as tree selection
 \end{itemize}
 
