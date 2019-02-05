@@ -4,6 +4,7 @@
 
 % -- Packages ------------------------------------------------------------------
 
+\usepackage{amsthm}
 \usepackage{bchart}
 \usepackage[sorting=ynt, style=alphabetic, backend=biber]{biblatex}
 \usepackage{booktabs}
@@ -18,6 +19,7 @@
 \usepackage{subcaption}
 \usepackage{tcolorbox}
 \usepackage{thmtools}
+\usepackage{thm-restate}
 \usepackage{titlesec}
 \usepackage{unicode-math}
 \usepackage{xcolor}
@@ -180,7 +182,14 @@
 
 % -- Theorems ------------------------------------------------------------------
 
-\declaretheorem[name={Research Question}]{question}
+\declaretheoremstyle[
+  spaceabove=10pt,
+  spacebelow=10pt,
+  headfont=\normalfont\bfseries❓~,
+  bodyfont=\normalfont\itshape,
+  postheadspace=1em,
+]{questionStyle}
+\declaretheorem[name={Research Question}, style=questionStyle]{question}
 
 % -- Macros --------------------------------------------------------------------
 
