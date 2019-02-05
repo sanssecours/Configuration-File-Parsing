@@ -43,12 +43,12 @@
 
 \setcurriculum{Computer Engineering}{Technische Informatik}
 
-% -- Settings ------------------------------------------------------------------
+% -- Bibliography --------------------------------------------------------------
 
-% Bibliography
 \addbibresource{References.bib}
 
-% Boxes
+% -- Boxes ---------------------------------------------------------------------
+
 \newtcbox{\codebox}{
   on line,
   arc = 2pt,
@@ -77,7 +77,8 @@
   toprule=0pt
 }
 
-% Code
+% -- Code ----------------------------------------------------------------------
+
 \usemintedstyle{rainbow_dash}
 \BeforeBeginEnvironment{minted}{\begin{code-boxed}}
 \AfterEndEnvironment{minted}{\end{code-boxed}}
@@ -111,10 +112,12 @@
 }
 \makeatother
 
-% Captions
+% -- Captions ------------------------------------------------------------------
+
 \captionsetup{format=hang}
 
-% Colors
+% -- Colors --------------------------------------------------------------------
+
 \definecolor{Aqua}{rgb}{0, 0.56, 1}
 \definecolor{Red}{rgb}{0.84, 0.15, 0.19}
 \definecolor{Blue}{rgb}{0, 0.41, 0.60}
@@ -126,17 +129,20 @@
 \definecolor{color06}{rgb}{0.00,0.50,1.00}
 \definecolor{color07}{rgb}{0.00,0.80,0.40}
 
-% Floats
+% -- Floats --------------------------------------------------------------------
+
 \floatplacement{figure}{htbp}
 \floatplacement{table}{htbp}
 
-% Fonts
+% -- Fonts ---------------------------------------------------------------------
+
 \setmainfont[Mapping=tex-text]{Seravek}
 \setsansfont[Mapping=tex-text]{Ubuntu}
 \setmonofont[Scale=MatchLowercase]{Menlo}
 \setmathfont{texgyrepagella-math.otf}
 
-% Hyperref
+% -- Hyperref ------------------------------------------------------------------
+
 \hypersetup{
   pdfauthor = {\authorname},
   pdftitle = {\thesistitle},
@@ -152,22 +158,25 @@
 % Glossary
 \makeindex
 \makeglossaries
+% -- Indentation & Paragraphs --------------------------------------------------
 
-% Indentation & Paragraphs
 \nonzeroparskip
 \setlength{\parindent}{0pt}
 
-% Page Numbering
+% -- Page Numbering ------------------------------------------------------------
+
 \renewcommand{\pagenumbering}[1]{}
 
-% Section & Paragraph Style
+% -- Section & Paragraph Style -------------------------------------------------
+
 \setsecnumdepth{subsubsection}
 \titleformat{\section}{\large\sffamily\bfseries}{}{0pt}{\thesection~}
   [{\color{Red}\hrule}]
 \titleformat{\paragraph}{\bfseries}{}{0pt}{\centering}[\vspace{1pt}]
 \titleformat{\subparagraph}{\bfseries}{}{0pt}{}[\vspace{1pt}]
 
-% Table of Contents
+% -- Table of Contents ---------------------------------------------------------
+
 \settocdepth{subsection}
 
 % -- Macros --------------------------------------------------------------------
