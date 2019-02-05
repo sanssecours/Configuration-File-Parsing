@@ -5,7 +5,9 @@ In the evaluation phase of the work we concentrated on the criteria listed below
 \begin{description}
 
   \item[Run-time Performance]~\\[0.1cm]
-  We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we could determine median execution times. At the end of the phase we determined the fastest parsing code and therefore also answered the second scientific question: “Are hand-written parsers or generated parsers faster?”.
+  We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we could determine median execution times. At the end of the phase we determined the fastest parsing code and therefore also answered~\Cref{que:speed}:
+
+  \speed*
 
   \item[Memory Usage]~\\[0.1cm]
   We determined the memory usage of the different parsing implementation using \href{http://valgrind.org}{Valgrind's} heap profiler \href{http://valgrind.org/docs/manual/ms-manual.html}{Massif}.
