@@ -80,14 +80,14 @@ We used C macros to minimize the code overhead and complexity caused by the erro
 
 Since the first steps with a hand-written recursive descent parser showed that this approach takes considerable effort we decided against extending the first prototype. Instead we chose to use an already existing hand-written YAML parser.
 
-\begin{figure}[htbp]
+\begin{listing}
   \centering
   \begin{code-boxed}
     \input{Code/yaml}
   \end{code-boxed}
   \caption{ABNF grammar for a very small regular subset of YAML}
   \label{cod:abnf_recurive_descent}
-\end{figure}
+\end{listing}
 
 The official \href{http://yaml.org}{YAML website} prominently lists known YAML parsers. Since we decided to use C or C++ as programming language – to improve the comparability of the parsers – we are left with three basic options:
 
