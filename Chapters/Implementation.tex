@@ -13,47 +13,59 @@ The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644c
       Grammar & Example & Code\\
       \midrule
 
+      \vspace{0cm}
       Terminal
       &
+      \vspace{0cm}
+      \codebox{
       \texttt{{\color{color02} a}
               {\color{color03} \textbf{=}}
-              {\color{color07} "a"}}
+              {\color{color07} "a"}}}
       &
-        \begin{tabminted}[autogobble]{c}
-          bool a() {
-            bool match = getc(file) == 'a';
-            if (!match) putc(file);
-            return match;
-          }
-        \end{tabminted}
+      \vspace{-0.36cm}
+      \begin{minted}[autogobble]{c}
+        bool a() {
+          bool match = getc(file) == 'a';
+          if (!match) putc(file);
+          return match;
+        }
+      \end{minted}
       \\
 
+      \vspace{0cm}
       Sequence
       &
+      \vspace{0cm}
+      \codebox{
       \texttt{{\color{color02} seq}
               {\color{color03} \textbf{=}}
-              {\color{color02} rule1 rule2}}
+              {\color{color02} rule1 rule2}}}
       &
-        \begin{tabminted}[autogobble]{c}
-          bool seq() {
-            return rule1() && rule2();
-          }
-        \end{tabminted}
+      \vspace{-0.36cm}
+      \begin{minted}[autogobble]{c}
+        bool seq() {
+          return rule1() && rule2();
+        }
+      \end{minted}
       \\
 
+      \vspace{0cm}
       Alternative
       &
+      \vspace{0cm}
+      \codebox{
       \texttt{{\color{color02} seq}
               {\color{color03} \textbf{=}}
               {\color{color02} rule1}
               {\color{color03} /}
-              {\color{color02} rule2}}
+              {\color{color02} rule2}}}
       &
-        \begin{tabminted}[autogobble]{c}
-          bool alt() {
-            return rule1() || rule2();
-          }
-        \end{tabminted}
+      \vspace{-0.36cm}
+      \begin{minted}[autogobble]{c}
+        bool alt() {
+          return rule1() || rule2();
+        }
+      \end{minted}
       \\
 
       \bottomrule
