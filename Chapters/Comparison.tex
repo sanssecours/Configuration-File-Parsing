@@ -52,10 +52,37 @@ In the evaluation phase of the work we concentrated on the criteria listed below
 
 While there exist techniques to enhance error reporting using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
 
-\section{Unmodified Error Messages}
+\subsection{Erroneous Input}
 
-\begin{yamlcode}
-  key:
-   - element 1
-  - element 2
-\end{yamlcode}
+The following code listing show the erroneous YAML data we used to compare the error reporting capabilities.
+
+\begin{listing}
+  \begin{code-boxed}
+    \inputminted{yaml}{Data/Errors/list_element_outside.yaml}
+  \end{code-boxed}
+  \caption{The indentation of the plain scalar \yaml{element 2} is incorrect in the file \sh{list_element_outside.yaml}}
+\end{listing}
+
+\subsection{Basic Error Messages}
+
+We started the comparison by listing the basic error messages for the YAML plugins. These messages contain the error location and the auto-generated error message by the parsing engines. For the sake of brevity we removed some uninteresting data such as the filename of the parsed file.
+
+\begin{table}
+  \caption{Basic Error Messages}
+  \label{tab:error_messages_list_element_outside}
+  \centering
+  \begin{tabular}{lp{12cm}}
+    \toprule
+    \textbf{Plugin} & \textbf{Message}\\
+    \midrule
+    YAMBi & 3:1: syntax error, unexpected ELEMENT, expecting KEY or BLOCK\_END\\
+    YAML CPP & yaml-cpp: error at line 3, column 1: end of map not found\\
+    Yan LR & 3:1: mismatched input '- ' expecting BLOCK\_END\\
+    YAwn & 3:1: Syntax error on token number 9: “<Token, ELEMENT, -, 3:1–3:2>”\\
+    YAy PEG & 3:0(18): parse error matching tao::yaypeg::eof\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+
