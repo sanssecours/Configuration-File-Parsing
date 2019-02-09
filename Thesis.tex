@@ -92,6 +92,12 @@
 \newminted{shell}{autogobble}
 \newminted{yaml}{autogobble}
 
+\newcommand{\code}[1]{\codebox{\texttt{#1}}}
+\newcommand{\cc}[1]{\codebox{\mintinline{c}|#1|}}
+\newcommand{\cpp}[1]{\codebox{\mintinline{cpp}|#1|}}
+\newcommand{\sh}[1]{\codebox{\mintinline{sh}|#1|}}
+\newcommand{\yaml}[1]{\codebox{\mintinline{yaml}|#1|}}
+
 % Source: https://tex.stackexchange.com/questions/188003
 \makeatletter
 \newenvironment{tabminted}{%
@@ -190,13 +196,6 @@
   postheadspace=1em,
 ]{questionStyle}
 \declaretheorem[name={Research Question}, style=questionStyle]{question}
-
-% -- Macros --------------------------------------------------------------------
-
-\newcommand{\code}[1]{\codebox{\texttt{#1}}}
-\newcommand{\cc}[1]{\codebox{\mintinline{c}|#1|}}
-\newcommand{\cpp}[1]{\codebox{\mintinline{cpp}|#1|}}
-\newcommand{\yaml}[1]{\codebox{\mintinline{yaml}|#1|}}
 
 % -- Glossary ------------------------------------------------------------------
 
