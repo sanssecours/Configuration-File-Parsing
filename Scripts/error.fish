@@ -5,7 +5,10 @@ set path 'Data/Errors'
 set files list_element_outside.yaml
 
 for file in $files
-    printf '📄 %s\n\n' "$file"
+
+    printf '————————————————————————————————————————\n'
+    printf '📄 %s\n' "$file"
+    printf '————————————————————————————————————————\n'
 
     for plugin in $plugins
         printf '\n🔌 %s\n\n' "$plugin"
