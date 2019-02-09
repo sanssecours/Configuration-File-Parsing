@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set plugins yamlcpp yanlr yaypeg yawn yambi
+set plugins yambi yamlcpp yanlr yawn yaypeg
 set path 'Data/Errors'
 set files list_element_outside.yaml
 
