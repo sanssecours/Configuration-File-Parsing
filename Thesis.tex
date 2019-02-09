@@ -102,30 +102,6 @@
 \renewcommand{\fps@listing}{H}
 \makeatother
 
-% Source: https://tex.stackexchange.com/questions/188003
-\makeatletter
-\newenvironment{tabminted}{%
-  \let\FV@ListVSpace\relax
-  \minted
-}{%
-  \endminted
-  \unskip
-  \aftergroup\@tabmintedend
-}
-\newcommand*{\tabminted@finalstrut}[1]{%
-  \ifdim\prevdepth>0pt
-    \ifdim\dp#1>\prevdepth
-      \vskip\dimexpr(\dp#1)-\prevdepth\relax
-    \fi
-  \else
-    \vskip\dimexpr(\dp#1)\relax
-  \fi
-}
-\newcommand*{\@tabmintedend}{%
-  \let\@finalstrut\tabminted@finalstrut
-}
-\makeatother
-
 % -- Captions ------------------------------------------------------------------
 
 \captionsetup{format=hang}
