@@ -60,7 +60,8 @@ The following code listing show the erroneous YAML data we used to compare the e
   \begin{code-boxed}
     \inputminted{yaml}{Data/Errors/list_element_outside.yaml}
   \end{code-boxed}
-  \caption{The indentation of the plain scalar \yaml{element 2} is incorrect in the file \sh{list_element_outside.yaml}}
+  \caption{The indentation of the plain scalar \yaml{element 2} is incorrect in the file \sh{list_element_outside.yaml}. One of the most obvious solutions to fix the syntax error would be to add a single space character right before \yaml{element 2}.}
+  \label{lst:list_element_outside}
 \end{listing}
 
 \subsection{Basic Error Messages}
@@ -84,5 +85,6 @@ We started the comparison by listing the basic error messages for the YAML plugi
   \end{tabular}
 \end{table}
 
+\subsubsection{Interpretation}
 
-
+As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the parsing engines report the error location for the code from Listing~\ref{lst:list_element_outside} correctly. The error messages also shows that the question, if the first position after a newline is at column 0 or 1, is still open for debate.
