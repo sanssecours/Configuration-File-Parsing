@@ -805,8 +805,6 @@
   \begin{SFFont}{phv}%
     \sffamily
       \chapter*{\vutinfth@polylingual@StatementChapter}%
-      \vutinfth@person@author@fullname\\
-      \vutinfth@data@address\par
       \vspace{1.2cm}%
       {\normalfont\vutinfth@polylingual@Statement}\par
       \vspace{1.2cm}%
