@@ -166,7 +166,7 @@ ANTLR uses a error listener class that provides a callback method that includes 
   \item the default error message
 \end{itemize}
 
-for each error detected by ANTLR. As we already saw in Table~\ref{tab:error_messages_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message provided by ANTLR. Since ANTLR uses methods such as token deletion and insertion to keep parsing a file even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
+for each error detected by ANTLR. As we already saw in Table~\ref{tab:error_messages_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message reported by ANTLR. Since ANTLR uses methods such as token deletion and insertion to keep parsing a file, even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
 
 \begin{listing}
   \begin{yamlcode}
