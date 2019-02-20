@@ -153,3 +153,37 @@ As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the 
 \end{table}
 
 After the slight modifications to the YAML parser plugins we decided to take a closer look at the error handling capabilities of each of the parsing engines on their own in the next sections.
+
+\subsection{ANTLR}
+
+ANTLR uses a error listener class that provides a callback method that includes access to
+
+\begin{itemize}
+  \item the location,
+  \item the offending symbol,
+  \item the used recognizer class,
+  \item the thrown exception, and
+  \item the default error message
+\end{itemize}
+
+for each error detected by ANTLR. As we already saw in Table~\ref{tab:error_messages_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message provided by ANTLR. Since ANTLR uses methods such as token deletion and insertion to keep parsing a file even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error. For example, the input
+
+\begin{yamlcode}
+  key: - element 1
+    - element 2 # Incorrect Indentation!
+\end{yamlcode}
+
+produced the following output:
+
+\begin{textcode}
+  2:37: extraneous input 'BLOCK END' expecting {STREAM_END, COMMENT}
+\end{textcode}
+
+. To fix this defect in the Yan LR plugin, we stored all error messages which resulted in the better error report:
+
+\begin{textcode}
+  2:1: mismatched input '- ' expecting MAP_END
+  2:37: extraneous input 'MAP END' expecting STREAM_END
+\end{textcode}
+
+.
