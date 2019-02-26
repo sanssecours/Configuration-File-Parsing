@@ -92,11 +92,6 @@ We started the comparison by listing the basic error messages for the YAML plugi
     \toprule
     \textbf{Plugin} & \textbf{Parser} & \textbf{Message}\\
     \midrule
-    YAMBi &
-    Bison &
-    3:1: syntax error, unexpected ELEMENT, \newline
-    expecting KEY or BLOCK\_END\\
-
     YAML CPP &
     yaml-cpp &
     yaml-cpp: error at line 3, column 1: end of map not found\\
@@ -104,6 +99,12 @@ We started the comparison by listing the basic error messages for the YAML plugi
     Yan LR &
     ANTLR &
     3:1: mismatched input \textquotesingle- \textquotesingle\ expecting BLOCK\_END\\
+
+    YAMBi &
+    Bison &
+    3:1: syntax error, unexpected ELEMENT, \newline
+    expecting KEY or BLOCK\_END\\
+
     YAwn &
     YAEP &
     3:1: Syntax error on token number 9: \newline
@@ -128,11 +129,6 @@ As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the 
     \toprule
     \textbf{Plugin} & \textbf{Parser} & \textbf{Message}\\
     \midrule
-    YAMBi &
-    Bison &
-    3:1: syntax error, unexpected ELEMENT, \newline
-    expecting \textbf{MAP\_END} or KEY\\
-
     YAML CPP &
     yaml-cpp &
     yaml-cpp: error at line 3, column 1: end of map not found\\
@@ -140,6 +136,12 @@ As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the 
     Yan LR &
     ANTLR &
     3:1: mismatched input \textquotesingle- \textquotesingle\ expecting \textbf{MAP\_END}\\
+
+    YAMBi &
+    Bison &
+    3:1: syntax error, unexpected ELEMENT, \newline
+    expecting \textbf{MAP\_END} or KEY\\
+
     YAwn &
     YAEP &
     3:1: Syntax error on token number 9: \newline
