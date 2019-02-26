@@ -217,3 +217,58 @@ shows the improved error message for Listing~\ref{lst:incorrect_indentation}. On
 \end{textcode}
 
 .
+
+\subsection{Bison}
+
+The first step we used to improve the error messages of the Bison parser was to define alternative names for the tokens, just like we did for Yan LR. Bison supports this feature directly, which meant we did not have to write a script to replace the symbols in the generated parser code. After this update the error message from Table~\ref{tab:error_messages_improved_list_element_outside} changed from:
+
+\begin{textcode}
+  3:1: syntax error, unexpected ELEMENT, expecting MAP_END or KEY
+\end{textcode}
+
+to
+
+\begin{textcode}
+  3:1: syntax error, unexpected element, expecting end of map or key
+\end{textcode}
+
+.
+
+We then looked into the error recovery capabilities of Bison. Unlike ANTLR the generated parser does not do error recovery by default, but rather exits on the first error. To improve the error behavior Bison offers the possibility to add the predefined \code{error} token to a grammar. Every time the Bison parser encounters an error it will produce this token~\cite{donnelly2019bison}. We modified the grammar to allow errors inside YAML maps and sequences:
+
+\begin{ccode}
+  pairs : pair
+        | pairs pair
+        | pairs error /* Allow errors after key-value pairs */
+        ;
+
+  elements : element
+           | elements element
+           /* Allow errors after elements of a sequence */
+           | elements error
+           ;
+\end{ccode}
+
+. This way the parser is able to report multiple syntax errors. For example, for the input
+
+\begin{yamlcode}
+  key 1: - element 1
+   - element 2
+  key 2: scalar
+         - element 3
+\end{yamlcode}
+
+the parser produces an error message that looks like this:
+
+\begin{textcode}
+2:2: unexpected start of sequence, expecting end of map or key
+      - element 2
+      ^
+4:8: unexpected start of sequence, expecting end of map or key
+            - element 3
+            ^
+\end{textcode}
+
+. As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
+
+One option to improve the error output of the Bison parser we did not implement is described in the paper \citetitle{jeffery2003generating} by \citeauthor{jeffery2003generating}~\cite{jeffery2003generating}. The technique looks promising, and was also added to the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. However, the technique is not directly supported by Bison and hence requires changes to the parsing code, that are out of the scope of this thesis.
