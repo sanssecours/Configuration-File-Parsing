@@ -276,3 +276,21 @@ For example, for the input shown in Listing~\ref{lst:incorrect_indentation_eleme
 . As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
 
 One option to improve the error output of the Bison parser we did not implement is described in the paper \citetitle{jeffery2003generating} by \citeauthor{jeffery2003generating}~\cite{jeffery2003generating}. The technique looks promising, and was also added to the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. However, the technique is not directly supported by Bison and hence requires changes to the parsing code, that are out of the scope of this thesis.
+
+\subsection{YAEP}
+
+Just as Bison, YAEP also requires that you add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did with Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
+
+\newpage
+After all these changes the output for the YAML data from Listing~\ref{lst:incorrect_indentation_element_without_sequence} looks very similar to the one produced by YAMBi:
+
+\begin{textcode}
+2:2: Syntax error on input “start of sequence”
+      - element 2
+      ^
+4:8: Syntax error on input “start of sequence”
+            - element 3
+            ^
+\end{textcode}
+
+. The only thing missing is the information about the expected type of token.
