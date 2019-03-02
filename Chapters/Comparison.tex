@@ -48,7 +48,7 @@ In the evaluation phase of the work we concentrated on the criteria listed below
   \item Error Correction
 \end{enumerate}
 
-. We are mainly concerned with error detection, since error recovery and error correction are generally not possible without the possibility of fixing errors incorrectly. These errors can be disastrous in case an important configuration value, such as “radiation intensity” is set incorrectly as a result of error correction.
+. We are mainly concerned with error detection and error recovery, since error correction is generally not possible without the possibility of fixing errors incorrectly. These errors can be disastrous in case an important configuration value, such as “radiation intensity” is set incorrectly as a result of error correction.
 
 While there exist techniques to enhance error reporting using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
 
@@ -60,7 +60,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
   \begin{code-boxed}
     \inputminted{yaml}{Data/Errors/list_element_outside.yaml}
   \end{code-boxed}
-  \caption{The indentation of the plain scalar \yaml{element 2} is incorrect in the code above. One of the most obvious solutions to fix the syntax error would be to add a single space character right before \yaml{element 2} (see Listing~\ref{lst:list_element_inside}). Another solution is to remove \yaml{element 2} altogether (see Listing~\ref{lst:list_element_removed}).}
+  \caption{The indentation of the sequence item \yaml{- element 2} is incorrect in the code above. One of the most obvious solutions to fix the syntax error would be to add a single space character right before \yaml{- element 2} (see Listing~\ref{lst:list_element_inside}). Another solution is to remove \yaml{- element 2} altogether (see Listing~\ref{lst:list_element_removed}).}
   \label{lst:list_element_outside}
 \end{listing}
 
@@ -68,7 +68,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
   \begin{code-boxed}
     \inputminted{yaml}{Data/Correct/list_element_inside.yaml}
   \end{code-boxed}
-  \caption{Usually a person would fix the error shown in Listing~\ref{lst:list_element_outside} by adding an indentation character before the plain scalar \yaml{element 2}.}
+  \caption{Usually a person would fix the error shown in Listing~\ref{lst:list_element_outside} by adding an indentation character before the sequence item \yaml{- element 2}.}
   \label{lst:list_element_inside}
 \end{listing}
 
@@ -76,7 +76,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
   \begin{code-boxed}
     \inputminted{yaml}{Data/Correct/list_element_removed.yaml}
   \end{code-boxed}
-  \caption{One of the easiest solutions to fix the code in Listing~\ref{lst:list_element_outside} for a computer program is to remove \yaml{element 2}.}
+  \caption{One of the easiest solutions to fix the code in Listing~\ref{lst:list_element_outside} for a computer program is to remove \yaml{- element 2}.}
   \label{lst:list_element_removed}
 \end{listing}
 
@@ -175,7 +175,7 @@ for each error detected by ANTLR. As we already saw in Table~\ref{tab:error_mess
     key: - element 1
       - element 2 # Incorrect Indentation!
   \end{yamlcode}
-  \caption{The indentation of the plain scalar \yaml{element 2} is incorrect in the code above.}
+  \caption{The indentation of the sequence element \yaml{- element 2} is incorrect in the code above.}
   \label{lst:incorrect_indentation}
 \end{listing}
 
@@ -249,16 +249,20 @@ We then looked into the error recovery capabilities of Bison. Unlike ANTLR the g
            ;
 \end{ccode}
 
-. This way the parser is able to report multiple syntax errors. For example, for the input
+. This way the parser is able to report multiple syntax errors.
 
-\begin{yamlcode}
-  key 1: - element 1
-   - element 2
-  key 2: scalar
-         - element 3
-\end{yamlcode}
+\begin{listing}
+  \begin{yamlcode}
+    key 1: - element 1
+     - element 2
+    key 2: scalar
+           - element 3
+  \end{yamlcode}
+  \caption{The indentation of the sequence item \yaml{- element 2} is incorrect in the code above. Another error is that the value of \yaml{key 2} can not be both a scalar (\yaml{scalar}) and a sequence (containing \yaml{- element 3}).}
+  \label{lst:incorrect_indentation_element_without_sequence}
+\end{listing}
 
-the parser produces an error message that looks like this:
+For example, for the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence} the parser produces an error message that looks like this:
 
 \begin{textcode}
 2:2: unexpected start of sequence, expecting end of map or key
