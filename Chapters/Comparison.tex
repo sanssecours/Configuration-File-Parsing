@@ -302,3 +302,25 @@ LL and LR parsers read the input deterministically from left to right. They ther
 \Gls{PEG} parsers do not have this property. The reason behind this is that \glspl{PEG} use backtracking, and therefore obfuscate error locations~\cite{ruefenacht2016error}. In his master thesis~\cite{ford2002packrat} \citeauthor{ford2002packrat} describes one option to produce meaningful error messages. His parser records all parsing results and uses the one that matched the farthest to the right in the input for error messages. In \citetitle{maidl2016129}~\cite{maidl2016129} \citeauthor{maidl2016129} show that this error strategy can also be added to every \gls{PEG} library that supports semantic actions. They also introduce a form of error reporting, inspired by the excepting handling mechanism of programming languages, based on grammar annotations called labeled failures~\cite{maidl2016129}.
 
 PEGTL does neither implement the error handling strategy described by \citeauthor{ford2002packrat}~\cite{ford2002packrat}, nor labelled failures~\cite{maidl2016129}. Instead the library offers a grammar rule called \cpp{must}, which states that a certain rule, specified as template argument, has to match at a given position or an error will be raised. We can customize the code executed for a given \cpp{must} rule according to this template argument. Effectively this strategy allows us to specify different error messages, according to expected but unmatched rules.
+
+As we described in the section “\nameref{sec:peg_parser}”, we tried to keep the grammar of our PEG Parser plugin \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} close to the grammar of the \href{http://yaml.org/spec/1.2/spec}{YAML specification}~\cite{ben2009yaml}. This also meant, that the grammar contained only a single \cpp{must} rule, that makes sure that the grammar matched the whole input:
+
+\begin{cppcode}
+  struct yaml : if_must<l_yaml_stream, eof> {};
+\end{cppcode}
+
+. The code above also explains the initial version of the error message shown in Table~\ref{tab:error_messages_improved_list_element_outside}:
+
+\begin{textcode}
+  3:0(18): parse error matching tao::yaypeg::eof
+\end{textcode}
+
+which tells us, that the parser was unable to match the expected “end of file” in line 3 of the input. We customized the error message above to show a more user friendly text:
+
+\begin{textcode}
+  3:0: Incomplete document, expected “end of file”
+       - element 2
+       ^
+\end{textcode}
+
+. As you can see we also added the erroneous input to the message, just as we did for the other parsing engines.
