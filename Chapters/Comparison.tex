@@ -327,23 +327,23 @@ which tells us, that the parser was unable to match the expected â€œend of fileâ
 
 The same single error message, regardless of the error, is not helpful. For good error reporting we needed to add other \cpp{must} rules. However, adding failure points (\cpp{must} rules) changes the behavior of the grammar and might even cause the parser to fail on valid input. To minimize the probability of incorrect grammar changes we only added a few rules for situation we were sure that the remainder of a grammar rule had to match. For example, when the parser reads an unescaped single or double quote character (outside of a block scalar) after the beginning of a line or a whitespace character it found a quoted flow scalar. Therefore
 
-\begin{itemize}
+\begin{enumerate}
   \item the text after the initial quote has to be followed by a (possibly empty) text containing only certain characters, and
   \item the last character of the flow scalar has to be an unescaped quote
-\end{itemize}
+\end{enumerate}
 
-. If one of those two rules is not fulfilled, then the parser found a syntax error. The error message for the following YAML data
+. If one of those two rules is not fulfilled, then the parser found a syntax error. After we updated the code accordingly the error message for the YAML data
 
 \begin{yamlcode}
   "double quoted
 \end{yamlcode}
 
-looks like this after we updated the code
+looks like this:
 
 \begin{textcode}
-  1:14: Missing closing double quote for flow scalar
+  1:14: Missing closing double quote or incorrect value inside flow scalar
         "double quoted
                       ^
 \end{textcode}
 
-.
+. As you noticed we included both error possibilities in the text, since reacting to both errors independently would require fundamental changes to the grammar.
