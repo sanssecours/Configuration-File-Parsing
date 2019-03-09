@@ -158,7 +158,7 @@ After the slight modifications to the YAML parser plugins we decided to take a c
 
 \subsection{ANTLR}
 
-ANTLR uses a error listener class that provides a callback method that includes access to
+ANTLR uses an error listener class that provides a callback method that includes access to
 
 \begin{itemize}
   \item the location,
@@ -179,7 +179,7 @@ for each error detected by ANTLR. As we already saw in Table~\ref{tab:error_mess
   \label{lst:incorrect_indentation}
 \end{listing}
 
-For example, the input shown in Listing~\ref{lst:incorrect_indentation} produced the following error output:
+For example, the input shown in Listing~\ref{lst:incorrect_indentation} the parser produced the following error output:
 
 \begin{textcode}
   2:37: extraneous input 'MAP END' expecting {STREAM_END, COMMENT}
@@ -325,7 +325,7 @@ which tells us, that the parser was unable to match the expected â€œend of fileâ
 
 . As you can see we also added the erroneous input to the message, just as we did for the other parsing engines.
 
-The same single error message, regardless of the error, is not helpful. For good error reporting we needed to add other \cpp{must} rules. However, adding failure points (\cpp{must} rules) changes the behavior of the grammar and might even cause the parser to fail on valid input. To minimize the probability of incorrect grammar changes we only added a few rules for situation we were sure that the remainder of a grammar rule had to match. For example, when the parser reads an unescaped single or double quote character (outside of a block scalar) at the beginning of a line or after a whitespace character, it found a quoted flow scalar. Therefore
+The same single error message, regardless of the error, is not helpful. For good error reporting we need to add other \cpp{must} rules. However, adding failure points (\cpp{must} rules) changes the behavior of the grammar and might even cause the parser to fail on valid input. To minimize the probability of incorrect grammar changes we only added a few rules for situation we were sure that the remainder of a grammar rule had to match. For example, when the parser reads an unescaped single or double quote character (outside of a block scalar) at the beginning of a line or after a whitespace character, it found a quoted flow scalar. Therefore
 
 \begin{enumerate}
   \item the text after the initial quote has to be followed by a (possibly empty) text containing only certain characters, and
