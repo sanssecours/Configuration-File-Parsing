@@ -347,3 +347,95 @@ looks like this:
 \end{textcode}
 
 . As you noticed we included both error possibilities in the text, since reacting to both errors independently would require fundamental changes to the grammar.
+
+\subsection{Final Error Messages}
+
+\subsubsection{Element Outside of Sequence}
+
+Table~\ref{tab:error_messages_final_list_element_outside} shows the final error messages for the code of Listing~\ref{lst:list_element_outside}:
+
+\begin{code-boxed}
+  \inputminted{yaml}{Data/Errors/list_element_outside.yaml}
+\end{code-boxed}
+
+.
+
+\begin{table}[H]
+  \caption{Final error messages for the YAML code of Listing~\ref{lst:list_element_outside}}
+  \label{tab:error_messages_final_list_element_outside}
+
+  \centering
+  \begin{tabular}{lp{0.8\textwidth}}
+    \toprule
+    Plugin & Error Messages\\
+    \midrule
+
+    \vspace{0cm}
+    YAML CPP &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      error at line 3, column 1: end of map not found.
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    Yan LR &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      3:1: mismatched input '- ' expecting end of map
+           - element 2
+           ^^
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    YAMBi &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      3:1: syntax error, unexpected element,
+           expecting end of map or key
+           - element 2
+           ^^
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    YAwn &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      3:1: Syntax error on input “-”
+           - element 2
+           ^^
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    YAy PEG &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      3:0: Incomplete document, expected “end of file”
+           - element 2
+           ^
+    \end{textcode}
+    \\
+
+    \bottomrule
+
+  \end{tabular}
+\end{table}
+
+\paragraph{Interpretation}
+
+\begin{itemize}
+  \item All the parsing engines report the correct error location.
+  \item  YAy PEG and YAwn do not tell us in which YAML node the error occurs. All the other plugins report that a map ended prematurely.
+  \item The error message of YAMBi reports an additional option, besides deleting the input, to fix the error: adding a key (on the line between \yaml{- element 1} and \yaml{- element 2}).
+\end{itemize}
+
+The following list shows a ranking of the plugins according to the interpretation of the error messages above.
+
+\begin{enumerate}
+  \item YAMBi
+  \item YAML CPP, Yan LR
+  \item YAy PEG, YAwn
+\end{enumerate}
