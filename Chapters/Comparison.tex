@@ -43,18 +43,18 @@ In the evaluation phase of the work we concentrated on the criteria listed below
 \emph{Error handling} can be grouped into three dependent stages~\cite{ruefenacht2016error}:
 
 \begin{enumerate}
-  \item Error Detection
-  \item Error Recovery
-  \item Error Correction
+  \item error detection
+  \item error recovery, and
+  \item error correction
 \end{enumerate}
 
 . We are mainly concerned with error detection and error recovery, since error correction is generally not possible without the possibility of fixing errors incorrectly. These errors can be disastrous in case an important configuration value, such as “radiation intensity” is set incorrectly as a result of error correction.
 
-While there exist techniques to enhance error reporting using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
+While there exist techniques to enhance error reporting by using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
 
 \subsection{Initial Erroneous Input}
 
-Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used initially to compare the error reporting capabilities. Listing~\ref{lst:list_element_inside} and \ref{lst:list_element_removed} show two solutions to fix the problematic part of YAML document.
+Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used initially to compare the error reporting capabilities. Listing~\ref{lst:list_element_inside} and \ref{lst:list_element_removed} show two solutions to fix the problematic part of the YAML document.
 
 \begin{listing}
   \begin{code-boxed}
@@ -85,7 +85,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
 We started the comparison by listing the basic error messages for the YAML plugins. These messages contain the error location and the auto-generated error message by the parsing engines. For the sake of brevity we removed some uninteresting data such as the filename of the parsed file.
 
 \begin{table}
-  \caption{Basic Error Messages}
+  \caption{Basic error messages}
   \label{tab:error_messages_list_element_outside}
   \centering
   \begin{tabular}{llp{10cm}}
@@ -122,7 +122,7 @@ We started the comparison by listing the basic error messages for the YAML plugi
 As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the parsing engines report the error location for the code from Listing~\ref{lst:list_element_outside} correctly. The error messages also shows that the question, if the first position after a newline is at column 0 or 1, is still open for debate. Other than that we can see that YAMBi, YAML CPP, and Yan LR also show information about the expected element at the error position (end of a block \gls{collection} is missing). YAML CPP provides a better error message that also shows which type of end element is missing (end of map). This type of information can also be determined easily in all of the lexer-based parsing engine plugins (Yan LR, YAMBi, YAwn). We modified them accordingly. Table~\ref{tab:error_messages_improved_list_element_outside} shows the slightly improved error messages, highlighting the updated part of the text.
 
 \begin{table}
-  \caption{Slightly Improved Error Messages}
+  \caption{Slightly improved error messages}
   \label{tab:error_messages_improved_list_element_outside}
   \centering
   \begin{tabular}{llp{10cm}}
@@ -179,7 +179,7 @@ for each error detected by ANTLR. As we already saw in Table~\ref{tab:error_mess
   \label{lst:incorrect_indentation}
 \end{listing}
 
-For example, the input shown in Listing~\ref{lst:incorrect_indentation} the parser produced the following error output:
+For example, for the input shown in Listing~\ref{lst:incorrect_indentation} the parser produced the following error output:
 
 \begin{textcode}
   2:37: extraneous input 'MAP END' expecting {STREAM_END, COMMENT}
@@ -205,7 +205,7 @@ One of the more recent improvements in error messages of modern compilers such a
                                           ^
 \end{textcode}
 
-shows the improved error message for Listing~\ref{lst:incorrect_indentation}. One thing that this error report still lacks is a more human friendly representation of the tokens. Someone with limited knowledge of the YAML specification and Yan LR’s lexer code will probably not really know what \code{MAP\_END}, \code{MAP END} and \code{STREAM\_END} mean. One option to improve this situation is to replace the text used by the lexer (\code{MAP END}) and the parser (\code{MAP\_END}, \code{MAP END}). The update of the relevant lexer code is trivial, since we can create tokens containing arbitrary text. For the parser code generated by ANLTR, we used a script that uses regular expression to replaces the relevant strings such as \cc{"MAP_END"} and \cc{"STREAM_END"}. After this update the error report for the YAML data in Listing~\ref{lst:incorrect_indentation} looks like this:
+shows the improved error message for Listing~\ref{lst:incorrect_indentation}. One thing that this error report still lacks is a more human friendly representation of the tokens. Someone with limited knowledge of the YAML specification and Yan LR’s lexer code will probably not know what \code{MAP\_END}, \code{MAP END} and \code{STREAM\_END} mean. One option to improve this situation is to replace the text used by the lexer (\code{MAP END}) and the parser (\code{MAP\_END}, \code{MAP END}). The update of the relevant lexer code is trivial, since we can create tokens containing arbitrary text. For the parser code generated by ANLTR, we used a script that uses regular expressions to replace the relevant strings such as \cc{"MAP_END"} and \cc{"STREAM_END"}. After this update the error report for the YAML data in Listing~\ref{lst:incorrect_indentation} looks like this:
 
 \begin{textcode}
 2:1: mismatched input '- ' expecting end of map
@@ -281,7 +281,6 @@ One option to improve the error output of the Bison parser we did not implement 
 
 Just as Bison, YAEP also requires that you add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did with Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
 
-\newpage
 After all these changes the output for the YAML data from Listing~\ref{lst:incorrect_indentation_element_without_sequence} looks very similar to the one produced by YAMBi:
 
 \begin{textcode}
@@ -315,7 +314,7 @@ As we described in the section “\nameref{sec:peg_parser}”, we tried to keep 
   3:0(18): parse error matching tao::yaypeg::eof
 \end{textcode}
 
-which tells us, that the parser was unable to match the expected “end of file” in line 3 of the input. We customized the error message above to show a more user friendly text:
+, which tells us, that the parser was unable to match the expected “end of file” in line 3 of the input. We customized the error message above to show a more user friendly text:
 
 \begin{textcode}
   3:0: Incomplete document, expected “end of file”
@@ -341,12 +340,13 @@ The same single error message, regardless of the error, is not helpful. For good
 looks like this:
 
 \begin{textcode}
-  1:14: Missing closing double quote or incorrect value inside flow scalar
+  1:14: Missing closing double quote or
+        incorrect value inside flow scalar
         "double quoted
                       ^
 \end{textcode}
 
-. As you noticed we included both error possibilities in the text, since reacting to both errors independently would require fundamental changes to the grammar.
+. As you noticed we included both error possibilities in the error message, since reacting to both errors independently would require fundamental changes to the grammar.
 
 \subsection{Final Error Messages}
 
@@ -428,8 +428,8 @@ Table~\ref{tab:error_messages_final_list_element_outside} shows the final error 
 
 \begin{itemize}
   \item All the parsing engines report the correct error location.
-  \item  YAy PEG and YAwn do not tell us in which YAML node the error occurs. All the other plugins report that a map ended prematurely.
-  \item The error message of YAMBi reports an additional option, besides deleting the input, to fix the error: adding a key (on the line between \yaml{- element 1} and \yaml{- element 2}).
+  \item YAy PEG and YAwn do not tell us in which YAML node the error occurs. All the other plugins report that a map ended prematurely.
+  \item The error message of YAMBi reports an additional option – besides deleting the input – to fix the error: adding a key (in the line between \yaml{- element 1} and \yaml{- element 2}).
 \end{itemize}
 
 The following list shows a ranking of the plugins according to the interpretation of the error messages above.
