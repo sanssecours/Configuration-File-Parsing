@@ -1,0 +1,16 @@
+key 1:
+  key 2:
+    - element 1
+    - element 2
+    element 3 # Missing `- `
+key 3: "double quoted scalar"
+key 4:
+  key 5:
+    - element 4
+    - element 5
+   key 6: # Not on same level as key 5
+     - element 6
+key 7: 'single quoted scalar'
+key 8:
+  - element 7
+scalar # Not a key

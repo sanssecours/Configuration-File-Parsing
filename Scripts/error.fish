@@ -2,7 +2,7 @@
 
 set plugins yamlcpp yanlr yambi yawn yaypeg
 set path 'Data/Errors'
-set files list_element_outside.yaml
+set files list_element_outside.yaml multiple_errors.yaml
 
 for file in $files
 
