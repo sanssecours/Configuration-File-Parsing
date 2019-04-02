@@ -439,3 +439,135 @@ The following list shows a ranking of the plugins according to the interpretatio
   \item YAML CPP, Yan LR
   \item YAy PEG, YAwn
 \end{enumerate}
+
+\subsubsection{YAML Data Containing Multiple Errors}
+
+The YAML data from Listing~\ref{lst:list_element_outside} only contains a single syntax error. To compare the error recovery capabilities of the parsing libraries, we used YAML data that contains multiple syntax errors as input (see Listing~\ref{lst:multiple_errors}).
+
+\begin{listing}
+  \begin{code-boxed}
+    \inputminted{yaml}{Data/Errors/multiple_errors.yaml}
+  \end{code-boxed}
+  \caption{The YAML data above contains at three syntax errors that we directly describe in the comments right next to the error positions.}
+  \label{lst:multiple_errors}
+\end{listing}
+
+Table~\ref{tab:error_messages_final_multiple_errors} shows the error messages of the different storage plugins for the YAML input of Listing~\ref{lst:multiple_errors}. As we can see the error output is quite different.
+
+\begin{table}[H]
+  \caption{Error messages for the YAML code of Listing~\ref{lst:multiple_errors}}
+  \label{tab:error_messages_final_multiple_errors}
+  \centering
+
+  \begin{tabular}{lp{0.9\textwidth}}
+    \toprule
+    Plugin & Error Messages\\
+    \midrule
+
+    \vspace{0cm}
+    YAML CPP &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      error at line 5, column 5: end of map not found.
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    Yan LR &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      5:5: mismatched input 'element 3' expecting end of sequence
+               element 3 # Missing `- `
+               ^^^^^^^^^
+      6:1: extraneous input 'end of sequence' expecting end of map
+           key 3: "double quoted scalar"
+           ^
+      11:4: mismatched input 'start of map' expecting end of map
+               key 6: # Not on same level as key 5
+
+      13:1: mismatched input 'end of map' expecting end of document
+            key 7: 'single quoted scalar'
+            ^
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    YAMBi &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      5:5: syntax error, unexpected plain scalar,
+           expecting end of sequence or element
+               element 3 # Missing `- `
+               ^^^^^^^^^
+      11:4: syntax error, unexpected start of map,
+            expecting end of map or key
+               key 6: # Not on same level as key 5
+               ^
+      13:1: syntax error, unexpected key, expecting end of document
+            key 7: 'single quoted scalar'
+            ^
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    YAwn &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      5:5: Syntax error on input “element 3”
+               element 3 # Missing `- `
+               ^^^^^^^^^
+      11:4: Syntax error on input “start of map”
+               key 6: # Not on same level as key 5
+               ^
+      13:1: Syntax error on input “key”
+            key 7: 'single quoted scalar'
+            ^
+      16:1: Syntax error on input “scalar”
+            scalar # Not a key
+            ^^^^^^
+    \end{textcode}
+    \\
+
+    \vspace{0cm}
+    YAy PEG &
+    \vspace{-0.36cm}
+    \begin{textcode}
+      5:0: Incomplete document, expected “end of file”
+               element 3 # Missing `- `
+           ^
+    \end{textcode}
+    \\
+
+    \bottomrule
+
+  \end{tabular}
+
+\end{table}
+
+\paragraph{Interpretation}
+
+\begin{itemize}
+
+  \item \emph{YAML CPP} and \emph{YAy PEG} do not provide any error recovery.
+
+  \item \emph{YAy PEG} shows the correct line number for the first error, but not the the correct column number. The plugin also only provides a very generic error message.
+
+  \item All of the plugins that use error recovery (Yan LR, YAMBi, YAwn) print a spurious error messages at line 13.
+
+  \item \emph{Yan LR} shows two error messages for the first syntax error, and one for the second syntax error. Error messages one and three describe the problematic part of the YAML data reasonably well.
+
+  \item Compared to Yan LR, \emph{YAMBi’s} (non-spurious) error messages also describe a second option to fix the erroneous input. However, while the first error message provides a useful suggestion on how to fix the error (insertion of a sequence element), the second option in the second error messages (insertion of a key), will probably confuse anyone that does not know how YAMBi’s lexer works.
+
+  \item \emph{YAwn} prints the same error messages as YAMBi, without the crucial information about the expected element. In addition YAwn prints a fourth error message that addresses the third syntax error.
+
+\end{itemize}
+
+According to the interpretation we concluded that all of the plugins with error recovery provide about the same level of useful error information. YAML CPP describes the first error reasonably well, while the error message from YAy PEG is not that useful. This leaves us with the following ranking of the error capabilities of the plugins based on the input of Listing~\ref{lst:multiple_errors}:
+
+\begin{enumerate}
+  \item Yan LR, YAMBi, Yawn
+  \item YAML CPP
+  \item YAy PEG
+\end{enumerate}
+
+.
