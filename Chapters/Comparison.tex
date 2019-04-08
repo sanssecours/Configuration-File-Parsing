@@ -58,7 +58,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
 
 \begin{listing}
   \begin{code-boxed}
-    \inputminted{yaml}{Data/Errors/list_element_outside.yaml}
+    \inputminted[linenos]{yaml}{Data/Errors/list_element_outside.yaml}
   \end{code-boxed}
   \caption{The indentation of the sequence item \yaml{- element 2} is incorrect in the code above. One of the most obvious solutions to fix the syntax error would be to add a single space character right before \yaml{- element 2} (see Listing~\ref{lst:list_element_inside}). Another solution is to remove \yaml{- element 2} altogether (see Listing~\ref{lst:list_element_removed}).}
   \label{lst:list_element_outside}
@@ -66,7 +66,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
 
 \begin{listing}
   \begin{code-boxed}
-    \inputminted{yaml}{Data/Correct/list_element_inside.yaml}
+    \inputminted[linenos]{yaml}{Data/Correct/list_element_inside.yaml}
   \end{code-boxed}
   \caption{Usually a person would fix the error shown in Listing~\ref{lst:list_element_outside} by adding an indentation character before the sequence item \yaml{- element 2}.}
   \label{lst:list_element_inside}
@@ -74,7 +74,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
 
 \begin{listing}
   \begin{code-boxed}
-    \inputminted{yaml}{Data/Correct/list_element_removed.yaml}
+    \inputminted[linenos]{yaml}{Data/Correct/list_element_removed.yaml}
   \end{code-boxed}
   \caption{One of the easiest solutions to fix the code in Listing~\ref{lst:list_element_outside} for a computer program is to remove \yaml{- element 2}.}
   \label{lst:list_element_removed}
@@ -171,10 +171,10 @@ ANTLR uses an error listener class that provides a callback method that includes
 for each detected error. As we already saw in Table~\ref{tab:error_messages_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message reported by ANTLR. Since ANTLR uses methods such as token deletion and insertion to keep parsing a file, even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
 
 \begin{listing}
-  \begin{yamlcode}
+  \begin{minted}[autogobble, linenos]{yaml}
     key: - element 1
       - element 2 # Incorrect Indentation!
-  \end{yamlcode}
+  \end{minted}
   \caption{The indentation of the sequence element \yaml{- element 2} is incorrect in the code above.}
   \label{lst:incorrect_indentation}
 \end{listing}
@@ -252,12 +252,12 @@ We then looked into the error recovery capabilities of Bison. Unlike ANTLR the g
 . This way the parser is able to report multiple syntax errors.
 
 \begin{listing}
-  \begin{yamlcode}
+  \begin{minted}[autogobble, linenos]{yaml}
     key 1: - element 1
      - element 2
     key 2: scalar
            - element 3
-  \end{yamlcode}
+  \end{minted}
   \caption{The indentation of the sequence item \yaml{- element 2} is incorrect in the code above. Another error is that the value of \yaml{key 2} can not be both a scalar (\yaml{scalar}) and a sequence (containing \yaml{- element 3}).}
   \label{lst:incorrect_indentation_element_without_sequence}
 \end{listing}
@@ -355,7 +355,7 @@ looks like this:
 Table~\ref{tab:error_messages_final_list_element_outside} shows the final error messages for the code of Listing~\ref{lst:list_element_outside}:
 
 \begin{code-boxed}
-  \inputminted{yaml}{Data/Errors/list_element_outside.yaml}
+  \inputminted[linenos]{yaml}{Data/Errors/list_element_outside.yaml}
 \end{code-boxed}
 
 .
@@ -446,7 +446,7 @@ The YAML data from Listing~\ref{lst:list_element_outside} only contains a single
 
 \begin{listing}
   \begin{code-boxed}
-    \inputminted{yaml}{Data/Errors/multiple_errors.yaml}
+    \inputminted[linenos]{yaml}{Data/Errors/multiple_errors.yaml}
   \end{code-boxed}
   \caption{The YAML data above contains three syntax errors that we directly describe in the comments right next to the error positions.}
   \label{lst:multiple_errors}
