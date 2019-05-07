@@ -123,6 +123,16 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
 
 \section{Run-Time Performance}
 
+To compare the run-time performance we used the tool \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}}, which opens an Elektra plugin using a specific configuration file. For the test we wrote a \href{https://master.libelektra.org/scripts/benchmark-yaml.in}{Bash script} that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}}. Using \sh{hyperfine} has the advantage, that the tool
+
+\begin{enumerate}
+  \item determines how often it should call \sh{benchmark_plugingetset} for meaningful measurement results,
+  \item shows us when it is time to redo the benchmark, since it informs us about statistical outliers,
+  \item prints important statistical data such as the mean run-time and the standard derivation
+\end{enumerate}
+
+.
+
 \subsection{Profiling}
 
 \section{Error Reporting}
