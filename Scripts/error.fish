@@ -15,6 +15,7 @@ for file in $files
         kdb mount config.yaml user/tests/yaml "$plugin"
         cat "$path/$file" >(kdb file user/tests/yaml)
         kdb ls user/tests/yaml 2>&1 | pcre2grep -M 'Reason: ((?!Ingroup)(\n|.))*'
-        reset_kdb >/dev/null
+        rm (kdb file user/tests/yaml)
+        kdb umount user/tests/yaml
     end
 end
