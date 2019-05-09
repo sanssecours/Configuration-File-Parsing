@@ -123,9 +123,9 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
 
 \section{Run-Time Performance}
 
-\begin{sloppypar}
-  To compare the run-time performance we used a C application, called \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}}, that opens an Elektra plugin using a specific configuration file. For the benchmark we wrote a \href{https://master.libelektra.org/scripts/benchmark-yaml.in}{Bash script} that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} using different YAML plugins. We use \sh{hyperfine} sine it
-\end{sloppypar}
+To compare the run-time performance we used the C application \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \href{https://master.libelektra.org/scripts/benchmark-yaml.in}{\sh{benchmark-yaml}}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
+
+For the measurement we use \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}}, sine this tool
 
 \begin{enumerate}
   \item automatically determines how often it should call \sh{benchmark_plugingetset} for meaningful measurement results,
@@ -134,6 +134,13 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
 \end{enumerate}
 
 .
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.9\textwidth]{Figures/Benchmark}
+  \caption{The diagramm above shows the basic sequence of steps to measure the performance of the YAML plugins.}
+  \label{fig:benchmark}
+\end{figure}
 
 \subsection{Input}
 
