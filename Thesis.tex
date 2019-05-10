@@ -21,6 +21,7 @@
 \usepackage{tcolorbox}
 \usepackage{thmtools}
 \usepackage{thm-restate}
+\usepackage{tikz}
 \usepackage{titlesec}
 \usepackage{unicode-math}
 \usepackage{xcolor}
@@ -119,6 +120,10 @@
 \definecolor{color05}{rgb}{0.30,0.30,0.30}
 \definecolor{color06}{rgb}{0.00,0.50,1.00}
 \definecolor{color07}{rgb}{0.00,0.80,0.40}
+
+% -- Tikz ----------------------------------------------------------------------
+
+\newcommand{\tikzcircle}[1]{\tikz\draw[#1,fill=#1] (0,0) circle (.5ex);}%
 
 % -- Floats --------------------------------------------------------------------
 
