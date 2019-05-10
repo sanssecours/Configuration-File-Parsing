@@ -123,14 +123,19 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
 
 \subsection{Build Setup}
 
-For the run-time performance benchmark described in “\nameref{sec:run_time_performance}” we built Elektra using the following \href{https://cmake.org}{CMake} options:
+The following list shows the \href{https://cmake.org}{CMake} options that we used for all comparisons:
 
 \begin{itemize}
   \item \sh{-GNinja}
+  \item \sh{-DPLUGINS=ALL}
+\end{itemize}
+
+. For the run-time performance benchmark described in “\nameref{sec:run_time_performance}” we built Elektra using the following \href{https://cmake.org}{CMake} options:
+
+\begin{itemize}
   \item \sh{-DCMAKE_BUILD_TYPE=Release}
   \item \sh{-DENABLE_LOGGER=OFF}
   \item \sh{-DENABLE_DEBUG=OFF}
-  \item \sh{-DPLUGINS=ALL}
 \end{itemize}
 
 .
