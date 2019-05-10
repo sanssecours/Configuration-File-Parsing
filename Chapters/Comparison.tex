@@ -189,33 +189,35 @@ Since both of these files are relatively small,\href{https://github.com/ElektraI
   \begin{bchart}[max=385, width=0.85\textwidth, unit=ms]
     \bcbar[text=252 ± 4.4, value=macOS, color=orange]{252}
     \bcbar[text=148.4 ± 5, value=Linux/GCC, color=orange]{148.4}
-    \bcbar[text=137.3 ± 11.8, value=Linux/LLVM, color=orange]{137.3}
+    \bcbar[text=137.3 ± 11.8, value=Linux/Clang, color=orange]{137.3}
 
     \bcbar[text=132 ± 3.7, value=macOS, color=Aqua]{132}
     \bcbar[text=132.7 ± 3.4, value=Linux/GCC, color=Aqua]{132.7}
-    \bcbar[text=124.5 ± 5.2, value=Linux/LLVM, color=Aqua]{124.5}
+    \bcbar[text=124.5 ± 5.2, value=Linux/Clang, color=Aqua]{124.5}
 
     \bcbar[text=191.2 ± 6.6, value=macOS, color=Turquoise3]{191.2}
     \bcbar[text=66.4 ± 2.3, value=Linux/GCC, color=Turquoise3]{66.4}
-    \bcbar[text=64.8 ± 2.5, value=Linux/LLVM, color=Turquoise3]{64.8}
+    \bcbar[text=64.8 ± 2.5, value=Linux/Clang, color=Turquoise3]{64.8}
 
     \bcbar[text=81.6 ± 2.9, value=macOS, color=DarkOrchid]{81.6}
     \bcbar[text=79.4 ± 4, value=Linux/GCC, color=DarkOrchid]{79.4}
-    \bcbar[text=74.9 ± 3.1, value=Linux/LLVM, color=DarkOrchid]{74.9}
+    \bcbar[text=74.9 ± 3.1, value=Linux/Clang, color=DarkOrchid]{74.9}
 
     \bcbar[text=381 ± 7, value=macOS, color=LightGray]{381}
     \bcbar[text=160.2 ± 6.6, value=Linux/GCC, color=LightGray]{160.2}
-    \bcbar[text=161.1 ± 7.5, value=Linux/LLVM, color=LightGray]{161.1}
+    \bcbar[text=161.1 ± 7.5, value=Linux/Clang, color=LightGray]{161.1}
   \end{bchart}
   \begin{center}
+  \vspace{-0.5cm}
     \tikzcircle{orange} YAML CPP ~~
     \tikzcircle{Aqua} Yan LR ~~
     \tikzcircle{Turquoise3} YAMBi ~~
     \tikzcircle{DarkOrchid} YAwn ~~
     \tikzcircle{LightGray} YAy PEG
+  \vspace{-0.5cm}
   \end{center}
-  \caption{The bar chart above shows the run time of the plugins for the YAML input file \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated.yaml}}}
-  \label{fig:benchmark}
+  \caption{This bar chart shows the run time of the plugins for the input \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated.yaml}}}
+  \label{fig:benchmark_generated}
 \end{figure}
 
 \subsection{Profiling}
