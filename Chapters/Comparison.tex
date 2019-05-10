@@ -121,7 +121,22 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
     \end{subtable}
 \end{table}
 
+\subsection{Build Setup}
+
+For the run-time performance benchmark described in “\nameref{sec:run_time_performance}” we built Elektra using the following \href{https://cmake.org}{CMake} options:
+
+\begin{itemize}
+  \item \sh{-GNinja}
+  \item \sh{-DCMAKE_BUILD_TYPE=Release}
+  \item \sh{-DENABLE_LOGGER=OFF}
+  \item \sh{-DENABLE_DEBUG=OFF}
+  \item \sh{-DPLUGINS=ALL}
+\end{itemize}
+
+.
+
 \section{Run-Time Performance}
+\label{sec:run_time_performance}
 
 To compare the run-time performance we used the C application \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \href{https://master.libelektra.org/scripts/benchmark-yaml.in}{\sh{benchmark-yaml}}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
