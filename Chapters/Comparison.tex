@@ -185,8 +185,77 @@ Since both of these files are relatively small,\href{https://github.com/ElektraI
 \subsection{Results}
 
 \begin{figure}[H]
-  \centering
-  \begin{bchart}[max=385, width=0.85\textwidth, unit=ms]
+  \begin{bchart}[max=30, width=0.8\textwidth, unit=ms]
+    \bcbar[text=20.2 ± 0.6, value=macOS, color=orange]{20.2}
+    \bcbar[text=28.9 ± 2.0, value=Linux/GCC, color=orange]{28.9}
+    \bcbar[text=28.1 ± 4.3, value=Linux/Clang, color=orange]{28.1}
+
+    \bcbar[text=17.5 ± 0.5, value=macOS, color=Aqua]{17.5}
+    \bcbar[text=30.2 ± 1.5, value=Linux/GCC, color=Aqua]{30.2}
+    \bcbar[text=31.1 ± 3.0, value=Linux/Clang, color=Aqua]{31.1}
+
+    \bcbar[text=20.8 ± 0.6, value=macOS, color=Turquoise3]{20.8}
+    \bcbar[text=22.4 ± 1.8, value=Linux/GCC, color=Turquoise3]{22.4}
+    \bcbar[text=25.0 ± 4.3, value=Linux/Clang, color=Turquoise3]{25.0}
+
+    \bcbar[text=15.4 ± 0.4, value=macOS, color=DarkOrchid]{15.4}
+    \bcbar[text=24.6 ± 2.8, value=Linux/GCC, color=DarkOrchid]{24.6}
+    \bcbar[text=25.8 ± 2.3, value=Linux/Clang, color=DarkOrchid]{25.8}
+
+    \bcbar[text=27.7 ± 1.8, value=macOS, color=LightGray]{27.7}
+    \bcbar[text=24.4 ±1.8, value=Linux/GCC, color=LightGray]{24.4}
+    \bcbar[text=26.4 ± 3.3, value=Linux/Clang, color=LightGray]{26.4}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{Aqua} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{DarkOrchid} YAwn ~~
+    \tikzcircle{LightGray} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the run time of the plugins for the input \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/keyframes.yaml}{\code{keyframes.yaml}}}
+  \label{fig:benchmark_keyframes}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{bchart}[max=35, width=0.8\textwidth, unit=ms]
+    \bcbar[text=12.4 ± 0.5, value=macOS, color=orange]{12.4}
+    \bcbar[text=21.3 ± 1.6, value=Linux/GCC, color=orange]{21.3}
+    \bcbar[text=24.8 ± 2.8, value=Linux/Clang, color=orange]{24.8}
+
+    \bcbar[text=9.8 ± 0.4, value=macOS, color=Aqua]{9.8}
+    \bcbar[text=25.2 ± 2.6, value=Linux/GCC, color=Aqua]{25.2}
+    \bcbar[text=26.2 ± 2.4, value=Linux/Clang, color=Aqua]{26.2}
+
+    \bcbar[text=11.6 ± 0.5, value=macOS, color=Turquoise3]{11.6}
+    \bcbar[text=19.3 ± 2.1, value=Linux/GCC, color=Turquoise3]{19.3}
+    \bcbar[text=20 ± 1.1, value=Linux/Clang, color=Turquoise3]{20}
+
+    \bcbar[text=8.4 ± 0.4, value=macOS, color=DarkOrchid]{8.4}
+    \bcbar[text=22.3 ± 1.6, value=Linux/GCC, color=DarkOrchid]{22.3}
+    \bcbar[text=21.1 ± 1.4, value=Linux/Clang, color=DarkOrchid]{21.1}
+
+    \bcbar[text=14.7 ± 0.6, value=macOS, color=LightGray]{14.7}
+    \bcbar[text=29.8 ± 8.1, value=Linux/GCC, color=LightGray]{29.8}
+    \bcbar[text=21.5 ± 1.4, value=Linux/Clang, color=LightGray]{21.5}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{Aqua} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{DarkOrchid} YAwn ~~
+    \tikzcircle{LightGray} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the run time of the plugins for the input \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/combined.yaml}{\code{combined.yaml}}}
+  \label{fig:benchmark_combined}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{bchart}[max=385, width=0.8\textwidth, unit=ms]
     \bcbar[text=252 ± 4.4, value=macOS, color=orange]{252}
     \bcbar[text=148.4 ± 5, value=Linux/GCC, color=orange]{148.4}
     \bcbar[text=137.3 ± 11.8, value=Linux/Clang, color=orange]{137.3}
