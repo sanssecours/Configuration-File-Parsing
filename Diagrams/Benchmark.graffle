@@ -28,7 +28,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2019-05-09 09:19:51 +0000</string>
+	<string>2019-05-23 10:16:12 +0000</string>
 	<key>Modifier</key>
 	<string>René Schwaiger</string>
 	<key>MovementHandleVisible</key>
@@ -138,7 +138,157 @@
 			<array>
 				<dict>
 					<key>Bounds</key>
-					<string>{{242.99999493429982, 440.99999080669227}, {125.99999737334065, 26.999999437144425}}</string>
+					<string>{{528.81198742955871, 243.522019043932}, {148.3760000000002, 48}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>FitText</key>
+					<string>YES</string>
+					<key>Flow</key>
+					<string>Resize</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>space</key>
+							<string>gg22</string>
+							<key>w</key>
+							<string>0</string>
+						</dict>
+						<key>Font</key>
+						<string>Avenir-Book</string>
+						<key>Size</key>
+						<real>14</real>
+					</dict>
+					<key>ID</key>
+					<integer>50</integer>
+					<key>Line</key>
+					<dict>
+						<key>ID</key>
+						<integer>51</integer>
+						<key>Position</key>
+						<real>0.29816663265228271</real>
+						<key>RotationType</key>
+						<integer>0</integer>
+					</dict>
+					<key>Style</key>
+					<dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
+{\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
+
+\f0\fs28 \cf0 redo, if statistical\
+outliers were reported}</string>
+						<key>TextAlongPathGlyphAnchor</key>
+						<string>center</string>
+					</dict>
+					<key>Wrap</key>
+					<string>NO</string>
+				</dict>
+				<dict>
+					<key>AllowLabelDrop</key>
+					<false/>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>FontInfo</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>space</key>
+							<string>gg22</string>
+							<key>w</key>
+							<string>0</string>
+						</dict>
+						<key>Font</key>
+						<string>Avenir-Book</string>
+						<key>Size</key>
+						<real>14</real>
+					</dict>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>5</integer>
+						<key>Info</key>
+						<integer>5</integer>
+					</dict>
+					<key>ID</key>
+					<integer>51</integer>
+					<key>LogicalPath</key>
+					<dict>
+						<key>elements</key>
+						<array>
+							<dict>
+								<key>element</key>
+								<string>MOVETO</string>
+								<key>point</key>
+								<string>{602.99998742955881, 449.99999061907374}</string>
+							</dict>
+							<dict>
+								<key>element</key>
+								<string>LINETO</string>
+								<key>point</key>
+								<string>{602.99998742955881, 26.999999437144425}</string>
+							</dict>
+							<dict>
+								<key>element</key>
+								<string>LINETO</string>
+								<key>point</key>
+								<string>{413.99999136954784, 26.999999437144446}</string>
+							</dict>
+						</array>
+					</dict>
+					<key>Points</key>
+					<array>
+						<string>{602.99998742955881, 449.99999061907374}</string>
+						<string>{602.99998742955881, 26.999999437144425}</string>
+						<string>{413.99999136954784, 26.999999437144446}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>Legacy</key>
+							<false/>
+							<key>Width</key>
+							<real>2</real>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>34</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{242.99999493429982, 467.99999024383669}, {125.99999737334065, 26.999999437144425}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -210,7 +360,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -225,7 +375,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{395.99999174478489, 503.99998949336259}, {179.9999962476295, 35.999999249525899}}</string>
+					<string>{{395.99999174478489, 530.99998893050702}, {179.9999962476295, 35.999999249525899}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -293,7 +443,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;\red253\green128\blue8;}
 {\*\expandedcolortbl;;\cssrgb\c100000\c57811\c0;}
@@ -310,7 +460,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{378.13209919799255, 467.21735198120092}, {41.116000000001804, 27}}</string>
+					<string>{{378.13209919799255, 494.21735141834534}, {41.116000000001804, 27}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -358,7 +508,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -407,20 +557,20 @@
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{350.99999268287752, 467.99999024383669}</string>
+								<string>{350.99999268287752, 494.99998968098112}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{485.99998986859964, 503.99998949336259}</string>
+								<string>{485.99998986859964, 530.99998893050702}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{350.99999268287752, 467.99999024383669}</string>
-						<string>{485.99998986859964, 503.99998949336259}</string>
+						<string>{350.99999268287752, 494.99998968098112}</string>
+						<string>{485.99998986859964, 530.99998893050702}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -447,7 +597,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{314.99999343335162, 557.99998836765144}, {179.9999962476295, 35.999999249525899}}</string>
+					<string>{{314.99999343335162, 584.99998780479586}, {179.9999962476295, 35.999999249525899}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -515,7 +665,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;\red253\green128\blue8;}
 {\*\expandedcolortbl;;\cssrgb\c100000\c57811\c0;}
@@ -532,7 +682,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{333.99627835326368, 486.2933962093033}, {41.116000000001804, 27}}</string>
+					<string>{{333.99627835326368, 513.29339564644772}, {41.116000000001804, 27}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -580,7 +730,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -627,20 +777,20 @@
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{326.99999318319351, 467.99999024383669}</string>
+								<string>{326.99999318319351, 494.99998968098112}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{404.99999155716637, 557.99998836765144}</string>
+								<string>{404.99999155716637, 584.99998780479586}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{326.99999318319351, 467.99999024383669}</string>
-						<string>{404.99999155716637, 557.99998836765144}</string>
+						<string>{326.99999318319351, 494.99998968098112}</string>
+						<string>{404.99999155716637, 584.99998780479586}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -674,7 +824,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{215.9999954971554, 602.99998742955881}, {179.9999962476295, 35.999999249525899}}</string>
+					<string>{{215.9999954971554, 629.99998686670324}, {179.9999962476295, 35.999999249525899}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -742,7 +892,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;\red253\green128\blue8;}
 {\*\expandedcolortbl;;\cssrgb\c100000\c57811\c0;}
@@ -759,7 +909,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{285.44199362096924, 502.19009771703861}, {41.116000000001804, 27}}</string>
+					<string>{{285.44199362096924, 529.19009715418304}, {41.116000000001804, 27}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -807,7 +957,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -854,20 +1004,20 @@
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 467.99999024383669}</string>
+								<string>{305.99999362097014, 494.99998968098112}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 602.99998742955881}</string>
+								<string>{305.99999362097014, 629.99998686670324}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{305.99999362097014, 467.99999024383669}</string>
-						<string>{305.99999362097014, 602.99998742955881}</string>
+						<string>{305.99999362097014, 494.99998968098112}</string>
+						<string>{305.99999362097014, 629.99998686670324}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -901,7 +1051,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{116.99999756095917, 557.99998836765144}, {179.9999962476295, 35.999999249525899}}</string>
+					<string>{{116.99999756095917, 584.99998780479586}, {179.9999962476295, 35.999999249525899}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -969,7 +1119,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;\red253\green128\blue8;}
 {\*\expandedcolortbl;;\cssrgb\c100000\c57811\c0;}
@@ -986,7 +1136,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{236.8877088231294, 486.29339628493256}, {41.116000000001804, 27}}</string>
+					<string>{{236.88770888867475, 513.29339564644772}, {41.116000000001804, 27}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1014,7 +1164,7 @@
 						<key>ID</key>
 						<integer>38</integer>
 						<key>Position</key>
-						<real>0.35326007092585104</real>
+						<real>0.35326007008552551</real>
 						<key>RotationType</key>
 						<integer>0</integer>
 					</dict>
@@ -1034,7 +1184,7 @@
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1081,20 +1231,20 @@
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{284.99999405874672, 467.99999024383669}</string>
+								<string>{284.99999405874672, 494.99998968098112}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{206.99999568477392, 557.99998836765144}</string>
+								<string>{206.99999568477392, 584.99998780479586}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{284.99999405874672, 467.99999024383669}</string>
-						<string>{206.99999568477392, 557.99998836765144}</string>
+						<string>{284.99999405874672, 494.99998968098112}</string>
+						<string>{206.99999568477392, 584.99998780479586}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1128,7 +1278,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{476.99999005621817, 431.99999099431079}, {161.99999662286655, 44.999999061907374}}</string>
+					<string>{{530.99998893050702, 449.99999061907374}, {143.9999969981036, 62.999998686670324}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -1180,22 +1330,25 @@
 					</dict>
 					<key>Text</key>
 					<dict>
+						<key>Align</key>
+						<integer>0</integer>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0\fs28 \cf0 Performance of plugins\
-for given input files}</string>
+\f0\fs28 \cf0 \'95 Runtime of plugins\
+   for given input files\
+\'95 Statistical outliers}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{383.93519099683016, 439.49999052526448}, {63.900000000001455, 30}}</string>
+					<string>{{386.71922863272277, 466.4999899624089}, {109.76399999999921, 30}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1223,7 +1376,7 @@ for given input files}</string>
 						<key>ID</key>
 						<integer>32</integer>
 						<key>Position</key>
-						<real>0.43412222818495727</real>
+						<real>0.44815579056739807</real>
 						<key>RotationType</key>
 						<integer>0</integer>
 					</dict>
@@ -1243,13 +1396,13 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs28 \cf0 6. report}</string>
+\f0\fs28 \cf0 6. report/export}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
@@ -1290,20 +1443,20 @@ for given input files}</string>
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{368.99999230764047, 454.49999052526448}</string>
+								<string>{368.99999230764047, 481.4999899624089}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{476.99999005621811, 454.49999052526448}</string>
+								<string>{530.99998893050702, 481.4999899624089}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{368.99999230764047, 454.49999052526448}</string>
-						<string>{476.99999005621811, 454.49999052526448}</string>
+						<string>{368.99999230764047, 481.4999899624089}</string>
+						<string>{530.99998893050702, 481.4999899624089}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1335,7 +1488,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{35.999999249525899, 503.99998949336259}, {179.9999962476295, 35.999999249525899}}</string>
+					<string>{{35.999999249525899, 530.99998893050702}, {179.9999962476295, 35.999999249525899}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -1403,13 +1556,14 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;\red253\green128\blue8;}
 {\*\expandedcolortbl;;\cssrgb\c100000\c57811\c0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 benchmark_plugingetset \'85 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 \cf2 yamlcpp\cf0  get}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
@@ -1419,7 +1573,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{188.06857122431049, 468.94523109745717}, {41.116000000001804, 27}}</string>
+					<string>{{188.06857122431049, 495.94523053460159}, {41.116000000001804, 27}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1467,7 +1621,7 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1516,20 +1670,20 @@ for given input files}</string>
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{263.9999944965233, 467.99999024383669}</string>
+								<string>{263.9999944965233, 494.99998968098112}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{125.99999737334065, 503.99998949336259}</string>
+								<string>{125.99999737334065, 530.99998893050702}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{263.9999944965233, 467.99999024383669}</string>
-						<string>{125.99999737334065, 503.99998949336259}</string>
+						<string>{263.9999944965233, 494.99998968098112}</string>
+						<string>{125.99999737334065, 530.99998893050702}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1563,7 +1717,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{292.11399362096972, 395.16785177538884}, {27.772000000000844, 27}}</string>
+					<string>{{292.11399362096972, 422.16785121253326}, {27.772000000000844, 27}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1611,7 +1765,7 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1658,20 +1812,20 @@ for given input files}</string>
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 386.99999193240342}</string>
+								<string>{305.99999362097014, 413.99999136954784}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 440.99999080669232}</string>
+								<string>{305.99999362097014, 467.99999024383675}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{305.99999362097014, 386.99999193240342}</string>
-						<string>{305.99999362097014, 440.99999080669232}</string>
+						<string>{305.99999362097014, 413.99999136954784}</string>
+						<string>{305.99999362097014, 467.99999024383675}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1705,7 +1859,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{206.99999568477392, 359.99999249525899}, {197.99999587239245, 26.999999437144425}}</string>
+					<string>{{215.9999954971554, 386.99999193240342}, {179.9999962476295, 26.999999437144425}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -1758,7 +1912,7 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1771,7 +1925,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{224.99999530953687, 269.99999437144425}, {161.99999662286655, 26.999999437144425}}</string>
+					<string>{{215.9999954971554, 296.99999380858867}, {179.9999962476295, 26.999999437144425}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -1824,7 +1978,7 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1837,7 +1991,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{215.9999954971554, 161.99999662286655}, {179.9999962476295, 44.999999061907374}}</string>
+					<string>{{215.9999954971554, 188.99999606001097}, {179.9999962476295, 44.999999061907374}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -1890,7 +2044,7 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -1904,7 +2058,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{224.99999530953687, 71.999998499051799}, {161.99999662286655, 26.999999437144425}}</string>
+					<string>{{215.9999954971554, 80.999998311433274}, {179.9999962476295, 44.999999061907374}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -1957,20 +2111,20 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs28 \cf0 Download YAML Data}</string>
+\f0\fs28 \cf0 Download non-cached YAML input file}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{244.54599362097042, 306.88072593633575}, {122.90799999999945, 27}}</string>
+					<string>{{233.19099362097086, 332.38072537348006}, {145.61799999999857, 30}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -2018,13 +2172,13 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs28 \cf0 continue if successful}</string>
+\f0\fs28 \cf0 continue, if successful}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
@@ -2067,20 +2221,20 @@ for given input files}</string>
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 296.99999380858867}</string>
+								<string>{305.99999362097014, 323.99999324573309}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 359.99999249525905}</string>
+								<string>{305.99999362097014, 386.99999193240336}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{305.99999362097014, 296.99999380858867}</string>
-						<string>{305.99999362097014, 359.99999249525905}</string>
+						<string>{305.99999362097014, 323.99999324573309}</string>
+						<string>{305.99999362097014, 386.99999193240336}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2112,7 +2266,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{244.54599362097042, 216.88072781252095}, {122.90799999999945, 27}}</string>
+					<string>{{233.19099362097086, 242.38072724966537}, {145.61799999999857, 30}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -2160,13 +2314,13 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs28 \cf0 continue if successful}</string>
+\f0\fs28 \cf0 continue, if successful}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
@@ -2207,20 +2361,20 @@ for given input files}</string>
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 206.99999568477392}</string>
+								<string>{305.99999362097014, 233.99999512191835}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 269.99999437144425}</string>
+								<string>{305.99999362097014, 296.99999380858867}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{305.99999362097014, 206.99999568477392}</string>
-						<string>{305.99999362097014, 269.99999437144425}</string>
+						<string>{305.99999362097014, 233.99999512191835}</string>
+						<string>{305.99999362097014, 296.99999380858867}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2254,7 +2408,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{244.54599362097042, 108.88073006394325}, {122.90799999999945, 27}}</string>
+					<string>{{233.19099362097086, 134.38072950108767}, {145.61799999999857, 30}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -2302,13 +2456,13 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 Avenir-Book;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs28 \cf0 continue if successful}</string>
+\f0\fs28 \cf0 continue, if successful}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
@@ -2317,7 +2471,7 @@ for given input files}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{197.99999587239245, 17.99999962476295}, {215.9999954971554, 26.999999437144425}}</string>
+					<string>{{197.99999587239245, 8.9999998123814748}, {215.9999954971554, 35.999999249525899}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -2381,13 +2535,13 @@ for given input files}</string>
 					<key>Text</key>
 					<dict>
 						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
 {\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs32 \cf0 benchmark-yaml [file \'85]}</string>
+\f0\fs32 \cf0 benchmark-yaml [file]}</string>
 						<key>TextAlongPathGlyphAnchor</key>
 						<string>center</string>
 					</dict>
@@ -2428,20 +2582,20 @@ for given input files}</string>
 								<key>element</key>
 								<string>MOVETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 98.999997936196209}</string>
+								<string>{305.99999362097014, 125.99999737334066}</string>
 							</dict>
 							<dict>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 161.99999662286655}</string>
+								<string>{305.99999362097014, 188.99999606001097}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
-						<string>{305.99999362097014, 98.999997936196209}</string>
-						<string>{305.99999362097014, 161.99999662286655}</string>
+						<string>{305.99999362097014, 125.99999737334066}</string>
+						<string>{305.99999362097014, 188.99999606001097}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2515,14 +2669,14 @@ for given input files}</string>
 								<key>element</key>
 								<string>LINETO</string>
 								<key>point</key>
-								<string>{305.99999362097014, 71.999998499051799}</string>
+								<string>{305.99999362097014, 80.999998311433274}</string>
 							</dict>
 						</array>
 					</dict>
 					<key>Points</key>
 					<array>
 						<string>{305.99999362097014, 44.999999061907374}</string>
-						<string>{305.99999362097014, 71.999998499051799}</string>
+						<string>{305.99999362097014, 80.999998311433274}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2637,7 +2791,7 @@ for given input files}</string>
 		<key>Sidebar_Tab</key>
 		<integer>0</integer>
 		<key>VisibleRegion</key>
-		<string>{{-72, -76}, {829, 803}}</string>
+		<string>{{-96.5, -106.5}, {829, 803}}</string>
 		<key>WindowInfo_InspectorTab</key>
 		<array>
 			<string>com.omnigroup.OmniGraffle.inspectorGroup.object</string>
