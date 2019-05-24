@@ -143,12 +143,25 @@ The following list shows the \href{https://cmake.org}{CMake} options that we use
 \section{Run-Time Performance}
 \label{sec:run_time_performance}
 
-To compare the run-time performance we used the C application \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \href{https://master.libelektra.org/scripts/benchmark-yaml.in}{\sh{benchmark-yaml}}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \href{https://master.libelektra.org/benchmarks/plugingetset.c}{\sh{benchmark_plugingetset}} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
+\newcommand{\FilePluginGetSet}{{%
+\href{https://master.libelektra.org/benchmarks/plugingetset.c}%
+{\sh{benchmark_plugingetset}}%
+}}
+\newcommand{\FileBenchmarkYAML}{{%
+\href{https://master.libelektra.org/scripts/benchmark-yaml.in}%
+{\sh{benchmark-yaml}}%
+}}
+\newcommand{\FileBenchmarkPluginGetSet}{{%
+\href{https://master.libelektra.org/benchmarks/plugingetset.c}%
+{\sh{benchmark_plugingetset}}%
+}}
+
+To compare the run-time performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \FileBenchmarkPluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
 For the measurement we use \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}}, sine this tool
 
 \begin{enumerate}
-  \item automatically determines how often it should call \sh{benchmark_plugingetset} for meaningful measurement results,
+  \item automatically determines how often it should call \FilePluginGetSet{} for meaningful measurement results,
   \item shows us when it is time to redo the benchmark, by informing us about statistical outliers, and
   \item prints important statistical data such as the mean run-time and the standard derivation
 \end{enumerate}
@@ -164,15 +177,42 @@ For the measurement we use \href{https://github.com/sharkdp/hyperfine}{\sh{hyper
 
 \subsection{Input}
 
-As the first input for the benchmark we used a \href{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other YAML plugins. We call the resulting file \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/keyframes.yaml}{\code{keyframes.yaml}} in the remainder of the thesis. This file and all other data of the benchmark is available here:
+\newcommand{\URLKeyFramesJSON}{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}
+
+\newcommand{\FileKeyFrames}{{%
+\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/keyframes.yaml}%
+{\code{keyframes.yaml}}%
+}}
+\newcommand{\FileCombined}{{%
+\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/combined.yaml}%
+{\code{combined.yaml}}%
+}}
+\newcommand{\FileGenerated}{{%
+\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}%
+{\code{generated.yaml}}%
+}}
+\newcommand{\FileGeneratedHundredThousand}{{%
+\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated_100000.yaml}%
+{\code{generated\_100000.yaml}}%
+}}
+\newcommand{\FileGenerateYAML}{{%
+\href{https://master.libelektra.org/scripts/generate-yaml}%
+{\sh{generate-yaml}}%
+}}
+\newcommand{\FileCutInput}{{%
+\href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Scripts/cut_input}%
+{\sh{cut_input}}%
+}}
+
+As the first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other YAML plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
 
 \begin{leftbar}
   \url{https://github.com/ElektraInitiative/rawdata/tree/master/YAML}
 \end{leftbar}
 
-. For another input file called \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/combined.yaml}{\code{combined.yaml}} we copy and pasted data from test data and various other YAML files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of YAML data that covers most of the code paths of the YAML plugins.
+. For another input file called \FileCombined{} we copy and pasted data from test data and various other YAML files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of YAML data that covers most of the code paths of the YAML plugins.
 
-Since both of these files are relatively small,\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/keyframes.yaml}{\code{keyframes.yaml}} contains 218 lines, while \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/combined.yaml}{\code{combined.yaml}} contains 152 lines, we also generated data using a Python script that we called \href{https://master.libelektra.org/scripts/generate-yaml}{\code{generate-yaml}}. This script generates YAML maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the YAML scalars the script randomly selects one of the three flow scalar styles:
+Since both of these files are relatively small, \FileKeyFrames{} contains 218 lines, while \FileCombined{} contains 152 lines, we also generated data using a Python script that we called \FileGenerateYAML{}. This script generates YAML maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the YAML scalars the script randomly selects one of the three flow scalar styles:
 
 \begin{itemize}
   \item single quoted scalar,
@@ -183,12 +223,12 @@ Since both of these files are relatively small,\href{https://github.com/ElektraI
 . This always works since \glspl{UUID} contain no character sequence that has special meaning according to the YAML specification. Using this method we generated two files:
 
 \begin{itemize}
-  \item \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated.yaml}} that contains 10 000 lines, and
+  \item \FileGenerated{} that contains 10 000 lines, and
 
-  \item \href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Input/generated_100000.yaml}{\code{generated\_100000.yaml}} that contains 100 000 lines
+  \item \FileGeneratedHundredThousand{} that contains 100 000 lines
 \end{itemize}
 
-. We also created another script called \href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Scripts/cut_input}{\code{cut\_input}} to generate additional smaller input files that contain the first 50000, 10000, 5000, 1000, 500, 100, 50, 10, 5 and 1 lines of \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated\_100000.yaml}}. The script also generates a file that contains only the empty string.
+. We also created another script called \FileCutInput{} to generate additional smaller input files that contain the first 50000, 10000, 5000, 1000, 500, 100, 50, 10, 5 and 1 lines of \FileGeneratedHundredThousand{}. The script also generates a file that contains only the empty string.
 
 \subsection{Results}
 
@@ -225,7 +265,7 @@ The graphs in this section show the results of the benchmark for different input
     \tikzcircle{DarkOrchid} YAy PEG
   \vspace{-0.5cm}
   \end{center}
-  \caption{This bar chart shows the run time of the plugins for the input \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/keyframes.yaml}{\code{keyframes.yaml}}}
+  \caption{This bar chart shows the run time of the plugins for the input \FileKeyFrames{}.}
   \label{fig:benchmark_keyframes}
 \end{figure}
 
@@ -260,7 +300,7 @@ The graphs in this section show the results of the benchmark for different input
     \tikzcircle{DarkOrchid} YAy PEG
   \vspace{-0.5cm}
   \end{center}
-  \caption{This bar chart shows the run time of the plugins for the input \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/combined.yaml}{\code{combined.yaml}}}
+  \caption{This bar chart shows the run time of the plugins for the input \FileCombined{}.}
   \label{fig:benchmark_combined}
 \end{figure}
 
@@ -295,14 +335,14 @@ The graphs in this section show the results of the benchmark for different input
     \tikzcircle{DarkOrchid} YAy PEG
   \vspace{-0.5cm}
   \end{center}
-  \caption{This bar chart shows the run time of the plugins for the input \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated.yaml}}}
+  \caption{This bar chart shows the run time of the plugins for the input \FileGenerated{}.}
   \label{fig:benchmark_generated}
 \end{figure}
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=\textwidth]{Figures/BenchmarkResultGenerated}
-  \caption{The diagrams above show the runtime of the plugins for the input file \href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Input/generated_100000.yaml}{\code{generated\_100000.yaml}} and other files that contains only the first $n$ number of lines of this file.}
+  \caption{The diagrams above show the runtime of the plugins for the input file \FileGeneratedHundredThousand{} and other files that contains only the first $n$ number of lines of this file.}
   \label{fig:benchmark_results_generated}
 \end{figure}
 
@@ -313,11 +353,11 @@ If we look at Figure~\ref{fig:benchmark_results_generated} we see that the runti
 \begin{figure}[H]
   \centering
     \includegraphics[width=\textwidth]{Figures/BenchmarkResultGeneratedAbove1000}
-  \caption{The diagrams above shows that the runtime for the first lines of the file \href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Input/generated_100000.yaml}{\code{generated\_100000.yaml}} almost certainly grows linearly.}
+  \caption{The diagrams above shows that the runtime for the first lines of the file \FileGeneratedHundredThousand{} almost certainly grows linearly.}
   \label{fig:benchmark_results_generated_above_1000}
 \end{figure}
 
-From the correlation coefficients ($R$) of $0.96$ and higher we deduce that the runtime almost certainly grows linearly. This means that the approximate runtime of the plugins should be the same. Figure~\ref{fig:benchmark_generated} shows that the constant difference between the runtime can be relatively high. For example on macOS, the fastest plugin YAwn is nearly five times faster than the slowest plugin YAy PEG for the file \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated.yaml}}:
+From the correlation coefficients ($R$) of $0.96$ and higher we deduce that the runtime almost certainly grows linearly. This means that the approximate runtime of the plugins should be the same. Figure~\ref{fig:benchmark_generated} shows that the constant difference between the runtime can be relatively high. For example on macOS, the fastest plugin YAwn is nearly five times faster than the slowest plugin YAy PEG for the file \FileGenerated{}:
 
 \begin{equation}
   \frac{381\text{ms}}{81.6\text{ms}} ≅ 4.67
