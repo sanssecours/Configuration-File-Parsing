@@ -306,6 +306,35 @@ The graphs in this section show the results of the benchmark for different input
   \label{fig:benchmark_results_generated}
 \end{figure}
 
+\subsection{Analysis}
+
+If we look at Figure~\ref{fig:benchmark_results_generated} we see that the runtime seems to grow linearly after a certain number of input lines. To verify this we hypothesis we removed all samples with a line length smaller than 1000. Figure~\ref{fig:benchmark_results_generated_above_1000} shows the result.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{Figures/BenchmarkResultGeneratedAbove1000}
+  \caption{The diagrams above shows that the runtime for the first lines of the file \href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Input/generated_100000.yaml}{\code{generated\_100000.yaml}} almost certainly grows linearly.}
+  \label{fig:benchmark_results_generated_above_1000}
+\end{figure}
+
+From the correlation coefficients ($R$) of $0.96$ and higher we deduce that the runtime almost certainly grows linearly. This means that the approximate runtime of the plugins should be the same. Figure~\ref{fig:benchmark_generated} shows that the constant difference between the runtime can be relatively high. For example on macOS, the fastest plugin YAwn is nearly five times faster than the slowest plugin YAy PEG for the file \href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/generated.yaml}{\code{generated.yaml}}:
+
+\begin{equation}
+  \frac{381\text{ms}}{81.6\text{ms}} ≅ 4.67
+\end{equation}
+
+. Other interesting observations are:
+
+\begin{enumerate}
+  \item The difference between the runtime of the fastest and slowest plugins for large files is nearly twice as large on macOS.
+
+  \item The OS seems to play a much more important role, than the compiler for all of the used YAML libraries.
+
+  \item While Yan LR and YAwn perform similarly on macOS and Linux, the difference between YAML CPP, YAMBi and YAy PEG on both operating systems can be quite significant.
+\end{enumerate}
+
+.
+
 \section{Error Reporting}
 
 \emph{Error handling} can be grouped into three dependent stages~\cite{ruefenacht2016error}:
