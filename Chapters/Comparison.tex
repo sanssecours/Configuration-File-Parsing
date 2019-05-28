@@ -361,6 +361,7 @@ From the correlation coefficients ($R$) of $0.96$ and higher we deduce that the 
 
 \begin{equation}
   \frac{381\text{ms}}{81.6\text{ms}} ≅ 4.67
+  \label{eq:benchmark_difference}
 \end{equation}
 
 . Other interesting observations are:
@@ -417,6 +418,12 @@ and obtain the formula:
   \caption{This bar chart shows the mean of the mean run times of the plugins according to Equation~\ref{eq:benchmark_generated_mean} for the input \FileGenerated{}.}
   \label{fig:benchmark_generated_mean}
 \end{figure}
+
+\subsection{Conclusion}
+
+We determined with a high confidence that all of the YAML plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}). This puts the plugin into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
+
+The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{fig:benchmark_generated_mean}) is YAwn, if we weigh the results of the two tested operating systems equally. Yan LR and YAMBi showed the second best runtimes, and were about $1.6$ times slower than YAwn. YAML CPP, which was, according to the results of Figure~\ref{fig:benchmark_generated_mean}, about $2.5$ times slower than Yawn takes the second to last place. Yay PEG was the slowest plugin on both tested operating systems, and is about $3.4$ slower than the fastest plugin according to Figure~\ref{fig:benchmark_generated_mean}.
 
 \section{Error Reporting}
 
