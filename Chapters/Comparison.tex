@@ -373,7 +373,50 @@ From the correlation coefficients ($R$) of $0.96$ and higher we deduce that the 
   \item While Yan LR and YAwn perform similarly on macOS and Linux, the difference between YAML CPP, YAMBi and YAy PEG on both operating systems can be quite significant.
 \end{enumerate}
 
-.
+. Since the run-time of the plugins is quite different on the two benchmarked operating systems we also determined mean of the mean values for the file \FileGenerated{}. We use a weight of
+
+\begin{itemize}
+  \item $0.5$ for the combination macOS/Clang,
+  \item $0.25$ for the combination Linux/Clang, and
+  \item $0.25$ for the combination Linux/GCC
+\end{itemize}
+
+and obtain the formula:
+
+\begin{equation}
+  \overline{t} = 0.25 · \overline{t}_{\text{Linux/Clang}} +
+                 0.25 · \overline{t}_{\text{Linux/Clang}} +
+                 0.5  · \overline{t}_{\text{macOS/Clang}}
+  \label{eq:benchmark_generated_mean}
+\end{equation}
+
+. Figure \ref{fig:benchmark_generated_mean} shows a bar graph with the result of this calculation.
+
+\begin{figure}[H]
+  \begin{bchart}[max=300, width=0.8\textwidth, unit=ms]
+
+    \bcbar[text=197.4, value=, color=orange]{197.4}
+
+    \bcbar[text=130.7, value=, color=DarkYellow]{130.7}
+
+    \bcbar[text=128.4, value=, color=Turquoise3]{128.4}
+
+    \bcbar[text=79.4, value=, color=Aqua]{79.4}
+
+    \bcbar[text=270.8, value=, color=DarkOrchid]{270.8}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{DarkYellow} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{Aqua} YAwn ~~
+    \tikzcircle{DarkOrchid} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the mean of the mean run times of the plugins according to Equation~\ref{eq:benchmark_generated_mean} for the input \FileGenerated{}.}
+  \label{fig:benchmark_generated_mean}
+\end{figure}
 
 \section{Error Reporting}
 
