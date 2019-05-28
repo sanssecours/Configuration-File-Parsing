@@ -210,7 +210,7 @@ As the first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON con
   \url{https://github.com/ElektraInitiative/rawdata/tree/master/YAML}
 \end{leftbar}
 
-. For another input file called \FileCombined{} we copy and pasted data from test data and various other YAML files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of YAML data that covers most of the code paths of the YAML plugins.
+. For another input file called \FileCombined{} we copy and pasted parts of test data and various other YAML files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of YAML data that covers most of the code paths of the YAML plugins.
 
 Since both of these files are relatively small, \FileKeyFrames{} contains 218 lines, while \FileCombined{} contains 152 lines, we also generated data using a Python script that we called \FileGenerateYAML{}. This script generates YAML maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the YAML scalars the script randomly selects one of the three flow scalar styles:
 
