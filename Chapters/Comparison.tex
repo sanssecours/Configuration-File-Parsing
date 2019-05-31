@@ -4,7 +4,7 @@ In the evaluation phase of the work we concentrated on the criteria listed below
 
 \begin{description}
 
-  \item[Run-time Performance]~\\[0.1cm]
+  \item[Runtime Performance]~\\[0.1cm]
   We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we could determine median execution times. At the end of the phase we determined the fastest parsing code and therefore also answered~\Cref{que:speed}:
 
   \speed*
@@ -130,7 +130,7 @@ The following list shows the \href{https://cmake.org}{CMake} options that we use
   \item \sh{-DPLUGINS=ALL}
 \end{itemize}
 
-. For the run-time performance benchmark described in “\nameref{sec:run_time_performance}” we built Elektra using the following \href{https://cmake.org}{CMake} options:
+. For the runtime performance benchmark described in “\nameref{sec:run_time_performance}” we built Elektra using the following \href{https://cmake.org}{CMake} options:
 
 \begin{itemize}
   \item \sh{-DCMAKE_BUILD_TYPE=Release}
@@ -140,7 +140,7 @@ The following list shows the \href{https://cmake.org}{CMake} options that we use
 
 .
 
-\section{Run-Time Performance}
+\section{Runtime Performance}
 \label{sec:run_time_performance}
 
 \newcommand{\FilePluginGetSet}{{%
@@ -156,14 +156,14 @@ The following list shows the \href{https://cmake.org}{CMake} options that we use
 {\sh{benchmark_plugingetset}}%
 }}
 
-To compare the run-time performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \FileBenchmarkPluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
+To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \FileBenchmarkPluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
 For the measurement we use \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}}, sine this tool
 
 \begin{enumerate}
   \item automatically determines how often it should call \FilePluginGetSet{} for meaningful measurement results,
   \item shows us when it is time to redo the benchmark, by informing us about statistical outliers, and
-  \item prints important statistical data such as the mean run-time and the standard derivation
+  \item prints important statistical data such as the mean runtime and the standard derivation
 \end{enumerate}
 
 .
@@ -374,7 +374,7 @@ From the correlation coefficients ($R$) of $0.96$ and higher we deduce that the 
   \item While Yan LR and YAwn perform similarly on macOS and Linux, the difference between YAML CPP, YAMBi and YAy PEG on both operating systems can be quite significant.
 \end{enumerate}
 
-. Since the run-time of the plugins is quite different on the two benchmarked operating systems we also determined mean of the mean values for the file \FileGenerated{}. We use a weight of
+. Since the runtime of the plugins is quite different on the two benchmarked operating systems we also determined mean of the mean values for the file \FileGenerated{}. We use a weight of
 
 \begin{itemize}
   \item $0.5$ for the combination macOS/Clang,
