@@ -658,7 +658,7 @@ We then looked into the error recovery capabilities of Bison. Unlike ANTLR the g
   \label{lst:incorrect_indentation_element_without_sequence}
 \end{listing}
 
-For example, for the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence} the parser produces an error message that looks like this:
+After the update the parser produces an error message that looks like this:
 
 \begin{textcode}
 2:2: unexpected start of sequence, expecting end of map or key
@@ -669,7 +669,7 @@ For example, for the input shown in Listing~\ref{lst:incorrect_indentation_eleme
             ^
 \end{textcode}
 
-. As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
+the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence}. As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
 
 One option to improve the error output of the Bison parser we did not implement is described in the paper \citetitle{jeffery2003generating} by \citeauthor{jeffery2003generating}~\cite{jeffery2003generating}. The technique looks promising, and was also added to the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. However, the technique is not directly supported by Bison and hence requires changes to the parsing code, that are out of the scope of this thesis.
 
