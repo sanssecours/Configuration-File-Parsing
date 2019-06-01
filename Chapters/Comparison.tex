@@ -671,7 +671,13 @@ After the update the parser produces an error message that looks like this:
 
 the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence}. As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
 
-One option to improve the error output of the Bison parser we did not implement is described in the paper \citetitle{jeffery2003generating} by \citeauthor{jeffery2003generating}~\cite{jeffery2003generating}. The technique looks promising, and was also added to the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. However, the technique is not directly supported by Bison and hence requires changes to the parsing code, that are out of the scope of this thesis.
+One option to improve the error output of the Bison parser we did not implement is described by \citeauthor{jeffery2003generating} in \citetitle{jeffery2003generating}~\cite{jeffery2003generating}. The technique looks promising, and was also added to the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. Recently \citeauthor{pottier2016reachability}~\cite{pottier2016reachability} extended \citeauthor{jeffery2003generating}’s work and added example based error reporting in the LR parsers of the CompCert C compiler~\cite{kaestner2018compcert}. In \citetitle{pottier2016reachability} \citeauthor{pottier2016reachability}~\cite{pottier2016reachability} writes:
+
+\begin{quote}
+  We believe it is fair to say that the quality of CompCert’s diagnostic messages is now on par with that of \texttt{clang} and \texttt{gcc}.
+\end{quote}
+
+. This statement and the examples in the article lead us to believe that the error messages of Yan LR could be improved using example based error reporting. However, the technique is not directly supported by Bison and hence requires changes to the parsing code that are out of the scope of this thesis.
 
 \subsection{YAEP}
 
