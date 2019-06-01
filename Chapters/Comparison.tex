@@ -692,7 +692,7 @@ After all these changes the output for the YAML data from Listing~\ref{lst:incor
 
 \subsection{PEGTL}
 
-LL and LR parsers read the input deterministically from left to right. They therefore report the first position, where the parsed input is not part of the language described by the grammar anymore. This behavior is also known as (longest) correct/viable prefix property~\cite{sippu1990parsing, ruefenacht2016error, maidl2016129}.
+LL and LR parsers read the input deterministically from left to right. They therefore report the first position, where the parsed input is not part of the language described by the grammar anymore. This behavior is also known as (longest) correct/viable prefix property~\cite{sippu1990parsing, ruefenacht2016error, maidl2016129, pottier2016reachability}.
 
 \Gls{PEG} parsers do not have this property. The reason behind this is that \glspl{PEG} use backtracking, and therefore obfuscate error locations~\cite{ruefenacht2016error}. In his master thesis~\cite{ford2002packrat} \citeauthor{ford2002packrat} describes one option to produce meaningful error messages. His parser records all parsing results and uses the one that matched the farthest to the right in the input for error messages. In \citetitle{maidl2016129}~\cite{maidl2016129} \citeauthor{maidl2016129} show that this error strategy can also be added to every \gls{PEG} library that supports semantic actions. They also introduce a form of error reporting, inspired by the excepting handling mechanism of programming languages, based on grammar annotations called labeled failures~\cite{maidl2016129}.
 
