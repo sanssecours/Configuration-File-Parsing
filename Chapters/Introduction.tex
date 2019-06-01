@@ -85,14 +85,18 @@ In the scope of the above comparison we answer the questions below.
 
 The methodological approach for this thesis consists of the following steps:
 
-\begin{description}[style=multiline, leftmargin=3.4cm, font=\bfseries]
+\begin{description}[style=multiline, leftmargin=3.2cm, font=\bfseries]
 
   \item[Literature Review] We determined the current status of parsing libraries suitable for configuration file parsing. We then chose appropriate libraries for the parsing techniques listed in the section “\nameref{sec:aim_of_the_work}”. In this part of the thesis we also investigated possible answers to our research questions according to the current state of literature.
 
-  \item[YAML Subset] To determine a minimal usable subset of YAML we discussed common features required for a new Elektra storage plugin with some of the current developers as part of an presentation and subsequent discussion.
+  \item[Discussion] To determine a minimal usable subset of YAML we discussed common features required for a new Elektra storage plugin with some of the current developers as part of an presentation and subsequent discussion.
 
   \item[Implementation] First we implemented parsing code for the minimal YAML subset. In this phase we also added other necessary code to Elektra. After that we chose one of the parsing methods to create a more complete \glstext{YAML} parser.
 
   \item[Comparison] As noted in “\nameref{sec:aim_of_the_work}” we compared the different implementations of our minimal YAML subset parsers.
+
+  \begin{description}
+    \item[Benchmark] For the speed comparison we use benchmarks to determine the speed of the different plugins.
+  \end{description}
 
 \end{description}
