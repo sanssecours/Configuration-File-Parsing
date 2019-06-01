@@ -427,17 +427,26 @@ The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{f
 
 \section{Error Reporting}
 
-\emph{Error handling} can be grouped into three dependent stages~\cite{ruefenacht2016error}:
+\emph{Error handling} can be grouped into four dependent stages~\cite{ruefenacht2016error, pottier2016reachability}:
 
 \begin{enumerate}
-  \item error detection
+  \item error detection,
+  \item error diagnosis,
   \item error recovery, and
   \item error correction
 \end{enumerate}
 
-. We are mainly concerned with error detection and error recovery, since error correction is generally not possible without the possibility of fixing errors incorrectly. These errors can be disastrous in case an important configuration value, such as “radiation intensity” is set incorrectly as a result of error correction.
+. We are mainly concerned with the first three items, since error correction is generally not possible without the possibility of fixing errors incorrectly. These errors can be disastrous in case an important configuration value, such as “radiation intensity” is set incorrectly as a result of error correction.
 
-While there exist techniques to enhance error reporting by using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
+\emph{Error reporting} is one of the the results of
+
+\begin{itemize}
+  \item detecting that input is incorrect (error detection),
+  \item finding what part of the input was incorrect (error diagnosis), and
+  \item trying to resume the parsing process in case of errors (error recovery)
+\end{itemize}
+
+. While there exist techniques to enhance error reporting, by using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
 
 \subsection{Initial Erroneous Input}
 
