@@ -5,7 +5,7 @@ In the evaluation phase of the work we looked at the criteria listed below.
 \begin{description}
 
   \item[Runtime Performance]~\\[0.1cm]
-  We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we could determine median execution times. At the end of the phase we determined the fastest parsing code and therefore also answered~\Cref{que:speed}:
+  We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we can determine median execution times. At the end of this phase we answer~\Cref{que:speed}.
 
   \speed*
 
@@ -357,11 +357,11 @@ If we look at Figure~\ref{fig:benchmark_results_generated} we see that the runti
   \label{fig:benchmark_results_generated_above_1000}
 \end{figure}
 
-From the correlation coefficients ($R$) of $0.95$ and higher we deduce that the runtime for all plugins almost certainly grows linearly. This means that the approximate runtime of the plugins should be the same. Now it is time to answer \Cref{que:speed}:
+From the correlation coefficients ($R$) of $0.95$ and higher we deduce that the runtime for all plugins almost certainly grows linearly. This means that the approximate runtime of the plugins should be the same. Now it is time to answer \Cref{que:speed}.
 
 \speed*
 
-. The runtime of a non-backtracking recursive descent parser for an LL(1) grammar, as used by YAML CPP, should be $O(n)$. According to the literature the upper boundary for the runtime of
+The runtime of a non-backtracking recursive descent parser for an LL(1) grammar, as used by YAML CPP, should be $O(n)$. According to the literature the upper boundary for the runtime of
 
 \begin{itemize}
   \item \gls{ALL(*)}, used by Yan LR, is $O(n⁴)$, but the algorithm often performs linearly~\cite[p. 1]{parr2014adaptive},
@@ -453,7 +453,7 @@ and obtain the formula:
 
 We determined with a high confidence that all of the YAML plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}). This puts the plugin into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
 
-The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{fig:benchmark_generated_mean}) is YAwn, if we weigh the results of the two tested operating systems equally. This is especially interesting, since \citeauthor{earley1970efficient} himself mentions in his dissertation~\cite[p. 122]{earley1970efficient} that his parsing technique was too slow for practical use at the time, as you can see in the quote below.
+The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{fig:benchmark_generated_mean}) is YAwn, if we weigh the results of the two tested operating systems equally. This is interesting, since \citeauthor{earley1970efficient} himself mentions in his dissertation~\cite[p. 122]{earley1970efficient} that his parsing technique was too slow for practical use at the time, as you can see in the quote below.
 
 \begin{quote}
   First we ask, what impact will our algorithm have on the parsing done in production compilers for existing programming languages? The answer is, practically none. Production compilers require guessing time proportional to n with a fairly low coefficient of n.
