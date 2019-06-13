@@ -470,6 +470,20 @@ The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{f
 
 Yan LR and YAMBi showed the second best runtimes, and were about $1.6$ times slower than YAwn. YAML CPP, which was, according to the results of Figure~\ref{fig:benchmark_generated_mean}, about $2.5$ times slower than Yawn takes the second to last place. Yay PEG was the slowest plugin on both tested operating systems, and is about $3.5$ times slower than the fastest plugin according to Figure~\ref{fig:benchmark_generated_mean}.
 
+\section{Memory Usage}
+\label{sec:memory_usage}
+
+\newcommand{\FileBenchmarkMemory}{{%
+\href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Scripts/benchmark-memory}%
+{\sh{benchmark-memory}}%
+}}
+
+We measured the heap memory usage with the heap profiler \href{http://valgrind.org/docs/manual/ms-manual.html}{Massif}. Most of the other setup is similar to the one we used for the runtime benchmark, described in the section “\nameref{sec:run_time_performance}”. We still use the the C application \FilePluginGetSet{} to execute the plugins. The input files are also the same as before.
+
+This time we do not need to determine the mean value of the results. Massif always produces the same output on the same hardware/software combination, since it runs the instrumented program \FilePluginGetSet{} on a “synthetic CPU”~\cite{valgrind2019core}.
+
+To automate the process of measuring the memory usage for the different input files, we created a Shell script called \FileBenchmarkMemory{}. We only benchmarked the memory usage on Linux, since Massif did not support macOS 10.14 at the time we executed the benchmark script.
+
 \section{Error Reporting}
 
 \emph{Error handling} can be grouped into four dependent stages~\cite{ruefenacht2016error, pottier2016reachability}:
