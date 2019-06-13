@@ -158,6 +158,10 @@ we built Elektra using the following \href{https://cmake.org}{CMake} options:
 \href{https://master.libelektra.org/scripts/benchmark-yaml.in}%
 {\sh{benchmark-yaml}}%
 }}
+\newcommand{\FileBenchmarkRuntime}{{%
+\href{https://github.com/sanssecours/rawdata/blob/⏱/YAML/Scripts/benchmark-runtime}%
+{\sh{benchmark-runtime}}%
+}}
 
 To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \FilePluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
@@ -170,6 +174,8 @@ For the measurement we use \href{https://github.com/sharkdp/hyperfine}{\sh{hyper
 \end{enumerate}
 
 .
+
+To make sure we repeat the benchmark every time \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} reporte statistical outliers we created the Shell script \FileBenchmarkRuntime{}. This script calls \FileBenchmarkYAML{} for every input file and repeats a benchmark, until \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} does not report any warning. The script \FileBenchmarkRuntime{} \emph{does} ignore warnings about runtimes under 5 milliseconds though, since \FilePluginGetSet{} might take less execution time for YAML files that only contain a few lines.
 
 \begin{figure}[H]
   \centering
