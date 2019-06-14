@@ -582,8 +582,21 @@ The graphs in this section show the results of the memory benchmark for differen
   \centering
     \includegraphics[width=\textwidth]{BenchmarkResultMemory}
   \caption{The diagrams above show the peak heap memory usage of the plugins for the input file \FileGeneratedHundredThousand{} and other files that contain only the first $n$ number of lines of this file.}
-  \label{fig:benchmark_results_generated}
+  \label{fig:benchmark_results_memory_lines}
 \end{figure}
+
+\subsection{Analysis}
+
+Figure~\ref{fig:benchmark_results_memory_lines} shows that the memory usage seems to grow linearly for large line numbers. To analyze this behavior further, we limited the data for the graph to observation where the line number is 1000 or higher. Figure~\ref{fig:benchmark_results_memory_lines_above_thousand} shows the graph after this modification. From the correlation coefficients ($R$) of 1 and the low probabilities of the null hypothesis being wrong ($p$) we conclude that the memory consumption almost certainly grows linearly for all plugins.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{BenchmarkResultMemoryAbove1000}
+  \caption{This diagram above shows that the memory usage of the YAML plugins almost certainly grows linearly for the first $n$ lines of the file \FileGeneratedHundredThousand{}}
+  \label{fig:benchmark_results_memory_lines_above_thousand}
+\end{figure}
+
+While asymptotic memory usage of the plugins is the same, the factor between the memory usage can be quite high. If we look at the data for the file \FileGenerated{} (see Figure~\ref{fig:benchmark_memory_generated}), then YAwn performs best, while YAMBi needs about $20\%$ more heap memory. The overhead for the other plugins is much worse. Yan LR allocates about three times the heap memory of YAwn, YAML CPP takes about $3.4$ times the memory amount of YAwn, and YAy PEG needs even more than $4$ times the heap memory of YAwn.
 
 \section{Error Reporting}
 
