@@ -12,7 +12,7 @@ In the evaluation phase of the work we looked at the criteria listed below.
   \item[{\hyperref[sec:memory_usage]{Memory Usage}}]~\\[0.1cm]
   We determined the memory usage of the different parsing implementation using \href{http://valgrind.org}{Valgrind's} heap profiler \href{http://valgrind.org/docs/manual/ms-manual.html}{Massif}.
 
-  \item[Code Size]~\\[0.1cm]
+  \item[{\hyperref[sec:code_size]{Code Size}}]~\\[0.1cm]
   We counted the lines of the different implementations using the tool \href{https://github.com/AlDanial/cloc}{cloc}.
 
   \item[Code Complexity]~\\[0.1cm]
@@ -93,6 +93,7 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
     Other Software &         CMake 3.14.4\\
                    &          Ninja 1.9.0\\
                    &      hyperfine 1.5.0\\
+                   &            cloc 1.82\\
 \bottomrule
         \end{tabular}
     \end{subtable}
@@ -599,6 +600,51 @@ Figure~\ref{fig:benchmark_results_memory_lines} shows that the memory usage seem
 \subsection{Conclusion}
 
 While the asymptotic memory usage of all plugins grows linearly, the factor between the memory usage can be quite high. If we look at the data for the file \FileGenerated{} (see Figure~\ref{fig:benchmark_memory_generated}), then YAwn performs best, while YAMBi needs about $20\%$ more heap memory. The overhead for the other plugins is much worse. Yan LR allocates about three times the heap memory of YAwn, YAML CPP takes about $3.4$ times the memory amount of YAwn, and YAy PEG needs even more than $4$ times the heap memory of YAwn.
+
+\section{Code Size}
+\label{sec:code_size}
+
+\newcommand{\FileCountLines}{{%
+\href{https://github.com/sanssecours/rawdata/blob/📝/YAML/Scripts/count-lines}%
+{\sh{count-lines}}%
+}}
+
+We created a Shell script called \FileCountLines{} that counts the code lines of the YAML plugins using the tool \href{https://github.com/AlDanial/cloc}{cloc}. Since cloc \href{http://cloc.sourceforge.net/#Languages}{does not support Bison grammar files}, we wrote a small function that removes comments and empty lines from a Bison grammar, and afterwards counts the remaining lines using the Unix tool \sh{wc}.
+
+\subsection{Results}
+
+Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}.
+
+\begin{figure}[H]
+  \begin{bchart}[max=2100, width=0.8\textwidth, unit={~Lines of Code}]
+    \bcbar[text=609, value=Hand Written, color=orange]{609}
+
+    \bcbar[value=24 ~ Grammar, color=DarkYellow]{24}
+    \bcbar[text=717, value=Hand Written, color=DarkYellow]{717}
+    \bcbar[text=1108, value=Generated, color=DarkYellow]{1108}
+
+    \bcbar[value=86 ~ Grammar, color=Turquoise3]{86}
+    \bcbar[text=766, value=Hand Written, color=Turquoise3]{766}
+    \bcbar[text=2046, value=Generated, color=Turquoise3]{2046}
+
+    \bcbar[value=50 ~ Grammar, color=Aqua]{50}
+    \bcbar[text=1096, value=Hand Written, color=Aqua]{1096}
+
+    \bcbar[text=1187, value=Hand Written, color=DarkOrchid]{1187}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{DarkYellow} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{Aqua} YAwn ~~
+    \tikzcircle{DarkOrchid} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the line counts of of the YAML plugins.}
+  \label{fig:line_count}
+\end{figure}
+
 
 \section{Error Reporting}
 \label{sec:error_reporting}
