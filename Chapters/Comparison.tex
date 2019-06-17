@@ -4,12 +4,12 @@ In the evaluation phase of the work we looked at the criteria listed below.
 
 \begin{description}
 
-  \item[Runtime Performance]~\\[0.1cm]
+  \item[{\hyperref[sec:run_time_performance]{Runtime Performance}}]~\\[0.1cm]
   We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we can determine median execution times. At the end of this phase we answer~\Cref{que:speed}.
 
   \speed*
 
-  \item[Memory Usage]~\\[0.1cm]
+  \item[{\hyperref[sec:memory_usage]{Memory Usage}}]~\\[0.1cm]
   We determined the memory usage of the different parsing implementation using \href{http://valgrind.org}{Valgrind's} heap profiler \href{http://valgrind.org/docs/manual/ms-manual.html}{Massif}.
 
   \item[Code Size]~\\[0.1cm]
@@ -30,7 +30,7 @@ In the evaluation phase of the work we looked at the criteria listed below.
 
   , and argue why certain parsing libraries allow us to stay closer to the definition of the configuration language.
 
-  \item[Error Reporting]~\\[0.1cm]
+  \item[{\hyperref[sec:error_reporting]{Error Reporting}}]~\\[0.1cm]
   For this subtask we created YAML input files, that contain certain errors. We then looked at what error information the parsing engines provide, and how well this information describes the given error.
 
 \end{description}
@@ -601,6 +601,7 @@ Figure~\ref{fig:benchmark_results_memory_lines} shows that the memory usage seem
 While the asymptotic memory usage of all plugins grows linearly, the factor between the memory usage can be quite high. If we look at the data for the file \FileGenerated{} (see Figure~\ref{fig:benchmark_memory_generated}), then YAwn performs best, while YAMBi needs about $20\%$ more heap memory. The overhead for the other plugins is much worse. Yan LR allocates about three times the heap memory of YAwn, YAML CPP takes about $3.4$ times the memory amount of YAwn, and YAy PEG needs even more than $4$ times the heap memory of YAwn.
 
 \section{Error Reporting}
+\label{sec:error_reporting}
 
 \emph{Error handling} can be grouped into four dependent stages~\cite{ruefenacht2016error, pottier2016reachability}:
 
