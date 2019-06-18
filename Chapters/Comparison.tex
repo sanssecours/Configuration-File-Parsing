@@ -645,6 +645,49 @@ Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}. As 
   \label{fig:line_count}
 \end{figure}
 
+\subsection{Analysis}
+
+The line counts of Figure~\ref{fig:line_count} show that YAML CPP requires the least amount of code. That results is not that surprising, considering that the plugin uses yaml-cpp, a library that already represents the YAML file using high-level abstract data structures. We can convert these data structures into Elektra’s \cpp{KeySet} structure relatively easily, keeping the code size of the plugin small.
+
+For the plugins directly based on a parser, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The line count numbers for YAMBi and YAwn are not that surprising, considering that we implemented some code functionality already provided by ANTLR, for those plugins ourselves.
+
+For YAMBi we wrote two classes,
+
+\begin{itemize}
+  \item one that represents the input for the lexer ($63$ code lines), and
+  \item another class that stores data about a lexer symbol ($53$ code lines)
+\end{itemize}
+
+. The sum of the lines of code ($63 + 53 = 116$) explains the difference between the amount of handwritten code between Yan LR and YAMBi ($717 - 609 = 108$) pretty well.
+
+For YAwn we also added a symbol ($69$ code lines) and input class ($101$ code lines) as we did for YAMBi. Additionally we added
+
+\begin{itemize}
+  \item tree walking code ($124$ code lines),
+  \item a listener ($126$ code lines),
+  \item an error listener ($94$ code lines), and
+  \item classes storing positioning information ($38$ code lines)
+\end{itemize}
+
+. The sum of the code lines ($552$) mentioned above is responsible for about half of the code lines of the whole plugin ($\frac{1096}{2} = 548$).
+
+YAy PEG, with its scanner-less parsing engine based on C++ templates, uses the most handwritten code. Just like for YAwn we added
+
+\begin{itemize}
+  \item tree walking code ($128$ lines of code), and
+  \item a listener ($122$ lines of code)
+\end{itemize}
+
+for the plugin. The other lines of code take care of parsing ($822$ code lines) and the communication between the plugin and Elektra ($115$ code lines). The amount of parsing code might look pretty large, if we compare it to the grammar code of the other plugins. However, we have to consider that
+
+\begin{itemize}
+  \item YAwn’s parsing code support a subset of YAML that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
+  \item that the parsing code also takes care of the work usually done by a lexer
+\end{itemize}
+
+. If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) lines of code for the lexer.
+
+Handwritten code requires manual work, and is therefore the most interesting criteria when we compare the code size of the plugins. However, the difference between the amount of generated code between the ANTLR based Yan LR plugin ($1108$ code lines), and the Bison based YAMBi plugin ($2046$ code lines) is also interesting. One reason for the big difference might be that ANTLR also requires a runtime library, while Bison generates all code needed for the parser. Both of these approaches have advantages and disadvantages. While Bisons approach means no additional dependencies, ANTLR’s approach provides space advantages. If multiple programs on the same machine use an ANTLR based parser, they can use the same library, which only has to be stored in memory and on disk once.
 
 \section{Error Reporting}
 \label{sec:error_reporting}
