@@ -609,7 +609,7 @@ While the asymptotic memory usage of all plugins grows linearly, the factor betw
 {\sh{count-lines}}%
 }}
 
-We created a Shell script called \FileCountLines{} that counts the code lines of the YAML plugins using the tool \href{https://github.com/AlDanial/cloc}{cloc}. Since cloc \href{http://cloc.sourceforge.net/#Languages}{does not support Bison grammar files}, we wrote a small function that removes comments and empty lines from a Bison grammar, and afterwards counts the remaining lines using the Unix tool \sh{wc}.
+We created a Shell script called \FileCountLines{} that counts the code lines of the YAML plugins using the tool \href{https://github.com/AlDanial/cloc}{cloc}. Since cloc \href{http://cloc.sourceforge.net/#Languages}{does not support Bison grammar files}, we wrote code that removes comments and empty lines from a Bison grammar, and afterwards counts the remaining lines using the Unix tool \sh{wc}.
 
 \subsection{Results}
 
