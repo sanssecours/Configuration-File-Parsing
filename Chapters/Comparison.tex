@@ -697,6 +697,12 @@ for the plugin. The other handwritten code take care of parsing ($822$ code line
 
 Handwritten code requires manual work, and is therefore the most interesting criteria when we compare the code size of the plugins. However, the difference between the amount of generated code between the ANTLR based Yan LR plugin ($1108$ code lines), and the Bison based YAMBi plugin ($2046$ code lines) is also interesting. One reason for the big difference might be that ANTLR also requires a runtime library, while Bison generates all code needed for the parser. Both of these approaches have advantages and disadvantages. While Bisons’ approach means no additional dependencies, ANTLR’s runtime library provides space advantages. If multiple programs on the same machine use an ANTLR based parser, they can use the same compiled code, which only has to be stored in memory and on disk once.
 
+\subsection{Conclusion}
+
+If we take the amount of handwritten plugin code as main criteria for the code size comparison, then YAML CPP takes the lead, requiring the least amount of code. That is not surprising, considering that the parsing code of the plugin is part of the external yaml-cpp library, and not part of the plugin code itself.
+
+The parser based plugin with the least amount of code is the ANTLR based Yan LR. The main reason for this is, that ANTLR already provides much functionality that we had to create ourselves for the other plugins. While writing this support code is usually not that hard, it is certainly an advantage that ANTLR already provides support for common tasks, such as tree walking.
+
 \section{Error Reporting}
 \label{sec:error_reporting}
 
@@ -1247,7 +1253,7 @@ According to the interpretation we concluded that all of the plugins with error 
 
 .
 
-\subsubsection{Conclusion}
+\subsection{Conclusion}
 
 While the parsing libraries do not produce particularly great error messages, at least the ANTLR (Yan LR) and Bison (YAMBi) plugin, provide error messages that are comparable in quality to the ones of the handwritten parsing engine (YAML CPP).
 
