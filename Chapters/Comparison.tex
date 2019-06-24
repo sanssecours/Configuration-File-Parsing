@@ -649,6 +649,14 @@ Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}. As 
 
 The line counts of Figure~\ref{fig:line_count} show that YAML CPP requires the least amount of code. That results is not that surprising, considering that the plugin uses yaml-cpp, a library that already represents the YAML file using high-level abstract data structures. We can convert these data structures into Elektra’s \cpp{KeySet} structure relatively easily, keeping the code size of the plugin small.
 
+For a fair size comparison we also have to take the library code itself into consideration. We use the command
+
+\begin{shellcode}
+  cloc --include-lang='C++,C/C++ Header' src include
+\end{shellcode}
+
+to determine the code size of version 0.6.2 of the yaml-cpp library. The command reported $8413$ lines of code, showing us that parsing the full YAML standard requires a relatively large amount of code.
+
 For the plugins directly based on a parser engine or library, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The line count of YAMBi and YAwn are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
 
 For YAMBi we wrote two classes,
