@@ -613,7 +613,7 @@ We created a Shell script called \FileCountLines{} that counts the code lines of
 
 \subsection{Results}
 
-Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}. As you can see we did not have to write a grammar for the library based YAML CPP plugin. For the other plugins, we either created a grammar (Yan LR, YAMBi, YAwn), or specified the grammar as handwritten code (Yay PEG). Only the \gls{ANTLR} (Yan LR) and Bison (YAMBi) based plugins use generated code. YAwn on the other hand, which is based on \gls{YAEP}, uses the grammar directly.
+Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}. As you can see, we did not have to write a grammar for the library based YAML CPP plugin. For the other plugins, we either created a grammar (Yan LR, YAMBi, YAwn), or specified the grammar as handwritten code (Yay PEG). Only the \gls{ANTLR} (Yan LR) and Bison (YAMBi) based plugins use generated code. YAwn, which is based on \gls{YAEP}, uses the grammar directly.
 
 \begin{figure}[H]
   \begin{bchart}[max=2100, width=0.75\textwidth, unit={~Lines of Code}]
@@ -649,7 +649,7 @@ Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}. As 
 
 The line counts of Figure~\ref{fig:line_count} show that YAML CPP requires the least amount of code. That results is not that surprising, considering that the plugin uses yaml-cpp, a library that already represents the YAML file using high-level abstract data structures. We can convert these data structures into Elektra’s \cpp{KeySet} structure relatively easily, keeping the code size of the plugin small.
 
-For the plugins directly based on a parser, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The line count numbers for YAMBi and YAwn are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
+For the plugins directly based on a parser engine or library, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The line count of YAMBi and YAwn are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
 
 For YAMBi we wrote two classes,
 
