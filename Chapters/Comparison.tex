@@ -657,7 +657,7 @@ For a fair size comparison we also have to take the library code itself into con
 
 to determine the code size of version 0.6.2 of the yaml-cpp library. The command reported $8413$ lines of code, showing us that parsing the full YAML standard requires a relatively large amount of code.
 
-For the plugins directly based on a parser engine or library, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The line count of YAMBi and YAwn are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
+If we look at the plugins directly based on a parser engine or library, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The higher line counts of YAMBi and YAwn compared to Yan LR are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
 
 For YAMBi we wrote two classes,
 
@@ -690,10 +690,10 @@ for the plugin. The other handwritten code take care of parsing ($822$ code line
 
 \begin{itemize}
   \item YAwn’s parsing code support a subset of YAML that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
-  \item that the parsing code also takes care of the work usually done by a lexer
+  \item the parsing code also takes care of the work usually done by a lexer
 \end{itemize}
 
-. If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) lines of code for the lexer.
+. If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) code lines for the lexer.
 
 Handwritten code requires manual work, and is therefore the most interesting criteria when we compare the code size of the plugins. However, the difference between the amount of generated code between the ANTLR based Yan LR plugin ($1108$ code lines), and the Bison based YAMBi plugin ($2046$ code lines) is also interesting. One reason for the big difference might be that ANTLR also requires a runtime library, while Bison generates all code needed for the parser. Both of these approaches have advantages and disadvantages. While Bisons’ approach means no additional dependencies, ANTLR’s runtime library provides space advantages. If multiple programs on the same machine use an ANTLR based parser, they can use the same compiled code, which only has to be stored in memory and on disk once.
 
