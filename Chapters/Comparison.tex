@@ -190,19 +190,19 @@ To make sure we repeat the benchmark every time \href{https://github.com/sharkdp
 \newcommand{\URLKeyFramesJSON}{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}
 
 \newcommand{\FileKeyFrames}{{%
-\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/Input/keyframes.yaml}%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/keyframes.yaml}%
 {\code{keyframes.yaml}}%
 }}
 \newcommand{\FileCombined}{{%
-\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/Input/combined.yaml}%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/combined.yaml}%
 {\code{combined.yaml}}%
 }}
 \newcommand{\FileGenerated}{{%
-\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/Input/generated.yaml}%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated.yaml}%
 {\code{generated.yaml}}%
 }}
 \newcommand{\FileGeneratedHundredThousand}{{%
-\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/Input/generated_100000.yaml}%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated_100000.yaml}%
 {\code{generated\_100000.yaml}}%
 }}
 \newcommand{\FileGenerateYAML}{{%
@@ -210,14 +210,14 @@ To make sure we repeat the benchmark every time \href{https://github.com/sharkdp
 {\sh{generate-yaml}}%
 }}
 \newcommand{\FileCutInput}{{%
-\href{https://github.com/ElektraInitiative/rawdata/tree/master/YAML/Scripts/cut_input}%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/cut_input}%
 {\sh{cut_input}}%
 }}
 
 As the first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other YAML plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
 
 \begin{leftbar}
-  \url{https://github.com/ElektraInitiative/rawdata/tree/master/YAML}
+  \url{http://rawdata.libelektra.org/tree/master/YAML}
 \end{leftbar}
 
 . For another input file called \FileCombined{} we copy and pasted parts of test data and various other YAML files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of YAML data that covers most of the code paths of the YAML plugins.
