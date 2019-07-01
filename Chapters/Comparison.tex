@@ -712,6 +712,13 @@ One option to create an extensible system is to base it on components. We can re
   \closeness*
 
 .
+
+\subsection{Plugin Updates}
+
+In the next section we look at some bugs we fixed in the parser based plugins (Yan LR, YAMBi, YAwn, YAy PEG) and the effort it took to fix these bugs. We do not include YAML CPP in this analysis, since all of the bugs we found were not applicable to this plugin. This might be the result of the different approach this plugin uses to translate the YAML data. YAML CPP converts an intermediate node based structure offered by the yaml-cpp library and does not use a listener based interface like the other YAML plugins.
+
+As measurement for the bug fix efforts we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the actual code changes needed to fix a bug, excluding additional test code and documentation updates.
+
 \section{Error Reporting}
 \label{sec:error_reporting}
 
