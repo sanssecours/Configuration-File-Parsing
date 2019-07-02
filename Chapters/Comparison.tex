@@ -717,6 +717,38 @@ One option to create an extensible system is to base it on components. We can re
 
 In the next section we look at the effort it took to, add certain features to, and fix certain bugs in, the YAML plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature, excluding additional test code and documentation updates.
 
+\subsubsection{Support for Elektra’s Boolean Data Type}
+
+Elektra’s \cc{Key} data structure usually saves data as untyped character string. We can also store type information for a certain key by adding a \code{type} meta key. If we do that Elektra ensures that applications store and retrieve the right kind of data for that specific key. Elektra’s C++ API offers a direct way to store and retrieve a typed value via templated functions. We used these functions to improve the support for boolean data types in the YAML plugins.
+
+YAML’s JSON schema represents boolean data as scalar with the canonical value \yaml{false} or \yaml{true}~\cite{ben2009yaml}. More advanced schemas, such as the core schema offer additional aliases for true and false values. For the YAML plugins in this thesis we only added support for the JSON schema though. For this to work we had to translate the YAML values \yaml{false} or \yaml{true} to \href{https://master.libelektra.org/doc/decisions/bool.md}{Elektra’s boolean values} \code{0} and \code{1}.
+
+Just like Elektra’s C++ API, yaml-cpp, the library used by the YAML CPP plugin, also offers templated functions to retrieve and set boolean values. One problem of yaml-cpp’s API is that there seems to be no way to check for the type of a YAML node, without the possibility of throwing an exception~\cite{beder2013type}. This can be problematic for the runtime efficiency, since YAML CPP might trigger multiple exceptions before it converts a YAML node to a correctly typed Elektra key. To improve the runtime performance of YAML CPP we checked the textual value of a YAML node before we converted it. The implementation of this more \href{https://github.com/ElektraInitiative/libelektra/commit/d4e62eebd006ea4b066c75e6e885ee5a4b6e26cf#diff-4bdb640234f370e3a9db751e1f7d769b}{complicated approach} took 15 additional code lines (\textcolor{Green}{$8$ additions + $12$ additions} \textcolor{Red}{- $1$ deletion - $4$ deletions}), while the implementation of the \href{https://github.com/ElektraInitiative/libelektra/commit/1e9a07baad8a140c6eda654053db450c0901f5d0#diff-4bdb640234f370e3a9db751e1f7d769b}{direct approach} – that might cause more exceptions for data without many boolean values – took only $7$ additional code lines (\textcolor{Green}{$8$ additions} \textcolor{Red}{- $1$ deletion}).
+
+Adding support for boolean values took $8$ additional code lines for \href{https://issues.libelektra.org/2653}{Yan LR} (\textcolor{Green}{$9$ additions} \textcolor{Red}{- $1$ deletion}), and $7$ additions lines (\textcolor{Green}{$8$ additions} \textcolor{Red}{- $1$ deletion}) for the other plugins (\href{https://issues.libelektra.org/2652}{YAMBI}, \href{https://issues.libelektra.org/2651}{YAwn}, \href{https://issues.libelektra.org/2654}{YAy PEG}). The similar line counts are a direct result of all of the plugins using a listener interface to convert parsed YAML data. To add boolean support we only had to change code in one of the functions of the listeners.
+
+\begin{figure}[H]
+  \begin{bchart}[max=20, width=0.8\textwidth, unit={~Lines of Code}]
+    \bcbar[text=7, value=Direct Approach, color=orange]{7}
+    \bcbar[text=15, value=Complex Approach, color=orange]{15}
+    \bcbar[text=8, value=, color=DarkYellow]{8}
+    \bcbar[text=7, value=, color=Turquoise3]{7}
+    \bcbar[text=7, value=, color=Aqua]{7}
+    \bcbar[text=7, value=, color=DarkOrchid]{7}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{DarkYellow} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{Aqua} YAwn ~~
+    \tikzcircle{DarkOrchid} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the additional lines needed for adding better boolean support to the YAML plugins.}
+  \label{fig:boolean_line_count}
+\end{figure}
+
 \section{Error Reporting}
 \label{sec:error_reporting}
 
