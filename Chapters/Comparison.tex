@@ -749,6 +749,44 @@ Adding support for boolean values took $10$ modified code lines for \href{https:
   \label{fig:boolean_line_count}
 \end{figure}
 
+\subsubsection{Conversion of Empty Values}
+
+Depending on the context, empty content (empty nodes) in a YAML stream might represent a null value. Elektra should store these null values in a binary key with a zero length value. This was not the case in the first version of the parser based YAML plugins (Yan LR, YAMBi, YAwn, YAy PEG). Instead the plugins would incorrectly convert these null values into empty strings.
+
+Another similar problem was that the lexer based plugins would not convert empty content null values right before the end of a file (\code{EOF}\glsadd{EOF}). The result of this bug would be that the lexer would not terminate for a stream such as the one shown in Figure~\ref{fig:Figures_StreamNullEOF}.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.75\textwidth]{StreamNullEOF}
+  \caption{The YAML data on the left represents a map that contains one key-value pair with the name \code{key} that stores a null value. The \cc{Key} structure on the right shows the converted YAML data, if we store it directly in the \gls{NS} \code{system}.}
+  \label{fig:Figures_StreamNullEOF}
+\end{figure}
+
+Figure~\ref{fig:null_line_count} shows the amount of changed lines for the \href{https://issues.libelektra.org/2662}{Yan LR}, \href{https://issues.libelektra.org/2663}{YAMBi}, \href{https://issues.libelektra.org/2664}{YAwn}, and \href{https://issues.libelektra.org/2665}{YAy PEG} plugin. The code changes for all the lexer based plugins (Yan LR, YAMBi, YAwn) are almost identical, since we had to fix the problems in the lexer and listener code, which is quite similar for all of those plugins. For YAy PEG we only had to fix the support for empty nodes, in the middle of a YAML stream, since YAy PEGs parsing code already handled empty nodes at the end of a file correctly. This is probably a direct result of using grammar code that is quite similar to the one from the \href{http://yaml.org/spec/1.2/spec}{YAML specification}.
+
+\begin{figure}[H]
+  \begin{bchart}[max=10, width=0.8\textwidth, unit={~Lines of Code}]
+    \bcbar[text=1, value=Empty Null, color=DarkYellow]{1}
+    \bcbar[text=5, value=Empty Null Before EOF, color=DarkYellow]{5}
+    \bcbar[text=1, value=Empty Null, color=Turquoise3]{1}
+    \bcbar[text=4, value=Empty Null Before EOF, color=Turquoise3]{4}
+    \bcbar[text=1, value=Empty Null, color=Aqua]{1}
+    \bcbar[text=4, value=Empty Null Before EOF, color=Aqua]{4}
+    \bcbar[text=6, value=Empty Null, color=DarkOrchid]{6}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{DarkYellow} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{Aqua} YAwn ~~
+    \tikzcircle{DarkOrchid} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the additional lines needed for fixing the null value support of the YAML plugins.}
+  \label{fig:null_line_count}
+\end{figure}
+
 \section{Error Reporting}
 \label{sec:error_reporting}
 
