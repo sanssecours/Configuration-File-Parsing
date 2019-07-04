@@ -789,6 +789,86 @@ For YAy PEG we only had to fix the support for empty nodes in the middle of a YA
   \label{fig:null_line_count}
 \end{figure}
 
+\subsubsection{Conversion of Empty Documents}
+
+According to the YAML specification an empty file corresponds to a null value. We did not consider this in the initial versions of the YAML plugins, which meant the empty documents shown in Figure~\ref{fig:null_yaml} were translated incorrectly. Figure~\ref{fig:empty_document_count} shows the amount of code lines we modified to fix this problem for the \href{https://issues.libelektra.org/2711}{Yan LR}, \href{https://issues.libelektra.org/2712}{YAMBi}, \href{https://issues.libelektra.org/2713}{YAwn} and \href{https://issues.libelektra.org/2714}{YAy PEG} plugin.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[c]{0.48\textwidth}
+    \begin{code-boxed}
+      \vspace{10pt}
+    \end{code-boxed}
+  \end{minipage}
+  \begin{minipage}[t]{0.02\textwidth}~\end{minipage}
+  \begin{minipage}[c]{0.48\textwidth}
+    \begin{yamlcode}
+      # Empty document
+    \end{yamlcode}
+  \end{minipage}
+  \caption{The examples above show two options on how to store “nothing” (\code{null}) using YAML.}
+  \label{fig:null_yaml}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{bchart}[max=20, width=0.8\textwidth, unit={~Lines of Code}]
+    \bcbar[text=10, value=, color=DarkYellow]{10}
+    \bcbar[text=17, value=, color=Turquoise3]{17}
+    \bcbar[text=15, value=, color=Aqua]{15}
+    \bcbar[text=10, value=, color=DarkOrchid]{10}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{DarkYellow} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{Aqua} YAwn ~~
+    \tikzcircle{DarkOrchid} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the amount of code lines we modified to fix the conversion of empty documents.}
+  \label{fig:empty_document_count}
+\end{figure}
+
+When we implemented the fixes for the empty document conversion we noticed that we added nearly identical code to the listener (Yan LR, YAwn, YAy PEG) respectively driver (YAMBi) of all the plugins. These modifications took \textcolor{Green}{$6$ additions} for Yan LR and \textcolor{Green}{$5$ additions} for the other plugins. We should mention here that we could also have avoided two additional lines for the Yan LR plugin, which consisted of an \cpp{using} statement and the inclusion of an optional header file.
+
+The other code line differences were a result of grammar updates to
+
+\begin{itemize}
+  \item Yan LR (\textcolor{Green}{$3$ additions}, \textcolor{Red}{$1$ deletion}),
+  \item YAMBi (\textcolor{Green}{$7$ additions}, \textcolor{Red}{$5$ deletion}), and
+  \item YAwn (\textcolor{Green}{$5$ additions}, \textcolor{Red}{$1$ deletion})
+\end{itemize}
+
+and updates to tree walking code of:
+
+\begin{itemize}
+  \item YAwn (\textcolor{Green}{$4$ additions}), and
+  \item YAy PEG (\textcolor{Green}{$5$ additions})
+\end{itemize}
+
+. The relatively high number of changes to the grammar of YAMBi is deceiving, since we also moved a 4 line grammar block (\textcolor{Green}{$4$ additions}, \textcolor{Red}{$4$ deletion}) in the bug fix update for the plugin. Figure~\ref{fig:empty_document_minimum_count} takes this code block movement and the optional line changes for Yan LR into account to give a better overview of the code changes we needed to implement the bug fix.
+
+\begin{figure}[H]
+  \begin{bchart}[max=20, width=0.8\textwidth, unit={~Lines of Code}]
+    \bcbar[text=8, value=, color=DarkYellow]{8}
+    \bcbar[text=9, value=, color=Turquoise3]{9}
+    \bcbar[text=15, value=, color=Aqua]{15}
+    \bcbar[text=10, value=, color=DarkOrchid]{10}
+  \end{bchart}
+  \begin{center}
+  \vspace{-0.5cm}
+    \tikzcircle{orange} YAML CPP ~~
+    \tikzcircle{DarkYellow} Yan LR ~~
+    \tikzcircle{Turquoise3} YAMBi ~~
+    \tikzcircle{Aqua} YAwn ~~
+    \tikzcircle{DarkOrchid} YAy PEG
+  \vspace{-0.5cm}
+  \end{center}
+  \caption{This bar chart shows the “minimal” code line modifications we needed to fix the conversion of empty documents.}
+  \label{fig:empty_document_minimum_count}
+\end{figure}
+
 \section{Error Reporting}
 \label{sec:error_reporting}
 
