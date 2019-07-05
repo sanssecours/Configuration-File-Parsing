@@ -869,6 +869,37 @@ and updates to tree walking code of:
   \label{fig:empty_document_minimum_count}
 \end{figure}
 
+\subsection{Component Based Grammars and Extensibility}
+
+The \href{http://yaml.org/spec/1.2/spec}{YAML specification} includes a detailed grammar description of the language in a parameterized \gls{BNF} like syntax. The grammar rules of the specification are very reminiscent of parser combinator functions~\cite{hutton1996monadic}. This is not that surprising considering that \href{https://hackage.haskell.org/package/YamlReference}{YAML’s reference parser} is also based on parser combinators. A large part of the reference parser actually uses slightly modified versions of all of the rules of the YAML spec. Since “the order of alternatives in the grammar is significant”~\cite{ben2009yaml} (ordered choice) and some of the parsing rules also uses positive and negative lookahead we can also categorize YAML’s reference grammar as a extended version of a \gls{PEG}.
+
+We already mentioned in the section “\nameref{sec:peg_parser}” that the grammar description of the YAy PEG plugin resembles the YAML specification grammar quite closely. It is time to analyze, if this close resemblance provides advantages over the other YAML plugins, which use a description that is quite different to the one of the YAML specification.
+
+Table~\ref{table:extensibility} lists some of the advantages and disadvantages we found while we implemented and extended the YAML plugins.
+
+\begin{table}[H]
+  \caption{The table below lists some advantage and disadvantages of PEG based (YAy PEG) and lexer based (Yan LR, YAMBi, YAwn) plugins regarding extensibility.}
+  \label{table:extensibility}
+  \centering
+  \begin{tabular}{ll}
+\toprule
+                   \tikzcircle{DarkOrchid} YAy PEG & \tikzcircle{DarkYellow} \tikzcircle{Turquoise3} \tikzcircle{Aqua} Lexer Based Plugins\\
+\midrule
+\textcolor{Green}{+} Extension via “Copy \& Paste” &                                 \textcolor{Green}{+}                   Simple Grammar\\
+            \textcolor{Red}{–} Complicated Grammar &                                                 \textcolor{Red}{–} Hand Written Lexer\\
+                      \textcolor{Red}{–} Debugging &                                                                                      \\
+\bottomrule
+  \end{tabular}
+\end{table}
+
+Using the PEG library certainly offers advantages considering the extensibility of the grammar, since we can more or less copy the grammar rules from the specification or reference parser and modify them slightly for \gls{PEGTL}. Fortunately the reference parser already contains a relatively large test suite, which means the chance of errors in the reference grammar is quite low. This is helpful, since the specification grammar consists of 211 rules, which can be quite complicated. This is also one of the disadvantages of using \gls{PEGTL}, since the grammar of YAy PEG is more complicated than the one of the lexer based plugins. The complexity is a result of using a single pass to parse YAML data instead of using a separate lexer and parser phase. The single parsing phase also makes debugging harder since we can not debug the lexer and parsing code separately.
+
+Keeping the information above in mind we can now answer \Cref{que:closeness}:
+
+  \closeness*
+
+. The parser of YAy PEG certainly stays closest to the grammar definition of the YAML specification. This closeness is helpful, if we look at the extension of the grammar. However, since YAy PEG’s grammar code also handles low level details of the parsing process we have to consider these details later in the parsing process, which reduces the extensibility of the parsing support code compared to the one of the lexer based plugins.
+
 \section{Error Reporting}
 \label{sec:error_reporting}
 
