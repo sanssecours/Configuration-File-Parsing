@@ -715,7 +715,7 @@ One option to create an extensible system is to base it on components. We can re
 
 \subsection{Plugin Updates}
 
-In the next section we look at the effort it took to, add certain features to, and fix certain bugs in, the YAML plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature, excluding additional test code and documentation updates.
+In the next section we look at the effort it took to, add certain features to, and fix certain bugs in, the YAML plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
 
 \subsubsection{Support for Elektra’s Boolean Data Type}
 
@@ -764,7 +764,7 @@ Another similar problem was that the lexer based plugins would not convert empty
 
 Figure~\ref{fig:null_line_count} shows the amount of changed lines for the \href{https://issues.libelektra.org/2662}{Yan LR}, \href{https://issues.libelektra.org/2663}{YAMBi}, \href{https://issues.libelektra.org/2664}{YAwn}, and \href{https://issues.libelektra.org/2665}{YAy PEG} plugin. The code changes for all the lexer based plugins (Yan LR, YAMBi, YAwn) are almost identical, since we had to fix the problems in the lexer and listener code, which is quite similar for all of those plugins.
 
-For YAy PEG we only had to fix the support for empty nodes in the middle of a YAML stream, since YAy PEG’s parsing code already handled empty nodes at the end of a file correctly. This is probably a direct result of using grammar code that is quite similar to the one from the \href{http://yaml.org/spec/1.2/spec}{YAML specification}. The notable difference between the amount of code we added for the empty node fix (\textcolor{Green}{$5$ additions}, \textcolor{Red}{$1$ deletion}) compared to the one of the lexer based plugins (\textcolor{Green}{$1$ addition}) is also a result of YAy PEG’s grammar. YAy PEG uses the same code path to add empty and non-empty mapping values. The lexer based plugins on the other hand check for a empty value inside the listener code for a key-value pair. We could also use that approach in the YAy PEG plugin, but that would possibly require substantial code changes to the tree walking code.
+For YAy PEG we only had to fix the support for empty nodes in the middle of a YAML stream, since YAy PEG’s parsing code already handled empty nodes at the end of a file correctly. This is probably a direct result of using grammar code that is quite similar to the one from the \href{http://yaml.org/spec/1.2/spec}{YAML specification}. The notable difference between the amount of code we added for the empty node fix (\textcolor{Green}{$5$ additions}, \textcolor{Red}{$1$ deletion}) compared to the one of the lexer based plugins (\textcolor{Green}{$1$ addition}) is also a result of YAy PEG’s grammar. YAy PEG uses the same code path to add empty and non-empty mapping values. The lexer based plugins on the other hand check for an empty value inside the listener code for a key-value pair. We could also use this approach in the YAy PEG plugin, but that would possibly require substantial code changes to the tree walking code.
 
 \begin{figure}[H]
   \begin{bchart}[max=10, width=0.8\textwidth, unit={~Lines of Code}]
@@ -830,7 +830,7 @@ According to the YAML specification an empty file corresponds to a null value. W
   \label{fig:empty_document_count}
 \end{figure}
 
-When we implemented the fixes for the empty document conversion we noticed that we added nearly identical code to the listener (Yan LR, YAwn, YAy PEG) respectively driver (YAMBi) of all the plugins. These modifications took \textcolor{Green}{$6$ additions} for Yan LR and \textcolor{Green}{$5$ additions} for the other plugins. We should mention here that we could also have avoided two additional lines for the Yan LR plugin, which consisted of an \cpp{using} statement and the inclusion of an optional header file.
+When we implemented the fixes for the empty document conversion we noticed that we added nearly identical code to the listener (Yan LR, YAwn, YAy PEG) respectively driver (YAMBi) of the plugins. These modifications took \textcolor{Green}{$6$ additions} for Yan LR and \textcolor{Green}{$5$ additions} for the other plugins. We should mention here that we could also have avoided two additional lines for the Yan LR plugin, which consisted of an \cpp{using} statement and the inclusion of an optional header file.
 
 The other code line differences were a result of grammar updates to
 
@@ -871,9 +871,9 @@ and updates to tree walking code of:
 
 \subsection{Component Based Grammars and Extensibility}
 
-The \href{http://yaml.org/spec/1.2/spec}{YAML specification} includes a detailed grammar description of the language in a parameterized \gls{BNF} like syntax. The grammar rules of the specification are very reminiscent of parser combinator functions~\cite{hutton1996monadic}. This is not that surprising considering that \href{https://hackage.haskell.org/package/YamlReference}{YAML’s reference parser} is also based on parser combinators. A large part of the reference parser actually uses slightly modified versions of all of the rules of the YAML spec. Since “the order of alternatives in the grammar is significant”~\cite{ben2009yaml} (ordered choice) and some of the parsing rules also uses positive and negative lookahead we can also categorize YAML’s reference grammar as a extended version of a \gls{PEG}.
+The \href{http://yaml.org/spec/1.2/spec}{YAML specification} includes a detailed grammar description of the language in a parameterized \gls{BNF} like syntax. The grammar rules of the specification are very reminiscent of parser combinator functions~\cite{hutton1996monadic}. This is not that surprising considering that \href{https://hackage.haskell.org/package/YamlReference}{YAML’s reference parser} is also based on parser combinators. A large part of the reference parser actually uses slightly modified versions of all of the rules of the YAML spec. Since “the order of alternatives in the grammar is significant”~\cite{ben2009yaml} (ordered choice) and some of the parsing rules also uses positive and negative lookahead we can also categorize YAML’s reference grammar as an extended version of a \gls{PEG}.
 
-We already mentioned in the section “\nameref{sec:peg_parser}” that the grammar description of the YAy PEG plugin resembles the YAML specification grammar quite closely. It is time to analyze, if this close resemblance provides advantages over the other YAML plugins, which use a description that is quite different to the one of the YAML specification.
+In the section “\nameref{sec:peg_parser}” we already mentioned that the grammar description of the YAy PEG plugin resembles the YAML specification grammar quite closely. It is time to analyze, if this close resemblance provides advantages over the other YAML plugins, which use a description that is quite different to the one of the YAML specification.
 
 Table~\ref{table:extensibility} lists some of the advantages and disadvantages we found while we implemented and extended the YAML plugins.
 
