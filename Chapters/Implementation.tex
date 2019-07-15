@@ -235,7 +235,7 @@ struct ns_plain_first : sor<seq<not_at<c_indicator>, ns_char>,
   \item \cc{seq<one<'?', ':', '-'>, at<ns_plain_safe>>}
 \end{enumerate}
 
-in order. It succeeds if one of the argument matches, or fails if all of them fail. The rule \cc{seq} on the other hand tries to match all it’s template arguments in sequence and either succeeds, if all of them succeed, or fails, if one of them fails. The rules \cc{at} and \cc{not_at} represents the PEG predicates \cc{&} and \cc{!}. The predicate rule \cc{at} (\cc{&}) succeeds, if the current input matches the given input and fails if it does not. The predicate rule \cc{not_at} behaves exactly opposite. Neither of these predicates consumes any input. The only remaining rule is \cc{one}, which tries to match any of the given characters, \cc{'?'}, \cc{':'} or \cc{'-'} in our example.
+in order. It succeeds if one of the argument matches, or fails if all of them fail. The rule \cc{seq} on the other hand tries to match all its template arguments in sequence and either succeeds, if all of them succeed, or fails, if one of them fails. The rules \cc{at} and \cc{not_at} represents the PEG predicates \cc{&} and \cc{!}. The predicate rule \cc{at} (\cc{&}) succeeds, if the current input matches the given input and fails if it does not. The predicate rule \cc{not_at} behaves exactly opposite. Neither of these predicates consumes any input. The only remaining rule is \cc{one}, which tries to match any of the given characters, \cc{'?'}, \cc{':'} or \cc{'-'} in our example.
 
 While translating the rule \cc{ns-plain-first(c)} was not that hard, other rules that contained nested contextual data such as:
 
