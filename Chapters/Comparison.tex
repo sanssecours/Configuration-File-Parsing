@@ -1123,7 +1123,7 @@ ANTLR uses an error listener class that provides a callback method that includes
   \item the default error message
 \end{itemize}
 
-for each detected error. As we already saw in Table~\ref{tab:error_messages_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message reported by ANTLR. Since ANTLR uses methods such as token deletion and insertion to keep parsing a file, even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
+for each detected error. As we already saw in Table~\ref{tab:error_messages_improved_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message reported by ANTLR. Since ANTLR uses methods such as token deletion and insertion to keep parsing a file, even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
 
 \begin{listing}
   \begin{minted}[autogobble, linenos]{yaml}
@@ -1393,7 +1393,7 @@ Table~\ref{tab:error_messages_final_list_element_outside} shows the final error 
   \item The error message of YAMBi reports an additional option – besides deleting the input – to fix the error: adding a key (in the line between \yaml{- element 1} and \yaml{- element 2}).
 \end{itemize}
 
-The following list shows a ranking of the plugins according to the interpretation of the error messages above.
+The list below shows a ranking of the plugins according to the interpretation of the error messages above.
 
 \begin{enumerate}
   \item YAMBi
@@ -1515,7 +1515,7 @@ Table~\ref{tab:error_messages_final_multiple_errors} shows the error messages of
 
   \item \emph{YAy PEG} shows the correct line number for the first error, but not the the correct column number. The plugin also only provides a very generic error message.
 
-  \item All of the plugins that use error recovery (Yan LR, YAMBi, YAwn) print a spurious error messages at line 13.
+  \item All of the plugins that use error recovery (Yan LR, YAMBi, YAwn) print a spurious error messages about an error at line 13.
 
   \item \emph{Yan LR} shows two error messages for the first syntax error, and one for the second syntax error. Error messages one and three describe the problematic part of the YAML data reasonably well.
 
