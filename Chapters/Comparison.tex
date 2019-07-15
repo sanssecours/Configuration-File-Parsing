@@ -788,11 +788,13 @@ In the second part of this section we will take a look at how the composability 
 
 \subsection{Plugin Updates}
 
-In the next section we look at the effort it took to, add certain features to, and fix certain bugs in, the YAML plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
+In the next subsection we look at the effort it took to, add certain features to, and fix certain bugs in, the YAML plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
 
 \subsubsection{Support for Elektra’s Boolean Data Type}
 
-Elektra’s \cc{Key} data structure usually saves data as untyped character string. We can also store type information for a certain key by adding a \code{type} meta key. If we do that Elektra ensures that applications store and retrieve the right kind of data for that specific key. Elektra’s C++ API offers a direct way to store and retrieve a typed value via templated functions. We used these functions to improve the support for boolean data types in the YAML plugins.
+\begin{sloppypar}
+Elektra’s \cc{Key} data structure usually saves data as untyped character string. We can also store type information for a certain key by adding a \code{type} meta key (see also Section “\nameref{sec:keyset}”). If we do that Elektra ensures that applications store and retrieve the right kind of data for that specific key. Elektra’s C++ API offers a direct way to store and retrieve a typed value via templated functions. We used these functions to improve the support for boolean data types in the YAML plugins.
+\end{sloppypar}
 
 YAML’s JSON schema represents boolean data as scalar with the canonical value \yaml{false} or \yaml{true}~\cite{ben2009yaml}. More advanced schemas, such as the core schema offer additional aliases for true and false values. For the YAML plugins in this thesis we only added support for the JSON schema though. For this to work we had to translate the YAML values \yaml{false} and \yaml{true} to \href{https://master.libelektra.org/doc/decisions/bool.md}{Elektra’s boolean values} \code{0} and \code{1}.
 
