@@ -19,11 +19,11 @@ In the evaluation phase of the work we looked at the criteria listed below.
   For the measurement of the code complexity we determined the cyclomatic complexity~\cite{mccabe1976complexity} of both the generated and handwritten code.
 
   \item[{\hyperref[sec:extensibility]{Ease of Extensibility and Composability}}]~\\[0.1cm]
-  Since there is no common way to measure either of these attributes we only looked into them from a more informal point of view. In this part of the evaluation we describe some of the features we found that hinder or enhance the extensibility and composability of the used parsing methods. At this stage we also answer~\Cref{que:closeness}:
+  We determined the amount of code line changes it took, to add certain features to, and implement bug fixes in, the YAML plugins. This method allows us to quantitatively measure the extension effort. In this part of the evaluation we also look at YAML’s specification grammar and compare it with the parsing code of our plugins. In the end we will answer~\Cref{que:closeness}:
 
   \closeness*
 
-  , and argue why certain parsing libraries allow us to stay closer to the definition of the configuration language.
+  .
 
   \item[{\hyperref[sec:error_reporting]{Error Reporting}}]~\\[0.1cm]
   For this subtask we created YAML input files, that contain certain errors. We then looked at what error information the parsing engines provide, and how well this information describes the given error.
