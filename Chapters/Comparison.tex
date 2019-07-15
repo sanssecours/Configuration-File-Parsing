@@ -141,21 +141,29 @@ we built Elektra using the following \href{https://cmake.org}{CMake} options:
 \label{sec:run_time_performance}
 
 \newcommand{\FilePluginGetSet}{{%
+\codebox{%
 \href{https://master.libelektra.org/benchmarks/plugingetset.c}%
-{\sh{benchmark_plugingetset}}%
+{\textcolor{black}{\texttt{benchmark\_plugingetset}}}}%
 }}
 \newcommand{\FileBenchmarkYAML}{{%
+\codebox{%
 \href{https://master.libelektra.org/scripts/benchmark-yaml.in}%
-{\sh{benchmark-yaml}}%
+{\textcolor{black}{\texttt{benchmark-yaml}}}}%
 }}
 \newcommand{\FileBenchmarkRuntime}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/benchmark-runtime}%
-{\sh{benchmark-runtime}}%
+{\textcolor{black}{\texttt{benchmark-runtime}}}}%
+}}
+\newcommand{\ToolHyperfine}{{%
+\codebox{%
+\href{https://github.com/sharkdp/hyperfine}%
+{\textcolor{black}{\texttt{hyperfine}}}}%
 }}
 
-To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} to call \FilePluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
+To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \ToolHyperfine{} to call \FilePluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
-For the measurement we use \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}}, sine this tool
+For the measurement we use \ToolHyperfine{}, sine this tool
 
 \begin{enumerate}
   \item automatically determines how often it should call \FilePluginGetSet{} for meaningful measurement results,
@@ -179,28 +187,34 @@ To make sure we repeat the benchmark every time \href{https://github.com/sharkdp
 \newcommand{\URLKeyFramesJSON}{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}
 
 \newcommand{\FileKeyFrames}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Input/keyframes.yaml}%
-{\code{keyframes.yaml}}%
+{\textcolor{black}{\texttt{keyframes.yaml}}}}%
 }}
 \newcommand{\FileCombined}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Input/combined.yaml}%
-{\code{combined.yaml}}%
+{\textcolor{black}{\texttt{combined.yaml}}}}%
 }}
 \newcommand{\FileGenerated}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated.yaml}%
-{\code{generated.yaml}}%
+{\textcolor{black}{\texttt{generated.yaml}}}}%
 }}
 \newcommand{\FileGeneratedHundredThousand}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated_100000.yaml}%
-{\code{generated\_100000.yaml}}%
+{\textcolor{black}{\texttt{generated\_100000.yaml}}}}%
 }}
 \newcommand{\FileGenerateYAML}{{%
+\codebox{%
 \href{https://master.libelektra.org/scripts/generate-yaml}%
-{\sh{generate-yaml}}%
+{\textcolor{black}{\texttt{generate-yaml}}}}%
 }}
 \newcommand{\FileCutInput}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/cut_input}%
-{\sh{cut_input}}%
+{\textcolor{black}{\texttt{cut\_input}}}}%
 }}
 
 As the first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other YAML plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
@@ -594,8 +608,9 @@ While the asymptotic memory usage of all plugins grows linearly, the factor betw
 \label{sec:code_size}
 
 \newcommand{\FileCountLines}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/count-lines}%
-{\sh{count-lines}}%
+{\textcolor{black}{\texttt{count-lines}}}}%
 }}
 
 We created a Shell script called \FileCountLines{} that counts the code lines of the YAML plugins using the tool \href{https://github.com/AlDanial/cloc}{cloc}. Since cloc \href{http://cloc.sourceforge.net/#Languages}{does not support Bison grammar files}, we wrote code that removes comments and empty lines from a Bison grammar, and afterwards counts the remaining lines using the Unix tool \sh{wc}.
@@ -696,8 +711,9 @@ The parser based plugin with the least amount of code is the ANTLR based Yan LR.
 \label{sec:code_complexity}
 
 \newcommand{\FileCheckComplexity}{{%
+\codebox{%
 \href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/measure-complexity}%
-{\sh{measure-complexity}}%
+{\textcolor{black}{\texttt{measure-complexity}}}}%
 }}
 
 For the code complexity analysis we measured the \gls{CC} of
