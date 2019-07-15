@@ -4,7 +4,7 @@
 
 \subsection{Recursive Descent Parser}
 
-The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{YAML plugin} developed in the course of this thesis used a handwritten recursive descent parser. As already described in “\nameref{sec:state_of_the_art}” this technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
+The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{YAML plugin} we developed used a handwritten recursive descent parser. As already described in “\nameref{sec:state_of_the_art}” this technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
 
 \begin{table}[H]
   \begin{center}
@@ -81,7 +81,7 @@ While Table~\ref{tab:recursive_descent_correspondence} suggest writing a recursi
 \begin{description}
   \item [Recognizer Only:] The pseudo-code only implements a recognizer for the language. At the end of the parsing process we only know, if the input is part of the language produced by the given grammar or not. Usually we want to \emph{build a data structure}, in our case a \cc{KeySet}, from the given input.
 
-  \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the creator or editor wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
+  \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the author of the YAML data wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
 
   \item [Left Recursion:] If we translate a left recursive rules such as \code{\color{color02} rule1 \color{color03} \textbf{=} \color{color02} rule1 \color{color03} / \color{color02} rule2} using the correspondences given in Table~\ref{tab:recursive_descent_correspondence}, then the resulting code would never terminate. This is the case, since \code{\color{color02} rule1} calls \code{{\color{color02} rule1}}, which then calls \code{\color{color02} rule1}, and so on an so forth (infinite recursion).
 \end{description}
@@ -139,7 +139,7 @@ Unfortunately LibYAML’s code uses C macros quite heavily and is therefore not 
 
 The source code of LibYAML showed us that we can take care of most of YAML’s  complexity in the lexer. For further information we looked at \href{https://github.com/llvm/llvm-project/blob/master/llvm/lib/Support/YAMLParser.cpp}{LLVM’s YAML parser} (written in C++) and \href{https://bitbucket.org/asomov/snakeyaml-engine}{SnakeYAML Engine} (written in Java). The lexer of both of these tools use the same basic ideas as LibYAML. However, the code of these libraries is easier to read than LibYAML’s, since LLVM’s YAML parser and SnakeYAML Engine are written in higher level programming languages.
 
-The most interesting part in the lexer of the libraries described above, is probably how they are able to add tokens for \glspl{simpleKey}. The list below describes how the algorithm works (in SnakeYAML Engine).
+The most interesting part in the lexer of the libraries described above, is probably how they are able to add tokens for \glspl{simpleKey}. The text below describes how the algorithm works (in SnakeYAML Engine).
 
 \begin{itemize}
 
@@ -152,7 +152,7 @@ The most interesting part in the lexer of the libraries described above, is prob
   \begin{enumerate}
     \item removes simple key candidates if the current lexer position is more than 1024 characters ahead of the start position of the key candidate, or if the key candidate does not start in the current line.
 
-    \item adds a key token for a candidate if it locates a key value symbol (\yaml{:}) for the key candidate.
+    \item adds a key token for a candidate, if it locates a key value symbol (\yaml{:}) for the key candidate.
   \end{enumerate}
 
 \end{itemize}
@@ -167,7 +167,7 @@ For the lexer of the plugin we used a slightly modified version of Yan LR’s le
 
 Apart from the parsing algorithm, another difference between Yan LR and YAMBi is the approach on how the plugin translates YAML data to a \cpp{KeySet}. For YAN LR we use a listener interface that operates on the parse tree created by ANTLR. Bison only offers parser actions. These actions contain code that will be called after the parser matches certain parts of the grammar.
 
-YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a YAML mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. To solve this problem we added an \href{https://git.libelektra.org/blob/0c47d024256d0824577209d95d69876722af6248/src/plugins/yambi/parser.ypp#L63-L66}{additional action} to the Bison grammar and moved the code that adds an empty key into a later phase of the parsing process.
+YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a YAML mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check, if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. To solve this problem we added an \href{https://git.libelektra.org/blob/0c47d024256d0824577209d95d69876722af6248/src/plugins/yambi/parser.ypp#L63-L66}{additional action} to the Bison grammar and moved the code that adds an empty key into a later phase of the parsing process.
 
 \subsection{Earley Parser}
 \label{sec:earley_parser}
