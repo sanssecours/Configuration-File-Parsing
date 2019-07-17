@@ -1542,3 +1542,71 @@ While the parsing libraries do not produce particularly great error messages, at
 One advantage of Yan LR, YAMBi, and YAwn is that their parsers offer error recovery. They are therefore able to report multiple errors in a file. This is something that YAML CPP is currently not able to do. ANTLR offers error recovery for free, while Bison and YAEP require us to add error tokens to the grammar. This can be problematic, since these error tokens can produce conflicts in the case of Bison, and ambiguous parsing results in the case of YAEP.
 
 The parsing plugin that showed the least useful error messages is YAy PEG. While the PEGTL offers basic error handling facilities that are able to provide good error messages for character level errors, producing good error messages for “high-level” errors would probably require a substantial amount of work.
+
+\section{Most Promising Plugin}
+
+Using the information we collected in this chapter it is time to determine the most promising YAML plugin. Let us start by saying that we think all of the parser based YAML plugins (Yan LR, YAMBi, YAwn, YAy PEG) could be extended to parse a more complete subset of YAML. However, some of them might be more suitable than others, to fit all the requirements we have for a more complete YAML plugin.
+
+\subsection{Requirements for an Extended YAML Plugin}
+\label{sec:requirements_extended_yaml_plugin}
+
+Issue \href{https://issues.libelektra.org/2330}{\#2330} of Elektra’s issue tracker specifies some of the desirable features for an extended YAML plugin. We list them below in their order of importance according to Elektra’s maintainer.
+
+\begin{enumerate}
+  \item \textbf{Round Trip:}
+  Assume a plugin
+  \begin{enumerate}
+    \item converts some YAML data to a \cpp{KeySet}, then
+    \item writes back the converted \cpp{KeySet} to a YAML file, and afterwards
+    \item reads the new YAML file again
+  \end{enumerate}
+  . In this scenario the \cpp{KeySet} read in step one and step three should be identical.
+
+  \item \textbf{Compatibility:} An extended YAML plugin should be able to read data in Elektra’s current default serialization format \code{dump}. For this task the plugin can invoke the plugin currently used to parse this serialization format.
+
+  \item \textbf{Auxiliary Data:} Additional file data such as comments and ordering of keys should be kept, when the plugin adds new data to a YAML file.
+
+  \item \textbf{Maintainability \& Modularity:} The code of the plugin should be readable and extendable. Specific tasks should be handle by specific parts of a plugin or other specialized plugins.
+
+  \item \textbf{Error Messages:} The plugin should provide good error messages for common mistakes.
+
+  \item \textbf{Documentation:} The YAML plugin and format (see Section “\nameref{sec:mapping_elektra_yaml}”) should be well documented.
+
+  \item \textbf{Line Information:} The plugin should store line information to provide this data to other plugins and users.
+\end{enumerate}
+
+\subsection{Elimination Process}
+
+To minimize the list of candidates for extension we first eliminate some of them according to the requirements listed in the previous section.
+
+\begin{description}[style=multiline, leftmargin=2cm, font=\bfseries]
+  \item[YAML CPP] The library used by the plugin (yaml-cpp) does currently not store comments (3. requirement) or line information (7. requirement). Adding this kind of information should be possible, but would probably require large modifications of yaml-cpp’s code base.
+
+  \item[YAy PEG] The error message information provided by the plugin is quite bad and does therefore not meet requirement 5.
+\end{description}
+
+This leaves us with three possible candidates.
+
+\begin{description}[style=multiline, leftmargin=2cm, font=\bfseries]
+  \item[Yan LR] Compared to YAMBi on Linux and YAwn the plugin performed worse in the runtime benchmark, and required more memory to parse our example data. On the other hand, ANTLR provides a lot of support code we had to write for the other plugins ourselves.
+
+  \item[YAMBi] The plugin performed very well in the runtime performance test on Linux and – compared to Yan LR – only required a relatively small amount of memory for our example data. The plugin does require more support code than Yan LR though. A problem considering the maintainability of the plugin (requirement 4) might be the LR parsing algorithm. If there are any problems like shift/reduce conflicts in the grammar, then a developer usually needs at least some information on how the LR parsing algorithm works to fix the problem.
+
+  \item[YAwn] While the plugin showed good runtime performance and the lowest memory usage, we found two disadvantages, compared to YAMBi and Yan LR.
+
+  \begin{enumerate}
+    \item YAEP is more or less the work of a single author: Vladimir N. Makarov. Recently another author, Alexander Klauer, fixed some of the problems of the project and modernized parts of the code base. However, compared to ANTLR and Bison, the community behind the parsing library is rather small.
+
+    \item YAEP requires more support code than YAMBi and Yan LR. While this support code is not that complicated, it would still something we need to maintain and extend for a more complete support of YAML and the requirements listed in “\nameref{sec:requirements_extended_yaml_plugin}”.
+  \end{enumerate}
+
+\end{description}
+
+With all the information above we decided that the best candidate for extension is Yan LR. We think ANTLR’s advantages, such as
+
+\begin{itemize}
+  \item providing the most complete set of support code of all of the tested libraries and generators, and
+  \item producing good error messages, without any changes to the grammar
+\end{itemize}
+
+make up for the worse runtime performance on Linux and the relatively large heap memory usage compared to Bison and YAEP. Since ANTRL’s C++ runtime is still relatively new we also think that the performance aspects can still be improved by ANTLR’s community.
