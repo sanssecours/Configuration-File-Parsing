@@ -212,7 +212,7 @@ Unlike ANTLR, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}
 
 . Using the three features above we were able to create a \gls{PEG} parser plugin called \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} that uses grammar rules that are similar to the ones described by the \href{http://yaml.org/spec/1.2/spec}{YAML specification}.
 
-The translation of some of the rules from the \glstext{YAML} specification to PEGTL rules was trivial. For example, the rule:
+The translation of some of the rules from the \glstext{YAML} specification to \gls{PEGTL} rules was trivial. For example, the rule:
 
 \begin{ccode}
 ns-plain-first(c) ::= ( ns-char - c-indicator )
@@ -244,7 +244,7 @@ l+block-sequence(n) ::= ( s-indent(n+m) c-l-block-seq-entry(n+m) )+
                         /* For some fixed auto-detected m > 0 */
 \end{ccode}
 
-proved more difficult to express in the PEGTL. To translate these kind of rules we added a custom state that contains a stack for the indentation (the values \cc{n} and \cc{n+m} above). In the above example a metarule puts the value \cc{n+m} on the stack before the parser tries to match \cc{s-indent(n+m)} and \cc{c-l-block-seq-entry(n+m)} multiple times. Afterwards the metarule removes the last value from the stack leaving the previous value \cc{n}. We called the general metarule that makes this possible \cc{with_updated_state}:
+proved more difficult to express in the \gls{PEGTL}. To translate these kind of rules we added a custom state that contains a stack for the indentation (the values \cc{n} and \cc{n+m} above). In the above example a metarule puts the value \cc{n+m} on the stack before the parser tries to match \cc{s-indent(n+m)} and \cc{c-l-block-seq-entry(n+m)} multiple times. Afterwards the metarule removes the last value from the stack leaving the previous value \cc{n}. We called the general metarule that makes this possible \cc{with_updated_state}:
 
 \begin{cppcode}
   template <typename UpdateStateRule,
@@ -278,7 +278,7 @@ As described in the previous section “\nameref{sec:peg_parser}” we already u
   \item does not provide built-in support for advanced features such as tree selection
 \end{itemize}
 
-. In the end we did not think the effort to create yet another parser was worth the time, since at least in theory PEGTL seemed to be the better choice.
+. In the end we did not think the effort to create yet another parser was worth the time, since at least in theory \gls{PEGTL} seemed to be the better choice.
 
 \subsection{Augeas Lens}
 
