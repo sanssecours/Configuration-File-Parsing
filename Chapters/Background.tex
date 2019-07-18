@@ -105,11 +105,11 @@ Since Elektra stores data in a hierarchical database, a key consists of parts â€
 . We can use a so-called \emph{cascading} key to select the most appropriate namespace. A cascading key does not start with a namespace but rather with a leading slash. Let us look at an example. We assume our database contains the keys:
 
 \begin{itemize}
-  \item \code{system/key}
+  \item \code{system/key}, and
   \item \code{user/key}
 \end{itemize}
 
-. If a non-superuser requests the key \code{user/key}, then Elektra will select \code{user/key}. If the database also contains a key \code{dir/key} for the current working directory, then Elektra will select this key instead.
+. If a non-superuser requests the cascading key \code{/key}, then Elektra will select \code{user/key}. If the database also contains a key \code{dir/key} for the current working directory, then Elektra will select this key instead.
 
 \subsection{\cc{KeySet}}
 \label{sec:keyset}
