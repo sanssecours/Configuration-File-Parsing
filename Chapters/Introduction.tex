@@ -82,16 +82,16 @@ The methodological approach for this thesis consists of the following steps:
 
   \item[Discussion] To determine a minimal usable subset of YAML we discussed common features required for a new Elektra storage plugin with some of the current developers as part of an presentation and subsequent discussion.
 
-  \item[Implementation] First we implemented parsing code for the minimal YAML subset. In this phase we also added other necessary code to Elektra. After that we chose one of the parsing methods to create a more complete \glstext{YAML} parser.
+  \item[Implementation] We wrote parsing code that handles our minimal YAML subset. In this phase we also added other necessary support code to Elektra.
 
   \item[Comparison] As noted in “\nameref{sec:aim_of_the_work}” we evaluated the different implementations of our minimal YAML subset parsers.
 
   \begin{description}
-    \item[Runtime Benchmark] For the speed comparison we use benchmarks to determine the speed of the different YAML plugins. In this part of the thesis, we will answer \Cref{que:speed}.
+    \item[Runtime Benchmark] For the speed comparison we use benchmarks to determine the speed of the different parsing code. In this part of the thesis, we answer \Cref{que:speed}.
 
     \item[Memory Profiling] For the memory comparison we use a memory profiling tool to determine the heap memory usage of the YAML plugins.
 
-    \item[Code Count] We counted the code lines with a code line counting tool. This method allow us to consider only actual code, ignoring blank lines and comments.
+    \item[Code Count] We counted the number of code lines with a code line counting tool. This method allow us to consider only actual code, ignoring blank lines and comments.
 
     \item[Complexity Measurement] We measured the \gls{CC} of the code using a static analyzer.
 
