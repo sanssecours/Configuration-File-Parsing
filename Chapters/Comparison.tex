@@ -361,7 +361,7 @@ The graphs in this section show the results of the benchmark for different input
 
 \subsection{Analysis}
 
-If we look at Figure~\ref{fig:benchmark_results_generated} we see that the runtime seems to grow linearly after a certain number of input lines. To verify this we hypothesis we removed all samples with a line length smaller than 1000. Figure~\ref{fig:benchmark_results_generated_above_1000} shows the result.
+If we look at Figure~\ref{fig:benchmark_results_generated} we see that the runtime seems to grow linearly after a certain number of input lines. To verify this hypothesis we removed all samples with a line length smaller than 1000. Figure~\ref{fig:benchmark_results_generated_above_1000} shows the result.
 
 \begin{figure}[H]
   \centering
@@ -392,7 +392,7 @@ The runtime of a non-backtracking recursive descent parser for an LL(1) grammar,
 
   \item YAwn also shows the linear behavior, even though \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}} \href{https://github.com/vnmakarov/yaep/issues/24}{does not implement \citeauthor{leo1991general}’s optimization}~\cite{leo1991general} that makes sure that the algorithm runs in linear time for every LR(k) grammar.
 
-  \item Even YAy PEG’s backtracking parser without memoization show linear behavior. This also corroborates the statement by \citeauthor{hirsch2016memo}, one of PEGTL’s authors statement about memoization~\cite{hirsch2016memo}, quoted below.
+  \item Even YAy PEG’s backtracking parser without memoization show linear behavior. This also corroborates a statement by Colin Hirsch, one of PEGTL’s authors, about memoization~\cite{hirsch2016memo}, quoted below.
 
   \begin{quote}
      …in practice packrat parsers often perform worse than simple recursive descent parsers despite being in a better time complexity class.
