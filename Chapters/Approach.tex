@@ -1,20 +1,20 @@
 \chapter{Approach}
 
-The YAML standard is extensive~\cite{ben2009yaml}. The document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules. To simplify the parser development we decided to first determine a useful subset of YAML. For this purpose we discussed the language with other Elektra developers. The first part of this chapter contains a review detailing this discussion.
+The \glstext{YAML} standard is extensive~\cite{ben2009yaml}. The document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules. To simplify the parser development we decided to first determine a useful subset of \glstext{YAML}. For this purpose we discussed the language with other Elektra developers. The first part of this chapter contains a review detailing this discussion.
 
-After that we describe how we mapped Elektra’s two basic types, \cc{Key} and \cc{KeySet} to YAML.
+After that we describe how we mapped Elektra’s two basic types, \cc{Key} and \cc{KeySet} to \glstext{YAML}.
 
 \section{Discussion}
 
-In the discussion 9 participants answered questions about the usefulness of certain YAML features for \href{https://www.libelektra.org}{Elektra}. We introduced the YAML syntax in a \href{https://github.com/sanssecours/YAML-Presentation/releases/download/v1.0/Presentation.pdf}{presentation}. After we talked about a certain part of YAML, we answered questions the participants had about the information presented so far. Afterwards we asked the participants to fill in parts of a \href{https://github.com/sanssecours/YAML-Presentation/blob/master/Questionnaire.md}{questionnaire} about the newly introduced feature set. The questionnaire consisted of checkboxes for each feature. A checked box indicates that the participant considers a feature useful for Elektra.
+In the discussion 9 participants answered questions about the usefulness of certain \glstext{YAML} features for \href{https://www.libelektra.org}{Elektra}. We introduced the \glstext{YAML} syntax in a \href{https://github.com/sanssecours/YAML-Presentation/releases/download/v1.0/Presentation.pdf}{presentation}. After we talked about a certain part of YAML, we answered questions the participants had about the information presented so far. Afterwards we asked the participants to fill in parts of a \href{https://github.com/sanssecours/YAML-Presentation/blob/master/Questionnaire.md}{questionnaire} about the newly introduced feature set. The questionnaire consisted of checkboxes for each feature. A checked box indicates that the participant considers a feature useful for Elektra.
 
 \subsection{Participants}
 
-All of the participants were at least partially familiar with Elektra. Some also had previous experience with YAML. Seven of them listened to the presentation, while one participant was late and another one participated via email. The email participant received a copy of the presentation slides and the questionnaire.
+All of the participants were at least partially familiar with Elektra. Some also had previous experience with \glstext{YAML}. Seven of them listened to the presentation, while one participant was late and another one participated via email. The email participant received a copy of the presentation slides and the questionnaire.
 
 \subsection{Results}
 
-In the following bar charts the term “Yes” refers to a checked box for the specific feature. The term “?” means that the participant did not know enough about a part of YAML and therefore marked the checkbox for one feature, or the heading for multiple features, with a question mark. The value before the term “No” specifies the number of unchecked boxes minus the number of boxes marked with “?”.
+In the following bar charts the term “Yes” refers to a checked box for the specific feature. The term “?” means that the participant did not know enough about a part of \glstext{YAML} and therefore marked the checkbox for one feature, or the heading for multiple features, with a question mark. The value before the term “No” specifies the number of unchecked boxes minus the number of boxes marked with “?”.
 
 \subsubsection{Scalars}
 
@@ -304,7 +304,7 @@ In the following bar charts the term “Yes” refers to a checked box for the s
       %YAML 1.2
     \end{yamlcode}
   \end{minipage}
-  \caption{YAML Version}
+  \caption{\glstext{YAML} Version}
 \end{figure}
 
 \begin{figure}[H]
@@ -573,18 +573,18 @@ In the following bar charts the term “Yes” refers to a checked box for the s
 
 The results of the survey showed that the participants preferred double quoted flow scalars over single quoted and plain scalars. A reasons for this could be that those scalars are familiar from other languages such as C, and that they are able to express arbitrary data. Asked about block scalar styles most of the Elektra developers did not think that any of the two styles were necessary.
 
-In contrast to the decision about block scalars the participants preferred the block styles of sequences and mappings (collections) over the respective flow style. However, they also decided that a minimally useful YAML subset should include flow collections.
+In contrast to the decision about block scalars the participants preferred the block styles of sequences and mappings (collections) over the respective flow style. However, they also decided that a minimally useful \glstext{YAML} subset should include flow collections.
 
-The Elektra developers decided against most of the specialized type features of YAML. Only the result count for and against primary tag handles resulted in a draw.
+The Elektra developers decided against most of the specialized type features of \glstext{YAML}. Only the result count for and against primary tag handles resulted in a draw.
 
-The questions about general type support (schemas) showed that a minimal YAML subset should include all types of the JSON Schema.
+The questions about general type support (schemas) showed that a minimal \glstext{YAML} subset should include all types of the JSON Schema.
 
 One of the few specialized features deemed necessary by the participants were anchors and aliases. These two elements can be used to reference the same data multiple times in the same document.
 
 \subsubsection{Summary/Decision}
 \label{sec:discussion_summary_decision}
 
-The list below contains a summary of the YAML features that should be part of a minimal YAML subset according to the results of the discussion:
+The list below contains a summary of the \glstext{YAML} features that should be part of a minimal \glstext{YAML} subset according to the results of the discussion:
 
 \begin{itemize}
   \item Double quoted flow scalars
@@ -594,7 +594,7 @@ The list below contains a summary of the YAML features that should be part of a 
   \item References
 \end{itemize}
 
-. In the end we decided to drop some features in the list above and implement the following list of items for the YAML subset:
+. In the end we decided to drop some features in the list above and implement the following list of items for the \glstext{YAML} subset:
 
 \begin{itemize}
   \item Double quoted scalars
@@ -606,11 +606,11 @@ The list below contains a summary of the YAML features that should be part of a 
 
 . The most notable difference to the result of the discussion are the missing support for data types, references and flow collections.
 
-\textbf{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of YAML’s data types to the ones supported by Elektra, is not trivial, and hence we decided to not support tags.
+\textbf{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of \glstext{YAML}’s data types to the ones supported by Elektra, is not trivial, and hence we decided to not support tags.
 
 We also decided against supporting \textbf{references}, since this feature allow us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
 
-\textbf{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the YAML documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant whitespace is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” YAML subset.
+\textbf{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the \glstext{YAML} documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant whitespace is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” \glstext{YAML} subset.
 
 \begin{figure}
   \begin{yamlcode}
@@ -651,18 +651,18 @@ We also decided against supporting \textbf{references}, since this feature allow
    {'Design Goal':
     '“YAML is easily readable by humans.”'}]
 \end{yamlcode}
-  \caption{The YAML document above stores the same data as the one in Figure~\ref{fig:block_collection}, but uses flow collections instead of block collections}
+  \caption{The \glstext{YAML} document above stores the same data as the one in Figure~\ref{fig:block_collection}, but uses flow collections instead of block collections}
   \label{fig:flow_collection}
 \end{figure}
 
-In the end should also mention that other YAML subsets such as \href{https://github.com/crdoconnor/strictyaml}{StrictYAML}, and \href{https://metacpan.org/pod/YAML::Tiny}{YAML Tiny} also do not support references, and only have very limited support for tags and flow collections~\cite{connor2018strictyaml, kennedy2018yamltiny}.
+In the end should also mention that other \glstext{YAML} subsets such as \href{https://github.com/crdoconnor/strictyaml}{StrictYAML}, and \href{https://metacpan.org/pod/YAML::Tiny}{YAML Tiny} also do not support references, and only have very limited support for tags and flow collections~\cite{connor2018strictyaml, kennedy2018yamltiny}.
 
 \newpage
-\section{Mapping Between Elektra’s Data Types and YAML}
+\section{Mapping Between Elektra’s Data Types and \glstext{YAML}}
 \label{sec:mapping_elektra_yaml}
 
 \begin{sloppypar}
-  There are basically two more or less obvious solutions to map data between Elektra’s \cc{KeySet} structure and a YAML file. Since a \cc{KeySet} behaves similar to a map (see also section~“\nameref{sec:keyset}”), connecting a certain key to a certain value, we could use YAML’s map type directly.
+  There are basically two more or less obvious solutions to map data between Elektra’s \cc{KeySet} structure and a \glstext{YAML} file. Since a \cc{KeySet} behaves similar to a map (see also section~“\nameref{sec:keyset}”), connecting a certain key to a certain value, we could use \glstext{YAML}’s map type directly.
 \end{sloppypar}
 
 \begin{figure}
@@ -672,7 +672,7 @@ In the end should also mention that other YAML subsets such as \href{https://git
   \label{fig:keys}
 \end{figure}
 
-For example, the \cc{KeySet} shown in figure~\ref{fig:keys} would then map to the following YAML data, if we use \code{user/yaml} as mountpoint:
+For example, the \cc{KeySet} shown in figure~\ref{fig:keys} would then map to the following \glstext{YAML} data, if we use \code{user/yaml} as mountpoint:
 
 \begin{yamlcode}
   bloc:
@@ -681,9 +681,9 @@ For example, the \cc{KeySet} shown in figure~\ref{fig:keys} would then map to th
   bloc/party/silent: "alarm"
 \end{yamlcode}
 
-. As we can see the resulting YAML file contains quite a lot of unnecessary redundant data.
+. As we can see the resulting \glstext{YAML} file contains quite a lot of unnecessary redundant data.
 
-In our second solution we take the hierarchical nature of the database into account and split on each part of a key. The result of this approach is the following YAML file:
+In our second solution we take the hierarchical nature of the database into account and split on each part of a key. The result of this approach is the following \glstext{YAML} file:
 
 \begin{yamlcode}
   bloc:
@@ -692,7 +692,7 @@ In our second solution we take the hierarchical nature of the database into acco
       silent: "alarm"
 \end{yamlcode}
 
-. The second solution removed unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the YAML data from above.
+. The second solution removed unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the \glstext{YAML} data from above.
 
 \begin{figure}
   \centering
@@ -721,7 +721,7 @@ In our second solution we take the hierarchical nature of the database into acco
     \caption{The new \cc{Key} overwrites the value of the node \code{block}}
     \label{fig:tree_extended++}
   \end{subfigure}
-  \caption{The tree-like representation of YAML data shows the problem with adding non-leaf values}
+  \caption{The tree-like representation of \glstext{YAML} data shows the problem with adding non-leaf values}
 \end{figure}
 
 As we can see in Figure~\ref{fig:tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:tree_extended} shows the resulting tree. We could now save \code{chain} as a map key inside \code{bloc}:
@@ -736,7 +736,7 @@ As we can see in Figure~\ref{fig:tree} the only nodes that store values are the 
 
 . However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:tree_extended++}).
 
-Another option to fix our problem would be to use YAML’s list type, and to store the value of a \cc{Key} and the data below the \cc{Key} as first and second element of the list:
+Another option to fix our problem would be to use \glstext{YAML}’s list type, and to store the value of a \cc{Key} and the data below the \cc{Key} as first and second element of the list:
 
 \begin{yamlcode}
   bloc:
@@ -747,7 +747,7 @@ Another option to fix our problem would be to use YAML’s list type, and to sto
         silent: "alarm"
 \end{yamlcode}
 
-. However, this format is quite complicated. If we add support for Elektra’s array type – mapping arrays to YAML lists – the situation is even worse.
+. However, this format is quite complicated. If we add support for Elektra’s array type – mapping arrays to \glstext{YAML} lists – the situation is even worse.
 
 To solve the problem we use another approach. We reserve the name \yaml{___dirdata} to save values in non-leaf nodes. The code below shows the mapping of our example data:
 
@@ -763,7 +763,7 @@ To solve the problem we use another approach. We reserve the name \yaml{___dirda
 
 \subsection{Mapping Arrays}
 
-Since Elektra’s array type and YAML sequences are similar, we want to map between these data types.
+Since Elektra’s array type and \glstext{YAML} sequences are similar, we want to map between these data types.
 
 \begin{figure}
   \centering
@@ -772,7 +772,7 @@ Since Elektra’s array type and YAML sequences are similar, we want to map betw
   \label{fig:array_value}
 \end{figure}
 
-If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_value} would result in the YAML data:
+If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_value} would result in the \glstext{YAML} data:
 
 \begin{yamlcode}
   array:
@@ -791,7 +791,7 @@ If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_val
     - "Third Element"
 \end{yamlcode}
 
-, since the result would be a YAML node that is neither list nor map. To fix this problem we decided to convert the \yaml{___dirdata} node to a list element:
+, since the result would be a \glstext{YAML} node that is neither list nor map. To fix this problem we decided to convert the \yaml{___dirdata} node to a list element:
 
 \begin{yamlcode}
   array:
@@ -801,4 +801,4 @@ If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_val
     - "Third Element"
 \end{yamlcode}
 
-. This approach produces valid YAML data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.
+. This approach produces valid \glstext{YAML} data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.
