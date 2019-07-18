@@ -77,7 +77,7 @@ A programming language used to specify such lenses is Boomerang~\cite{bohannon20
 
 \section{Elektra}
 
-In this section we describe some of the concepts of Elektra, the software that provides the common storage facility for our YAML parsers. Elektra is a framework that stores data in a \emph{global hierarchical key-value database}.
+In this section we describe some of the concepts of Elektra, the software that provides the common storage facility for our \glstext{YAML} parsers. Elektra is a framework that stores data in a \emph{global hierarchical key-value database}.
 
 \subsection{\cc{Key}}
 
@@ -167,7 +167,7 @@ Apart from basic features most of Elektra’s functionality is realized as \emph
 
 There are many different plugin categories, but the most basic ones are resolver and storage plugins. Elektra needs at least one resolver and one storage plugin. The resolver plugin handles filenames and replaces files on disk. Storage plugins on the other hand parse configuration files and convert read data to a \cc{KeySet}. They are also responsible for writing a modified \cc{KeySet} back to a given file.
 
-In this thesis we are mostly interested in storage plugins. However, we will also use other plugins to implement common functionality for our YAML storage plugins. For this purpose we use the plugin interface of Elektra to pass key sets between plugins.
+In this thesis we are mostly interested in storage plugins. However, we will also use other plugins to implement common functionality for our \glstext{YAML} storage plugins. For this purpose we use the plugin interface of Elektra to pass key sets between plugins.
 
 The order in which Elektra calls a certain plugin is specified via the \emph{contract} of the plugin. For example, a typical storage plugin will use the positions \code{getstorage} and \code{setstorage}. Plugins at the position \code{getstorage} will be called when Elektra tries to read a configuration file, while Elektra calls \code{setstorage} plugins when it is time to write a \cc{KeySet} back to a file. A plugin that wants to further process data will usually use the position \code{postgetstorage} right after \code{getstorage}, and \code{presetstorage} the position before \code{setstorage}.
 
@@ -178,16 +178,16 @@ The order in which Elektra calls a certain plugin is specified via the \emph{con
   \label{fig:plugins}
 \end{figure}
 
-Figure~\ref{fig:plugins} shows a example, where Elektra uses a YAML plugin to read and write data, while a Base64 plugin (see also section “\nameref{sec:base64}”) encodes and decodes binary values. Such a combination of multiple plugins working together is called a \emph{backend}.
+Figure~\ref{fig:plugins} shows a example, where Elektra uses a \glstext{YAML} plugin to read and write data, while a Base64 plugin (see also section “\nameref{sec:base64}”) encodes and decodes binary values. Such a combination of multiple plugins working together is called a \emph{backend}.
 
-In Elektra we \emph{mount} a backend at a certain position of the key-value database. For example, if we mount the backend described above at \code{user/yaml}, then the YAML plugin is responsible for storing and retrieving values below this mountpoint. If we want to save a new \cc{Key} with the name \code{user/yaml/pinky} and the value \code{pie}, then Elektra
+In Elektra we \emph{mount} a backend at a certain position of the key-value database. For example, if we mount the backend described above at \code{user/yaml}, then the \glstext{YAML} plugin is responsible for storing and retrieving values below this mountpoint. If we want to save a new \cc{Key} with the name \code{user/yaml/pinky} and the value \code{pie}, then Elektra
 
 \begin{enumerate}
-  \item uses the YAML plugin to convert the current YAML configuration file to a \cc{KeySet},
+  \item uses the \glstext{YAML} plugin to convert the current \glstext{YAML} configuration file to a \cc{KeySet},
   \item decodes every binary \cc{Key} with the Base64 plugin,
   \item adds \code{user/yaml/pinkie} to the \cc{KeySet},
   \item encoded every binary \cc{Key} with the Base64 plugin, and
-  \item then stores the result to the configuration file using the YAML plugin
+  \item then stores the result to the configuration file using the \glstext{YAML} plugin
 \end{enumerate}
 
 .
