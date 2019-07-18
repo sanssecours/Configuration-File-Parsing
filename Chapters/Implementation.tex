@@ -4,7 +4,7 @@
 
 \subsection{Recursive Descent Parser}
 
-The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{YAML plugin} we developed used a handwritten recursive descent parser. As already described in “\nameref{sec:state_of_the_art}” this technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
+The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{\glstext{YAML} plugin} we developed used a handwritten recursive descent parser. As already described in “\nameref{sec:state_of_the_art}” this technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
 
 \begin{table}[H]
   \begin{center}
@@ -81,35 +81,35 @@ While Table~\ref{tab:recursive_descent_correspondence} suggest writing a recursi
 \begin{description}
   \item [Recognizer Only:] The pseudo-code only implements a recognizer for the language. At the end of the parsing process we only know, if the input is part of the language produced by the given grammar or not. Usually we want to \emph{build a data structure}, in our case a \cc{KeySet}, from the given input.
 
-  \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the author of the YAML data wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
+  \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the author of the \glstext{YAML} data wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
 
   \item [Left Recursion:] If we translate a left recursive rules such as \code{\color{color02} rule1 \color{color03} \textbf{=} \color{color02} rule1 \color{color03} / \color{color02} rule2} using the correspondences given in Table~\ref{tab:recursive_descent_correspondence}, then the resulting code would never terminate. This is the case, since \code{\color{color02} rule1} calls \code{{\color{color02} rule1}}, which then calls \code{\color{color02} rule1}, and so on an so forth (infinite recursion).
 \end{description}
 
 All of the problems above apply regardless of the programming language of the parsing code. Since we implemented the recursive descent parser in C, another issue is the error handling in C itself. The language does not provide a native exception handling mechanism. We therefore used the return value to also transfer the error information between functions. This approach is quite cumbersome, since it basically means that we have to check for an error after each function call.
 
-We used C macros to minimize the code overhead and complexity caused by the error handling. Still, for a very small part of the YAML syntax described in the ABNF grammar of Figure~\ref{cod:abnf_recurive_descent} the parser contained about 374 lines of code (counted with \code{cloc} version 1.72). While smaller feature additions, such as going from support of one key-value pair to multiple key-value pairs \href{https://github.com/ElektraInitiative/libelektra/commit/17aa7a6ea5d9261287104213dcba67f4d0a0fcbc}{were quite straightforward} (\textcolor{Green}{14 additions}, \textcolor{Red}{1 deletion}), other modifications, such as supporting block styles would take considerable more effort.
+We used C macros to minimize the code overhead and complexity caused by the error handling. Still, for a very small part of the \glstext{YAML} syntax described in the ABNF grammar of Figure~\ref{cod:abnf_recurive_descent} the parser contained about 374 lines of code (counted with \code{cloc} version 1.72). While smaller feature additions, such as going from support of one key-value pair to multiple key-value pairs \href{https://github.com/ElektraInitiative/libelektra/commit/17aa7a6ea5d9261287104213dcba67f4d0a0fcbc}{were quite straightforward} (\textcolor{Green}{14 additions}, \textcolor{Red}{1 deletion}), other modifications, such as supporting block styles would take considerable more effort.
 
-Since the first steps with a hand-written recursive descent parser showed that this approach takes considerable effort we decided against extending the first prototype. Instead we chose to use an already existing hand-written YAML parser.
+Since the first steps with a hand-written recursive descent parser showed that this approach takes considerable effort we decided against extending the first prototype. Instead we chose to use an already existing hand-written \glstext{YAML} parser.
 
 \begin{listing}
   \centering
   \begin{code-boxed}
     \input{Code/yaml}
   \end{code-boxed}
-  \caption{ABNF grammar for a very small regular subset of YAML}
+  \caption{ABNF grammar for a very small regular subset of \glstext{YAML}}
   \label{cod:abnf_recurive_descent}
 \end{listing}
 
-The official \href{http://yaml.org}{YAML website} prominently lists known YAML parsers. Since we decided to use C or C++ as programming language – to improve the comparability of the parsers – we are left with three basic options:
+The official \href{http://yaml.org}{YAML website} prominently lists known \glstext{YAML} parsers. Since we decided to use C or C++ as programming language – to improve the comparability of the parsers – we are left with three basic options:
 
 \begin{itemize}
-  \item Syck (YAML 1.0)
+  \item Syck (\glstext{YAML} 1.0)
   \item \href{https://github.com/yaml/libyaml}{LibYAML} (YAML 1.1)
   \item \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} (YAML 1.2)
 \end{itemize}
 
-. Out of these options Syck is not actively maintained any more. This leaves only \code{libyaml} and \code{yaml-cpp}. We decided to use \code{yaml-cpp}, since it supports the latest version of YAML (\code{YAML 1.2}). With the help of the library we \href{https://github.com/ElektraInitiative/libelektra/pull/1613}{added the first plugin with full YAML support} called \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} to Elektra.
+. Out of these options Syck is not actively maintained any more. This leaves only \code{libyaml} and \code{yaml-cpp}. We decided to use \code{yaml-cpp}, since it supports the latest version of \glstext{YAML} (\code{YAML 1.2}). With the help of the library we \href{https://github.com/ElektraInitiative/libelektra/pull/1613}{added the first plugin with full YAML support} called \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} to Elektra.
 
 \subsection{ALL(*) Parser}
 
@@ -117,10 +117,10 @@ The first parser generator we used as part of the thesis was \gls{ANTLR} 4. As w
 
 \subsubsection{Initial Attempt}
 
-One of the first problems we encountered using ANTLR was the significant leading whitespace used to describe the structure of YAML block \glspl{collection}. In YAML increased leading whitespace starts a new child element, while decreasing amount of leading whitespace ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, YAML’s reference grammar does not use \code{INDENT} and \code{DETEND} tokens, but uses parameterized \gls{BNF} productions instead. According to the authors of the YAML specification, this is necessary to describe the indentation rules of YAML~\cite{ben2009yaml}:
+One of the first problems we encountered using ANTLR was the significant leading whitespace used to describe the structure of \glstext{YAML} block \glspl{collection}. In \glstext{YAML} increased leading whitespace starts a new child element, while decreasing amount of leading whitespace ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, \glstext{YAML}’s reference grammar does not use \code{INDENT} and \code{DETEND} tokens, but uses parameterized \gls{BNF} productions instead. According to the authors of the \glstext{YAML} specification, this is necessary to describe the indentation rules of \glstext{YAML}~\cite{ben2009yaml}:
 
 \begin{quote}
-  Many productions use an explicit indentation level parameter. This is less elegant than Python’s “indent” and “undent” conceptual tokens. However it is required to formally express YAML’s indentation rules.
+  Many productions use an explicit indentation level parameter. This is less elegant than Python’s “indent” and “undent” conceptual tokens. However it is required to formally express \glstext{YAML}’s indentation rules.
 \end{quote}
 
 . We first tried to parse different levels of whitespace using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of whitespace. This approach worked, but only for a constant amount of whitespace. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading whitespace matched in the current rule, then the generated parser would be unable to parse simple example input.
@@ -129,15 +129,15 @@ One of the first problems we encountered using ANTLR was the significant leading
 
 Since the initial attempt for our ANTLR grammar did not show promising results, we looked at how other ANTLR grammars handle significant whitespace.
 
-Bart Kiers created an \href{https://github.com/antlr/grammars-v4/blob/master/python3/Python3.g4}{ANTLR grammar for Python 3}, which captures the start of a document and newline characters inside the lexer. The grammar then uses application-specific code~\cite[p. 48]{parr2013definitive} to fill a stack with the current amount of indentation and emits \code{INDENT} and \code{DETEND} tokens accordingly. Since this method looked promising, we created a \href{https://github.com/sanssecours/Yan-LR/compare/363be1e...188e5d4}{basic YAML parser that used the same algorithm}. While this approach worked for some YAML documents, we found simple input where the algorithm did not show the expected result. Another problem with this approach are complex lexer rules for YAML scalars. The cause of this problem is that the parameterized BNF rules of the YAML specification do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
+Bart Kiers created an \href{https://github.com/antlr/grammars-v4/blob/master/python3/Python3.g4}{ANTLR grammar for Python 3}, which captures the start of a document and newline characters inside the lexer. The grammar then uses application-specific code~\cite[p. 48]{parr2013definitive} to fill a stack with the current amount of indentation and emits \code{INDENT} and \code{DETEND} tokens accordingly. Since this method looked promising, we created a \href{https://github.com/sanssecours/Yan-LR/compare/363be1e...188e5d4}{basic \glstext{YAML} parser that used the same algorithm}. While this approach worked for some \glstext{YAML} documents, we found simple input where the algorithm did not show the expected result. Another problem with this approach are complex lexer rules for \glstext{YAML} scalars. The cause of this problem is that the parameterized BNF rules of the \glstext{YAML} specification do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
 
 \subsubsection{Custom Lexer}
 
-For the \href{https://www.libelektra.org/plugins/yanlr}{final version of our ANTLR parser} we looked at the source code of various YAML parsing libraries. One of the most widely used parsing libraries is \href{https://github.com/yaml/libyaml}{LibYAML}. LibYAML is especially interesting since it was implemented by Kirill Simonov under the guidance of one of the authors of the YAML specification: Clark Evans~\cite{libyaml2018pyyaml}.
+For the \href{https://www.libelektra.org/plugins/yanlr}{final version of our ANTLR parser} we looked at the source code of various \glstext{YAML} parsing libraries. One of the most widely used parsing libraries is \href{https://github.com/yaml/libyaml}{LibYAML}. LibYAML is especially interesting since it was implemented by Kirill Simonov under the guidance of one of the authors of the \glstext{YAML} specification: Clark Evans~\cite{libyaml2018pyyaml}.
 
 Unfortunately LibYAML’s code uses C macros quite heavily and is therefore not very readable. A quick look at the code and comments showed us that LibYAML’s handwritten lexer already takes care of issues such as proper detection of plain scalars and \glspl{simpleKey}. Since the lexer uses a turing-complete language to scan the input, it is also able to handle nested block \glspl{collection}.
 
-The source code of LibYAML showed us that we can take care of most of YAML’s  complexity in the lexer. For further information we looked at \href{https://github.com/llvm/llvm-project/blob/master/llvm/lib/Support/YAMLParser.cpp}{LLVM’s YAML parser} (written in C++) and \href{https://bitbucket.org/asomov/snakeyaml-engine}{SnakeYAML Engine} (written in Java). The lexer of both of these tools use the same basic ideas as LibYAML. However, the code of these libraries is easier to read than LibYAML’s, since LLVM’s YAML parser and SnakeYAML Engine are written in higher level programming languages.
+The source code of LibYAML showed us that we can take care of most of \glstext{YAML}’s  complexity in the lexer. For further information we looked at \href{https://github.com/llvm/llvm-project/blob/master/llvm/lib/Support/YAMLParser.cpp}{LLVM’s YAML parser} (written in C++) and \href{https://bitbucket.org/asomov/snakeyaml-engine}{SnakeYAML Engine} (written in Java). The lexer of both of these tools use the same basic ideas as LibYAML. However, the code of these libraries is easier to read than LibYAML’s, since LLVM’s YAML parser and SnakeYAML Engine are written in higher level programming languages.
 
 The most interesting part in the lexer of the libraries described above, is probably how they are able to add tokens for \glspl{simpleKey}. The text below describes how the algorithm works (in SnakeYAML Engine).
 
@@ -145,7 +145,7 @@ The most interesting part in the lexer of the libraries described above, is prob
 
   \item The lexer keeps a list of tokens and stores how many of those token it has emitted. The lexer can not simply emit a token unconditionally, since it might have to scan additional tokens to check if the current token starts a \gls{simpleKey}.
 
-  \item When the lexer scans a YAML token that can possibly start a simple key at the current position it adds this token as simple key candidate. For each simple key candidate the lexer also stores the current position in the token list. This way it can insert a key token at this position later, if a key candidate does indeed start a mapping key.
+  \item When the lexer scans a \glstext{YAML} token that can possibly start a simple key at the current position it adds this token as simple key candidate. For each simple key candidate the lexer also stores the current position in the token list. This way it can insert a key token at this position later, if a key candidate does indeed start a mapping key.
 
   \item The lexer only emits the current token, if there are currently no candidates for simple keys. If there are simple key candidates it scans further ahead. Later it
 
@@ -157,7 +157,7 @@ The most interesting part in the lexer of the libraries described above, is prob
 
 \end{itemize}
 
-. We used the algorithm described above in the final version of our basic ANTLR storage plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. For that purpose we wrote a custom YAML lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
+. We used the algorithm described above in the final version of our basic ANTLR storage plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. For that purpose we wrote a custom \glstext{YAML} lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
 
 \subsection{LALR(1) Parser}
 
@@ -165,9 +165,9 @@ After we finished the initial version of the ANTLR plugin \href{https://www.libe
 
 For the lexer of the plugin we used a slightly modified version of Yan LR’s lexer. This was necessary since Bison, unlike ANTLR, does not provide helper methods to operate on a character stream. For that purpose we wrote a simple class that mimics the behavior of ANTLR’s \cpp{ANTLRInputStream}.
 
-Apart from the parsing algorithm, another difference between Yan LR and YAMBi is the approach on how the plugin translates YAML data to a \cpp{KeySet}. For YAN LR we use a listener interface that operates on the parse tree created by ANTLR. Bison only offers parser actions. These actions contain code that will be called after the parser matches certain parts of the grammar.
+Apart from the parsing algorithm, another difference between Yan LR and YAMBi is the approach on how the plugin translates \glstext{YAML} data to a \cpp{KeySet}. For YAN LR we use a listener interface that operates on the parse tree created by ANTLR. Bison only offers parser actions. These actions contain code that will be called after the parser matches certain parts of the grammar.
 
-YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a YAML mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check, if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. To solve this problem we added an \href{https://git.libelektra.org/blob/0c47d024256d0824577209d95d69876722af6248/src/plugins/yambi/parser.ypp#L63-L66}{additional action} to the Bison grammar and moved the code that adds an empty key into a later phase of the parsing process.
+YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a \glstext{YAML} mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check, if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. To solve this problem we added an \href{https://git.libelektra.org/blob/0c47d024256d0824577209d95d69876722af6248/src/plugins/yambi/parser.ypp#L63-L66}{additional action} to the Bison grammar and moved the code that adds an empty key into a later phase of the parsing process.
 
 \subsection{Earley Parser}
 \label{sec:earley_parser}
@@ -212,7 +212,7 @@ Unlike ANTLR, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}
 
 . Using the three features above we were able to create a \gls{PEG} parser plugin called \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} that uses grammar rules that are similar to the ones described by the \href{http://yaml.org/spec/1.2/spec}{YAML specification}.
 
-The translation of some of the rules from the YAML specification to PEGTL rules was trivial. For example, the rule:
+The translation of some of the rules from the \glstext{YAML} specification to PEGTL rules was trivial. For example, the rule:
 
 \begin{ccode}
 ns-plain-first(c) ::= ( ns-char - c-indicator )
@@ -264,13 +264,13 @@ proved more difficult to express in the PEGTL. To translate these kind of rules 
   \item it applies \cc{RevertStateRule} and fails (second argument of \cc{sor}), if \cc{seq<Rules...>} failed
 \end{enumerate}
 
-. We used \cc{with_updated_state} to create rules that update nested versions of the indentation (\cc{n} and \cc{m} in the YAML spec) and context (\cc{c} in the YAML spec). Using this approach we were able to translate almost any YAML rule without too much problems.
+. We used \cc{with_updated_state} to create rules that update nested versions of the indentation (\cc{n} and \cc{m} in the \glstext{YAML} spec) and context (\cc{c} in the \glstext{YAML} spec). Using this approach we were able to translate almost any \glstext{YAML} rule without too much problems.
 
 For the conversion of the parsed data to a \cc{KeySet} we used the parse tree facility provided by \gls{PEGTL}. The whole parse tree contains many unnecessary nodes. Fortunately \gls{PEGTL} contains support for parse tree selection and rewriting capabilities. These features allowed us to keep the parse tree simple. We then use custom tree walking code to walk this tree, invoking a listener at certain nodes, to create a \cc{KeySet}. This approach is very similar to the one we used for the \href{https://www.libelektra.org/plugins/yawn}{YAwn} plugin (see Section “\nameref{sec:earley_parser}”).
 
 \subsection{Parser Combinator}
 
-As described in the previous section “\nameref{sec:peg_parser}” we already used a parser combinator library to create a parser for our basic YAML subset. Initially we also wanted to use a second parser combinator library called \href{https://github.com/orangeduck/mpc}{mpc}. However we decided against using mpc, since
+As described in the previous section “\nameref{sec:peg_parser}” we already used a parser combinator library to create a parser for our basic \glstext{YAML} subset. Initially we also wanted to use a second parser combinator library called \href{https://github.com/orangeduck/mpc}{mpc}. However we decided against using mpc, since
 
 \begin{itemize}
   \item the parser engine \href{https://github.com/orangeduck/mpc#does-mpc-support-unicode}{only supports ASCII} encoded data,
@@ -285,13 +285,13 @@ As described in the previous section “\nameref{sec:peg_parser}” we already u
 Augeas~\cite{lutterkort2008augeas} is a tool that uses so-called
 lenses to edit configuration data. The main advantage of lenses is that they
 handle both the parsing and writing process. Since Elektra already includes a
-plugin for Augeas~\cite{berlakovich2016universal}, it sounds like a YAML
-lens is the ideal tool to convert YAML data to a \cc{KeySet}. In reality there
+plugin for Augeas~\cite{berlakovich2016universal}, it sounds like a \glstext{YAML}
+lens is the ideal tool to convert \glstext{YAML} data to a \cc{KeySet}. In reality there
 are multiple problems with this approach. Besides the issues mentioned by
 \citeauthor{berlakovich2016universal} in his bachelor thesis~\cite{berlakovich2016universal}, one of
-the main problems is that YAML is a context-sensitive
+the main problems is that \glstext{YAML} is a context-sensitive
 language~\cite{lutterkort2017augeas}, while Augeas offers only full support for
-regular languages. With this in mind we tested the official YAML lens with Elektra’s \href{https://www.libelektra.org/manpages/kdb}{\cc{kdb} tool}. Since even the conversion of a single single key-value pair failed, we used the tool \href{https://github.com/raphink/augeas-sandbox/blob/master/augcheck}{\cc{augcheck}} to make sure the YAML lens is able to parse our example data. This tool showed us that the \href{https://github.com/hercules-team/augeas/blob/d555a995a06ac81cab62d016d6eaff8a7ba64a2e/lenses/tests/test_yaml.aug}{YAML lens} currently supports nested mappings, such as
+regular languages. With this in mind we tested the official \glstext{YAML} lens with Elektra’s \href{https://www.libelektra.org/manpages/kdb}{\cc{kdb} tool}. Since even the conversion of a single single key-value pair failed, we used the tool \href{https://github.com/raphink/augeas-sandbox/blob/master/augcheck}{\cc{augcheck}} to make sure the \glstext{YAML} lens is able to parse our example data. This tool showed us that the \href{https://github.com/hercules-team/augeas/blob/d555a995a06ac81cab62d016d6eaff8a7ba64a2e/lenses/tests/test_yaml.aug}{YAML lens} currently supports nested mappings, such as
 
 \begin{yamlcode}
   root:
@@ -304,22 +304,22 @@ regular languages. With this in mind we tested the official YAML lens with Elekt
   key: value
 \end{yamlcode}
 
-, and other simple data. With the current state of the YAML lens and the problems of the Augeas plugin in mind, we decided to not look any further into developing an Augeas lens for our YAML subset.
+, and other simple data. With the current state of the \glstext{YAML} lens and the problems of the Augeas plugin in mind, we decided to not look any further into developing an Augeas lens for our \glstext{YAML} subset.
 
 \section{Additional Plugins}
 
-While most of the problems of adding a YAML storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
+While most of the problems of adding a \glstext{YAML} storage plugin deal with the parsing process itself, there are other issues we can handle using additional plugins. Elektra’s plugin system allows us to use multiple plugins in conjunction as part of a so-called \emph{backend} (see also section~“\nameref{sec:plugins}”).
 
 \subsection{Base64}
 \label{sec:base64}
 
-One of the first plugins we used to improve the YAML support of Elektra was the \href{https://www.libelektra.org/plugins/base64}{Base64} plugin of Peter Nirschl~\cite{nirschl2018crypto}. The plugin en- and decodes binary values using the Base64 algorithm~\cite{josefsson2006base16}.
+One of the first plugins we used to improve the \glstext{YAML} support of Elektra was the \href{https://www.libelektra.org/plugins/base64}{Base64} plugin of Peter Nirschl~\cite{nirschl2018crypto}. The plugin en- and decodes binary values using the Base64 algorithm~\cite{josefsson2006base16}.
 
-Since Elektra supports values containing binary data, we can use the Base64 plugin to encode this data and store it using ASCII values in a YAML file. However, the plugin used a common prefix to mark base64-encoded data. For example, if we want to store the decimal numbers 104 (0x68) and 105 (0x69), then the plugin would encode this values as \code{aGk=} and add the prefix \code{@BASE64}. The resulting value would then be \yaml{"@BASE64aGk="}. In YAML a value should not contain a prefix though. Instead YAML marks base64 encoded data with the tag (data type) \yaml{!!binary}. We therefore need to store the two values above as \yaml{!!binary "aGk="} in a YAML file. For this purpose we added a new mode to the Base64 plugin.
+Since Elektra supports values containing binary data, we can use the Base64 plugin to encode this data and store it using ASCII values in a \glstext{YAML} file. However, the plugin used a common prefix to mark base64-encoded data. For example, if we want to store the decimal numbers 104 (0x68) and 105 (0x69), then the plugin would encode this values as \code{aGk=} and add the prefix \code{@BASE64}. The resulting value would then be \yaml{"@BASE64aGk="}. In \glstext{YAML} a value should not contain a prefix though. Instead \glstext{YAML} marks base64 encoded data with the tag (data type) \yaml{!!binary}. We therefore need to store the two values above as \yaml{!!binary "aGk="} in a \glstext{YAML} file. For this purpose we added a new mode to the Base64 plugin.
 
 The new \emph{meta mode} uses metadata to mark a key-value pair that contains a base64-encoded value. Instead of a prefix Base64 adds a meta-key \code{type} with the value \code{binary}. Figure~\ref{fig:base64} shows an example, where Elektra uses the Base64 plugin to encode and decode the bytes 0x68 and 0x69 (code points for the ASCII string \yaml{hi}).
 
-We should mention here that we only added support for the Base64 encoded data to the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin, since we decided to not support tags for our YAML subset (see Section “\nameref{sec:discussion_summary_decision}”).
+We should mention here that we only added support for the Base64 encoded data to the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin, since we decided to not support tags for our \glstext{YAML} subset (see Section “\nameref{sec:discussion_summary_decision}”).
 
 \begin{figure}
   \centering
@@ -361,7 +361,7 @@ In addition the plugin insert a new \cc{Key} for every array parent that stores 
 
 Figure~\ref{fig:keyset_large_extended} shows the \cc{KeySet} after the whole conversion at the position \code{preset}. This \cc{KeySet} is also the input for the Directory Value plugin at the position \code{postget}.
 
-\subsection{YAML Smith}
+\subsection{\glstext{YAML} Smith}
 
 Elektra’s storage plugins needs to both
 
