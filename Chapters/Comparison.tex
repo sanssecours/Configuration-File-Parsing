@@ -19,14 +19,14 @@ In the evaluation phase of the work we looked at the criteria listed below.
   For the measurement of the code complexity we determined the cyclomatic complexity~\cite{mccabe1976complexity} of both the generated and handwritten code.
 
   \item[{\hyperref[sec:extensibility]{Ease of Extensibility and Composability}}]~\\[0.1cm]
-  We determined the amount of code line changes it took, to add certain features to, and implement bug fixes in, the YAML plugins. This method allows us to quantitatively measure the extension effort. In this part of the evaluation we also look at YAML’s specification grammar and compare it with the parsing code of our plugins. In the end we will answer~\Cref{que:closeness}:
+  We determined the amount of code line changes it took, to add certain features to, and implement bug fixes in, the \glstext{YAML} plugins. This method allows us to quantitatively measure the extension effort. In this part of the evaluation we also look at \glstext{YAML}’s specification grammar and compare it with the parsing code of our plugins. In the end we will answer~\Cref{que:closeness}:
 
   \closeness*
 
   .
 
   \item[{\hyperref[sec:error_reporting]{Error Reporting}}]~\\[0.1cm]
-  For this subtask we created YAML input files, that contain certain errors. We then looked at what error information the parsing engines provide, and how well this information describes the given error.
+  For this subtask we created \glstext{YAML} input files, that contain certain errors. We then looked at what error information the parsing engines provide, and how well this information describes the given error.
 
 \end{description}
 
@@ -161,7 +161,7 @@ we built Elektra using the following \href{https://cmake.org}{CMake} options:
 {\textcolor{black}{\texttt{hyperfine}}}}%
 }}
 
-To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \ToolHyperfine{} to call \FilePluginGetSet{} using different YAML plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
+To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \ToolHyperfine{} to call \FilePluginGetSet{} using different \glstext{YAML} plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
 For the measurement we use \ToolHyperfine{}, sine this tool
 
@@ -173,12 +173,12 @@ For the measurement we use \ToolHyperfine{}, sine this tool
 
 .
 
-To make sure we repeat the benchmark every time \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} reports statistical outliers we created the Shell script \FileBenchmarkRuntime{}. This script calls \FileBenchmarkYAML{} for every input file and repeats a benchmark, until \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} does not report any warnings. The script \FileBenchmarkRuntime{} \emph{does} ignore warnings about runtimes under 5 milliseconds though, since \FilePluginGetSet{} might take less execution time for YAML files that only contain a few lines.
+To make sure we repeat the benchmark every time \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} reports statistical outliers we created the Shell script \FileBenchmarkRuntime{}. This script calls \FileBenchmarkYAML{} for every input file and repeats a benchmark, until \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} does not report any warnings. The script \FileBenchmarkRuntime{} \emph{does} ignore warnings about runtimes under 5 milliseconds though, since \FilePluginGetSet{} might take less execution time for \glstext{YAML} files that only contain a few lines.
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=0.9\textwidth]{Benchmark}
-  \caption{The diagram above shows the basic sequence of steps to measure the performance of the YAML plugins.}
+  \caption{The diagram above shows the basic sequence of steps to measure the performance of the \glstext{YAML} plugins.}
   \label{fig:benchmark}
 \end{figure}
 
@@ -217,15 +217,15 @@ To make sure we repeat the benchmark every time \href{https://github.com/sharkdp
 {\textcolor{black}{\texttt{cut\_input}}}}%
 }}
 
-As the first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other YAML plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
+As the first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other \glstext{YAML} plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
 
 \begin{leftbar}
   \url{http://rawdata.libelektra.org/tree/master/YAML}
 \end{leftbar}
 
-. For another input file called \FileCombined{} we copy and pasted parts of test data and various other YAML files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of YAML data that covers most of the code paths of the YAML plugins.
+. For another input file called \FileCombined{} we copy and pasted parts of test data and various other \glstext{YAML} files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of \glstext{YAML} data that covers most of the code paths of the \glstext{YAML} plugins.
 
-Since both of these files are relatively small, \FileKeyFrames{} contains 218 lines, while \FileCombined{} contains 152 lines, we also generated data using a Python script that we called \FileGenerateYAML{}. This script generates YAML maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the YAML scalars the script randomly selects one of the three flow scalar styles:
+Since both of these files are relatively small, \FileKeyFrames{} contains 218 lines, while \FileCombined{} contains 152 lines, we also generated data using a Python script that we called \FileGenerateYAML{}. This script generates \glstext{YAML} maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the \glstext{YAML} scalars the script randomly selects one of the three flow scalar styles:
 
 \begin{itemize}
   \item single quoted scalar,
@@ -233,7 +233,7 @@ Since both of these files are relatively small, \FileKeyFrames{} contains 218 li
   \item plain scalar
 \end{itemize}
 
-. This always works since \glspl{UUID} contain no character sequence that has special meaning according to the YAML specification. Using this method we generated two files:
+. This always works since \glspl{UUID} contain no character sequence that has special meaning according to the \glstext{YAML} specification. Using this method we generated two files:
 
 \begin{itemize}
   \item \FileGenerated{} that contains 10 000 lines, and
@@ -412,7 +412,7 @@ Figure~\ref{fig:benchmark_generated} shows that the constant difference between 
 \begin{enumerate}
   \item The difference between the runtime of the fastest and slowest plugins for large files is nearly twice as large on macOS.
 
-  \item The OS seems to play a much more important role, than the compiler for all of the used YAML libraries.
+  \item The OS seems to play a much more important role, than the compiler for all of the used \glstext{YAML} libraries.
 
   \item While Yan LR and YAwn perform similarly on macOS and Linux, the difference between YAML CPP, YAMBi and YAy PEG on both operating systems can be quite significant.
 \end{enumerate}
@@ -464,7 +464,7 @@ and obtain the formula:
 
 \subsection{Conclusion}
 
-We determined with a high confidence that all of the YAML plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}). This puts the plugin into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
+We determined with a high confidence that all of the \glstext{YAML} plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}). This puts the plugin into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
 
 The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{fig:benchmark_generated_mean}) is YAwn, if we weigh the results of the two tested operating systems equally. This is interesting, since \citeauthor{earley1970efficient} himself mentions in his dissertation~\cite[p. 122]{earley1970efficient} that his parsing technique was too slow for practical use at the time, as you can see in the quote below.
 
@@ -596,7 +596,7 @@ Figure~\ref{fig:benchmark_results_memory_lines} shows that the memory usage seem
 \begin{figure}[H]
   \centering
     \includegraphics[width=\textwidth]{BenchmarkResultMemoryAbove1000}
-  \caption{This diagram above shows that the memory usage of the YAML plugins almost certainly grows linearly for the first $n$ lines of the file \FileGeneratedHundredThousand{}}
+  \caption{This diagram above shows that the memory usage of the \glstext{YAML} plugins almost certainly grows linearly for the first $n$ lines of the file \FileGeneratedHundredThousand{}}
   \label{fig:benchmark_results_memory_lines_above_thousand}
 \end{figure}
 
@@ -613,7 +613,7 @@ While the asymptotic memory usage of all plugins grows linearly, the factor betw
 {\textcolor{black}{\texttt{count-lines}}}}%
 }}
 
-We created a Shell script called \FileCountLines{} that counts the code lines of the YAML plugins using the tool \href{https://github.com/AlDanial/cloc}{cloc}. Since cloc \href{http://cloc.sourceforge.net/#Languages}{does not support Bison grammar files}, we wrote code that removes comments and empty lines from a Bison grammar, and afterwards counts the remaining lines using the Unix tool \sh{wc}.
+We created a Shell script called \FileCountLines{} that counts the code lines of the \glstext{YAML} plugins using the tool \href{https://github.com/AlDanial/cloc}{cloc}. Since cloc \href{http://cloc.sourceforge.net/#Languages}{does not support Bison grammar files}, we wrote code that removes comments and empty lines from a Bison grammar, and afterwards counts the remaining lines using the Unix tool \sh{wc}.
 
 \subsection{Results}
 
@@ -645,13 +645,13 @@ Figure~\ref{fig:line_count} shows the results reported by \FileCountLines{}. As 
     \tikzcircle{DarkOrchid} YAy PEG
   \vspace{-0.5cm}
   \end{center}
-  \caption{This bar chart shows the line counts of of the YAML plugins.}
+  \caption{This bar chart shows the line counts of of the \glstext{YAML} plugins.}
   \label{fig:line_count}
 \end{figure}
 
 \subsection{Analysis}
 
-The line counts of Figure~\ref{fig:line_count} show that YAML CPP requires the least amount of code. That results is not that surprising, considering that the plugin uses yaml-cpp, a library that already represents the YAML file using high-level abstract data structures. We can convert these data structures into Elektra’s \cpp{KeySet} structure relatively easily, keeping the code size of the plugin small.
+The line counts of Figure~\ref{fig:line_count} show that YAML CPP requires the least amount of code. That results is not that surprising, considering that the plugin uses yaml-cpp, a library that already represents the \glstext{YAML} file using high-level abstract data structures. We can convert these data structures into Elektra’s \cpp{KeySet} structure relatively easily, keeping the code size of the plugin small.
 
 For a fair size comparison we also have to take the library code itself into consideration. We use the command
 
@@ -659,7 +659,7 @@ For a fair size comparison we also have to take the library code itself into con
   cloc --include-lang='C++,C/C++ Header' src include
 \end{shellcode}
 
-to determine the code size of version 0.6.2 of the yaml-cpp library. The command reported $8413$ lines of code, showing us that parsing the full YAML standard requires a relatively large amount of code.
+to determine the code size of version 0.6.2 of the yaml-cpp library. The command reported $8413$ lines of code, showing us that parsing the full \glstext{YAML} standard requires a relatively large amount of code.
 
 If we look at the plugins directly based on a parser engine or library, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The higher line counts of YAMBi and YAwn compared to Yan LR are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
 
@@ -693,7 +693,7 @@ YAy PEG, with its scanner-less parsing engine based on C++ templates, uses the m
 for the plugin. The other handwritten code take care of parsing ($822$ code lines) and the communication between the plugin and Elektra ($115$ code lines). The amount of parsing code of YAy PEG is quite large, compared to the grammar code of the other plugins. However, we have to consider that
 
 \begin{itemize}
-  \item YAy PEG’s parsing code support a subset of YAML that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
+  \item YAy PEG’s parsing code support a subset of \glstext{YAML} that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
   \item the parsing code also takes care of the work usually done by a lexer
 \end{itemize}
 
@@ -778,7 +778,7 @@ While cyclomatic complexity has “never been unambiguously correlated with defe
 \section{Ease of Extensibility and Composability}
 \label{sec:extensibility}
 
-One advantage of parsing libraries and parser generators over handwritten parsers is that we can update the language grammar without having to rewrite parsing code. This way we can extend the parsed YAML subset easily without many manual code changes. In the first part of the next section we analyze how many code line changes it took to, fix bugs in, and add minor features to, the YAML plugins. The amount of code changes provides a good metric on how much effort it takes to extend the parser plugins.
+One advantage of parsing libraries and parser generators over handwritten parsers is that we can update the language grammar without having to rewrite parsing code. This way we can extend the parsed \glstext{YAML} subset easily without many manual code changes. In the first part of the next section we analyze how many code line changes it took to, fix bugs in, and add minor features to, the \glstext{YAML} plugins. The amount of code changes provides a good metric on how much effort it takes to extend the parser plugins.
 
 In the second part of this section we will take a look at how the composability of our parsing code influences the extensibility. One option to create an extensible system is to base it on components. We can reuse these components to keep the amount of code for a new feature or bug fix low. We can imagine that the rules of a grammar represent components in our parsing systems. Parsing systems without a separate lexing phase such as PEGTL take the composability idea one step further. In PEGTL we can compose the parser for the whole grammar out of smaller parser that build on each other. We will analyze, if the component based parser of YAy PEG provides extensibility advantages over the other parsers. We will also answer~\Cref{que:closeness} in this part of the thesis:
 
@@ -788,19 +788,19 @@ In the second part of this section we will take a look at how the composability 
 
 \subsection{Plugin Updates}
 
-In the next subsection we look at the effort it took to, add certain features to, and fix certain bugs in, the YAML plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
+In the next subsection we look at the effort it took to, add certain features to, and fix certain bugs in, the \glstext{YAML} plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
 
 \subsubsection{Support for Elektra’s Boolean Data Type}
 
 \begin{sloppypar}
-Elektra’s \cc{Key} data structure usually saves data as untyped character string. We can add type information for a certain key by adding a \code{type} meta key (see also Section “\nameref{sec:keyset}”). If we do that Elektra ensures that applications store and retrieve the right kind of data for that specific key. Elektra’s C++ API offers a direct way to store and retrieve a typed value via templated functions. We used these functions to improve the support for boolean data types in the YAML plugins.
+Elektra’s \cc{Key} data structure usually saves data as untyped character string. We can add type information for a certain key by adding a \code{type} meta key (see also Section “\nameref{sec:keyset}”). If we do that Elektra ensures that applications store and retrieve the right kind of data for that specific key. Elektra’s C++ API offers a direct way to store and retrieve a typed value via templated functions. We used these functions to improve the support for boolean data types in the \glstext{YAML} plugins.
 \end{sloppypar}
 
-YAML’s JSON schema represents boolean data as scalar with the canonical value \yaml{false} or \yaml{true}~\cite{ben2009yaml}. More advanced schemas, such as the core schema offer additional aliases for true and false values. For the YAML plugins in this thesis we only added support for the JSON schema though. For this to work we had to translate the YAML values \yaml{false} and \yaml{true} to \href{https://master.libelektra.org/doc/decisions/bool.md}{Elektra’s boolean values} \code{0} and \code{1}.
+\glstext{YAML}’s JSON schema represents boolean data as scalar with the canonical value \yaml{false} or \yaml{true}~\cite{ben2009yaml}. More advanced schemas, such as the core schema offer additional aliases for true and false values. For the \glstext{YAML} plugins in this thesis we only added support for the JSON schema though. For this to work we had to translate the \glstext{YAML} values \yaml{false} and \yaml{true} to \href{https://master.libelektra.org/doc/decisions/bool.md}{Elektra’s boolean values} \code{0} and \code{1}.
 
-Just like Elektra’s C++ API, yaml-cpp, the library used by the YAML CPP plugin, also offers templated functions to retrieve and set boolean values. One problem of yaml-cpp’s API is that there seems to be no way to check for the type of a YAML node, without the possibility of throwing an exception~\cite{beder2013type}. This can be problematic for the runtime efficiency, since YAML CPP might trigger multiple exceptions before it converts a YAML node to a correctly typed Elektra key. To improve the runtime performance of YAML CPP we checked the textual value of a YAML node before we converted it. The implementation of this more \href{https://github.com/ElektraInitiative/libelektra/commit/d4e62eebd006ea4b066c75e6e885ee5a4b6e26cf#diff-4bdb640234f370e3a9db751e1f7d769b}{complicated approach} modified $16$ code lines (\textcolor{Green}{$15$ additions}, \textcolor{Red}{$1$ deletion}), while the implementation of the \href{https://github.com/ElektraInitiative/libelektra/commit/1e9a07baad8a140c6eda654053db450c0901f5d0#diff-4bdb640234f370e3a9db751e1f7d769b}{direct approach} – that might cause more exceptions for data without many boolean values – modified only $9$ additional code lines (\textcolor{Green}{$8$ additions}, \textcolor{Red}{$1$ deletion}).
+Just like Elektra’s C++ API, yaml-cpp, the library used by the YAML CPP plugin, also offers templated functions to retrieve and set boolean values. One problem of yaml-cpp’s API is that there seems to be no way to check for the type of a \glstext{YAML} node, without the possibility of throwing an exception~\cite{beder2013type}. This can be problematic for the runtime efficiency, since YAML CPP might trigger multiple exceptions before it converts a \glstext{YAML} node to a correctly typed Elektra key. To improve the runtime performance of YAML CPP we checked the textual value of a \glstext{YAML} node before we converted it. The implementation of this more \href{https://github.com/ElektraInitiative/libelektra/commit/d4e62eebd006ea4b066c75e6e885ee5a4b6e26cf#diff-4bdb640234f370e3a9db751e1f7d769b}{complicated approach} modified $16$ code lines (\textcolor{Green}{$15$ additions}, \textcolor{Red}{$1$ deletion}), while the implementation of the \href{https://github.com/ElektraInitiative/libelektra/commit/1e9a07baad8a140c6eda654053db450c0901f5d0#diff-4bdb640234f370e3a9db751e1f7d769b}{direct approach} – that might cause more exceptions for data without many boolean values – modified only $9$ additional code lines (\textcolor{Green}{$8$ additions}, \textcolor{Red}{$1$ deletion}).
 
-Adding support for boolean values modified $10$ lines in \href{https://issues.libelektra.org/2653}{Yan LR’s} code base (\textcolor{Green}{$9$ additions}, \textcolor{Red}{$1$ deletion}), and $9$ lines (\textcolor{Green}{$8$ additions}, \textcolor{Red}{$1$ deletion}) in each of the other plugins (\href{https://issues.libelektra.org/2652}{YAMBI}, \href{https://issues.libelektra.org/2651}{YAwn}, \href{https://issues.libelektra.org/2654}{YAy PEG}). The similar line counts are a direct result of all of the plugins using a listener interface to convert parsed YAML data. To add boolean support we only had to change code in one of the functions of the listeners.
+Adding support for boolean values modified $10$ lines in \href{https://issues.libelektra.org/2653}{Yan LR’s} code base (\textcolor{Green}{$9$ additions}, \textcolor{Red}{$1$ deletion}), and $9$ lines (\textcolor{Green}{$8$ additions}, \textcolor{Red}{$1$ deletion}) in each of the other plugins (\href{https://issues.libelektra.org/2652}{YAMBI}, \href{https://issues.libelektra.org/2651}{YAwn}, \href{https://issues.libelektra.org/2654}{YAy PEG}). The similar line counts are a direct result of all of the plugins using a listener interface to convert parsed \glstext{YAML} data. To add boolean support we only had to change code in one of the functions of the listeners.
 
 \begin{figure}[H]
   \begin{bchart}[max=20, width=0.8\textwidth, unit={~Lines of Code}]
@@ -820,26 +820,26 @@ Adding support for boolean values modified $10$ lines in \href{https://issues.li
     \tikzcircle{DarkOrchid} YAy PEG
   \vspace{-0.5cm}
   \end{center}
-  \caption{This bar chart shows the number of modified lines needed for adding better boolean support to the YAML plugins.}
+  \caption{This bar chart shows the number of modified lines needed for adding better boolean support to the \glstext{YAML} plugins.}
   \label{fig:boolean_line_count}
 \end{figure}
 
 \subsubsection{Conversion of Empty Values}
 
-Depending on the context, empty content (empty nodes) in a YAML stream might represent null values. Elektra should store these null values in a key with a zero length binary value. This was not the case in the first version of the parser based YAML plugins (Yan LR, YAMBi, YAwn, YAy PEG). Instead the plugins would incorrectly convert these null values into empty strings.
+Depending on the context, empty content (empty nodes) in a \glstext{YAML} stream might represent null values. Elektra should store these null values in a key with a zero length binary value. This was not the case in the first version of the parser based \glstext{YAML} plugins (Yan LR, YAMBi, YAwn, YAy PEG). Instead the plugins would incorrectly convert these null values into empty strings.
 
 Another similar problem was that the lexer based plugins would not convert empty content null values right before the end of a file (\code{EOF}\glsadd{EOF}). The result of this bug was that the lexer would not terminate for a stream such as the one shown in Figure~\ref{fig:Figures_StreamNullEOF}.
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=0.75\textwidth]{StreamNullEOF}
-  \caption{The YAML data on the left represents a map that contains one key-value pair with the name \code{key} that stores a null value. The \cc{Key} structure on the right shows the converted YAML data, if we store it directly in the \gls{NS} \code{system}.}
+  \caption{The \glstext{YAML} data on the left represents a map that contains one key-value pair with the name \code{key} that stores a null value. The \cc{Key} structure on the right shows the converted \glstext{YAML} data, if we store it directly in the \gls{NS} \code{system}.}
   \label{fig:Figures_StreamNullEOF}
 \end{figure}
 
 Figure~\ref{fig:null_line_count} shows the amount of changed lines for the \href{https://issues.libelektra.org/2662}{Yan LR}, \href{https://issues.libelektra.org/2663}{YAMBi}, \href{https://issues.libelektra.org/2664}{YAwn}, and \href{https://issues.libelektra.org/2665}{YAy PEG} plugin. The code changes for all the lexer based plugins (Yan LR, YAMBi, YAwn) are almost identical, since we had to fix the problems in the lexer and listener code, which is quite similar for all of those plugins.
 
-For YAy PEG we only had to fix the support for empty nodes in the middle of a YAML stream, since YAy PEG’s parsing code already handled empty nodes at the end of a file correctly. This is probably a direct result of using grammar code that is quite similar to the one from the \href{http://yaml.org/spec/1.2/spec}{YAML specification}. The notable difference between the amount of code we added for the empty node fix (\textcolor{Green}{$5$ additions}, \textcolor{Red}{$1$ deletion}) compared to the one of the lexer based plugins (\textcolor{Green}{$1$ addition}) is also a result of YAy PEG’s grammar. YAy PEG uses the same code path to add empty and non-empty mapping values. The lexer based plugins on the other hand check for an empty value inside the listener code for a key-value pair. We could also use this approach in the YAy PEG plugin, but that would possibly require substantial code changes to the tree walking code.
+For YAy PEG we only had to fix the support for empty nodes in the middle of a \glstext{YAML} stream, since YAy PEG’s parsing code already handled empty nodes at the end of a file correctly. This is probably a direct result of using grammar code that is quite similar to the one from the \href{http://yaml.org/spec/1.2/spec}{YAML specification}. The notable difference between the amount of code we added for the empty node fix (\textcolor{Green}{$5$ additions}, \textcolor{Red}{$1$ deletion}) compared to the one of the lexer based plugins (\textcolor{Green}{$1$ addition}) is also a result of YAy PEG’s grammar. YAy PEG uses the same code path to add empty and non-empty mapping values. The lexer based plugins on the other hand check for an empty value inside the listener code for a key-value pair. We could also use this approach in the YAy PEG plugin, but that would possibly require substantial code changes to the tree walking code.
 
 \begin{figure}[H]
   \begin{bchart}[max=10, width=0.8\textwidth, unit={~Lines of Code}]
@@ -860,13 +860,13 @@ For YAy PEG we only had to fix the support for empty nodes in the middle of a YA
     \tikzcircle{DarkOrchid} YAy PEG
   \vspace{-0.5cm}
   \end{center}
-  \caption{This bar chart shows the additional lines needed for fixing the null value support of the YAML plugins.}
+  \caption{This bar chart shows the additional lines needed for fixing the null value support of the \glstext{YAML} plugins.}
   \label{fig:null_line_count}
 \end{figure}
 
 \subsubsection{Conversion of Empty Documents}
 
-According to the YAML specification an empty file corresponds to a null value. We did not consider this in the initial versions of the YAML plugins, which meant the empty documents shown in Figure~\ref{fig:null_yaml} were translated incorrectly. Figure~\ref{fig:empty_document_count} shows the amount of code lines we modified to fix this problem for the \href{https://issues.libelektra.org/2711}{Yan LR}, \href{https://issues.libelektra.org/2712}{YAMBi}, \href{https://issues.libelektra.org/2713}{YAwn} and \href{https://issues.libelektra.org/2714}{YAy PEG} plugin.
+According to the \glstext{YAML} specification an empty file corresponds to a null value. We did not consider this in the initial versions of the \glstext{YAML} plugins, which meant the empty documents shown in Figure~\ref{fig:null_yaml} were translated incorrectly. Figure~\ref{fig:empty_document_count} shows the amount of code lines we modified to fix this problem for the \href{https://issues.libelektra.org/2711}{Yan LR}, \href{https://issues.libelektra.org/2712}{YAMBi}, \href{https://issues.libelektra.org/2713}{YAwn} and \href{https://issues.libelektra.org/2714}{YAy PEG} plugin.
 
 \begin{figure}[H]
   \centering
@@ -881,7 +881,7 @@ According to the YAML specification an empty file corresponds to a null value. W
       # Empty document
     \end{yamlcode}
   \end{minipage}
-  \caption{The examples above show two options on how to store “nothing” (\code{null}) using YAML.}
+  \caption{The examples above show two options on how to store “nothing” (\code{null}) using \glstext{YAML}.}
   \label{fig:null_yaml}
 \end{figure}
 
@@ -946,11 +946,11 @@ and updates to tree walking code of:
 
 \subsection{Component Based Grammars and Extensibility}
 
-The \href{http://yaml.org/spec/1.2/spec}{YAML specification} includes a detailed grammar description of the language in a parameterized \gls{BNF} like syntax. The grammar rules of the specification are very reminiscent of parser combinator functions~\cite{hutton1996monadic}. This is not that surprising considering that \href{https://hackage.haskell.org/package/YamlReference}{YAML’s reference parser} is also based on parser combinators. A large part of the reference parser actually uses slightly modified versions of all of the rules of the YAML spec. Since “the order of alternatives in the grammar is significant”~\cite{ben2009yaml} (ordered choice) and some of the parsing rules also uses positive and negative lookahead we can also categorize YAML’s reference grammar as an extended version of a \gls{PEG}.
+The \href{http://yaml.org/spec/1.2/spec}{YAML specification} includes a detailed grammar description of the language in a parameterized \gls{BNF} like syntax. The grammar rules of the specification are very reminiscent of parser combinator functions~\cite{hutton1996monadic}. This is not that surprising considering that \href{https://hackage.haskell.org/package/YamlReference}{YAML’s reference parser} is also based on parser combinators. A large part of the reference parser actually uses slightly modified versions of all of the rules of the \glstext{YAML} spec. Since “the order of alternatives in the grammar is significant”~\cite{ben2009yaml} (ordered choice) and some of the parsing rules also uses positive and negative lookahead we can also categorize \glstext{YAML}’s reference grammar as an extended version of a \gls{PEG}.
 
-In the section “\nameref{sec:peg_parser}” we already mentioned that the grammar description of the YAy PEG plugin resembles the YAML specification grammar quite closely. It is time to analyze, if this close resemblance provides advantages over the other YAML plugins, which use a description that is quite different to the one of the YAML specification.
+In the section “\nameref{sec:peg_parser}” we already mentioned that the grammar description of the YAy PEG plugin resembles the \glstext{YAML} specification grammar quite closely. It is time to analyze, if this close resemblance provides advantages over the other \glstext{YAML} plugins, which use a description that is quite different to the one of the \glstext{YAML} specification.
 
-Table~\ref{table:extensibility} lists some of the advantages and disadvantages we found while we implemented and extended the YAML plugins.
+Table~\ref{table:extensibility} lists some of the advantages and disadvantages we found while we implemented and extended the \glstext{YAML} plugins.
 
 \begin{table}[H]
   \caption{The table below lists some advantage and disadvantages of PEG based (YAy PEG) and lexer based (Yan LR, YAMBi, YAwn) plugins regarding extensibility.}
@@ -967,21 +967,21 @@ Table~\ref{table:extensibility} lists some of the advantages and disadvantages w
   \end{tabular}
 \end{table}
 
-Using the PEG library certainly offers advantages considering the extensibility of the grammar, since we can more or less copy the grammar rules from the specification or reference parser and modify them slightly for \gls{PEGTL}. Fortunately the reference parser already contains a relatively large test suite, which means the chance of errors in the reference grammar is quite low. This is helpful, since the specification grammar consists of 211 rules, which can be quite complicated. This is also one of the disadvantages of using \gls{PEGTL}, since the grammar of YAy PEG is more complicated than the one of the lexer based plugins. The complexity is a result of using a single pass to parse YAML data instead of using a separate lexer and parser phase. The single parsing phase also makes debugging harder since we can not debug the lexer and parsing code separately.
+Using the PEG library certainly offers advantages considering the extensibility of the grammar, since we can more or less copy the grammar rules from the specification or reference parser and modify them slightly for \gls{PEGTL}. Fortunately the reference parser already contains a relatively large test suite, which means the chance of errors in the reference grammar is quite low. This is helpful, since the specification grammar consists of 211 rules, which can be quite complicated. This is also one of the disadvantages of using \gls{PEGTL}, since the grammar of YAy PEG is more complicated than the one of the lexer based plugins. The complexity is a result of using a single pass to parse \glstext{YAML} data instead of using a separate lexer and parser phase. The single parsing phase also makes debugging harder since we can not debug the lexer and parsing code separately.
 
 Keeping the information above in mind we can now answer \Cref{que:closeness}:
 
   \closeness*
 
-. The parser of YAy PEG certainly stays closest to the grammar definition of the YAML specification. This closeness is helpful, if we look at the extension of the grammar. However, since YAy PEG’s grammar code also handles low level details of the parsing process we have to consider these details later in the parsing process, which reduces the extensibility of the parsing support code compared to the one of the lexer based plugins.
+. The parser of YAy PEG certainly stays closest to the grammar definition of the \glstext{YAML} specification. This closeness is helpful, if we look at the extension of the grammar. However, since YAy PEG’s grammar code also handles low level details of the parsing process we have to consider these details later in the parsing process, which reduces the extensibility of the parsing support code compared to the one of the lexer based plugins.
 
 \subsection{Conclusion}
 
-The examples at the start of this section show that the extensibility of the different YAML plugins depend on the specific bug we want to fix or the feature we like to add. Sometimes the code changes can be quite similar, at least for all the lexer based plugins (Yan LR, YAMBi, YAwn). Other times we need to change code in nearly all parts of a plugin. In these cases plugins that use generators and libraries that provide more built-in code support are easier to extend. If we take the built-in support code into account, then the order of ease of extensibility for the lexer based plugins is roughly Yan LR, followed by YAMBi and then YAwn.
+The examples at the start of this section show that the extensibility of the different \glstext{YAML} plugins depend on the specific bug we want to fix or the feature we like to add. Sometimes the code changes can be quite similar, at least for all the lexer based plugins (Yan LR, YAMBi, YAwn). Other times we need to change code in nearly all parts of a plugin. In these cases plugins that use generators and libraries that provide more built-in code support are easier to extend. If we take the built-in support code into account, then the order of ease of extensibility for the lexer based plugins is roughly Yan LR, followed by YAMBi and then YAwn.
 
-YAML CPP’s extensibility depends on the specific part we need to extend. While we can modify the conversion code of the plugin easily, fixing bugs in the lexer or adding features, such as comment preservation would require us to change the library code of yaml-cpp. This would probably take more effort, than it would for the the other YAML plugins for a similar features, since we would have to update yaml-cpp’s handwritten parser code instead of the code of a more compact grammar file.
+YAML CPP’s extensibility depends on the specific part we need to extend. While we can modify the conversion code of the plugin easily, fixing bugs in the lexer or adding features, such as comment preservation would require us to change the library code of yaml-cpp. This would probably take more effort, than it would for the the other \glstext{YAML} plugins for a similar features, since we would have to update yaml-cpp’s handwritten parser code instead of the code of a more compact grammar file.
 
-YAy PEG’s advantage considering grammar extensibility is that the plugin uses parsing code that is very similar to the one of the YAML specification. This allows us to extend the grammar relatively easily by taking rules from the YAML specification and modifying them slightly. The similarity of the grammar code can also be a disadvantage though, since the support code of the plugin needs to consider the many rules of the specification grammar compared to the relatively simple grammar rules of the lexer based plugins.
+YAy PEG’s advantage considering grammar extensibility is that the plugin uses parsing code that is very similar to the one of the \glstext{YAML} specification. This allows us to extend the grammar relatively easily by taking rules from the \glstext{YAML} specification and modifying them slightly. The similarity of the grammar code can also be a disadvantage though, since the support code of the plugin needs to consider the many rules of the specification grammar compared to the relatively simple grammar rules of the lexer based plugins.
 
 \section{Error Reporting}
 \label{sec:error_reporting}
@@ -1009,7 +1009,7 @@ YAy PEG’s advantage considering grammar extensibility is that the plugin uses 
 
 \subsection{Initial Erroneous Input}
 
-Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used initially to compare the error reporting capabilities. Listing~\ref{lst:list_element_inside} and \ref{lst:list_element_removed} show two solutions to fix the problematic part of the YAML document.
+Listing \ref{lst:list_element_outside} shows the erroneous \glstext{YAML} data we used initially to compare the error reporting capabilities. Listing~\ref{lst:list_element_inside} and \ref{lst:list_element_removed} show two solutions to fix the problematic part of the \glstext{YAML} document.
 
 \begin{listing}
   \begin{code-boxed}
@@ -1037,7 +1037,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous YAML data we used ini
 
 \subsection{Basic Error Messages}
 
-We started the comparison by listing the basic error messages for the YAML plugins. These messages contain the error location and the auto-generated error message by the parsing engines. For the sake of brevity we removed some uninteresting data such as the filename of the parsed file.
+We started the comparison by listing the basic error messages for the \glstext{YAML} plugins. These messages contain the error location and the auto-generated error message by the parsing engines. For the sake of brevity we removed some uninteresting data such as the filename of the parsed file.
 
 \begin{table}
   \caption{Basic error messages}
@@ -1109,7 +1109,7 @@ As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the 
   \end{tabular}
 \end{table}
 
-After the slight modifications to the YAML parser plugins we decided to take a closer look at the error handling capabilities of each of the parsing engines on their own in the next sections.
+After the slight modifications to the \glstext{YAML} parser plugins we decided to take a closer look at the error handling capabilities of each of the parsing engines on their own in the next sections.
 
 \subsection{ANTLR}
 
@@ -1160,7 +1160,7 @@ One of the more recent improvements in error messages of modern compilers such a
                                           ^
 \end{textcode}
 
-shows the improved error message for Listing~\ref{lst:incorrect_indentation}. One thing that this error report still lacks is a more human friendly representation of the tokens. Someone with limited knowledge of the YAML specification and Yan LR’s lexer code will probably not know what \code{MAP\_END}, \code{MAP END} and \code{STREAM\_END} mean. One option to improve this situation is to replace the text used by the lexer (\code{MAP END}) and the parser (\code{MAP\_END}, \code{STREAM\_END}). The update of the relevant lexer code is trivial, since we can create tokens containing arbitrary text. For the parser code generated by ANLTR, we used a script that uses regular expressions to replace the relevant strings such as \cc{"MAP_END"} and \cc{"STREAM_END"}. After this update the error report for the YAML data in Listing~\ref{lst:incorrect_indentation} looks like this:
+shows the improved error message for Listing~\ref{lst:incorrect_indentation}. One thing that this error report still lacks is a more human friendly representation of the tokens. Someone with limited knowledge of the \glstext{YAML} specification and Yan LR’s lexer code will probably not know what \code{MAP\_END}, \code{MAP END} and \code{STREAM\_END} mean. One option to improve this situation is to replace the text used by the lexer (\code{MAP END}) and the parser (\code{MAP\_END}, \code{STREAM\_END}). The update of the relevant lexer code is trivial, since we can create tokens containing arbitrary text. For the parser code generated by ANLTR, we used a script that uses regular expressions to replace the relevant strings such as \cc{"MAP_END"} and \cc{"STREAM_END"}. After this update the error report for the \glstext{YAML} data in Listing~\ref{lst:incorrect_indentation} looks like this:
 
 \begin{textcode}
 2:1: mismatched input '- ' expecting end of map
@@ -1189,7 +1189,7 @@ to
 
 .
 
-We then looked into the error recovery capabilities of Bison. Unlike ANTLR the generated parser does not do error recovery by default, but rather exits on the first error. To improve the error behavior, Bison offers the possibility to add the predefined \code{error} token to a grammar. Every time the Bison parser encounters an error it will produce this token~\cite{donnelly2019bison}. We modified the grammar to allow errors inside YAML maps and sequences:
+We then looked into the error recovery capabilities of Bison. Unlike ANTLR the generated parser does not do error recovery by default, but rather exits on the first error. To improve the error behavior, Bison offers the possibility to add the predefined \code{error} token to a grammar. Every time the Bison parser encounters an error it will produce this token~\cite{donnelly2019bison}. We modified the grammar to allow errors inside \glstext{YAML} maps and sequences:
 
 \begin{ccode}
   pairs : pair
@@ -1242,7 +1242,7 @@ One option to improve the error output of the Bison parser we did not implement 
 
 Just as Bison, YAEP also requires that you add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did with Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
 
-After all these changes the output for the YAML data from Listing~\ref{lst:incorrect_indentation_element_without_sequence} looks very similar to the one produced by YAMBi:
+After all these changes the output for the \glstext{YAML} data from Listing~\ref{lst:incorrect_indentation_element_without_sequence} looks very similar to the one produced by YAMBi:
 
 \begin{textcode}
 2:2: Syntax error on input “start of sequence”
@@ -1292,7 +1292,7 @@ The same single error message, regardless of the error, is not helpful. For good
   \item the last character of the flow scalar has to be an unescaped quote
 \end{enumerate}
 
-. If one of those two rules is not fulfilled, then the parser found a syntax error. After we updated the code accordingly the error message for the YAML data
+. If one of those two rules is not fulfilled, then the parser found a syntax error. After we updated the code accordingly the error message for the \glstext{YAML} data
 
 \begin{yamlcode}
   "double quoted
@@ -1322,7 +1322,7 @@ Table~\ref{tab:error_messages_final_list_element_outside} shows the final error 
 .
 
 \begin{table}[H]
-  \caption{Final error messages for the YAML code of Listing~\ref{lst:list_element_outside}}
+  \caption{Final error messages for the \glstext{YAML} code of Listing~\ref{lst:list_element_outside}}
   \label{tab:error_messages_final_list_element_outside}
 
   \centering
@@ -1389,7 +1389,7 @@ Table~\ref{tab:error_messages_final_list_element_outside} shows the final error 
 
 \begin{itemize}
   \item All the parsing engines report the correct error location.
-  \item YAy PEG and YAwn do not tell us in which YAML node the error occurs. All the other plugins report that a map ended prematurely.
+  \item YAy PEG and YAwn do not tell us in which \glstext{YAML} node the error occurs. All the other plugins report that a map ended prematurely.
   \item The error message of YAMBi reports an additional option – besides deleting the input – to fix the error: adding a key (in the line between \yaml{- element 1} and \yaml{- element 2}).
 \end{itemize}
 
@@ -1397,26 +1397,26 @@ The list below shows a ranking of the plugins according to the interpretation of
 
 \begin{enumerate}
   \item YAMBi
-  \item YAML CPP, Yan LR
+  \item \glstext{YAML} CPP, Yan LR
   \item YAy PEG, YAwn
 \end{enumerate}
 
-\subsubsection{YAML Data Containing Multiple Errors}
+\subsubsection{\glstext{YAML} Data Containing Multiple Errors}
 
-The YAML data from Listing~\ref{lst:list_element_outside} only contains a single syntax error. To compare the error recovery capabilities of the parsing libraries, we used YAML data that contains multiple syntax errors as input (see Listing~\ref{lst:multiple_errors}).
+The \glstext{YAML} data from Listing~\ref{lst:list_element_outside} only contains a single syntax error. To compare the error recovery capabilities of the parsing libraries, we used \glstext{YAML} data that contains multiple syntax errors as input (see Listing~\ref{lst:multiple_errors}).
 
 \begin{listing}
   \begin{code-boxed}
     \inputminted[linenos]{yaml}{Data/Errors/multiple_errors.yaml}
   \end{code-boxed}
-  \caption{The YAML data above contains three syntax errors that we directly describe in the comments right next to the error positions.}
+  \caption{The \glstext{YAML} data above contains three syntax errors that we directly describe in the comments right next to the error positions.}
   \label{lst:multiple_errors}
 \end{listing}
 
-Table~\ref{tab:error_messages_final_multiple_errors} shows the error messages of the different storage plugins for the YAML input of Listing~\ref{lst:multiple_errors}. As we can see the error output is quite different.
+Table~\ref{tab:error_messages_final_multiple_errors} shows the error messages of the different storage plugins for the \glstext{YAML} input of Listing~\ref{lst:multiple_errors}. As we can see the error output is quite different.
 
 \begin{table}[H]
-  \caption{Error messages for the YAML code of Listing~\ref{lst:multiple_errors}}
+  \caption{Error messages for the \glstext{YAML} code of Listing~\ref{lst:multiple_errors}}
   \label{tab:error_messages_final_multiple_errors}
   \centering
 
@@ -1517,7 +1517,7 @@ Table~\ref{tab:error_messages_final_multiple_errors} shows the error messages of
 
   \item All of the plugins that use error recovery (Yan LR, YAMBi, YAwn) print a spurious error messages about an error at line 13.
 
-  \item \emph{Yan LR} shows two error messages for the first syntax error, and one for the second syntax error. Error messages one and three describe the problematic part of the YAML data reasonably well.
+  \item \emph{Yan LR} shows two error messages for the first syntax error, and one for the second syntax error. Error messages one and three describe the problematic part of the \glstext{YAML} data reasonably well.
 
   \item Compared to Yan LR, \emph{YAMBi’s} (non-spurious) error messages also describe a second option to fix the erroneous input. However, while the first error message provides a useful suggestion on how to fix the error (insertion of a sequence element), the second option in the second error messages (insertion of a key), will probably confuse anyone that does not know how YAMBi’s lexer works.
 
@@ -1545,32 +1545,32 @@ The parsing plugin that showed the least useful error messages is YAy PEG. While
 
 \section{Most Promising Plugin}
 
-Using the information we collected in this chapter it is time to determine the most promising YAML plugin. Let us start by saying that we think all of the parser based YAML plugins (Yan LR, YAMBi, YAwn, YAy PEG) could be extended to parse a more complete subset of YAML. However, some of them might be more suitable than others, to fit all the requirements we have for a more complete YAML plugin.
+Using the information we collected in this chapter it is time to determine the most promising \glstext{YAML} plugin. Let us start by saying that we think all of the parser based \glstext{YAML} plugins (Yan LR, YAMBi, YAwn, YAy PEG) could be extended to parse a more complete subset of \glstext{YAML}. However, some of them might be more suitable than others, to fit all the requirements we have for a more complete \glstext{YAML} plugin.
 
-\subsection{Requirements for an Extended YAML Plugin}
+\subsection{Requirements for an Extended \glstext{YAML} Plugin}
 \label{sec:requirements_extended_yaml_plugin}
 
-Issue \href{https://issues.libelektra.org/2330}{\#2330} of Elektra’s issue tracker specifies some of the desirable features for an extended YAML plugin. We list them below in their order of importance according to Elektra’s maintainer.
+Issue \href{https://issues.libelektra.org/2330}{\#2330} of Elektra’s issue tracker specifies some of the desirable features for an extended \glstext{YAML} plugin. We list them below in their order of importance according to Elektra’s maintainer.
 
 \begin{enumerate}
   \item \textbf{Round Trip:}
   Assume a plugin
   \begin{enumerate}
-    \item converts some YAML data to a \cpp{KeySet}, then
-    \item writes back the converted \cpp{KeySet} to a YAML file, and afterwards
-    \item reads the new YAML file again
+    \item converts some \glstext{YAML} data to a \cpp{KeySet}, then
+    \item writes back the converted \cpp{KeySet} to a \glstext{YAML} file, and afterwards
+    \item reads the new \glstext{YAML} file again
   \end{enumerate}
   . In this scenario the \cpp{KeySet} read in step one and step three should be identical.
 
-  \item \textbf{Compatibility:} An extended YAML plugin should be able to read data in Elektra’s current default serialization format \code{dump}. For this task the plugin can invoke the plugin currently used to parse this serialization format.
+  \item \textbf{Compatibility:} An extended \glstext{YAML} plugin should be able to read data in Elektra’s current default serialization format \code{dump}. For this task the plugin can invoke the plugin currently used to parse this serialization format.
 
-  \item \textbf{Auxiliary Data:} Additional file data such as comments and ordering of keys should be kept, when the plugin adds new data to a YAML file.
+  \item \textbf{Auxiliary Data:} Additional file data such as comments and ordering of keys should be kept, when the plugin adds new data to a \glstext{YAML} file.
 
   \item \textbf{Maintainability \& Modularity:} The code of the plugin should be readable and extendable. Specific tasks should be handle by specific parts of a plugin or other specialized plugins.
 
   \item \textbf{Error Messages:} The plugin should provide good error messages for common mistakes.
 
-  \item \textbf{Documentation:} The YAML plugin and format (see Section “\nameref{sec:mapping_elektra_yaml}”) should be well documented.
+  \item \textbf{Documentation:} The \glstext{YAML} plugin and format (see Section “\nameref{sec:mapping_elektra_yaml}”) should be well documented.
 
   \item \textbf{Line Information:} The plugin should store line information to provide this data to other plugins and users.
 \end{enumerate}
@@ -1597,7 +1597,7 @@ This leaves us with three possible candidates.
   \begin{enumerate}
     \item YAEP is more or less the work of a single author: Vladimir N. Makarov. Recently another author, Alexander Klauer, fixed some of the problems of the project and modernized parts of the code base. However, compared to ANTLR and Bison, the community behind the parsing library is rather small.
 
-    \item YAEP requires more support code than YAMBi and Yan LR. While this support code is not that complicated, it would still something we need to maintain and extend for a more complete support of YAML and the requirements listed in “\nameref{sec:requirements_extended_yaml_plugin}”.
+    \item YAEP requires more support code than YAMBi and Yan LR. While this support code is not that complicated, it would still something we need to maintain and extend for a more complete support of \glstext{YAML} and the requirements listed in “\nameref{sec:requirements_extended_yaml_plugin}”.
   \end{enumerate}
 
 \end{description}
