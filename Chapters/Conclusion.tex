@@ -1,10 +1,22 @@
 \chapter{Conclusion}
 
-% Determined promising parsing techniques according to current literature:
-% → Only use directed parsing techniques, since they should be fast and powerful enough
+In the thesis we compared different parsing techniques using the \nameref{sec:keyset} structures of the configuration framework \href{https://www.libelektra.org}{Elektra} as common end product of the parsing process. The aim of this task was to find the most promising technique for a \glstext{YAML} storage plugin for Elektra.
 
-% Determined good candidates for parsing libraries an:
-% → All of them written in C/C++ to improve comparability
+We first looked at the current state of literature to determine the most promising parsing techniques. One of the results of this task was that we only considered directed parsing algorithms. They are powerful enough to parse \glstext{YAML} and offer better runtime performance than the more powerful parsing techniques that parse the input in arbitrary order.
+
+Afterwards we looked for libraries and parser generators that implemented the chosen parsing algorithms: recursive descent, \gls{ALL(*)}, LR, Earley, \gls{PEG} parser and combinatory parsing. We decided to only consider C and C++ as implementation languages to improve the comparability of the parsing code. Since Elektra also offers support for the parsing library Augeas we decided to also add this library to our list of implementation options. At the end of this process our list of parser library and parser generators consisted of
+
+\begin{itemize}
+  \item handwritten code (recursive descent),
+  \item \href{http://www.antlr.org}{ANTLR} (\gls{ALL(*)}),
+  \item \href{https://www.gnu.org/software/bison}{Bison} (LR),
+  \item \href{https://github.com/vnmakarov/yaep}{YAEP} (Earley parser),
+  \item \href{https://github.com/taocpp/PEGTL}{PEGTL} (PEG parser),
+  \item \href{https://github.com/orangeduck/mpc}{mpc} (parser combinator), and
+  \item \href{http://augeas.net}{Augeas} (bidirectional programming)
+\end{itemize}
+
+. As the specification of \glstext{YAML} is a rather extensive we decided to only implement a subset of the language. We discussed the specific required features for such a subset with Elektra’s developers as part of a presentation about the features of the language. The questionnaire we
 
 % Found minimal YAML subset in discussion with Elektra developers:
 % → Developers preferred double quoted scalars
@@ -17,6 +29,7 @@
 % → Problems
 %   → Begin and end markers in lexer based plugins
 %   → Handling dynamic context in PEG parser
+%   → Augeas not powerful enough to handle YAML
 
 % Comparison:
 % → All parsing engines show linear runtime/memory usage for tested file
