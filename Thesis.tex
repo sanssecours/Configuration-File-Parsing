@@ -177,9 +177,8 @@
 % Add list of listings to TOC
 % Source: https://tex.stackexchange.com/questions/99628
 \renewcommand{\listoflistings}{%
-  \cleardoublepage
-  \addcontentsline{toc}{chapter}{\listoflistingscaption}%
   \listof{listing}{\listoflistingscaption}%
+  \addcontentsline{toc}{chapter}{\listoflistingscaption}%
 }
 
 % -- Theorems ------------------------------------------------------------------
@@ -216,12 +215,12 @@
 
 \newglossaryentry{collection}{
     name = collection,
-    description = {A collection is a data structure used to store multiple items. In YAML the term collection is used to refer to both sequences and mappings}
+    description = {A collection is a data structure used to store multiple items. In \glstext{YAML} the term collection is used to refer to both sequences and mappings}
 }
 
 \newglossaryentry{simpleKey}{
     name = simple key,
-    description = {A simple YAML key is a key that does not start with the explicit mapping start symbol “\yaml{?}”}
+    description = {A simple \glstext{YAML} key is a key that does not start with the explicit mapping start symbol “\yaml{?}”}
 }
 
 \newcommand{\GlsShort}[1]
