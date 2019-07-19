@@ -1588,7 +1588,7 @@ To minimize the list of candidates for extension we first eliminate some of them
 This leaves us with three possible candidates.
 
 \begin{description}[style=multiline, leftmargin=2cm, font=\bfseries]
-  \item[Yan LR] Compared to YAMBi on Linux and YAwn the plugin performed worse in the runtime benchmark, and required more memory to parse our example data. On the other hand, ANTLR provides a lot of support code we had to write for the other plugins ourselves.
+  \item[Yan LR] Compared to YAMBi on Linux and YAwn, the plugin performed worse in the runtime benchmark, and required more memory to parse our example data. On the other hand, ANTLR provides a lot of support code we had to write for the other plugins ourselves.
 
   \item[YAMBi] The plugin performed very well in the runtime performance test on Linux and – compared to Yan LR – only required a relatively small amount of memory for our example data. The plugin does require more support code than Yan LR though. A problem considering the maintainability of the plugin (requirement 4) might be the LR parsing algorithm. If there are any problems like shift/reduce conflicts in the grammar, then a developer usually needs at least some information on how the LR parsing algorithm works to fix the problem.
 
@@ -1602,11 +1602,11 @@ This leaves us with three possible candidates.
 
 \end{description}
 
-With all the information above we decided that the best candidate for extension is Yan LR. We think ANTLR’s advantages, such as
+With all the information above in mind we decided that the best candidate for extension is Yan LR. We think ANTLR’s advantages, such as
 
 \begin{itemize}
   \item providing the most complete set of support code of all of the tested libraries and generators, and
-  \item producing good error messages, without any changes to the grammar
+  \item producing good error messages without any changes to the grammar,
 \end{itemize}
 
 make up for the worse runtime performance on Linux and the relatively large heap memory usage compared to Bison and YAEP. Since ANTRL’s C++ runtime is still relatively new we also think that the performance aspects can still be improved by ANTLR’s community.
