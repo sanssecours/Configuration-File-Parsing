@@ -608,7 +608,7 @@ The list below contains a summary of the \glstext{YAML} features that should be 
 
 \textbf{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of \glstext{YAML}’s data types to the ones supported by Elektra, is not trivial, and hence we decided to not support tags.
 
-We also decided against supporting \textbf{references}, since this feature allow us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
+We also decided against supporting \textbf{references}, since this feature allows us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
 
 \textbf{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the \glstext{YAML} documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant whitespace is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” \glstext{YAML} subset.
 
