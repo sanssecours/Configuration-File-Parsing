@@ -180,7 +180,7 @@ The order in which Elektra calls a certain plugin is specified via the \emph{con
 
 Figure~\ref{fig:plugins} shows a example, where Elektra uses a \glstext{YAML} plugin to read and write data, while a Base64 plugin (see also section “\nameref{sec:base64}”) encodes and decodes binary values. Such a combination of multiple plugins working together is called a \emph{backend}.
 
-In Elektra we \emph{mount} a backend at a certain position of the key-value database. For example, if we mount the backend described above at \code{user/yaml}, then the \glstext{YAML} plugin is responsible for storing and retrieving values below this mountpoint. If we want to save a new \cc{Key} with the name \code{user/yaml/pinky} and the value \code{pie}, then Elektra
+In Elektra we \emph{mount} a backend at a certain position of the key-value database. For example, if we mount the backend described above at \code{user/yaml}, then the \glstext{YAML} plugin is responsible for storing and retrieving values below this mountpoint. If we want to save a new \cc{Key} with the name \code{user/yaml/pinkie} and the value \code{pie}, then Elektra
 
 \begin{enumerate}
   \item uses the \glstext{YAML} plugin to convert the current \glstext{YAML} configuration file to a \cc{KeySet},
