@@ -109,7 +109,7 @@ The official \href{http://yaml.org}{YAML website} prominently lists known \glste
   \item \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} (YAML 1.2)
 \end{itemize}
 
-. Out of these options Syck is not actively maintained any more. This leaves only \code{libyaml} and \code{yaml-cpp}. We decided to use \code{yaml-cpp}, since it supports the latest version of \glstext{YAML} (\code{YAML 1.2}). With the help of the library we \href{https://github.com/ElektraInitiative/libelektra/pull/1613}{added the first plugin with full YAML support} called \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} to Elektra.
+. Out of these options Syck is not actively maintained any more. This leaves only \code{libyaml} and \code{yaml-cpp}. We decided to use \code{yaml-cpp}, since it supports the latest version of \glstext{YAML} (\code{YAML 1.2}). With the help of the library we \href{https://github.com/ElektraInitiative/libelektra/pull/1613}{added the first plugin with full YAML support} called \LinkYAMLCPP{} to Elektra.
 
 \subsection{ALL(*) Parser}
 
@@ -159,11 +159,11 @@ The most interesting part in the lexer of the libraries described above, is prob
 
 \end{itemize}
 
-We used the algorithm described above in the final version of our basic ANTLR storage plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. For that purpose we wrote a custom \glstext{YAML} lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
+We used the algorithm described above in the final version of our basic ANTLR storage plugin \LinkYanLR{}. For that purpose we wrote a custom \glstext{YAML} lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
 
 \subsection{LALR(1) Parser}
 
-After we finished the initial version of the ANTLR plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR} we developed a C++ plugin, that uses a \href{https://www.gnu.org/software/bison}{Bison} parser, called \href{https://www.libelektra.org/plugins/yambi}{YAMBi}.
+After we finished the initial version of the ANTLR plugin \LinkYanLR{} we developed a C++ plugin, that uses a \href{https://www.gnu.org/software/bison}{Bison} parser, called \LinkYAMBi{}.
 
 For the lexer of the plugin we used a slightly modified version of Yan LR’s lexer. This was necessary since Bison, unlike ANTLR, does not provide helper methods to operate on a character stream. For that purpose we wrote a simple class that mimics the behavior of ANTLR’s \cpp{ANTLRInputStream}.
 
@@ -184,7 +184,7 @@ elements : element          # 0
 
 states that the rule \code{elements} should return the same node \code{element} produced (\code{0}), if it matches a single \code{element}. If the rule \code{elements} matched a rule \code{elements} followed by the rule \code{element} (second line), then YAEP creates a new node with the name \code{elements} that contains the nodes produced by the rule \code{elements} as first child (\code{0}) and the node produced by \code{element} as second child (\code{1}).
 
-Since the output of our storage plugin \href{https://www.libelektra.org/plugins/yawn}{YAwn} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the ANTLR plugin \href{https://www.libelektra.org/plugins/yanlr}{Yan LR}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
+Since the output of our storage plugin \LinkYAwn{} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the ANTLR plugin \LinkYanLR{}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
 
 \subsection{PEG Parser}
 \label{sec:peg_parser}
@@ -212,7 +212,7 @@ Unlike ANTLR, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}
   \item \emph{custom state} to store contextual data
 \end{itemize}
 
-. Using the three features above we were able to create a \gls{PEG} parser plugin called \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} that uses grammar rules that are similar to the ones described by the \href{http://yaml.org/spec/1.2/spec}{YAML specification}.
+. Using the three features above we were able to create a \gls{PEG} parser plugin called \LinkYAyPEG{} that uses grammar rules that are similar to the ones described by the \href{http://yaml.org/spec/1.2/spec}{YAML specification}.
 
 The translation of some of the rules from the \glstext{YAML} specification to \gls{PEGTL} rules was trivial. For example, the rule:
 
@@ -268,7 +268,7 @@ proved more difficult to express in the \gls{PEGTL}. To translate these kind of 
 
 . We used \cc{with_updated_state} to create rules that update nested versions of the indentation (\cc{n} and \cc{m} in the \glstext{YAML} spec) and context (\cc{c} in the \glstext{YAML} spec). Using this approach we were able to translate almost any \glstext{YAML} rule without too much problems.
 
-For the conversion of the parsed data to a \cc{KeySet} we used the parse tree facility provided by \gls{PEGTL}. The whole parse tree contains many unnecessary nodes. Fortunately \gls{PEGTL} supports parse tree selection and tree rewriting. These features allowed us to keep the parse tree simple. We then use custom tree walking code to walk this tree, invoking a listener at certain nodes, to create a \cc{KeySet}. This approach is very similar to the one we used for the \href{https://www.libelektra.org/plugins/yawn}{YAwn} plugin (see Section “\nameref{sec:earley_parser}”).
+For the conversion of the parsed data to a \cc{KeySet} we used the parse tree facility provided by \gls{PEGTL}. The whole parse tree contains many unnecessary nodes. Fortunately \gls{PEGTL} supports parse tree selection and tree rewriting. These features allowed us to keep the parse tree simple. We then use custom tree walking code to walk this tree, invoking a listener at certain nodes, to create a \cc{KeySet}. This approach is very similar to the one we used for the \LinkYAwn{} plugin (see Section “\nameref{sec:earley_parser}”).
 
 \subsection{Parser Combinator}
 
@@ -321,7 +321,7 @@ Since Elektra supports values containing binary data, we can use the Base64 plug
 
 The new \emph{meta mode} uses metadata to mark a key-value pair that contains a base64-encoded value. Instead of a prefix Base64 adds a meta-key \code{type} with the value \code{binary}. Figure~\ref{fig:base64} shows an example, where Elektra uses the Base64 plugin to encode and decode the bytes 0x68 and 0x69 (code points for the ASCII string \yaml{hi}).
 
-We should mention here that we only added support for the Base64 encoded data to the \href{https://www.libelektra.org/plugins/yamlcpp}{YAML CPP} plugin, since we decided to not support tags for our \glstext{YAML} subset (see Section “\nameref{sec:discussion_summary_decision}”).
+We should mention here that we only added support for the Base64 encoded data to the \LinkYAMLCPP{} plugin, since we decided to not support tags for our \glstext{YAML} subset (see Section “\nameref{sec:discussion_summary_decision}”).
 
 \begin{figure}
   \centering
