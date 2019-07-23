@@ -233,7 +233,7 @@ struct ns_plain_first : sor<seq<not_at<c_indicator>, ns_char>,
 . The rule \cc{sor} represents ordered choice, meaning that it tries to match it’s template arguments:
 
 \begin{enumerate}
-  \item \cc{seq<not_at<c_indicator>, ns_char}
+  \item \cc{seq<not_at<c_indicator>, ns_char}, and
   \item \cc{seq<one<'?', ':', '-'>, at<ns_plain_safe>>}
 \end{enumerate}
 
