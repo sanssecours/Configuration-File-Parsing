@@ -379,7 +379,7 @@ The runtime of a non-backtracking recursive descent parser for an LL(1) grammar,
 \begin{itemize}
   \item \gls{ALL(*)}, used by Yan LR, is $O(n⁴)$, but the algorithm often performs linearly~\cite[p. 1]{parr2014adaptive},
   \item LALR, used by YAMBi, is $O(n)$~\cite{baxter2017runtime},
-  \item an Early parser, used by YAwn, is $O(n²)$ for unambiguous grammars~\cite[p. 145]{hopcroft1969formal},
+  \item an Earley parser, used by YAwn, is $O(n²)$ for unambiguous grammars~\cite[p. 145]{hopcroft1969formal},
   \item a general PEG parsers, as used by YAy PEG, is exponential~\cite[p. 1]{moss2014derivatives} ($O(cⁿ)$) and for PEG parsers that use memoization is $O(n)$~\cite{ford2002packrat}
 \end{itemize}
 
