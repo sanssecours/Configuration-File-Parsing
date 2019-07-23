@@ -173,7 +173,7 @@ For the measurement we use \ToolHyperfine{}, sine this tool
 
 .
 
-To make sure we repeat the benchmark every time \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} reports statistical outliers we created the Shell script \FileBenchmarkRuntime{}. This script calls \FileBenchmarkYAML{} for every input file and repeats a benchmark, until \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} does not report any warnings. The script \FileBenchmarkRuntime{} \emph{does} ignore warnings about runtimes under 5 milliseconds though, since \FilePluginGetSet{} might take less execution time for \glstext{YAML} files that only contain a few lines.
+To make sure we repeat the benchmark every time \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} reports statistical outliers we created the Shell script \FileBenchmarkRuntime{}. This script calls \FileBenchmarkYAML{} for every input file and repeats a benchmark, until \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} does not report any warnings. The script \FileBenchmarkRuntime{} \emph{does} ignore warnings about runtimes under 5 milliseconds though, since \FilePluginGetSet{} might take less execution time for small \glstext{YAML} files.
 
 \begin{figure}[H]
   \centering
