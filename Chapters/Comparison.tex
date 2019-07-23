@@ -690,11 +690,11 @@ YAy PEG, with its scanner-less parsing engine based on C++ templates, uses the m
   \item a listener ($122$ lines of code)
 \end{itemize}
 
-for the plugin. The other handwritten code take care of parsing ($822$ code lines) and the communication between the plugin and Elektra ($115$ code lines). The amount of parsing code of YAy PEG is quite large, compared to the grammar code of the other plugins. However, we have to consider that
+for the plugin. The other handwritten code take care of parsing ($822$ code lines) and the communication between the plugin and Elektra ($115$ code lines). The amount of parsing code of YAy PEG is quite large, compared to the grammar code of the other plugins. However, we have to consider
 
 \begin{itemize}
-  \item YAy PEG’s parsing code supports a subset of \glstext{YAML} that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
-  \item the parsing code also takes care of the work usually done by a lexer
+  \item that YAy PEG’s parsing code supports a subset of \glstext{YAML} that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
+  \item that the parsing code also takes care of the work usually done by a lexer
 \end{itemize}
 
 . If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) code lines for the lexer.
