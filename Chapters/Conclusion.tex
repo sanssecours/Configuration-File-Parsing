@@ -27,16 +27,26 @@
 %   study opens up, what the results says to current thinking about and acting on
 %   the topic.
 %
+% Contribution
+% ============
+%
+% - Real world comparison of common file parsing techniques
+% - Common data structure (better comparison possibilities)
+%
 % Limitations
 % ===========
 %
-% - Only looked at YAML
+% - Only looked at YAML: Other configuration file formats would be interesting too
 % - Additional parsing libraries in other programming languages might be better
 %   for parsing config data
+% - Did not use Augeas (not powerful enough) and mpc (less powerful version of
+%   PEGTL)
+% - More test data for performance test (parser more complete set of YAML)
 %
 % Future Work
 % ===========
 %
 % - Add lexer level error messages
+% - Add escaping and unescaping support for single and double quoted scalars
 
 In the thesis we compared different parsing techniques using the \nameref{sec:keyset} structures of the configuration framework \href{https://www.libelektra.org}{Elektra} as common end product of the parsing process. The aim of this task was to find the most promising parsing technique for configuration files using the language \glstext{YAML} as example.
