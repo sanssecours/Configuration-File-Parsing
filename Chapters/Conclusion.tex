@@ -49,4 +49,23 @@
 % - Add lexer level error messages
 % - Add escaping and unescaping support for single and double quoted scalars
 
-In the thesis we compared different parsing techniques using the \nameref{sec:keyset} structures of the configuration framework \href{https://www.libelektra.org}{Elektra} as common end product of the parsing process. The aim of this task was to find the most promising parsing technique for configuration files using the language \glstext{YAML} as example.
+In the thesis we compared different parsing techniques using the \nameref{sec:keyset} structures of the configuration framework \href{https://www.libelektra.org}{Elektra} as common end product of the parsing process. The aim of this task was to find the most promising parsing technique for configuration files using a subset of the language \glstext{YAML} as example.
+
+In a \hyperref[sec:comparison]{detailed comparison} we determined the answer to our research questions.
+
+\speed*
+
+The \hyperref[sec:run_time_performance]{benchmarks} showed a significant difference between the runtime of the \hyperref[sec:implementation]{parsing plugins} created in the scope of the thesis, especially for large files. However, at least for our example data, all the plugins \hyperref[fig:benchmark_results_generated_above_1000]{showed linear runtime behavior}. Even the PEG parser library \gls{PEGTL} that has a theoretical exponential runtime in the worst case showed this linear behavior. Interestingly, \gls{YAEP}, the library that uses one of the most powerful parsing techniques tested (Earley parsing), showed the \hyperref[fig:benchmark_generated]{best runtime performance on macOS}. Even on Linux the library was only \hyperref[fig:benchmark_generated]{slightly slower than the fastest parser, based on Bisons’ LALR code}.
+
+\closeness*
+
+We showed that \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, since in the case of YAML, the language specification is rather low level, the extension of the support code that converts the data in Elektra’s data structures takes more effort, than for the lexer based parsers.
+
+In the end, \gls{ANTLR}, the parsing engine
+
+\begin{itemize}
+  \item that provided the most complete support code, and
+  \item that produces good error messages, without any changes to the grammar
+\end{itemize}
+
+showed the best overall results according to our \hyperref[sec:comparison]{comparison}. Bison and \gls{YAEP} also showed promising results, while yaml-cpp and PEGTL did not fit all \hyperref[sec:requirements_extended_yaml_plugin]{requirements for a good storage plugin}. In the beginning of the thesis we also considered using the bidirectional programming library Augeas and the parser combinator library mpc. However, in the implementation phase we found that both of these libraries are unsatisfactory for our needs. Augeas is not able to process the context sensitive language YAML, and mpc does not seem to offer any significant advantage over the similar library \gls{PEGTL}.
