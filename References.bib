@@ -1,7 +1,7 @@
 %% This BibTeX bibliography file was created using BibDesk.
 %% https://bibdesk.sourceforge.io/
 
-%% Created for René Schwaiger at 2019-07-23 12:26:57 +0200 
+%% Created for René Schwaiger at 2019-07-31 15:05:32 +0200 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
@@ -22,6 +22,40 @@
 	Publisher = {Springer Berlin Heidelberg},
 	Title = {DCGs + Memoing = Packrat Parsing but Is It Worth It?},
 	Year = {2008}}
+
+@mastersthesis{flodin2014packrat,
+	Abstract = {Packrat parsing is a top-down, recursive descent parsing technique that uses backtracking and has a guaranteed linear parse time. Conventional backtracking parsers suffer from exponential parse times in the worst case due to re-evaluating redundant results. This is avoided in packrat parsers with the use of memoization. However, memoization causes packrat parsers memory consumption to be linearly proportional to the input string, as opposed to linearly proportional to the maximum recursion depth for conventional parsing techniques. The objective of this thesis is to implement a packrat parser generator and compare it with an existing and well-known parser combination called Lex/Yacc which produces shift-reduce parsers. The comparison will consist of pure performance measurements such as memory consumption and parsing time, and also a more general comparison between the two parsing techniques. The conclusion made from the comparison is that packrat parsing can be a viable option due to its ability to compose modular and extendible grammars more easily than Lex/Yacc. However, from a performance perspective the Lex/Yacc combination proved superior. In addition, the results indicate that similar performance for a packrat parser is hard to achieve on grammars similar to those used in this thesis. },
+	Author = {Flodin, Daniel},
+	Date-Added = {2019-07-30 14:49:32 +0200},
+	Date-Modified = {2019-07-31 15:05:03 +0200},
+	Institution = {Uppsala University, Department of Information Technology},
+	Issn = {1401-5749},
+	Keywords = {Packrat Parsing, LR},
+	Number = {14 016},
+	School = {Uppsala University, Department of Information Technology},
+	Series = {UPTEC IT},
+	Title = {A Comparison Between Packrat Parsing and Conventional Shift-Reduce Parsing on Real-World Grammars and Inputs},
+	Url = {http://uu.diva-portal.org/smash/record.jsf?pid=diva2%3A752340},
+	Year = {2014},
+	Bdsk-Url-1 = {http://uu.diva-portal.org/smash/record.jsf?pid=diva2%3A752340}}
+
+@article{json2019geoff,
+	Archiveprefix = {arXiv},
+	Author = {Geoff Langdale and Daniel Lemire},
+	Bibsource = {dblp computer science bibliography, https://dblp.org},
+	Biburl = {https://dblp.org/rec/bib/journals/corr/abs-1902-08318},
+	Date-Added = {2019-07-29 14:52:33 +0200},
+	Date-Modified = {2019-07-30 14:51:07 +0200},
+	Eprint = {1902.08318},
+	Journal = {CoRR},
+	Keywords = {JSON, SIMD, Parsing},
+	Timestamp = {Tue, 21 May 2019 18:03:37 +0200},
+	Title = {Parsing Gigabytes of {JSON} per Second},
+	Url = {http://arxiv.org/abs/1902.08318},
+	Volume = {abs/1902.08318},
+	Year = {2019},
+	Bdsk-Url-1 = {http://arxiv.org/abs/1902.08318}}
+
 @article{earley1970efficient,
 	Acmid = {362035},
 	Address = {New York, NY, USA},
