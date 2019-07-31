@@ -399,6 +399,8 @@ The runtime of a non-backtracking recursive descent parser for an LL(1) grammar,
      …in practice packrat parsers often perform worse than simple recursive descent parsers despite being in a better time complexity class.
   \end{quote}
 
+  In the article~\citetitle{hudak2008dcgs}~\cite{hudak2008dcgs} \citeauthor{hudak2008dcgs} also show that not using memoization can decrease the actual runtime of a PEG parser.
+
 \end{itemize}
 
 Figure~\ref{fig:benchmark_generated} shows that the constant difference between the linear runtimes can be relatively high. For example on macOS, the fastest plugin YAwn is nearly five times faster than the slowest plugin YAy PEG for the file \FileGenerated{}:
