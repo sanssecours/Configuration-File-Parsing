@@ -51,7 +51,7 @@
 
 \section{Conclusion}
 
-In the thesis we compared different parsing techniques using the \nameref{sec:keyset} structures of the configuration framework \href{https://www.libelektra.org}{Elektra} as common end product of the parsing process. The aim of this task was to find the most promising parsing technique for configuration files using a subset of the language \glstext{YAML} as example.
+In the thesis we compared different parsing techniques using the \nameref{sec:keyset} structure of the configuration framework \href{https://www.libelektra.org}{Elektra} as common end product of the parsing process. The aim of this task was to find the most promising parsing technique for configuration files using a subset of the language \glstext{YAML} as example.
 
 In a \hyperref[sec:comparison]{detailed comparison} we determined the answer to our research questions.
 
@@ -61,7 +61,7 @@ The \hyperref[sec:run_time_performance]{benchmarks} showed a significant differe
 
 \closeness*
 
-We showed that \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, since in the case of YAML, the language specification is rather low level, the extension of the support code that converts the data in Elektra’s data structures takes more effort, than for the lexer based parsers.
+We showed that the \gls{PEG} library \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, since in the case of YAML, the language specification is rather low level, the extension of the support code that converts the data in Elektra’s data structures takes more effort, than for the lexer based parsers.
 
 In the end, \gls{ANTLR}, the parsing engine
 
@@ -72,4 +72,4 @@ In the end, \gls{ANTLR}, the parsing engine
 
 showed the best overall results according to our \hyperref[sec:comparison]{comparison}. Bison and \gls{YAEP} also showed promising results, while yaml-cpp and PEGTL did not fit all \hyperref[sec:requirements_extended_yaml_plugin]{requirements for an extended YAML storage plugin well}. In the beginning of the thesis we also considered using the bidirectional programming library Augeas and the parser combinator library mpc. However, in the implementation phase we found that both of these libraries are unsatisfactory for our needs. Augeas is not able to process the context sensitive language YAML, and mpc does not seem to offer any significant advantage over the similar library \gls{PEGTL}.
 
-Overall the thesis should provide a thorough comparison of current implementations of parsing techniques in the context of configuration data. There are certainly other papers that compare libraries or parsing engines using either a specialized format such as JSON~\cite{json2019geoff} or multiple grammars~\cite{chen2011full, flodin2014packrat}. However, the comparability of the parsers in these papers is usually limited by the fact that they do not use the same common data structure.
+Overall this thesis provides a thorough comparison of current implementations of parsing techniques in the context of configuration data. There are certainly other papers that compare libraries or parsing engines using either a specialized format such as JSON~\cite{json2019geoff} or multiple grammars~\cite{chen2011full, flodin2014packrat}. However, the comparability of the parsers in these papers is usually limited by the fact that they do not use the same common data structure.
