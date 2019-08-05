@@ -80,7 +80,7 @@ While we think that the comparison presented in this theses is thorough, we foun
 
 \subsection{Additional Data Formats}
 
-The \glstext{YAML} file format we used as example is quite complicated. We therefore used a custom lexer instead of a standard tool, like ANTLR’s lexer or flex, to make the parsing process of the whitespace rules of the language easier. It would make sense to also write, generate and compare parsing code for simpler data configuration formats, such as JSON, TOML or INI. These formats should also make it easier to use a standard lexing tool.
+The \glstext{YAML} file format we used as example is quite complicated. We therefore used a custom lexer instead of a standard tool, like ANTLR’s lexer or flex, to make the parsing process of the whitespace rules of the language easier. It would make sense to also write, generate, and compare parsing code for simpler data configuration formats, such as JSON, TOML or INI. These formats should make it easier to use a standard lexing tool, and allow us to determine how much influence a lexing tool has on the overall parsing process.
 
 \subsection{Typing Support}
 
@@ -94,10 +94,8 @@ The custom lexer code written in this thesis does not detect or report errors at
 
 To improve the comparability of the runtime and memory benchmarks we only considered tools written in C or C++ in this thesis. However, some of the most interesting parsing research focuses on tools written in other programming languages.
 
-\begin{sloppypar}
 \begin{description}[style=multiline, leftmargin=3cm, font=\bfseries]
-  \item [Menhir (OCaml)] Menhir is a LR parser generator that provides support for “example based error reporting”~\cite{jeffery2003generating, kaestner2018compcert, pottier2019menhir}. In theory we should be able to generate parsers with Menhir that produce error messages comparable~\cite[p. 2]{kaestner2018compcert} to the ones of handwritten recursive descent parsers, used in tools such as Clang or GCC.
+  \item [Menhir (OCaml)] Menhir is a LR parser generator that provides support for “example based error reporting”~\cite{jeffery2003generating, kaestner2018compcert, pottier2019menhir}. In theory we should be able to generate parsers with Menhir that produce error messages comparable to the ones of handwritten recursive descent parsers, used in tools such as Clang or GCC~\cite[p. 2]{kaestner2018compcert}.
 
   \item[LPegLabel (Lua)] This library supports some of the recent interesting features for error handling in \glspl{PEG}, such as labeled failures~\cite{maidl2016labeled} and syntax error recovery~\cite{medeiros2018recovery}.
 \end{description}
-\end{sloppypar}
