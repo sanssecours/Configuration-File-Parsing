@@ -73,3 +73,31 @@ In the end, \gls{ANTLR}, the parsing engine
 showed the best overall results according to our \hyperref[sec:comparison]{comparison}. Bison and \gls{YAEP} also showed promising results, while yaml-cpp and PEGTL did not fit all \hyperref[sec:requirements_extended_yaml_plugin]{requirements for an extended YAML storage plugin well}. In the beginning of the thesis we also considered using the bidirectional programming library Augeas and the parser combinator library mpc. However, in the implementation phase we found that both of these libraries are unsatisfactory for our needs. Augeas is not able to process the context sensitive language YAML, and mpc does not seem to offer any significant advantage over the similar library \gls{PEGTL}.
 
 Overall this thesis provides a thorough comparison of current implementations of parsing techniques in the context of configuration data. There are certainly other papers that compare libraries or parsing engines using either a specialized format such as JSON~\cite{json2019geoff} or multiple grammars~\cite{chen2011full, flodin2014packrat}. However, the comparability of the parsers in these papers is usually limited by the fact that they do not use the same common data structure.
+
+\section{Future Work}
+
+While we think that the comparison presented in this theses is thorough, we found some limitations future research could take into consideration.
+
+\subsection{Additional Data Formats}
+
+The \glstext{YAML} file format we used as example is quite complicated. We therefore used a custom lexer instead of a standard tool, like ANTLR’s lexer or flex, to make the parsing process of the whitespace rules of the language easier. It would make sense to also write, generate and compare parsing code for simpler data configuration formats, such as JSON, TOML or INI. These formats should also make it easier to use a standard lexing tool.
+
+\subsection{Typing Support}
+
+We did not consider proper type support in the thesis. While we added support for binary data to the \LinkYAMLCPP{} plugin, most of the other code we wrote does not support types properly. This can lead to problems, such as \href{https://issues.libelektra.org/2833}{unwanted conversions from boolean data to integer values}.
+
+\subsection{Lexer Level Error Messages}
+
+The custom lexer code written in this thesis does not detect or report errors at the token level. Adding support for this feature should be relatively easy and allow us to compare error messages for common low level mistakes. This is especially interesting, since we would be able to assess, if the PEG library \gls{PEGTL} is able to provide the same error message quality as handwritten custom code for low level errors.
+
+\subsection{Additional Parser Engines/Generators}
+
+To improve the comparability of the runtime and memory benchmarks we only considered tools written in C or C++ in this thesis. However, some of the most interesting parsing research focuses on tools written in other programming languages.
+
+\begin{sloppypar}
+\begin{description}[style=multiline, leftmargin=3cm, font=\bfseries]
+  \item [Menhir (OCaml)] Menhir is a LR parser generator that provides support for “example based error reporting”~\cite{jeffery2003generating, kaestner2018compcert, pottier2019menhir}. In theory we should be able to generate parsers with Menhir that produce error messages comparable~\cite[p. 2]{kaestner2018compcert} to the ones of handwritten recursive descent parsers, used in tools such as Clang or GCC.
+
+  \item[LPegLabel (Lua)] This library supports some of the recent interesting features for error handling in \glspl{PEG}, such as labeled failures~\cite{maidl2016labeled} and syntax error recovery~\cite{medeiros2018recovery}.
+\end{description}
+\end{sloppypar}
