@@ -1243,7 +1243,7 @@ One option to improve the error output of the Bison parser we did not implement 
 
 \subsection{YAEP}
 
-Just as Bison, YAEP also requires that you add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did for Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
+Just as Bison, \gls{YAEP} also requires that you add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did for Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
 
 After all these changes the output for the \glstext{YAML} data from Listing~\ref{lst:incorrect_indentation_element_without_sequence} looks very similar to the one produced by YAMBi:
 
