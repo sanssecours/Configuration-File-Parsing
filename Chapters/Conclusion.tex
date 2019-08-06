@@ -98,4 +98,12 @@ To improve the comparability of the runtime and memory benchmarks we only consid
   \item [Menhir (OCaml)] Menhir is a LR parser generator that provides support for “example based error reporting”~\cite{jeffery2003generating, kaestner2018compcert, pottier2019menhir}. In theory we should be able to generate parsers with Menhir that produce error messages comparable to the ones of handwritten recursive descent parsers, used in tools such as Clang or GCC~\cite[p. 2]{kaestner2018compcert}.
 
   \item[LPegLabel (Lua)] This library supports some of the recent interesting features for error handling in \glspl{PEG}, such as labeled failures~\cite{maidl2016labeled} and syntax error recovery~\cite{medeiros2018recovery}.
+
+  \item[Marpa (Perl)] Marpa is a parsing library based on Earley’s parsing algorithm. The library implements improvements to the algorithm from \citeauthor{leo1991general}~\cite{leo1991general} and \citeauthor{aycock2002practical}~\cite{aycock2002practical}. According to the author~\cite{kegler2019marpa}:
+
+  \begin{quote}
+    Marpa is intended to replace, and to go well beyond, recursive descent and the yacc family of parsers.
+  \end{quote}
+
+  .
 \end{description}
