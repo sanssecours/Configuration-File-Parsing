@@ -20,11 +20,9 @@ In the evaluation phase of the work we looked at the criteria listed below.
   For the measurement of the code complexity we determined the cyclomatic complexity~\cite{mccabe1976complexity} of both the generated and handwritten code.
 
   \item[{\hyperref[sec:extensibility]{Ease of Extensibility and Composability}}]~\\[0.1cm]
-  We determined the amount of code line changes it took, to add certain features to, and implement bug fixes in, the \glstext{YAML} plugins. This method allows us to quantitatively measure the extension effort. In this part of the evaluation we also look at \glstext{YAML}’s specification grammar and compare it with the parsing code of our plugins. In the end we will answer~\Cref{que:closeness}:
+  We determined the amount of code line changes it took, to add certain features to, and implement bug fixes in, the \glstext{YAML} plugins. This method allows us to quantitatively measure the extension effort. In this part of the evaluation we also look at \glstext{YAML}’s specification grammar and compare it with the parsing code of our plugins. In the end we will answer~\Cref{que:closeness}.
 
   \closeness*
-
-  .
 
   \item[{\hyperref[sec:error_reporting]{Error Reporting}}]~\\[0.1cm]
   For this subtask we created \glstext{YAML} input files, that contain certain errors. We then looked at what error information the parsing engines provide, and how well this information describes the given error.
@@ -789,11 +787,9 @@ While cyclomatic complexity has “never been unambiguously correlated with defe
 
 One advantage of parsing libraries and parser generators over handwritten parsers is that we can update the language grammar without having to rewrite parsing code. This way we can extend the parsed \glstext{YAML} subset easily without many manual code changes. In the first part of the next section we analyze how many code line changes it took to, fix bugs in, and add minor features to, the \glstext{YAML} plugins. The amount of code changes provides a good metric on how much effort it takes to extend the parser plugins.
 
-In the second part of this section we will take a look at how the composability of our parsing code influences the extensibility. One option to create an extensible system is to base it on components. We can reuse these components to keep the amount of code for a new feature or bug fix low. We can imagine that the rules of a grammar represent components in our parsing systems. Parsing systems without a separate lexing phase such as PEGTL take the composability idea one step further. In PEGTL we can compose the parser for the whole grammar out of smaller parser that build on each other. We will analyze, if the component based parser of YAy PEG provides extensibility advantages over the other parsers. We will also answer~\Cref{que:closeness} in this part of the thesis:
+In the second part of this section we will take a look at how the composability of our parsing code influences the extensibility. One option to create an extensible system is to base it on components. We can reuse these components to keep the amount of code for a new feature or bug fix low. We can imagine that the rules of a grammar represent components in our parsing systems. Parsing systems without a separate lexing phase such as PEGTL take the composability idea one step further. In PEGTL we can compose the parser for the whole grammar out of smaller parser that build on each other. We will analyze, if the component based parser of YAy PEG provides extensibility advantages over the other parsers. We will also answer~\Cref{que:closeness} in this part of the thesis.
 
-  \closeness*
-
-.
+\closeness*
 
 \subsection{Plugin Updates}
 
@@ -976,11 +972,11 @@ Table~\ref{table:extensibility} lists some of the advantages and disadvantages w
 
 Using the PEG library certainly offers advantages considering the extensibility of the grammar, since we can more or less copy the grammar rules from the specification or reference parser and modify them slightly for \gls{PEGTL}. Fortunately the reference parser already contains a relatively large test suite, which means the chance of errors in the reference grammar is quite low. This is helpful, since the specification grammar consists of 211 rules, which can be quite complicated. This is also one of the disadvantages of using \gls{PEGTL}, since the grammar of YAy PEG is more complicated than the one of the lexer based plugins. The complexity is a result of using a single pass to parse \glstext{YAML} data instead of using a separate lexer and parser phase. The single parsing phase also makes debugging harder since we can not debug the lexer and parsing code separately.
 
-Keeping the information above in mind we can now answer \Cref{que:closeness}:
+Keeping the information above in mind we can now answer \Cref{que:closeness}.
 
   \closeness*
 
-. The parser of YAy PEG certainly stays closest to the grammar definition of the \glstext{YAML} specification. This closeness is helpful, if we look at the extension of the grammar. However, since YAy PEG’s grammar code also handles low level details of the parsing process we have to consider these details later in the parsing process, which reduces the extensibility of the parsing support code compared to the one of the lexer based plugins.
+The parser of YAy PEG certainly stays closest to the grammar definition of the \glstext{YAML} specification. This closeness is helpful, if we look at the extension of the grammar. However, since YAy PEG’s grammar code also handles low level details of the parsing process we have to consider these details later in the parsing process, which reduces the extensibility of the parsing support code compared to the one of the lexer based plugins.
 
 \subsection{Conclusion}
 
