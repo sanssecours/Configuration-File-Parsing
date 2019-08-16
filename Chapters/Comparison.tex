@@ -162,7 +162,7 @@ we built Elektra using the following \href{https://cmake.org}{CMake} options:
 
 To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \ToolHyperfine{} to call \FilePluginGetSet{} using different \glstext{YAML} plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
-For the measurement we use \ToolHyperfine{}, sine this tool
+For the measurement we use \ToolHyperfine{}, since this tool
 
 \begin{enumerate}
   \item automatically determines how often it should call \FilePluginGetSet{} for meaningful measurement results,
