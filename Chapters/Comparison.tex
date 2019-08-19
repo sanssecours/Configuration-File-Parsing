@@ -908,7 +908,9 @@ According to the \glstext{YAML} specification an empty file corresponds to a nul
   \label{fig:empty_document_count}
 \end{figure}
 
+\begin{sloppypar}
 When we implemented the fixes for the empty document conversion we noticed that we added nearly identical code to the listener (Yan LR, YAwn, YAy PEG) respectively driver (YAMBi) of the plugins. These modifications took \textcolor{Green}{$6$ additions} for Yan LR and \textcolor{Green}{$5$ additions} for the other plugins. We should mention here that we could also have avoided two additional lines for the Yan LR plugin, which consisted of an \cpp{using} statement and the inclusion of an optional header file.
+\end{sloppypar}
 
 The other code line differences were a result of grammar updates to
 
