@@ -694,7 +694,9 @@ In our second solution we take the hierarchical nature of the database into acco
 
 . The second solution removes unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the \glstext{YAML} data from above.
 
-\begin{figure}
+As we can see in Figure~\ref{fig:tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:tree_extended} shows the resulting tree.
+
+\begin{figure}[H]
   \centering
   \begin{subfigure}[t]{.4\textwidth}
     \centering
@@ -724,7 +726,7 @@ In our second solution we take the hierarchical nature of the database into acco
   \caption{The tree-like representation of \glstext{YAML} data shows the problem with adding non-leaf values}
 \end{figure}
 
-As we can see in Figure~\ref{fig:tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:tree_extended} shows the resulting tree. We could now save \code{chain} as a map key inside \code{bloc}:
+We could now save \code{chain} as a map key inside \code{bloc}:
 
 \begin{yamlcode}
   bloc:
