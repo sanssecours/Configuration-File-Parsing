@@ -87,17 +87,17 @@ The methodological approach for this thesis consists of the steps below.
   \item[Comparison] As noted in “\nameref{sec:aim_of_the_work}” we evaluated the different implementations of our minimal \glstext{YAML} subset parsers.
 
   \begin{description}
-    \item[Runtime Benchmark] For the runtime comparison we use benchmarks to determine the speed of the different parsing code. In this part of the thesis, we answer \Cref{que:speed}.
+    \item[Runtime Benchmark:] For the runtime comparison we use benchmarks to determine the speed of the different parsing code. In this part of the thesis, we answer \Cref{que:speed}.
 
-    \item[Memory Profiling] For the memory comparison we use a memory profiling tool to determine the heap memory usage of the \glstext{YAML} plugins.
+    \item[Memory Profiling:] For the memory comparison we use a memory profiling tool to determine the heap memory usage of the \glstext{YAML} plugins.
 
-    \item[Code Count] We counted the number of code lines with a code line counting tool. This method allow us to consider only actual code, ignoring blank lines and comments.
+    \item[Code Count:] We counted the number of code lines with a code line counting tool. This method allow us to consider only actual code, ignoring blank lines and comments.
 
-    \item[Complexity Measurement] We measured the \gls{CC} of the code using a static analyzer.
+    \item[Complexity Measurement:] We measured the \gls{CC} of the code using a static analyzer.
 
-    \item[Extensibility \& Composability Check] To analyze the extensibility and composability of the parsing code we looked at the code difference of commits for certain features and bug fixes. We counted the amount of updated code lines to determine the extension effort. This measurement, together with a comparison between the grammar specification of \glstext{YAML} and the code created in this thesis, will help us to determine the answer for \Cref{que:closeness}.
+    \item[Extensibility \& Composability Check:] To analyze the extensibility and composability of the parsing code we looked at the code difference of commits for certain features and bug fixes. We counted the amount of updated code lines to determine the extension effort. This measurement, together with a comparison between the grammar specification of \glstext{YAML} and the code created in this thesis, will help us to determine the answer for \Cref{que:closeness}.
 
-    \item[Error Reporting] To determine the quality of the error messages we created erroneous files and compared the quality of the resulting error output.
+    \item[Error Reporting:] To determine the quality of the error messages we created erroneous files and compared the quality of the resulting error output.
   \end{description}
 
 \end{description}
