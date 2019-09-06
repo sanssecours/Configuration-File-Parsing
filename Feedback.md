@@ -33,18 +33,6 @@ Ich denke, es wird nicht so viel zu tun sein. Deine Arbeit ist nämlich
 Mit dem Schreiben von ein paar zusätzlichen Seiten (wo du dich verkaufst
 bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 
-# Fragen/Kommentare
-
-- Weiterer Parser für INI-Files (und Property-Files)? Erstellen eines ANTLR-Templates/Plugins für andere Storage-Formate? Zeiten
-
-Ein eigenes ANTLR-Plugin wäre wahrscheinlich zu restriktiv, da die Zuordnung von Konfigurationsformat zu `Key` und `KeySet` im Allgemeinen nicht eindeutig festlegbar ist.
-
-- Feature: Kommentare erhalten (Yan LR, Zusätzliches Property-File/INI-Plugin)?
-- State of the Art: Hinzufügen einer Abschnitts der Parsen von Config-Daten und vollständigen Programmiersprachen vergleicht?
-- Syntax-Fehler
-- Tipps zum Finden von Papers zu bestimmten Thema?
-- Parsing Framework auch für andere Parsergeneratoren/Libraries?
-- Allgemeine Frage: `-Wconversion` als Standard-Compiler-Flag sinnvoll?
 
 1. Contributions (alles implementiert, Vergleichsframework)
 2. Motivation (Introduction)
