@@ -37,8 +37,37 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 
 1. Contributions (alles implementiert, Vergleichsframework)
 2. Motivation (Introduction)
-3. stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate), Arbeit abgrenzen
+3. stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
 4. Methoden vollständig beschreiben
 5. Results und Analyse trennen
 6. Kleinigkeiten (Zeiten bei Implementierung)
 7. Umfrage (löschen)
+
+# Contributions
+
+- Integration of 4 parsing engines (ANTLR, Bison, YAEP, PEGTL) and YAML library into Elektra parser framework
+- Easy addition of additional parsers based on this work
+- Benchmark framework to compare YAML based parsers in Elektra
+- Addition of plugin to handle directory values in node (leaf) based configuration format
+
+# Differences Config-/Language-Parser
+
+| Area       | Programming Language                 | Configuration Language      |
+| ---------- | ------------------------------------ | --------------------------- |
+| Comments   | Throw away                           | Should be kept in file      |
+| Structure  | Describes data and data manipulation | Only describes data         |
+| Complexity | Medium to High                       | Low to Medium               |
+| Updates    | Manually done by programmer          | Manual/Tools (CLI, GUI)     |
+| Errors     | - Program does not compile           | - Possibly incorrect config |
+|            | - Programmer/Expert                  | - Normal User               |
+
+## Documents
+
+- https://stackoverflow.com/questions/648246/at-what-point-does-a-config-file-become-a-programming-language
+
+# Results
+
+## Why ANTLR?
+
+- More support code (direct support for parse tree)
+- Grammar supports repetition (unlike Bison)
