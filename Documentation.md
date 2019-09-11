@@ -52,14 +52,15 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 
 # Differences Config-/Language-Parser
 
-| Area       | Programming Language                 | Configuration Language      |
-| ---------- | ------------------------------------ | --------------------------- |
-| Comments   | Throw away                           | Should be kept in file      |
-| Structure  | Describes data and data manipulation | Only describes data         |
-| Complexity | Medium to High                       | Low to Medium               |
-| Updates    | Manually done by programmer          | Manual/Tools (CLI, GUI)     |
-| Errors     | - Program does not compile           | - Possibly incorrect config |
-|            | - Programmer/Expert                  | - Normal User               |
+| Area       | Programming Language                  | Configuration Language      |
+| ---------- | ------------------------------------- | --------------------------- |
+| Comments   | Throw away                            | Should be kept in file      |
+| Structure  | Describes data and data manipulation  | Only describes data         |
+| Complexity | Medium to High                        | Low to Medium               |
+| Updates    | Manually done by programmer           | Manual/Tools (CLI, GUI)     |
+| Errors     | - Program does not compile            | - Possibly incorrect config |
+|            | - Programmer/Expert                   | - Normal User               |
+| Text       | Explicit Markers (usually `"` or `'`) | Explicit Markers/No Markers |
 
 ## Documents
 
