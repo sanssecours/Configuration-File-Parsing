@@ -42,6 +42,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 5. Results und Analyse trennen
 6. Kleinigkeiten (Zeiten bei Implementierung)
 7. Umfrage (löschen)
+8. Struktur von Arbeit beschreiben
 
 # Contributions
 
