@@ -1,22 +1,20 @@
 \chapter{Introduction}
 
-% - Viele eigene Formate,
-% - Nur einen Parser
-% - Neue Parser, möglichst schnell implementieren
-
 \section{Motivation \& Problem Statement}
 
-\emph{Parsing} is the process of structuring linear input according to a grammar~\cite{grune2008parsing}. Often the output of this structuring process is a data structure. Research around this topic focuses on how to process the input, how to handle erroneous input and the general computational complexity of algorithms to handle certain kind of \emph{formal languages}.
+Parsing of programming languages is an often studied and revered technique in the computer sciences. The same is not true for configuration file parsing. The answer to the question “How do I solve this problem?” does usually not contain the task of creating and parsing a new programming language in the process. On the other hand, the answer to “How do I configure this?” often seems to be thinking about a new configuration file format and then implementing handwritten parser code for it.
 
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=.8\textwidth]{Parsing}
-  \caption{Simplified view of the parsing process}
-\end{figure}
+While hand written parsing code can be the proper tool to convert code, for example both \href{http://clang.llvm.org}{Clang}~\cite{bendersky2012clang} and \href{http://gcc.gnu.org}{GCC}~\cite{myers2008cparser} use handwritten parsers, often the person writing configuration parsing code is not an expert in parsing. As consequence, configuration file parsers might often suffer from problems such as
 
-This thesis concerns itself with the parsing process of languages that are able to express configuration data (e.g. INI, TOML, \glstext{YAML}). These languages form an interesting subpart of formal languages, since accessing key-value based persistent configuration data is a common task for many computer programs.
+\begin{itemize}
+  \item bad or no error message support,
+  \item no error recovery, and
+  \item no proper encoding support
+\end{itemize}
 
-Just like people disagree about the “best” configuration format, there is currently no consensus, as to which is the ideal way to parse configuration data. There are many possible ways to parse and store data. Notable examples include:
+. One of the reasons for these problems is that computer programmer usually think of configuration file parsing as easy, and not that important. After all, misconfiguration is also often seen as a problem of the user and not of the application~\cite{xu2013not}.
+
+In this thesis we will look at the configuration file parsing problem and evaluate different options to convert configuration settings. There are many possible ways to parse and store data. Notable examples include:
 
 \begin{itemize}
   \item bidirectional programming~\cite{foster2005combinators, bohannon2006relational, lutterkort2008augeas, ko2016bigul, raab2016improving},
