@@ -4,12 +4,6 @@
 
 Parsing of programming languages is an often studied and revered technique in the computer sciences. The same is not true for configuration file parsing. The answer to the question “How do I solve this problem?” does usually not contain the task of creating and parsing a new programming language in the process. On the other hand, the answer to “How do I configure this?” often seems to be thinking about a new configuration file format and then implementing handwritten parser code for it.
 
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=\textwidth]{Parsing}
-  \caption{Simplified view of a parsing process}
-\end{figure}
-
 While hand written parsing code can be the proper tool to convert code, for example both \href{http://clang.llvm.org}{Clang}~\cite{bendersky2012clang} and \href{http://gcc.gnu.org}{GCC}~\cite{myers2008cparser} use handwritten parsers, often the person writing configuration parsing code is not an expert in parsing. As consequence, configuration file parsers often suffer from problems such as
 
 \begin{itemize}
@@ -30,6 +24,12 @@ In this thesis we will look at the configuration file parsing problem and evalua
 \end{itemize}
 
 . Currently the possibilities to compare different parsing techniques are limited. The naïve approach would be to just run different parsers on the same data. In practice however, this approach is not usable, since parser tools tend to produce very different data structures. Some of them do not produce data structures at all, instead they let the user specify subroutines that should be called when the parser matches parts of the grammar.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{Parsing}
+  \caption{Simplified view of a parsing process}
+\end{figure}
 
 As part of this thesis we will tackle this problem, using different parsing techniques within a common configuration framework. This integration eliminates the problem of comparing the parsing process under different circumstances, since the data structures the parsers create will always be the same. We will use \href{http://web.libelektra.org}{Elektra}, a key-value database, as configuration framework. Elektra’s storage plugin interface will act as foundation for the parsing process. In the end the thesis should provide answers about which parsing techniques provide an ideal balance between performance and usability.
 
