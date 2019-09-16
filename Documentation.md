@@ -35,14 +35,14 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 
 # ToDo
 
-1. Contributions (alles implementiert, Vergleichsframework)
-2. Motivation (Introduction)
-3. stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
-4. Methoden vollständig beschreiben
-5. Results und Analyse trennen
-6. Kleinigkeiten (Zeiten bei Implementierung)
-7. Umfrage (löschen)
-8. Struktur von Arbeit beschreiben
+- [x] Contributions (alles implementiert, Vergleichsframework)
+- [x] Motivation (Introduction)
+- [ ] stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
+- [ ] Methoden vollständig beschreiben
+- [ ] Results und Analyse trennen
+- [ ] Kleinigkeiten (Zeiten bei Implementierung)
+- [ ] Umfrage (eventuell löschen)
+- [ ] Struktur von Arbeit beschreiben
 
 # Differences Config-/Language-Parser
 
