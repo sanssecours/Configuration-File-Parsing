@@ -112,3 +112,15 @@ The methodological approach for this thesis consists of the steps given below.
 
 \section{Contributions}
 
+\begin{itemize}[style=multiline, leftmargin=3cm, font=\bfseries]
+  \item[Parsing Engine Integration] We added plugins for four general purpose parsing engines (\glstext{ANTLR}, Bison, \glstext{YAEP}, \glstext{PEGTL}) to the Elektra framework. These plugins parse a subset of YAML, and can be adapted to parse other configuration languages.
+
+  \item[Benchmark Framework] We created a parser benchmark framework. This framework compares configuration parsers under fair circumstances, since we require and verify that the parsers produce the same data for the same YAML input.
+
+  \item[Support Plugins] In this work we
+  \begin{itemize}
+    \item created a plugin that add full support for mapping node-based configurations formats, such as JSON and YAML, to Elektra’s data structures,
+    \item extended a plugin to convert Base64 encoded YAML data into binary Elektra data, and
+    \item created a plugin that deserializes Elektra’s data structures into YAML data.
+  \end{itemize}
+\end{itemize}
