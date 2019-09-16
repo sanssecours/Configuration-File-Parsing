@@ -44,13 +44,6 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 7. Umfrage (löschen)
 8. Struktur von Arbeit beschreiben
 
-# Contributions
-
-- Integration of 4 parsing engines (ANTLR, Bison, YAEP, PEGTL) and YAML library into Elektra parser framework
-- Easy addition of additional parsers based on this work
-- Benchmark framework to compare YAML based parsers in Elektra
-- Addition of plugin to handle directory values in node (leaf) based configuration format
-
 # Differences Config-/Language-Parser
 
 | Area       | Programming Language                  | Configuration Language      |
