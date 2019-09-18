@@ -3,13 +3,12 @@
 
 In this chapter we first detail how we determined the subset that our YAML parsers should be able to parse together with other Elektra developers. Afterwards we describe the mapping between YAML and Elektra’s \cc{KeySet} structure. In the last part we then explain the challenges we faced implementing the parser plugins and the additional plugins we created to improve the YAML support of Elektra.
 
+\section{YAML Subset}
 % - Bedarfsanalyse
 % - Methode: Leute fragen
 % - Implementierung: Erklärung für Referenzen
 
 The \glstext{YAML} standard is extensive. The document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules~\cite{ben2009yaml}. To simplify the parser development we decided to first determine a useful subset of \glstext{YAML}. For this purpose we discussed the language with other Elektra developers. The first part of this chapter contains a review detailing this discussion.
-
-\section{YAML Subset}
 
 In the discussion 9 participants answered questions about the usefulness of certain \glstext{YAML} features for \href{https://www.libelektra.org}{Elektra}. We introduced the \glstext{YAML} syntax in a \href{https://github.com/sanssecours/YAML-Presentation/releases/download/v1.0/Presentation.pdf}{presentation}. After we talked about a certain part of YAML, we answered questions the participants had about the information presented so far. Afterwards we asked the participants to fill in parts of a \href{https://github.com/sanssecours/YAML-Presentation/blob/master/Questionnaire.md}{questionnaire} about the newly introduced feature set. The questionnaire consisted of checkboxes for each feature. A checked box indicates that the participant considers a feature useful for Elektra.
 
