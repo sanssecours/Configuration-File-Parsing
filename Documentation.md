@@ -37,7 +37,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 
 - [x] Contributions (alles implementiert, Vergleichsframework)
 - [x] Motivation (Introduction)
-- [ ] stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
+- [x] stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
 - [ ] Methoden vollständig beschreiben
 - [ ] Results und Analyse trennen
 - [ ] Kleinigkeiten (Zeiten bei Implementierung)
