@@ -7,6 +7,155 @@
 % - Stärker auf Konfigurationsthema eingehen
 % - Kapital: Design Decisions/Challenges \& Choices (Features)
 
+In the first part we describe how we mapped Elektra’s two basic types, \cc{Key} and \cc{KeySet} to \glstext{YAML}.
+
+\section{Mapping Between Elektra’s Data Types and \glstext{YAML}}
+\label{sec:mapping_elektra_yaml}
+
+\begin{sloppypar}
+  There are basically two more or less obvious solutions to map data between Elektra’s \cc{KeySet} structure and a \glstext{YAML} file. Since a \cc{KeySet} behaves similar to a map (see also section~“\nameref{sec:keyset}”), connecting a certain key to a certain value, we could use \glstext{YAML}’s map type directly.
+\end{sloppypar}
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.5\textwidth]{Keys}
+  \caption{An exemplary \cc{KeySet}}
+  \label{fig:keys}
+\end{figure}
+
+For example, the \cc{KeySet} shown in Figure~\ref{fig:keys} would then map to the following \glstext{YAML} data, if we use \code{user/yaml} as mountpoint:
+
+\begin{yamlcode}
+  bloc:
+  bloc/party:
+  bloc/party/little: "thoughts"
+  bloc/party/silent: "alarm"
+\end{yamlcode}
+
+. As we can see the resulting \glstext{YAML} file contains quite a lot of redundant data.
+
+In our second solution we take the hierarchical nature of the database into account and split on each part of a key. The result of this approach is the following \glstext{YAML} file:
+
+\begin{yamlcode}
+  bloc:
+    party:
+      little: "thoughts"
+      silent: "alarm"
+\end{yamlcode}
+
+. The second solution removes unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the \glstext{YAML} data from above.
+
+As we can see in Figure~\ref{fig:tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:tree_extended} shows the resulting tree.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{Tree}
+    \caption{Initial representation}
+    \label{fig:tree}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{TreeExtended}
+    \caption{We add an additional value}
+    \label{fig:tree_extended}
+  \end{subfigure}\\
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{TreeExtended+}
+    \caption{We add an additional \cc{Key} containing a value}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[height=4cm]{TreeExtended++}
+    \caption{The new \cc{Key} overwrites the value of the node \code{block}}
+    \label{fig:tree_extended++}
+  \end{subfigure}
+  \caption{The tree-like representation of \glstext{YAML} data shows the problem of adding non-leaf values}
+\end{figure}
+
+We could now save \code{chain} as a map key inside \code{bloc}:
+
+\begin{yamlcode}
+  bloc:
+    chain:
+    party:
+      little: "thoughts"
+      silent: "alarm"
+\end{yamlcode}
+
+. However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:tree_extended++}).
+
+Another option to fix our problem would be to use \glstext{YAML}’s list type, and to store the value of a \cc{Key} and the data below the \cc{Key} as first and second element of the list:
+
+\begin{yamlcode}
+  bloc:
+    - chain                 # First element stores value
+    - party:                # Second element stores data below
+      -                     # `user/yaml/bloc/party` contains no value
+      - little: "thoughts"
+        silent: "alarm"
+\end{yamlcode}
+
+. However, this format is quite complicated. If we add support for Elektra’s array type – mapping arrays to \glstext{YAML} sequences – the situation is even worse.
+
+To solve the problem we use another approach. We reserve the name \yaml{___dirdata} to save values in non-leaf nodes. The code below shows the mapping of our example data:
+
+\begin{yamlcode}
+  bloc:
+    ___dirdata: "chain"
+    party:
+      little: "thoughts"
+      silent: "alarm"
+\end{yamlcode}
+
+. Since we reserved the name \yaml{___dirdata} the value below this key will always be a leaf of the tree.
+
+\subsection{Mapping Arrays}
+
+Since Elektra’s array type and \glstext{YAML} sequences are similar, we want to map between these data types.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=.6\textwidth]{ArrayValue}
+  \caption{The \cc{KeySet} above describes an array containing three elements}
+  \label{fig:array_value}
+\end{figure}
+
+If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_value} would result in the \glstext{YAML} data:
+
+\begin{yamlcode}
+  array:
+    - "First Element"
+    - "Second Element"
+    - "Third Element"
+\end{yamlcode}
+
+. We are left with the problem, where to save the data of the \emph{parent} \cc{Key} of the array elements \code{user/array}. We can not use the same approach as before:
+
+\begin{yamlcode}
+  array:
+    ___dirdata: "Array Value"
+    - "First Element"
+    - "Second Element"
+    - "Third Element"
+\end{yamlcode}
+
+, since the result would be a \glstext{YAML} node that is neither sequence nor map. To fix this problem we decided to convert the \yaml{___dirdata} node to a sequence element:
+
+\begin{yamlcode}
+  array:
+    - "___dirdata: Array Value"
+    - "First Element"
+    - "Second Element"
+    - "Third Element"
+\end{yamlcode}
+
+. This approach produces valid \glstext{YAML} data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.
+
 \section{Parsers}
 
 \subsection{Recursive Descent Parser}
