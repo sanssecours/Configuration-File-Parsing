@@ -816,7 +816,7 @@ The next section describes some of the implementation challenges we faced when w
 
 \subsection{Recursive Descent Parser}
 
-The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{\glstext{YAML} plugin} we developed used a handwritten recursive descent parser. As already described in “\nameref{sec:state_of_the_art}” this technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
+The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{\glstext{YAML} plugin} we developed used a handwritten recursive descent parser. This technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
 
 \begin{table}[H]
   \begin{center}
