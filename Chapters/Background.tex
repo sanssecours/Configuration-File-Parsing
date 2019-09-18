@@ -78,6 +78,46 @@ A method that is not a parsing technique per se, but a way to specify conversion
 
 A programming language used to specify such lenses is Boomerang~\cite{bohannon2008boomerang}. The research of the Boomerang project lead to the creation of another project that uses lenses to parse configuration data: \href{http://augeas.net}{Augeas}. Augeas converts configuration data into a tree like representation. \citeauthor{berlakovich2016universal} implemented an Augeas plugin for Elektra as part of his Bachelor thesis~\cite{berlakovich2016universal}.
 
+\subsection{Configuration File Parsing}
+\label{sec:configuration_file_parsing}
+
+The literature overview in the previous section focused on parsing in general. It is know time to take a look at the current state of configuration file parsing and how it differs from the well know problem of parsing (general purpose) programming languages.
+
+There exists extensive literature about parsing of programming languages and compiler design. The topic is even part of famous computer science books such as \citetitle{ullman1977principles}~\cite{ullman1977principles} and \citetitle{aho2006compilers}~\cite{aho2006compilers}, commonly also know as “Dragon” books~\cite{parr2009language}, named after the Dragon (waiting to be slain) on their covers.
+
+While parsing and compiling computer languages is seen as “slaying a Dragon”, configuration file parsing is arguably a much simpler task. The reason for this is that the purpose of configuration languages, usually only specifying data, is a subset of the purpose of programming language, which also manipulate data. This superset feature of programming language makes them sometimes also interesting for the purpose of storing configuration data~\cite{balmer2013lua}. Since configuration data is used by many programs that usually do not ship with, or require an interpreter or compiler, most configuration files do not use the syntax of a general purpose programming language. These “data only” configuration file formats can be classified roughly into three categories.
+
+\begin{description}
+  \item[Custom configuration file formats] specify data for a specific application. Examples are the \href{https://en.wikipedia.org/wiki/Fstab}{\code{fstab}} file used by the Unix program \sh{mount}, or the \href{https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Hosts_file}{\code{hosts}} file used for name resolution.
+
+  \item[General purpose configuration formats] such as \href{https://en.wikipedia.org/wiki/INI_file}{INI}, and the \href{https://en.wikipedia.org/wiki/Property_list}{Property list} file format are used mainly to store configuration data of many different applications.
+
+  \item[Serialization formats] such as \glstext{JSON}, \glstext{YAML}, and \glstext{XML}, store all kinds of data, not only limited to configuration purposes.
+\end{description}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.45\textwidth]{ConfigurationFileFormats}
+  \caption{The Venn diagramm above shows an overview of the overall expressiveness of the formats usually used for configuration data. Please note, that the size of the circles \emph{does not} show the level of expressiveness of a certain category of file formats, i.e. a circle twice as large does not represent twice the level of expressiveness.}
+\end{figure}
+
+In general we can use serialization formats, to specify the same data as we can using general purpose configuration languages. For example, in macOS Property lists can be stored using \glstext{JSON} or \glstext{XML} on disk. The same is not true for custom configuration formats, which are often very simple, but can sometimes also use programming language code. Popular examples for this are the configuration files of shells, such as \code{bash}, \code{zsh} and \code{fish}. These shells use the same syntax for programming and configuration data.
+
+We already said that most configuration file formats do not use the syntax of general purpose programming languages, but rather syntax only able to specify and \emph{not} to modify data. The simplicity of some of these languages often means that parsing code for them is not written by an expert. Especially for simple custom configuration file formats, the same person that implements a program often also implements the parser for its configuration file format. This can result in configuration code that integrates tightly into a program, decreasing the extensibility of the application. Other problems of parsers not written by experts include: bad or no error message support, no support for error recovery, and insufficient support for different file format encodings.
+
+Some of these problems can be solved using a configuration file library that is available for most of the more popular general file formats. Such a library takes care of the parsing, loosening the integration of an application and its configuration code. Some problems of theses libraries are that they
+
+\begin{itemize}
+  \item often do not consider order, and
+  \item almost always throw away comments
+\end{itemize}
+
+when they write back data into a configuration file. This is a problems, since comments in configuration files can be very helpful in averting misconfiguration.
+
+A configuration library that keeps the order of entries and comments intact is Augeas~\cite{lutterkort2008augeas, berlakovich2016universal}. As we already wrote in the previous section Augeas uses so-called lenses to both parse and write back configuration. The problem of lenses is that they only support regular languages~\cite{chomsky1959certain} properly. For example, as we found out during the development of the parsing code for the thesis, the \href{https://github.com/hercules-team/augeas/blob/d555a995a06ac81cab62d016d6eaff8a7ba64a2e/lenses/yaml.aug}{YAML lens} of Augeas only supports mapping data with a nesting level of two.
+
+Compared to Augeas, Elektra~\cite{raab2010modular, raab2017context}, with its plugin based parsing system also supports context free and even context sensitive configuration languages. This is the case, since Elektra can use a general purpose programming language to parse code. Using metadata Elektra is also able to store the content of comments and keep the order of configuration data intact, when writing data back. The code for this has to be implemented in the plugin itself, which can become problematic. For example, while Elektra’s \href{https://github.com/ElektraInitiative/libelektra/tree/3e6e0254a54d3ad9642091550ce9c560d8cf38dd/src/plugins/ini}{INI} plugin preserves comments and the order of entries, its code is also quite complicated and error-prone.
+
 \section{Elektra}
 
 In this section we describe some of the concepts of Elektra, the software that provides the common storage facility for our \glstext{YAML} parsers. Elektra is a framework that stores data in a \emph{global hierarchical key-value database}.
