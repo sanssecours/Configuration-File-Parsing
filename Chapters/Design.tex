@@ -8,13 +8,15 @@ In this chapter we first detail how we determined the subset that our YAML parse
 % - Methode: Leute fragen
 % - Implementierung: Erklärung für Referenzen
 
-The \glstext{YAML} standard is extensive. The document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules~\cite{ben2009yaml}. To simplify the parser development we decided to first determine a useful subset of \glstext{YAML}. For this purpose we discussed the language with other Elektra developers. The first part of this chapter contains a review detailing this discussion.
+The \glstext{YAML} standard is extensive. The document describing the serialization language includes about 200 parameterized \gls{BNF} grammar rules~\cite{ben2009yaml}. To simplify the parser development we decided to first determine a useful subset of \glstext{YAML}. For this purpose we discussed the language with other Elektra developers.
 
-In the discussion 9 participants answered questions about the usefulness of certain \glstext{YAML} features for \href{https://www.libelektra.org}{Elektra}. We introduced the \glstext{YAML} syntax in a \href{https://github.com/sanssecours/YAML-Presentation/releases/download/v1.0/Presentation.pdf}{presentation}. After we talked about a certain part of YAML, we answered questions the participants had about the information presented so far. Afterwards we asked the participants to fill in parts of a \href{https://github.com/sanssecours/YAML-Presentation/blob/master/Questionnaire.md}{questionnaire} about the newly introduced feature set. The questionnaire consisted of checkboxes for each feature. A checked box indicates that the participant considers a feature useful for Elektra.
+\subsection{Method}
+
+We used a requirement analysis to determine useful YAML features. For that purpose we created a \href{https://github.com/sanssecours/YAML-Presentation/blob/master/Questionnaire.md}{questionnaire} that lists YAML features. For each feature we added a checkbox that a participant should check, if they deemed it useful for a YAML subset that stores configuration data. We also added one free form field participants could use to specify additional data types, they think should be supported. Since YAML is a complex language we introduced the \glstext{YAML} syntax in a \href{https://github.com/sanssecours/YAML-Presentation/releases/download/v1.0/Presentation.pdf}{presentation} to the Elektra developers first. After we talked about a certain part of YAML, we answered questions the participants had about the information presented so far. Afterwards we asked the participants to fill in the parts of the questionnaire about the newly introduced feature set.
 
 \subsection{Participants}
 
-All of the participants were at least partially familiar with Elektra. Some also had previous experience with \glstext{YAML}. Seven of them listened to the presentation, while one participant was late and another one participated via email. The email participant received a copy of the presentation slides and the questionnaire.
+Nine people participated in the requirement analysis. All of the participants were at least partially familiar with Elektra. Some also had previous experience with \glstext{YAML}. Seven of them listened to the presentation, while one participant was late and another one participated via email. The email participant received a copy of the presentation slides and the questionnaire.
 
 \subsection{Results}
 
