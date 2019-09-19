@@ -993,7 +993,9 @@ YAMBi uses parser actions to call methods of a class that stores temporary data 
 \subsection{Earley Parser}
 \label{sec:earley_parser}
 
-For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. Unlike ANTLR and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
+For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. We used this library, since it uses C and C++ as programming language, which improves the comparability with the other parsing tool we used. We also found another \href{https://bitbucket.org/amirouche/c-earley-parser/src/default/src/earley_items.c}{C Earley Parser implementation} by Amirouche Boubekki. However, his parser looked incomplete and unmaintained.
+
+Unlike ANTLR and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
 
 \begin{shellcode}
 elements : element          # 0
