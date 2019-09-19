@@ -971,7 +971,7 @@ The most interesting part in the lexer of the libraries described above, is prob
   \item The lexer only emits the current token, if there are currently no candidates for simple keys. If there are simple key candidates it scans further ahead. Later it
 
   \begin{enumerate}
-    \item removes simple key candidates if the current lexer position is more than 1024 characters ahead of the start position of the key candidate, or if the key candidate does not start in the current line.
+    \item removes simple key candidates if the current lexer position is more than 1024 characters\footnote{The YAML specification specifies this value to limit the lookahead needed to parse a simple key.} ahead of the start position of the key candidate, or if the key candidate does not start in the current line.
 
     \item adds a key token for a candidate, if it locates a key value symbol (\yaml{:}) for the key candidate.
   \end{enumerate}
