@@ -44,6 +44,10 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 - [ ] Umfrage (eventuell löschen)
 - [ ] Struktur von Arbeit beschreiben
 
+## Fragen
+
+- Kann man den Teil zum Rekursiv-Descent-Parser so lassen (ohne Teile zu Background/Result zu verschieben)? Im Endeffekt beschreibe ich ja hier nur Probleme mit einem Ansatz, den ich eh nicht verwendet habe.
+
 # Differences Config-/Language-Parser
 
 | Area       | Programming Language                  | Configuration Language      |
