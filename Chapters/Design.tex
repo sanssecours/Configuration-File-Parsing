@@ -1026,7 +1026,7 @@ All of the previously described parser generators and libraries divide the parsi
   \label{fig:lexing_parsing}
 \end{figure}
 
-Unlike ANTLR, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}{PEGTL} does not use a separate lexing phase. Instead the \gls{PEGTL} parses the input in one sweep using C++ templates to combine simple matching functions into more elaborate parsers. The process of combining parsers this way is also known under the name “parser combinators” (see also Section “\nameref{sec:parsing}”). Besides the possibility to create \emph{custom matching function}, the library also supports,
+Unlike ANTLR, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}{PEGTL} does not use a separate lexing phase. Instead the \gls{PEGTL} parses the input in one sweep using C++ templates to combine simple matching functions into more elaborate parsers. The process of combining parsers this way is also known under the name “parser combinators” (see also Section “\nameref{sec:parsing}”). Besides the possibility to create \emph{custom matching function}, the library also supports:
 
 \begin{itemize}
   \item \emph{custom actions} to react to matched input, and
