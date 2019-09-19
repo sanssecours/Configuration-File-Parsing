@@ -1087,7 +1087,7 @@ proved more difficult to express in the \gls{PEGTL}. To translate these kind of 
   \item it applies \cc{RevertStateRule} and fails (second argument of \cc{sor}), if \cc{seq<Rules...>} failed
 \end{enumerate}
 
-. We used \cc{with_updated_state} to create rules that update nested versions of the indentation (\cc{n} and \cc{m} in the \glstext{YAML} spec) and context (\cc{c} in the \glstext{YAML} spec). Using this approach we were able to translate almost any \glstext{YAML} rule without too much problems.
+. We used \cc{with_updated_state} to create rules that update nested versions of the indentation (\cc{n} and \cc{m} in the \glstext{YAML} spec) and context (\cc{c} in the \glstext{YAML} spec). Using this approach we were able to translate all \glstext{YAML} rules for our subset.
 
 For the conversion of the parsed data to a \cc{KeySet} we used the parse tree facility provided by \gls{PEGTL}. The whole parse tree contains many unnecessary nodes. Fortunately \gls{PEGTL} supports parse tree selection and tree rewriting. These features allowed us to keep the parse tree simple. We then use custom tree walking code to walk this tree, invoking a listener at certain nodes, to create a \cc{KeySet}. This approach is very similar to the one we used for the \LinkYAwn{} plugin (see Section “\nameref{sec:earley_parser}”).
 
