@@ -1194,3 +1194,7 @@ Elektra’s storage plugins need to both
 \end{enumerate}
 
 . Since the second task is always the same, regardless of the parser library we use, we created a plugin called \href{http://libelektra.org/plugins/yamlsmith}{YAML Smith} that takes care of this task.
+
+This plugin first determines all leaf keys of a \cc{KeySet}. After that it counts the levels of the parent key so it knows how many levels it has to skip for each leaf. The plugin then iterates over each leaf key.
+
+For every leaf key the plugin iterates over each level of the name. First it skips all levels of the parent key. After that it skips all levels of the prefix it shares with the key that came before. In this process it adds a constant amount of spaces for each of the levels to an initially empty string and stores the result in a variable called \cc{indent}. Now the plugin adds each remaining level of the key in it own line. To do that it first writes the content of \cc{indent}, then adds the current part of the key, and after that the appropriate marker, either \yaml{-} for an sequence, or \yaml{:} for a map. For each written level of the key the plugin increases \cc{indent} for the next key part. In the last step for a specific leaf key, the plugin adds another newline, the current indentation and finally writes the value of the key in double quotes.
