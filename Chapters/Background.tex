@@ -118,6 +118,43 @@ A configuration library that keeps the order of entries and comments intact is A
 
 Compared to Augeas, Elektra~\cite{raab2010modular, raab2017context}, with its plugin based parsing system also supports context free and even context sensitive configuration languages. This is the case, since Elektra can use a general purpose programming language to parse code. Using metadata Elektra is also able to store the content of comments and keep the order of configuration data intact, when writing data back. The code for this has to be implemented in the plugin itself, which can become problematic. For example, while Elektra’s \href{https://github.com/ElektraInitiative/libelektra/tree/3e6e0254a54d3ad9642091550ce9c560d8cf38dd/src/plugins/ini}{INI plugin} preserves comments and the order of entries, its code is also quite complicated and error-prone. As we already stated in “\nameref{sec:aim_of_the_work}” we want to improve this situation using state of the art parsing techniques for our YAML subset.
 
+\subsection{Error Handling}
+
+The usual goal in parsing is the processing of grammatically correct input. However, since editing configuration data is often done by hand, there is always a possibility of erroneous input. A method to inform the user about such errors is essential. As pointed out by Terence \citeauthor{parr2013definitive} in \citetitle{parr2013definitive}~\cite[p. 151]{parr2013definitive} we also need to inform the user about the reason for an error:
+
+\begin{quote}
+  In other words, a parser that responds with “Eh?” and bails out upon the first syntax error isn’t very useful for us during development or for our users during deployment.
+\end{quote}
+
+The process of reacting to errors is called \emph{error handling}. Error handling can be grouped into four dependent stages~\cite{ruefenacht2016error, pottier2016reachability}:
+
+\begin{enumerate}
+  \item error detection,
+  \item error diagnosis,
+  \item error recovery, and
+  \item error correction
+\end{enumerate}
+
+. We are mainly interested in the first three items, since error correction is generally not possible without the possibility of fixing errors incorrectly.
+
+\emph{Error reporting} is the results of
+
+\begin{itemize}
+  \item detecting that input is incorrect (error detection),
+  \item finding what part of the input was incorrect (error diagnosis), and
+  \item trying to resume the parsing process in case of errors (error recovery).
+\end{itemize}
+
+The current state of error reporting capabilities depend strongly on the parsing technique.
+
+In general, top-down recursive descent parsers \emph{without backtracking}, especially those written by hand, are able to produce good error messages. The reason for this is that such parsers have information about the higher level grammar rules that matched until the error point. While the error messages produced by recursive descent parsers can be good, writing error logic by hand makes the code more complicated. If we want to react to multiple errors in a configuration file we also need to implement error recovery, which can be “tedious and easy to screw up”~\cite[p. 160]{parr2013definitive}. \glstext{ANTLR} produces parsers that integrate techniques such as token deletion, token insertion, and resynchronization to produce parsers that provide “a good error reporting facility and a sophisticated error recovery strategy for free” according to its main author~\cite{parr2013definitive}.
+
+Bottom up parsers, produced by a tool such as Bison are not suited to provide good error messages~\cite{jeffery2003generating}. Error recovery in Bison produced parsers even requires changes to the grammar~\cite{donnelly2019bison}. There exists promising research work to improve the current situation. In \citetitle{jeffery2003generating}~\cite{jeffery2003generating}  \citeauthor{jeffery2003generating} shows how his tool merr can help a user to specify error messages based on example input in a C based parser produced by \glstext{YACC} or Bison. \citeauthor{jeffery2003generating}’s semi-automated approach is based on error states of the parser and improves on the previous technique used in the Icon programming language, where developers manually modified the source code produced by a custom version of \glstext{YACC}. Since  \citeauthor{jeffery2003generating}’s work looks promising, another similar approach was also used in the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. Recently \citeauthor{pottier2016reachability}~\cite{pottier2016reachability} extended \citeauthor{jeffery2003generating}’s work and added example based error reporting in the \glstext{LR} parsers of the CompCert C compiler~\cite{kaestner2018compcert}. In \citetitle{pottier2016reachability} \citeauthor{pottier2016reachability}~\cite{pottier2016reachability} writes that he thinks that “the quality of CompCert’s diagnostic messages is now on par with that of \texttt{clang} and \texttt{gcc}”.
+
+For now we only talked about the error capabilities of deterministic parsers – such as \glstext{LL} and \glstext{LR} parser – i.e. parser that do not back up. These parsers read the input deterministically from left to right. They therefore report the first position, where the parsed input is not part of the language described by the grammar anymore. This behavior is also known as (longest) correct/viable prefix property~\cite{sippu1990parsing, ruefenacht2016error, maidl2016labeled, pottier2016reachability}. Parsers with backtracking, such as recursive descent parsers \emph{with backtracking}, \glstext{PEG} parsers and the closely related combinatory parsers usually do not have this property. While backtracking makes these parsers more powerful, the quality of error messages suffer. The problem is that backtracking can occur both because of a valid choice in the grammar or because of an error in the input.
+
+There has been research to improve the situation, especially in \glstext{PEG} parsers. In his master thesis~\cite{ford2002packrat} \citeauthor{ford2002packrat} already describes one option to produce meaningful error messages. His parser records all parsing results and uses the one that matched the farthest to the right in the input for error messages. In \citetitle{maidl2016labeled}~\cite{maidl2016labeled} \citeauthor{maidl2016labeled} show that this error strategy can also be added to every \glstext{PEG} library that supports semantic actions. They also introduce a form of error reporting, inspired by the excepting handling mechanism of programming languages, based on grammar annotations called labeled failures~\cite{maidl2016labeled}.
+
 \section{Elektra}
 
 In this section we describe some of the concepts of Elektra, the software that provides the common storage facility for our \glstext{YAML} parsers, further. Elektra is a framework that stores data in a \emph{global hierarchical key-value database}.
