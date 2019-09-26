@@ -934,7 +934,7 @@ One of the first problems we encountered using ANTLR was the significant leading
   Many productions use an explicit indentation level parameter. This is less elegant than Python’s “indent” and “undent” conceptual tokens. However it is required to formally express \glstext{YAML}’s indentation rules.
 \end{quote}
 
-. We first tried to parse different levels of whitespace using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of whitespace. This approach worked, but only for a constant amount of whitespace. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading whitespace matched in the current rule, then the generated parser would be unable to parse simple example input.
+We first tried to parse different levels of whitespace using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of whitespace. This approach worked, but only for a constant amount of whitespace. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading whitespace matched in the current rule, then the generated parser would be unable to parse simple example input.
 
 \subsubsection{Indent \& Detend Tokens}
 
@@ -950,7 +950,7 @@ Bart Kiers created an \href{https://github.com/antlr/grammars-v4/blob/master/pyt
   \label{lst:correct_list}
 \end{listing}
 
-Another problem of this approach are complex lexer rules for \glstext{YAML} scalars. The cause of this problem is that the parameterized BNF rules of the \glstext{YAML} specification do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
+Another problem of this approach are complex lexer rules for \glstext{YAML} scalars. The cause of this problem are the parameterized BNF rules of the \glstext{YAML} specification, which do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
 
 \subsubsection{Custom Lexer}
 
