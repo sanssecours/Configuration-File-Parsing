@@ -375,13 +375,11 @@ The runtime of a non-backtracking recursive descent parser for an \glstext{LL}(1
 
   \item YAwn also shows the linear behavior, even though \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}} \href{https://github.com/vnmakarov/yaep/issues/24}{does not implement \citeauthor{leo1991general}’s optimization}~\cite{leo1991general} that makes sure that the algorithm runs in linear time for every \glstext{LR}(k) grammar.
 
-  \item Even YAy PEG’s backtracking parser without memoization show linear behavior. We should mention that it is generally not clear, if memoization provides a runtime performance advantage in practice for a certain grammar. This seems also one of the reasons, why \gls{PEGTL} does not uses memoization, as can be seen in a quote of Colin Hirsch~\cite{hirsch2016memo}, one of the authors of \gls{PEGTL}, below.
+  \item Even YAy PEG’s backtracking parser without memoization show linear behavior. As we already mentioned before in “\nameref{sec:state_of_the_art}” it is generally not clear, if memoization provides runtime improvements for a certain grammar. This seems also one of the reasons, why \gls{PEGTL} does not uses memoization, as can be seen in a quote of Colin Hirsch~\cite{hirsch2016memo}, one of the authors of \gls{PEGTL}, below.
 
   \begin{quote}
      …it would increase the complexity of the library beyond our design goals and only be useful in a very limited number of cases - in practice packrat parsers often perform worse than simple recursive descent parsers despite being in a better time complexity class.
   \end{quote}
-
-  In the article~\citetitle{hudak2008dcgs}~\cite{hudak2008dcgs} \citeauthor{hudak2008dcgs} also show that not using memoization can decrease the actual runtime of a PEG parser.
 
 \end{itemize}
 
