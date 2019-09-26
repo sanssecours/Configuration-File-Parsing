@@ -383,7 +383,7 @@ The runtime of a non-backtracking recursive descent parser for an \glstext{LL}(1
 
 \end{itemize}
 
-Figure~\ref{fig:benchmark_generated} shows that the constant difference between the linear runtimes can be relatively high. For example on macOS, the fastest plugin YAwn is nearly five times faster than the slowest plugin YAy PEG for the file \FileGenerated{}:
+Figure~\ref{fig:benchmark_generated} shows that the constant factor between the linear runtimes can be relatively high. For example on macOS, the fastest plugin YAwn is nearly five times faster than the slowest plugin YAy PEG for the file \FileGenerated{}:
 
 \begin{equation}
   \frac{363.2\text{ms}}{73.6\text{ms}} ≅ 4.93
@@ -447,7 +447,7 @@ and obtain the formula:
 
 \subsubsection{Conclusion}
 
-We determined with a high confidence that all of the \glstext{YAML} plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}), at least for the file \FileGeneratedHundredThousand{}. This puts the plugin into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
+We determined with a high confidence that all of the \glstext{YAML} plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}), at least for the file \FileGeneratedHundredThousand{}. This puts all plugins, into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
 
 The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{fig:benchmark_generated_mean}) is YAwn, if we weigh the results of the two tested operating systems equally. This is interesting, since \citeauthor{earley1970efficient} himself mentions in his dissertation~\cite[p. 122]{earley1970efficient} that his parsing technique was too slow for practical use at the time, as you can see in the quote below.
 
