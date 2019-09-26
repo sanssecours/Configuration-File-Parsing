@@ -110,29 +110,15 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
 
 \subsection{Build Setup}
 
-The following list shows the \href{https://cmake.org}{CMake} options that we used for all comparisons:
+The following list shows the \href{https://cmake.org}{CMake} options that we used for all benchmarks:
 
 \begin{itemize}
-  \item \sh{-GNinja}
-  \item \sh{-DPLUGINS=ALL}
+  \item \sh{-GNinja},
+  \item \sh{-DPLUGINS=ALL},
+  \item \sh{-DCMAKE_BUILD_TYPE=Release},
+  \item \sh{-DENABLE_LOGGER=OFF}, and
+  \item \sh{-DENABLE_DEBUG=OFF}.
 \end{itemize}
-
-. For
-
-\begin{itemize}
-  \item the runtime performance benchmark, described in “\nameref{sec:run_time_performance}”, and
-  \item the heap memory usage comparison, described in “\nameref{sec:memory_usage}”
-\end{itemize}
-
-we built Elektra using the following \href{https://cmake.org}{CMake} options:
-
-\begin{itemize}
-  \item \sh{-DCMAKE_BUILD_TYPE=Release}
-  \item \sh{-DENABLE_LOGGER=OFF}
-  \item \sh{-DENABLE_DEBUG=OFF}
-\end{itemize}
-
-.
 
 \subsection{Input}
 
