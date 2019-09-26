@@ -57,7 +57,7 @@ For all of the tests we used the hardware described in Table~\ref{table:benchmar
 
 \subsection{Software}
 
-Table~\ref{table:benchmark_software} shows the overall software setup for the benchmarks. We tested the performance both on macOS and Linux. For the Linux setup we used the Mac version of Docker.
+Table~\ref{table:benchmark_software} shows the overall software setup for the benchmarks. We tested the performance both on macOS and Linux. For the Linux setup we used the Mac version of Docker. The basis of the runtime benchmark is \href{https://github.com/ElektraInitiative/libelektra/commit/54a4c0194946917b7d093e0777f465619b2f3d6f}{commit 54a4c019} of Elektra’s code base, while we measured the memory usage using \href{https://github.com/ElektraInitiative/libelektra/commit/ea418f177a5e2707f59f61b5e130a596abdd1c56}{commit ea418f17}. No code of any of the tested plugins changed \href{https://github.com/ElektraInitiative/libelektra/compare/54a4c0194946917b7d093e0777f465619b2f3d6f...ea418f177a5e2707f59f61b5e130a596abdd1c56}{between those two commits}.
 
 \begin{table}[H]
     \newcommand{\YAEP}{{\href{https://github.com/vnmakarov/yaep/commit/550de4cc5600d5f6109c7ebcfbacec51bf80d8d3}{YAEP 550de4cc}}}
