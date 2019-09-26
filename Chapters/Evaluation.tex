@@ -785,7 +785,11 @@ In the second part of this section we will take a look at how the composability 
 
 \subsection{Plugin Updates}
 
-In the next subsection we look at the effort it took to, add certain features to, and fix certain bugs in, the \glstext{YAML} plugins. As measurement for the effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
+In the next subsections we look at the effort it took to, add certain features to, and fix certain bugs in, the \glstext{YAML} plugins.
+
+\subsubsection{Method}
+
+As measurement for the extendibility effort we use the amount of changed code lines. Since we want to keep the comparison fair, we only look at the code changes needed for a certain feature or bug fix, excluding additional test code and documentation updates.
 
 \subsubsection{Support for Elektra’s Boolean Data Type}
 
@@ -1034,7 +1038,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous \glstext{YAML} data w
 
 \subsection{Basic Error Messages}
 
-We started the comparison by listing the basic error messages for the \glstext{YAML} plugins. These messages contain the error location and the auto-generated error message by the parsing engines. For the sake of brevity we removed some uninteresting data such as the filename of the parsed file.
+We started the comparison by listing the basic error messages for the \glstext{YAML} plugins. These messages contain the error location and the auto-generated error message by the parsing engines. For the sake of brevity we removed identical data that is identical for all plugins, such as the filename of the parsed file.
 
 \begin{table}
   \caption{Basic error messages}
