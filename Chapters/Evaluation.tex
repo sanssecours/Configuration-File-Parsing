@@ -1,37 +1,35 @@
 \chapter{Evaluation}
 \label{sec:evaluation}
 
-In the evaluation phase of the work we looked at the criteria listed below.
+In the evaluation phase of the work we compare our parser plugins. For that purpose we first describe our comparison criteria in the first section of this chapter. After that we measure and analyze the plugins according to each criteria in the following sections. At the end we determine the plugins that best fit our criteria.
 
-\begin{description}
+\section{Goals}
 
-  \item[{\hyperref[sec:run_time_performance]{Runtime Performance}}]~\\[0.1cm]
-  We used each of the parsing algorithms from the implementation phase and executed them using different input files. In each instance we measured the time it took to finish the parsing process. We repeated this multiple times for each combination of parsing technique and file, so we can determine median execution times. At the end of this phase we answer~\Cref{que:speed}.
+The goal of this evaluation is to find a parser plugin that
+\begin{itemize}
+  \item is fast,
+  \item has low resource usage,
+  \item uses code that is
+    \begin{itemize}
+      \item maintainable, and
+      \item easily extendible, and
+    \end{itemize}
+  \item has good error reporting capabilities.
+\end{itemize}
+
+To make sure that the plugins are reasonably fast we compare their execution time using runtime benchmarks and answer~\Cref{que:speed}.
 
   \speed*
 
-  \item[{\hyperref[sec:memory_usage]{Memory Usage}}]~\\[0.1cm]
-  We determined the memory usage of the different parsing implementation using \href{http://valgrind.org}{Valgrind's} heap profiler \href{http://valgrind.org/docs/manual/ms-manual.html}{Massif}.
-
-  \item[{\hyperref[sec:code_size]{Code Size}}]~\\[0.1cm]
-  We counted the lines of the different implementations using the tool \href{https://github.com/AlDanial/cloc}{cloc}.
-
-  \item[{\hyperref[sec:code_complexity]{Code Complexity}}]~\\[0.1cm]
-  For the measurement of the code complexity we determined the cyclomatic complexity~\cite{mccabe1976complexity} of both the generated and handwritten code.
-
-  \item[{\hyperref[sec:extensibility]{Ease of Extensibility and Composability}}]~\\[0.1cm]
-  We determined the amount of code line changes it took, to add certain features to, and implement bug fixes in, the \glstext{YAML} plugins. This method allows us to quantitatively measure the extension effort. In this part of the evaluation we also look at \glstext{YAML}’s specification grammar and compare it with the parsing code of our plugins. In the end we will answer~\Cref{que:closeness}.
+For the resource usage we analyze the heap memory consumption. To make sure that the plugins are maintainable we analyze code sizes and take a look at the \glsdesc{CC}. We also examine the extensibility and composability of the plugins looking at code changes for specific bug fixes and feature additions. This step will help us to answer~\Cref{que:closeness}.
 
   \closeness*
 
-  \item[{\hyperref[sec:error_reporting]{Error Reporting}}]~\\[0.1cm]
-  For this subtask we created \glstext{YAML} input files, that contain certain errors. We then looked at what error information the parsing engines provide, and how well this information describes the given error.
+To make sure the plugins produce good error messages we also compare these messages for some input files in a detailed analysis.
 
-\end{description}
+\section{Performance Analysis}
 
-\section{Setup}
-
-In the following section we list the hard- and software configuration we used for the comparison.
+In the following section we analyze the runtime time and memory usage of our plugins for certain input files. To make all benchmarks reproducible we start by detailing the whole setup including used hardware, software, build configuration option and input files. After that we measure and analyze the runtime performance and then do the same for the heap memory usage of the plugins.
 
 \subsection{Hardware}
 
@@ -122,8 +120,8 @@ The following list shows the \href{https://cmake.org}{CMake} options that we use
 . For
 
 \begin{itemize}
-  \item the runtime performance benchmark, described in Section “\nameref{sec:run_time_performance}”, and
-  \item the heap memory usage comparison, described in Section “\nameref{sec:memory_usage}”
+  \item the runtime performance benchmark, described in “\nameref{sec:run_time_performance}”, and
+  \item the heap memory usage comparison, described in “\nameref{sec:memory_usage}”
 \end{itemize}
 
 we built Elektra using the following \href{https://cmake.org}{CMake} options:
@@ -136,7 +134,68 @@ we built Elektra using the following \href{https://cmake.org}{CMake} options:
 
 .
 
-\section{Runtime Performance}
+\subsection{Input}
+
+\newcommand{\URLKeyFramesJSON}{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}
+
+\newcommand{\FileKeyFrames}{{%
+\codebox{%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/keyframes.yaml}%
+{\textcolor{black}{\texttt{keyframes.yaml}}}}%
+}}
+\newcommand{\FileCombined}{{%
+\codebox{%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/combined.yaml}%
+{\textcolor{black}{\texttt{combined.yaml}}}}%
+}}
+\newcommand{\FileGenerated}{{%
+\codebox{%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated.yaml}%
+{\textcolor{black}{\texttt{generated.yaml}}}}%
+}}
+\newcommand{\FileGeneratedHundredThousand}{{%
+\codebox{%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated_100000.yaml}%
+{\textcolor{black}{\texttt{generated\_100000.yaml}}}}%
+}}
+\newcommand{\FileGenerateYAML}{{%
+\codebox{%
+\href{https://master.libelektra.org/scripts/generate-yaml}%
+{\textcolor{black}{\texttt{generate-yaml}}}}%
+}}
+\newcommand{\FileCutInput}{{%
+\codebox{%
+\href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/cut_input}%
+{\textcolor{black}{\texttt{cut\_input}}}}%
+}}
+
+As first input for the benchmarks we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \LinkYAMLCPP{} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other \glstext{YAML} plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
+
+\begin{leftbar}
+  \url{http://rawdata.libelektra.org/tree/master/YAML}
+\end{leftbar}
+
+. For another input file called \FileCombined{} we copy and pasted parts of test data and various other \glstext{YAML} files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of \glstext{YAML} data that covers most of the code paths of the \glstext{YAML} plugins.
+
+Since both of these files are relatively small, \FileKeyFrames{} contains 218 lines, while \FileCombined{} contains 152 lines, we also generated data using a Python script that we called \FileGenerateYAML{}. This script generates \glstext{YAML} maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the \glstext{YAML} scalars the script randomly selects one of the three flow scalar styles:
+
+\begin{itemize}
+  \item single quoted scalar,
+  \item double quoted scalar, or
+  \item plain scalar
+\end{itemize}
+
+. This always works since \glspl{UUID} contain no character sequence that has special meaning according to the \glstext{YAML} specification. Using this method we generated two files:
+
+\begin{itemize}
+  \item \FileGenerated{} that contains 10 000 lines, and
+
+  \item \FileGeneratedHundredThousand{} that contains 100 000 lines
+\end{itemize}
+
+. We also created another script called \FileCutInput{} to generate additional smaller input files that contain the first 50000, 10000, 5000, 1000, 500, 100, 50, 10, 5 and 1 lines of \FileGeneratedHundredThousand{}.
+
+\subsection{Runtime Performance}
 \label{sec:run_time_performance}
 
 \newcommand{\FilePluginGetSet}{{%
@@ -181,68 +240,7 @@ To make sure we repeat the benchmark every time \href{https://github.com/sharkdp
   \label{fig:benchmark}
 \end{figure}
 
-\subsection{Input}
-
-\newcommand{\URLKeyFramesJSON}{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}
-
-\newcommand{\FileKeyFrames}{{%
-\codebox{%
-\href{http://rawdata.libelektra.org/tree/master/YAML/Input/keyframes.yaml}%
-{\textcolor{black}{\texttt{keyframes.yaml}}}}%
-}}
-\newcommand{\FileCombined}{{%
-\codebox{%
-\href{http://rawdata.libelektra.org/tree/master/YAML/Input/combined.yaml}%
-{\textcolor{black}{\texttt{combined.yaml}}}}%
-}}
-\newcommand{\FileGenerated}{{%
-\codebox{%
-\href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated.yaml}%
-{\textcolor{black}{\texttt{generated.yaml}}}}%
-}}
-\newcommand{\FileGeneratedHundredThousand}{{%
-\codebox{%
-\href{http://rawdata.libelektra.org/tree/master/YAML/Input/generated_100000.yaml}%
-{\textcolor{black}{\texttt{generated\_100000.yaml}}}}%
-}}
-\newcommand{\FileGenerateYAML}{{%
-\codebox{%
-\href{https://master.libelektra.org/scripts/generate-yaml}%
-{\textcolor{black}{\texttt{generate-yaml}}}}%
-}}
-\newcommand{\FileCutInput}{{%
-\codebox{%
-\href{http://rawdata.libelektra.org/tree/master/YAML/Scripts/cut_input}%
-{\textcolor{black}{\texttt{cut\_input}}}}%
-}}
-
-As first input for the benchmark we used a \href{\URLKeyFramesJSON}{JSON configuration file} of the \href{https://www.libelektra.org/plugins/yajl}{YAJL plugin} that we converted to block syntax using the \LinkYAMLCPP{} plugin. We then modified the exported data by removing all \yaml{!<!elektra/meta>} tags, which are not supported by the other \glstext{YAML} plugins. We call the resulting file \FileKeyFrames{} in the remainder of the thesis. This file and all other data of the benchmark is available here:
-
-\begin{leftbar}
-  \url{http://rawdata.libelektra.org/tree/master/YAML}
-\end{leftbar}
-
-. For another input file called \FileCombined{} we copy and pasted parts of test data and various other \glstext{YAML} files in Elektra’s repository into a single file. While the file content is nonsensical, it should at least contains a mix of \glstext{YAML} data that covers most of the code paths of the \glstext{YAML} plugins.
-
-Since both of these files are relatively small, \FileKeyFrames{} contains 218 lines, while \FileCombined{} contains 152 lines, we also generated data using a Python script that we called \FileGenerateYAML{}. This script generates \glstext{YAML} maps using \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{\glspl{UUID}} as scalar keys and values. For the \glstext{YAML} scalars the script randomly selects one of the three flow scalar styles:
-
-\begin{itemize}
-  \item single quoted scalar,
-  \item double quoted scalar, or
-  \item plain scalar
-\end{itemize}
-
-. This always works since \glspl{UUID} contain no character sequence that has special meaning according to the \glstext{YAML} specification. Using this method we generated two files:
-
-\begin{itemize}
-  \item \FileGenerated{} that contains 10 000 lines, and
-
-  \item \FileGeneratedHundredThousand{} that contains 100 000 lines
-\end{itemize}
-
-. We also created another script called \FileCutInput{} to generate additional smaller input files that contain the first 50000, 10000, 5000, 1000, 500, 100, 50, 10, 5 and 1 lines of \FileGeneratedHundredThousand{}.
-
-\subsection{Results}
+\subsubsection{Results}
 
 The graphs in this section show the results of the benchmark for different input files. The basis for all results is \href{https://github.com/ElektraInitiative/libelektra/commit/54a4c0194946917b7d093e0777f465619b2f3d6f}{commit 54a4c019} of Elektra’s code base.
 
@@ -358,7 +356,7 @@ The graphs in this section show the results of the benchmark for different input
   \label{fig:benchmark_results_generated}
 \end{figure}
 
-\subsection{Analysis}
+\subsubsection{Analysis}
 
 If we look at Figure~\ref{fig:benchmark_results_generated} we see that the runtime seems to grow linearly after a certain number of input lines. To verify this hypothesis we removed all samples with a line length smaller than 1000. Figure~\ref{fig:benchmark_results_generated_above_1000} shows the result.
 
@@ -463,7 +461,7 @@ and obtain the formula:
   \label{fig:benchmark_generated_mean}
 \end{figure}
 
-\subsection{Conclusion}
+\subsubsection{Conclusion}
 
 We determined with a high confidence that all of the \glstext{YAML} plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}), at least for the file \FileGeneratedHundredThousand{}. This puts the plugin into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
 
@@ -475,7 +473,7 @@ The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{f
 
 Yan LR and YAMBi showed the second best runtimes, and were about $1.6$ times slower than YAwn. YAML CPP, which was, according to the results of Figure~\ref{fig:benchmark_generated_mean}, about $2.5$ times slower than Yawn takes the second to last place. Yay PEG was the slowest plugin on both tested operating systems, and is about $3.5$ times slower than the fastest plugin according to Figure~\ref{fig:benchmark_generated_mean}.
 
-\section{Memory Usage}
+\subsection{Memory Usage}
 \label{sec:memory_usage}
 
 \newcommand{\FileBenchmarkMemory}{{%
@@ -489,7 +487,7 @@ This time we do not need to determine the mean value of the results. Massif alwa
 
 To automate the process of measuring the memory usage for the different input files, we created a Shell script called \FileBenchmarkMemory{}. We only benchmarked the memory usage on Linux, since Massif did not support macOS 10.14 at the time we executed the benchmark script.
 
-\subsection{Results}
+\subsubsection{Results}
 
 The graphs in this section show the results of the memory benchmark for different input files. The basis of all results is \href{https://github.com/ElektraInitiative/libelektra/commit/ea418f177a5e2707f59f61b5e130a596abdd1c56}{commit ea418f17} of Elektra’s code base.
 
@@ -590,7 +588,7 @@ The graphs in this section show the results of the memory benchmark for differen
   \label{fig:benchmark_results_memory_lines}
 \end{figure}
 
-\subsection{Analysis}
+\subsubsection{Analysis}
 
 Figure~\ref{fig:benchmark_results_memory_lines} shows that the memory usage seems to grow linearly for large line numbers. To analyze this behavior further, we limited the data for the graph to observation where the line number is 1000 or higher. Figure~\ref{fig:benchmark_results_memory_lines_above_thousand} shows the graph after this modification. From the correlation coefficients ($R$) of 1 and the low probabilities of the null hypothesis being wrong ($p$) we conclude that the memory consumption almost certainly grows linearly for all plugins.
 
@@ -601,7 +599,7 @@ Figure~\ref{fig:benchmark_results_memory_lines} shows that the memory usage seem
   \label{fig:benchmark_results_memory_lines_above_thousand}
 \end{figure}
 
-\subsection{Conclusion}
+\subsubsection{Conclusion}
 
 While the asymptotic memory usage of all plugins grows linearly according to our measurements, the factor between the memory usage can be quite high. If we look at the data for the file \FileGenerated{} (see Figure~\ref{fig:benchmark_memory_generated}), then YAwn performs best, while YAMBi needs about $20\%$ more heap memory. The memory usage of the other plugins is much worse. Yan LR allocates about three times the heap memory of YAwn, YAML CPP takes about $3.4$ times the memory amount of YAwn, and YAy PEG needs even more than $4$ times the heap memory of YAwn.
 
