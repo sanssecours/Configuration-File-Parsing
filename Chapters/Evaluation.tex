@@ -29,9 +29,13 @@ To make sure the plugins produce good error messages we also compare these messa
 
 \section{Performance Analysis}
 
-In the following section we analyze the runtime time and memory usage of our plugins for certain input files. To make all benchmarks reproducible we start by detailing the whole setup including used hardware, software, build configuration options and input files. After that we measure and analyze the runtime performance and then do the same for the heap memory usage of the plugins.
+In the following section we analyze the runtime time and memory usage of our plugins for certain input files. We first describe the overall methodical steps we took for both the runtime and memory benchmarks. Then we describe, measure and analyze both of these criteria in their own sections.
 
-\subsection{Hardware}
+\subsection{Method}
+
+To make all benchmarks reproducible we start by detailing the whole setup including used hardware, software, build configuration options and how we generated the input files.
+
+\subsubsection{Hardware}
 
 For all of the tests we used the hardware described in Table~\ref{table:benchmark_hardware}.
 
@@ -55,7 +59,7 @@ For all of the tests we used the hardware described in Table~\ref{table:benchmar
   \end{tabular}
 \end{table}
 
-\subsection{Software}
+\subsubsection{Software}
 
 Table~\ref{table:benchmark_software} shows the overall software setup for the benchmarks. We tested the performance both on macOS and Linux. For the Linux setup we used the Mac version of Docker. The basis of the runtime benchmark is \href{https://github.com/ElektraInitiative/libelektra/commit/54a4c0194946917b7d093e0777f465619b2f3d6f}{commit 54a4c019} of Elektra’s code base, while we measured the memory usage using \href{https://github.com/ElektraInitiative/libelektra/commit/ea418f177a5e2707f59f61b5e130a596abdd1c56}{commit ea418f17}. No code of any of the tested plugins changed \href{https://github.com/ElektraInitiative/libelektra/compare/54a4c0194946917b7d093e0777f465619b2f3d6f...ea418f177a5e2707f59f61b5e130a596abdd1c56}{between those two commits}.
 
@@ -108,7 +112,7 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
     \end{subtable}
 \end{table}
 
-\subsection{Build Setup}
+\subsubsection{Build Setup}
 
 The following list shows the \href{https://cmake.org}{CMake} options that we used for all benchmarks:
 
@@ -120,7 +124,7 @@ The following list shows the \href{https://cmake.org}{CMake} options that we use
   \item \sh{-DENABLE_DEBUG=OFF}.
 \end{itemize}
 
-\subsection{Input}
+\subsubsection{Input}
 
 \newcommand{\URLKeyFramesJSON}{https://master.libelektra.org/src/plugins/yajl/yajl/keyframes_complex.json}
 
