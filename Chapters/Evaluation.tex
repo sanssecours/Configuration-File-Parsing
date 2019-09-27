@@ -213,6 +213,13 @@ Since both of these files are relatively small, \FileKeyFrames{} contains 218 li
 
 To compare the runtime performance we used the C application \FilePluginGetSet{} that opens an Elektra plugin using a specific configuration file. For the whole benchmark process we created a Bash script, called \FileBenchmarkYAML{}, that uses the benchmarking tool \ToolHyperfine{} to call \FilePluginGetSet{} using different \glstext{YAML} plugins. Figure~\ref{fig:benchmark} shows a diagram of this setup.
 
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.9\textwidth]{Benchmark}
+  \caption{The diagram above shows the basic sequence of steps to measure the runtime performance of the \glstext{YAML} plugins.}
+  \label{fig:benchmark}
+\end{figure}
+
 For the measurement we use \ToolHyperfine{}, since this tool
 
 \begin{enumerate}
@@ -222,13 +229,6 @@ For the measurement we use \ToolHyperfine{}, since this tool
 \end{enumerate}
 
 To make sure we repeat the benchmark every time \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} reports statistical outliers we created the Shell script \FileBenchmarkRuntime{}. This script calls \FileBenchmarkYAML{} for every input file and repeats a benchmark, until \href{https://github.com/sharkdp/hyperfine}{\sh{hyperfine}} does not report any warnings. The script \FileBenchmarkRuntime{} \emph{does} ignore warnings about runtimes under 5 milliseconds though, since \FilePluginGetSet{} might take less execution time for small \glstext{YAML} files.
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=0.9\textwidth]{Benchmark}
-  \caption{The diagram above shows the basic sequence of steps to measure the runtime performance of the \glstext{YAML} plugins.}
-  \label{fig:benchmark}
-\end{figure}
 
 \subsubsection{Results}
 
