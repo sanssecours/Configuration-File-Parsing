@@ -1552,6 +1552,89 @@ The parsing plugin that showed the least useful error messages is YAy PEG. While
 
 Using the information we collected in this chapter it is time to determine the most promising \glstext{YAML} plugin. Let us start by saying that we think all of the parser based \glstext{YAML} plugins (Yan LR, YAMBi, YAwn, YAy PEG) could be extended to parse a more complete subset of \glstext{YAML}. However, some of them fit all the requirements we have for a more complete \glstext{YAML} plugin better than others.
 
+\begin{table}[H]
+  \caption{Overview of the YAML parsing plugins and their characteristics}
+  \label{tab:error_messages_final_multiple_errors}
+  \centering
+
+  \begin{adjustbox}{max width=\textwidth}
+  \begin{threeparttable}
+  \begin{tabular}{p{3cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
+    \toprule
+    & YAML CPP & Yan LR & YAMBi & YAwn & YAy PEG\\
+    \midrule
+
+    \multicolumn{6}{l}{Generator/Library Features}\\[0.2cm]
+    Name & \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} & \href{http://antlr.org}{ANTLR} & \href{https://www.gnu.org/software/bison}{Bison} & \href{https://github.com/vnmakarov/yaep}{YAEP} & \href{https://github.com/taocpp/PEGTL}{PEGTL}\\
+    Parser Technique & Recursive Descent & \gls{ALL(*)} & \glstext{LALR}(1) & Earley Parser & PEG Parser\\
+    Lexer Support & Handwritten & Integrated (Regex) & External & External & Integrated (\glstext{PEG})\\[1cm]
+
+    \midrule
+    \multicolumn{6}{l}{Plugin Specific Features}\\[0.2cm]
+    Lexer Used & Existing Lexer & Custom C++ Lexer & Custom C++ Lexer & Custom C++ Lexer & Template Based PEG Code\\
+
+    Handwritten Code &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=0pt]
+      \item Converter Functions\tnote{T}
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=0pt]
+      \item Lexer
+      \item Grammar
+      \item Listener \tnote{E}
+      \item Error Listener \tnote{E}
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=0pt]
+      \item Input Support
+      \item Token Support\tnote{E}
+      \item Lexer
+      \item Grammar
+      \item Driver\tnote{D}
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=0pt]
+      \item Input Support
+      \item Token Support
+      \item Location Info
+      \item Lexer
+      \item Grammar
+      \item Listener
+      \item Error Listener
+      \item Tree Walking Code
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=0pt]
+      \item Grammar
+      \item State
+      \item Listener
+      \item Error Listener
+      \item Tree Walking Code
+    \end{itemize}
+    \end{minipage}
+    \\
+    \bottomrule
+  \end{tabular}
+
+  \begin{tablenotes}
+    \item[E] Here we extended generated code.
+    \item[T] We translated the node based structured output produced by yaml-cpp into a \cc{KeySet}.
+    \item[D] The driver contains similar code that we implemented in the “Listener” and “Error Listener” parts of the other plugins.
+  \end{tablenotes}
+
+  \end{threeparttable}
+  \end{adjustbox}
+\end{table}
+
 \subsection{Requirements for an Extended \glstext{YAML} Plugin}
 \label{sec:requirements_extended_yaml_plugin}
 
