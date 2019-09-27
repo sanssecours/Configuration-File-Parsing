@@ -47,6 +47,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 ## Fragen
 
 - Kann man den Teil zum Rekursiv-Descent-Parser so lassen (ohne Teile zu Background/Result zu verschieben)? Im Endeffekt beschreibe ich ja hier nur Probleme mit einem Ansatz, den ich eh nicht verwendet habe.
+- Welche Unterschiede gibt es beim Thema “Error Messages von Compilern” und “Error Messages bei Konfigurationsdateien”? Mir fällt nur die eventuell andere Benutzergruppe ein. Ein Benutzer der Elektra verwendet kann eventuell nicht programmieren?
 
 # Differences Config-/Language-Parser
 
