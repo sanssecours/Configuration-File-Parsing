@@ -1642,7 +1642,7 @@ Using the information we collected in this chapter it is time to determine the m
     \begin{itemize}[leftmargin=*, itemsep=-1ex]
       \item Parser Actions
       \item AST
-      \item Tree \newline Walking \newline (Listener)
+      \item Tree \newline Walking (Listener / Visitor)
     \end{itemize}
     \end{minipage}
     &
@@ -1668,8 +1668,11 @@ Using the information we collected in this chapter it is time to determine the m
 
     Input API (Encoding) & — & ✅ & ❌ & ❌ & ✅\\
     Token Handling & — & ✅ & ✅ & ❌ & ✅\\
-    Tree Walking & — & ✅ & ❌ & ❌ & ❌\\
-    Error Listener & — & ✅ & ❌ & ❌ & ❌\\
+    AST \newline Support & — & ✅ & ❌ & ✅ & ✅\\
+    Tree \newline Walking & — & ✅ & ❌ & ❌ & ❌\\
+    Tree \newline Rewriting & — & ❌ & ❌ & ✅ & ✅\\
+    Error \newline Listener & — & ✅ & ❌ & ❌ & ❌\\
+    Error \newline Recovery & ❌ & ✅ & ✅\tnote{E} & ✅\tnote{E} & ❌\\
     Language Support &
     \begin{minipage}[t]{\linewidth}
     \begin{itemize}[leftmargin=*, itemsep=-1ex]
@@ -1716,6 +1719,7 @@ Using the information we collected in this chapter it is time to determine the m
 
   \begin{tablenotes}
     \item[A] Since \glspl{PEG} use backtracking the action code has to take “accidentally” taken actions into consideration.
+    \item[E] Error recovery support requires non-trivial changes to the grammar.
   \end{tablenotes}
 
   \end{threeparttable}
