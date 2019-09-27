@@ -1550,47 +1550,210 @@ The parsing plugin that showed the least useful error messages is YAy PEG. While
 
 \section{Most Promising Plugin}
 
-Using the information we collected in this chapter it is time to determine the most promising \glstext{YAML} plugin. Let us start by saying that we think all of the parser based \glstext{YAML} plugins (Yan LR, YAMBi, YAwn, YAy PEG) could be extended to parse a more complete subset of \glstext{YAML}. However, some of them fit all the requirements we have for a more complete \glstext{YAML} plugin better than others.
+Using the information we collected in this chapter it is time to determine the most promising \glstext{YAML} plugin. Let us start by saying that we think all of the parser based \glstext{YAML} plugins (Yan LR, YAMBi, YAwn, YAy PEG) could be extended to parse a more complete subset of \glstext{YAML}. However, some of them fit all the requirements we have for a more complete \glstext{YAML} plugin better than others. Since the whole evaluation is rather long we show the information both about the used parser libraries and the parsing plugins in compact form in Table~\ref{tab:parser_overview} and Table~\ref{tab:plugin_overview}.
 
 \begin{table}[H]
-  \caption{Overview of the YAML parsing plugins and their characteristics}
-  \label{tab:error_messages_final_multiple_errors}
+  \caption{Overview of the used parsing libraries and their characteristics}
+  \label{tab:parser_overview}
   \centering
 
   \begin{adjustbox}{max width=\textwidth}
   \begin{threeparttable}
-  \begin{tabular}{p{3cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
+  \begin{tabular}{p{2cm}p{2.3cm}p{2.3cm}p{2.3cm}p{2.3cm}p{2.3cm}}
+    \toprule
+    & \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} & \href{http://antlr.org}{ANTLR} & \href{https://www.gnu.org/software/bison}{Bison} & \href{https://github.com/vnmakarov/yaep}{YAEP} & \href{https://github.com/taocpp/PEGTL}{PEGTL}\\
+    \midrule
+
+    Parser \newline Techniques &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Recursive Descent
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item \glstext{SLL(*)}
+      \item \glstext{ALL(*)}
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+      \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item \glstext{LALR}
+      \item \glstext{IELR}
+      \item \glstext{LR}
+      \item \glstext{GLR}
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+      \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Earley Parser
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+      \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item \glstext{PEG} Parser
+    \end{itemize}
+    \end{minipage}
+    \\
+
+    Lexer \newline Support & Handwritten & Integrated (Regex) & External & External & Integrated (\glstext{PEG})\\
+
+    Grammar
+    &
+    C++ Code
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Standalone
+      \item Annotated with Code
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Annotated with Code
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Annotated with \gls{AST} Rewriting Rules
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Templated C++ Code
+    \end{itemize}
+    \end{minipage}
+    \\
+    Conversion Interface &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Node Class
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Parser Actions
+      \item AST
+      \item Tree \newline Walking \newline (Listener)
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Parser Actions
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item AST
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item Parser Actions\tnote{A}
+      \item AST
+    \end{itemize}
+    \end{minipage}
+    \\
+
+    Input API (Encoding) & — & ✅ & ❌ & ❌ & ✅\\
+    Token Handling & — & ✅ & ✅ & ❌ & ✅\\
+    Tree Walking & — & ✅ & ❌ & ❌ & ❌\\
+    Error Listener & — & ✅ & ❌ & ❌ & ❌\\
+    Language Support &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item C++
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item C++
+      \item C\#
+      \item Python
+      \item Java
+      \item JavaScript
+      \item Go
+      \item PHP
+      \item Swift
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item C
+      \item C++
+      \item Java
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item C
+      \item C++
+    \end{itemize}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
+      \item C++
+    \end{itemize}
+    \end{minipage}
+    \\
+   \bottomrule
+  \end{tabular}
+
+  \begin{tablenotes}
+    \item[A] Since \glspl{PEG} use backtracking the action code has to take “accidentally” taken actions into consideration.
+  \end{tablenotes}
+
+  \end{threeparttable}
+  \end{adjustbox}
+\end{table}
+
+\begin{table}[H]
+  \caption{Overview of the YAML parsing plugins and their characteristics}
+  \label{tab:plugin_overview}
+  \centering
+
+  \begin{adjustbox}{max width=\textwidth}
+  \begin{threeparttable}
+  \begin{tabular}{p{2cm}p{2.3cm}p{2.3cm}p{2.3cm}p{2.3cm}p{2.3cm}}
     \toprule
     & YAML CPP & Yan LR & YAMBi & YAwn & YAy PEG\\
     \midrule
-
-    \multicolumn{6}{l}{Generator/Library Features}\\[0.2cm]
-    Name & \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} & \href{http://antlr.org}{ANTLR} & \href{https://www.gnu.org/software/bison}{Bison} & \href{https://github.com/vnmakarov/yaep}{YAEP} & \href{https://github.com/taocpp/PEGTL}{PEGTL}\\
-    Parser Technique & Recursive Descent & \gls{ALL(*)} & \glstext{LALR}(1) & Earley Parser & PEG Parser\\
-    Lexer Support & Handwritten & Integrated (Regex) & External & External & Integrated (\glstext{PEG})\\[1cm]
-
-    \midrule
-    \multicolumn{6}{l}{Plugin Specific Features}\\[0.2cm]
-    Lexer Used & Existing Lexer & Custom C++ Lexer & Custom C++ Lexer & Custom C++ Lexer & Template Based PEG Code\\
+    Parser \newline Technique & Recursive Descent & \gls{ALL(*)} & \glstext{LALR}(1) & Earley Parser & PEG Parser\\
+    Lexer Used & Existing Lexer & Custom C++ Lexer & Custom C++ Lexer & Custom C++ Lexer & Templated C++ Code\\
 
     Handwritten Code &
     \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[leftmargin=*, itemsep=0pt]
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
       \item Converter Functions\tnote{T}
     \end{itemize}
     \end{minipage}
     &
     \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[leftmargin=*, itemsep=0pt]
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
       \item Lexer
       \item Grammar
       \item Listener \tnote{E}
-      \item Error Listener \tnote{E}
+      \item Error \newline Listener\tnote{E}
     \end{itemize}
     \end{minipage}
     &
     \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[leftmargin=*, itemsep=0pt]
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
       \item Input Support
       \item Token Support\tnote{E}
       \item Lexer
@@ -1600,24 +1763,24 @@ Using the information we collected in this chapter it is time to determine the m
     \end{minipage}
     &
     \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[leftmargin=*, itemsep=0pt]
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
       \item Input Support
       \item Token Support
       \item Location Info
       \item Lexer
       \item Grammar
       \item Listener
-      \item Error Listener
+      \item Error \newline Listener
       \item Tree Walking Code
     \end{itemize}
     \end{minipage}
     &
     \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[leftmargin=*, itemsep=0pt]
+    \begin{itemize}[leftmargin=*, itemsep=-1ex]
       \item Grammar
       \item State
       \item Listener
-      \item Error Listener
+      \item Error \newline Listener
       \item Tree Walking Code
     \end{itemize}
     \end{minipage}
