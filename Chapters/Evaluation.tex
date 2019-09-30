@@ -1830,16 +1830,16 @@ To minimize the list of candidates for extension we first eliminate some of them
 After the elimination three possible candidates are left.
 
 \begin{description}[style=multiline, leftmargin=2cm, font=\bfseries]
-  \item[Yan LR] Compared to YAMBi on Linux and YAwn, the plugin performed worse in the runtime benchmark, and required more memory to parse our example data. On the other hand, ANTLR provides a lot of support code we had to write for the other plugins ourselves.
+  \item[Yan LR] Compared to YAwn, the plugin performed worse in the runtime benchmark. It also requires more memory to parse our example data than YAMBi and YAwn. On the other hand, ANTLR provides a lot of support code we had to write for the other plugins ourselves.
 
-  \item[YAMBi] The plugin performed very well in the runtime performance test on Linux and – compared to Yan LR – only required a relatively small amount of memory for our example data. The plugin does require more support code than Yan LR though. A problem considering the maintainability of the plugin (requirement 4) might be the LR parsing algorithm. If there are any problems like shift/reduce conflicts in the grammar, then a developer usually needs at least some information on how the LR parsing algorithm works to fix the problem.
+  \item[YAMBi] The plugin performed well in the runtime performance test on Linux and – compared to Yan LR – only required a relatively small amount of memory for our example data. The plugin does require more support code than Yan LR though. A problem considering the maintainability of the plugin (requirement 4) might be the LR parsing algorithm. If there are any problems like shift/reduce conflicts in the grammar, then a developer usually needs at least some information on how the LR parsing algorithm works to fix the problem. Bison also offers considerable less support code for common parsing task than ANTLR (see Table~\ref{tab:parser_overview}), which could become a problem, e.g. if are not able to only use parser actions for an extension of the YAMBi plugin.
 
   \item[YAwn] While the plugin showed good runtime performance and the lowest memory usage, we found two disadvantages, compared to YAMBi and Yan LR.
 
   \begin{enumerate}
-    \item YAEP is more or less the work of a single author: Vladimir N. Makarov. Recently another author, Alexander Klauer, fixed some of the problems of the project and modernized parts of the code base. However, compared to ANTLR and Bison, the community behind the parsing library is rather small.
+    \item \gls{YAEP} is more or less the work of a single author: Vladimir N. Makarov. Recently another author, Alexander Klauer, fixed some of the problems of the project and modernized parts of the code base. However, compared to ANTLR and Bison, the community behind the parsing library is rather small.
 
-    \item YAEP requires more support code than YAMBi and Yan LR. While this support code is not that complicated, it would still something we need to maintain and extend for a more complete support of \glstext{YAML} and the requirements listed in “\nameref{sec:requirements_extended_yaml_plugin}”.
+    \item YAEP requires more support code than Yan LR and even YAMBi. While this support code is not that complicated, it would still something we need to maintain and extend for a more complete support of \glstext{YAML} and the requirements listed in “\nameref{sec:requirements_extended_yaml_plugin}”.
   \end{enumerate}
 
 \end{description}
@@ -1851,4 +1851,4 @@ With all the information above in mind we decided that the best candidate for ex
   \item producing good error messages without any changes to the grammar,
 \end{itemize}
 
-make up for the worse runtime performance on Linux and the relatively large heap memory usage compared to Bison and YAEP.
+make up for the worse runtime performance compared to \gls{YAEP}, and the relatively large heap memory usage compared to Bison and \gls{YAEP}.
