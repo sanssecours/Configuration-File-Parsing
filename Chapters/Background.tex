@@ -119,6 +119,7 @@ A configuration library that keeps the order of entries and comments intact is A
 Compared to Augeas, Elektra~\cite{raab2010modular, raab2017context}, with its plugin based parsing system also supports context free and even context sensitive configuration languages. This is the case, since Elektra can use a general purpose programming language to parse code. Using metadata Elektra is also able to store the content of comments and keep the order of configuration data intact, when writing data back. The code for this has to be implemented in the plugin itself, which can become problematic. For example, while Elektra’s \href{https://github.com/ElektraInitiative/libelektra/tree/3e6e0254a54d3ad9642091550ce9c560d8cf38dd/src/plugins/ini}{INI plugin} preserves comments and the order of entries, its code is also quite complicated and error-prone. As we already stated in “\nameref{sec:aim_of_the_work}” we want to improve this situation using state of the art parsing techniques for our YAML subset plugins.
 
 \subsection{Error Handling}
+\label{sec:error_handling}
 
 The usual goal in parsing is the processing of grammatically correct input. However, since editing configuration data is often done by hand, there is always a possibility of erroneous input. A method to inform the user about such errors is essential. As pointed out by Terence \citeauthor{parr2013definitive} in \citetitle{parr2013definitive}~\cite[p. 151]{parr2013definitive} we also need to inform the user about the reason for an error:
 

@@ -991,26 +991,7 @@ YAy PEG’s advantage considering grammar extensibility is that the plugin uses 
 \section{Error Reporting}
 \label{sec:error_reporting}
 
-\emph{Error handling} can be grouped into four dependent stages~\cite{ruefenacht2016error, pottier2016reachability}:
-
-\begin{enumerate}
-  \item error detection,
-  \item error diagnosis,
-  \item error recovery, and
-  \item error correction
-\end{enumerate}
-
-. We are mainly interested in the first three items, since error correction is generally not possible without the possibility of fixing errors incorrectly.
-
-\emph{Error reporting} is the results of
-
-\begin{itemize}
-  \item detecting that input is incorrect (error detection),
-  \item finding what part of the input was incorrect (error diagnosis), and
-  \item trying to resume the parsing process in case of errors (error recovery)
-\end{itemize}
-
-. While there exist techniques to enhance error reporting, by using external tools or modifying a parser engine~\cite{jeffery2003generating, cox2010errors}, we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
+While there exist techniques to enhance error reporting, by using external tools or modifying a parser engine (see Section “\nameref{sec:error_handling}”), we will only consider built-in solutions or slight modifications to a grammar. We do this, since extending a parser engine is out of scope of the thesis and elaborate extensions would also make the comparison concerning error reporting unfair.
 
 \subsection{Initial Erroneous Input}
 
@@ -1235,17 +1216,9 @@ After the update the parser produces an error message that looks like this:
 
 for the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence}. As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
 
-One option to improve the error output of the Bison parser we did not implement is described by \citeauthor{jeffery2003generating} in \citetitle{jeffery2003generating}~\cite{jeffery2003generating}. The technique looks promising, and was also added to the old Bison parser\footnote{The developers of Go switched to a hand-written parser written in Go in 2016~\cite{pike2017reddit, go2016release}.} for the programming language Go~\cite{cox2010errors}. Recently \citeauthor{pottier2016reachability}~\cite{pottier2016reachability} extended \citeauthor{jeffery2003generating}’s work and added example based error reporting in the \glstext{LR} parsers of the CompCert C compiler~\cite{kaestner2018compcert}. In \citetitle{pottier2016reachability} \citeauthor{pottier2016reachability}~\cite{pottier2016reachability} writes:
-
-\begin{quote}
-  We believe it is fair to say that the quality of CompCert’s diagnostic messages is now on par with that of \texttt{clang} and \texttt{gcc}.
-\end{quote}
-
-. This statement and the examples in the article lead us to believe that the error messages of YAMBi could be improved using example based error reporting. However, the technique is not directly supported by Bison and hence requires changes to the parsing code that are out of the scope of this thesis.
-
 \subsection{YAEP}
 
-Just as Bison, \gls{YAEP} also requires that you add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did for Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
+Just as Bison, \gls{YAEP} also requires that we add error tokens to the grammar to specify locations for error recovery. We therefore defined the same error recovery locations inside sequences and maps, as we did for Bison. The other updates were quite similar too: We improved the name of tokens inside error messages and added the erroneous input to the error message.
 
 After all these changes the output for the \glstext{YAML} data from Listing~\ref{lst:incorrect_indentation_element_without_sequence} looks very similar to the one produced by YAMBi:
 
@@ -1262,11 +1235,7 @@ After all these changes the output for the \glstext{YAML} data from Listing~\ref
 
 \subsection{PEGTL}
 
-\glstext{LL} and \glstext{LR} parsers read the input deterministically from left to right. They therefore report the first position, where the parsed input is not part of the language described by the grammar anymore. This behavior is also known as (longest) correct/viable prefix property~\cite{sippu1990parsing, ruefenacht2016error, maidl2016labeled, pottier2016reachability}.
-
-\Gls{PEG} parsers do not have this property. The reason behind this is that \glspl{PEG} use backtracking, and therefore obfuscate error locations~\cite{ruefenacht2016error}. In his master thesis~\cite{ford2002packrat} \citeauthor{ford2002packrat} describes one option to produce meaningful error messages. His parser records all parsing results and uses the one that matched the farthest to the right in the input for error messages. In \citetitle{maidl2016labeled}~\cite{maidl2016labeled} \citeauthor{maidl2016labeled} show that this error strategy can also be added to every \gls{PEG} library that supports semantic actions. They also introduce a form of error reporting, inspired by the excepting handling mechanism of programming languages, based on grammar annotations called labeled failures~\cite{maidl2016labeled}.
-
-PEGTL does neither implement the error handling strategy described by \citeauthor{ford2002packrat}~\cite{ford2002packrat}, nor labelled failures~\cite{maidl2016labeled}. Instead the library offers a grammar rule called \cpp{must}, which states that a certain rule, specified as template argument, has to match at a given position or an error will be raised. We can customize the code executed for a given \cpp{must} rule according to this template argument. Effectively this strategy allows us to specify different error messages for each expected but unmatched rule.
+We already talked about general error strategies for \glstext{PEG} parsers in the Section “\nameref{sec:error_handling}”. PEGTL does neither implement the error handling strategy described by \citeauthor{ford2002packrat}~\cite{ford2002packrat}, nor labelled failures~\cite{maidl2016labeled}. Instead the library offers a grammar rule called \cpp{must}, which states that a certain rule, specified as template argument, has to match at a given position or an error will be raised. We can customize the code executed for a given \cpp{must} rule according to this template argument. Effectively this strategy allows us to specify different error messages for each expected but unmatched rule.
 
 As we described in the section “\nameref{sec:peg_parser}”, we tried to keep the grammar of our PEG parser plugin \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} close to the grammar of the \href{http://yaml.org/spec/1.2/spec}{YAML specification}~\cite{ben2009yaml}. This also meant, that the grammar contained only a single \cpp{must} rule, that makes sure that the grammar matched the whole input:
 
