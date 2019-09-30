@@ -1790,6 +1790,7 @@ Using the information we collected in this chapter it is time to determine the m
     \end{minipage}
     \\
 
+    Run Time\tnote{R} & 188.9 & 122 & 119.9 & 74.9 & 261 \\
     Code Lines\tnote{L} & 609 & 741 & 852 & 1146 & 1187 \\
     \bottomrule
   \end{tabular}
@@ -1798,6 +1799,7 @@ Using the information we collected in this chapter it is time to determine the m
     \item[E] Here we extended generated code.
     \item[D] The driver contains similar code that we implemented in the “Listener” and “Error Listener” parts of the other plugins.
     \item[L] This number includes the line number of the grammar, but not any generated code, according to the data shows in Table~\ref{fig:line_count}.
+    \item[R] This row contains the mean of the execution times in milliseconds for the file \FileGenerated{} show in Table~\ref{fig:benchmark_generated_mean}.
     \item[T] We translated the node based structured output produced by yaml-cpp into a \cc{KeySet}.
   \end{tablenotes}
 
