@@ -38,8 +38,8 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 - [x] Contributions (alles implementiert, Vergleichsframework)
 - [x] Motivation (Introduction)
 - [x] stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
-- [ ] Methoden vollständig beschreiben
-- [ ] Results und Analyse trennen
+- [x] Methoden vollständig beschreiben
+- [x] Results und Analyse trennen
 - [ ] Kleinigkeiten (Zeiten bei Implementierung)
 - [ ] Umfrage (eventuell löschen)
 - [ ] Struktur von Arbeit beschreiben
