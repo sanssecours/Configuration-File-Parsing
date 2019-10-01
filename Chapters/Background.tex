@@ -275,4 +275,10 @@ In Elektra we \emph{mount} a backend at a certain position of the key-value data
 
 \section{Related Work}
 
-There are certainly other papers that compare libraries or parsing engines using either a specialized format such as JSON~\cite{json2019geoff} or multiple grammars~\cite{chen2011full, flodin2014packrat}. However, the comparability of the parsers in these papers is usually limited by the fact that they do not use the same common data structure.
+\subsection{Parser Comparison}
+
+There exists a lot of research about how to increase the parsing speed for certain data file formats. For example, in \citetitle{json2019geoff}~\cite{json2019geoff} \citeauthor{json2019geoff} use \gls{SIMD} instructions to accelerate the parsing of \gls{JSON} data. In the “Experiments” section of this paper the authors compare their implementation with other JSON parsers, first only using the pure parsing speed, meaning that they ignore the different output of the tested parsers. They also provide a comparison where they show how fast the tested parser are able to find the same data in one of the converted documents from their data set.
+
+While parsing one file format using a specialized parser provides information about how fast we are able to convert certain file formats, this kind of optimization can require substantial manual work. For the plethora of different configuration file formats, it is usually not possible to handcraft parser by hand. Even if it would be possible, some parser need to store information that others do not (e.g. comments), making the process of creating a parser that handles all these tasks by hand even harder. To fix this problem we can generate code for the parser.
+
+There exist some papers that compare parser generators themselves. For example, in \citetitle{chen2011full}~\cite{chen2011full} \citeauthor{chen2011full} compare the table size and the time to generate parser code for the tools Hyacc, Menhir, MSTA and Bison. This paper does not evaluate the execution speed, error messages or other important criteria of the generated parsers.
