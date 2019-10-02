@@ -19,8 +19,8 @@ In this thesis we will look at the configuration file parsing problem and evalua
 \begin{itemize}
   \item bidirectional programming~\cite{foster2005combinators, bohannon2006relational, lutterkort2008augeas, ko2016bigul, raab2016improving},
   \item code produced by a parser generator~\cite{denny2008ielr, parr2014adaptive, warth2016modular, bates2017aprt},
-  \item Serialization libraries~\cite{sumaray2012cds, pacini2015performance}, and
-  \item Hand-written parsers~\cite{myers2008cparser, bendersky2012clang}
+  \item serialization libraries~\cite{sumaray2012cds, pacini2015performance}, and
+  \item hand-written parsers~\cite{myers2008cparser, bendersky2012clang}
 \end{itemize}
 
 . Currently the possibilities to compare different parsing techniques are limited. The naïve approach would be to just run different parsers on the same data. In practice however, this approach is not usable, since parser tools tend to produce very different data structures. Some of them do not produce data structures at all, instead they let the user specify subroutines that should be called when the parser matches parts of the grammar.
