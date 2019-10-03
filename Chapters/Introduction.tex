@@ -132,3 +132,13 @@ The methodological approach for this thesis consists of the steps given below.
     \item \href{https://github.com/ElektraInitiative/libelektra/graphs/contributors?from=2012-04-01&to=2019-09-30&type=a}{added over 100 000 lines} to, and \href{https://github.com/ElektraInitiative/libelektra/graphs/contributors?from=2012-04-01&to=2019-09-30&type=d}{removed over 100 000 lines} from Elektra’s code base.
   \end{itemize}
 \end{itemize}
+
+\section{Structure of this Thesis}
+
+In chapter~\ref{sec:background} we provide background information about the state of art in configuration file parsing. We then describe the configuration framework Elektra, and give some examples about other parser comparison related research.
+
+In chapter~\ref{sec:design_challenges_and_decisions} we describe the design challenges we faced and the decisions we made when we implemented the parer plugins. First we describe how we decided about the YAML subset the parsers should be able to parse. Then we explain how we mapped YAML data into the data structures of Elektra. After that we discuss the problems we had when we implemented the plugins and how we solved them. At the end of the chapter we talk about the additional Elektra plugins we wrote to improve the integration of the parser plugins into Elektra.
+
+Chapter~\ref{sec:evaluation} provides a detailed evaluation of the parsers. It first describes the goals of the evaluation, detailing different important criteria of the parser plugins. Afterwards we analyze each of the criteria in their own section, answering our research questions in the process. At the end of the evaluation we describe the parser plugins that best fit our criteria.
+
+In chapter~\ref{sec:conclusion_and_future_work} we first provide an overview of the results. Then we describe possible future work.
