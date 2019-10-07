@@ -42,7 +42,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 - [x] Results und Analyse trennen
 - [ ] Kleinigkeiten (Zeiten bei Implementierung)
 - [ ] Umfrage (eventuell löschen)
-- [ ] Struktur von Arbeit beschreiben
+- [x] Struktur von Arbeit beschreiben
 
 ## Fragen
 
