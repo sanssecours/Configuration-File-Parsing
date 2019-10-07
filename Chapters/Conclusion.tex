@@ -9,7 +9,7 @@ In a \hyperref[sec:evaluation]{detailed evaluation} we determined the answer to 
 
 \speed*
 
-The \hyperref[sec:run_time_performance]{benchmarks} showed a significant difference between the runtime of the \hyperref[sec:design_challenges_and_decisions]{parsing plugins} created in the scope of the thesis, especially for large files. However, at least for our example data, all the plugins \hyperref[fig:benchmark_results_generated_above_1000]{showed linear runtime behavior}. Even the PEG parser library \gls{PEGTL} that has a theoretical exponential runtime in the worst case showed this linear behavior. Interestingly, \gls{YAEP}, the library that uses one of the most powerful parsing techniques tested (Earley parsing), showed the \hyperref[fig:benchmark_generated]{best runtime performance on macOS}. Even on Linux the library was only \hyperref[fig:benchmark_generated]{slightly slower than the fastest parser, based on Bisons’ LALR code}.
+The \hyperref[sec:run_time_performance]{benchmarks} showed a large difference between the runtime of the \hyperref[sec:design_challenges_and_decisions]{parsing plugins} especially for large files. However, at least for our example data, all the plugins \hyperref[fig:benchmark_results_generated_above_1000]{showed linear runtime behavior}. Even the PEG parser library \gls{PEGTL} that has a theoretical exponential runtime in the worst case showed this linear behavior. Interestingly, \gls{YAEP}, the library that uses one of the most powerful parsing techniques tested (Earley parsing), showed the \hyperref[fig:benchmark_generated]{best runtime performance on macOS}. On Linux the library was only \hyperref[fig:benchmark_generated]{slightly slower than the fastest parser, based on Bisons’ LALR code}.
 
 \closeness*
 
