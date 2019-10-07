@@ -43,6 +43,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 - [ ] Kleinigkeiten (Zeiten bei Implementierung)
 - [ ] Umfrage (eventuell löschen)
 - [x] Struktur von Arbeit beschreiben
+- [ ] Verbessere Argumentation für ANTLR
 
 ## Fragen
 
