@@ -20,10 +20,10 @@ In this thesis we will look at the configuration file parsing problem and evalua
   \item bidirectional programming~\cite{foster2005combinators, bohannon2006relational, lutterkort2008augeas, ko2016bigul, raab2016improving},
   \item code produced by a parser generator~\cite{denny2008ielr, parr2014adaptive, warth2016modular, bates2017aprt},
   \item serialization libraries~\cite{sumaray2012cds, pacini2015performance}, and
-  \item hand-written parsers~\cite{myers2008cparser, bendersky2012clang}
+  \item hand-written parsers~\cite{myers2008cparser, bendersky2012clang}.
 \end{itemize}
 
-. Currently the possibilities to compare different parsing techniques are limited. The naïve approach would be to just run different parsers on the same data. In practice however, this approach is not usable, since parser tools tend to produce very different data structures. Some of them do not produce data structures at all, instead they let the user specify subroutines that should be called when the parser matches parts of the grammar.
+Currently the possibilities to compare different parsing techniques are limited. The naïve approach would be to just run different parsers on the same data. In practice however, this approach is not usable, since parser tools tend to produce very different data structures. Some of them do not produce data structures at all, instead they let the user specify subroutines that should be called when the parser matches parts of the grammar.
 
 \begin{figure}[H]
   \centering
@@ -53,10 +53,10 @@ As part of this thesis we compare various ways of parsing. For that purpose we w
   \item Earley parser (\href{https://github.com/vnmakarov/yaep}{YAEP}),
   \item \glstext{PEG} parser (\href{https://github.com/taocpp/PEGTL}{PEGTL}),
   \item parser combinator (\href{https://github.com/orangeduck/mpc}{mpc}), and
-  \item bidirectional programming (\href{http://augeas.net}{Augeas})
+  \item bidirectional programming (\href{http://augeas.net}{Augeas}).
 \end{itemize}
 
-. We compare the parsing code according to the following criteria:
+We compare the parsing code according to the following criteria:
 
 \begin{itemize}
   \item runtime performance,
@@ -64,10 +64,10 @@ As part of this thesis we compare various ways of parsing. For that purpose we w
   \item code size,
   \item overall code complexity,
   \item ease of extensibility and composability, and
-  \item error reporting
+  \item error reporting.
 \end{itemize}
 
-. In the scope of the above comparison we answer the questions below.
+In the scope of the above comparison we answer the questions below.
 
 \begin{restatable}{question}{speed}
   \label{que:speed}
