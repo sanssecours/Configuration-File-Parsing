@@ -4,7 +4,7 @@
 
 Parsing of programming languages is an often studied and revered technique in the computer sciences. The same is not true for configuration file parsing. The answer to the question “How do I solve this problem?” does usually not contain the task of creating and parsing a new programming language in the process. On the other hand, the answer to “How do I configure this?” often seems to be thinking about a new configuration file format and then implementing handwritten parser code for it.
 
-While hand written parsing code can be the proper tool to convert code, for example both \href{http://clang.llvm.org}{Clang}~\cite{bendersky2012clang} and \href{http://gcc.gnu.org}{GCC}~\cite{myers2008cparser} use handwritten parsers, often the person writing configuration parsing code is not an expert in parsing. As consequence, configuration file parsers often suffer from problems such as
+While handwritten parsing code can be the proper tool to convert code, for example both \href{http://clang.llvm.org}{Clang}~\cite{bendersky2012clang} and \href{http://gcc.gnu.org}{GCC}~\cite{myers2008cparser} use handwritten parsers, often the person writing configuration parsing code is not an expert in parsing. As consequence, configuration file parsers often suffer from problems such as
 
 \begin{itemize}
   \item bad or no error message support,
