@@ -62,6 +62,11 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 |            | - Programmer/Expert                   | - Normal User               |
 | Text       | Explicit Markers (usually `"` or `'`) | Explicit Markers/No Markers |
 
+## Handling Errors Configuration Files
+
+- Often times type information not available
+- Problem: Expert in parsing code, also writes error messages
+
 ## Documents
 
 - https://stackoverflow.com/questions/648246/at-what-point-does-a-config-file-become-a-programming-language
