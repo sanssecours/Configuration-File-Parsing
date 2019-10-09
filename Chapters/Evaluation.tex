@@ -658,10 +658,10 @@ For YAMBi we wrote two classes,
 
 \begin{itemize}
   \item one that represents the input for the lexer ($63$ code lines), and
-  \item another class that stores data about a lexer symbol ($53$ code lines)
+  \item another class that stores data about a lexer symbol ($53$ code lines).
 \end{itemize}
 
-. The sum of the lines of code ($63 + 53 = 116$) explains the difference between the amount of handwritten code between Yan LR and YAMBi ($717 - 609 = 108$) pretty well.
+The sum of the lines of code ($63 + 53 = 116$) explains the difference between the amount of handwritten code between Yan LR and YAMBi ($717 - 609 = 108$) pretty well.
 
 For YAwn we also added a symbol ($69$ code lines) and input class ($101$ code lines) as we did for YAMBi. Additionally we added
 
@@ -669,10 +669,10 @@ For YAwn we also added a symbol ($69$ code lines) and input class ($101$ code li
   \item tree walking code ($124$ code lines),
   \item a listener ($126$ code lines),
   \item an error listener ($94$ code lines), and
-  \item classes storing positional information ($38$ code lines)
+  \item classes storing positional information ($38$ code lines).
 \end{itemize}
 
-. The $552$ code lines mentioned above are responsible for about half of the code of the whole plugin ($\frac{1096}{2} = 548$).
+The $552$ code lines mentioned above are responsible for about half of the code of the whole plugin ($\frac{1096}{2} = 548$).
 
 YAy PEG, with its scanner-less parsing engine based on C++ templates, uses the most handwritten code. Just like for YAwn we wrote
 
@@ -685,10 +685,10 @@ for the plugin. The other handwritten code take care of parsing ($822$ code line
 
 \begin{itemize}
   \item that YAy PEG’s parsing code supports a subset of \glstext{YAML} that is a little bit larger, than the one of the lexer based parsing plugins (Yan LR, YAMBi, YAwn), and
-  \item that the parsing code also takes care of the work usually done by a lexer
+  \item that the parsing code also takes care of the work usually done by a lexer.
 \end{itemize}
 
-. If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) code lines for the lexer.
+If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) code lines for the lexer.
 
 Handwritten code requires manual work, and is therefore the most interesting criteria when we compare the code size of the plugins. However, the difference between the amount of generated code between the \gls{ANTLR} based Yan LR plugin ($1108$ code lines), and the Bison based YAMBi plugin ($2046$ code lines) is also interesting. One reason for the big difference might be that \gls{ANTLR} also requires a runtime library, while Bison generates all code needed for the parser. Both of these approaches have advantages and disadvantages. While Bisons’ approach means no additional dependencies, \gls{ANTLR}’s runtime library provides space advantages. If multiple programs on the same machine use an \gls{ANTLR} based parser, they can use the same compiled code, which only has to be stored in memory and on disk once.
 
