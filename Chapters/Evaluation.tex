@@ -172,18 +172,18 @@ Since both of these files are relatively small, \FileKeyFrames{} contains 218 li
 \begin{itemize}
   \item single quoted scalar,
   \item double quoted scalar, or
-  \item plain scalar
+  \item plain scalar.
 \end{itemize}
 
-. This always works since \glspl{UUID} contain no character sequence that has special meaning according to the \glstext{YAML} specification. Using this method we generated two files:
+This always works since \glspl{UUID} contain no character sequence that has special meaning according to the \glstext{YAML} specification. Using this method we generated two files:
 
 \begin{itemize}
   \item \FileGenerated{} that contains 10 000 lines, and
 
-  \item \FileGeneratedHundredThousand{} that contains 100 000 lines
+  \item \FileGeneratedHundredThousand{} that contains 100 000 lines.
 \end{itemize}
 
-. We also created another script called \FileCutInput{} to generate additional smaller input files that contain the first 50000, 10000, 5000, 1000, 500, 100, 50, 10, 5 and 1 lines of \FileGeneratedHundredThousand{}.
+We also created another script called \FileCutInput{} to generate additional smaller input files that contain the first 50000, 10000, 5000, 1000, 500, 100, 50, 10, 5 and 1 lines of \FileGeneratedHundredThousand{}.
 
 \subsection{Runtime Performance}
 \label{sec:run_time_performance}
@@ -367,10 +367,10 @@ The runtime of a non-backtracking recursive descent parser for an \glstext{LL}(1
   \item \gls{ALL(*)}, used by Yan LR, is $O(n⁴)$, but the algorithm often performs linearly~\cite[p. 1]{parr2014adaptive},
   \item LALR, used by YAMBi, is $O(n)$~\cite{baxter2017runtime},
   \item an Earley parser, used by YAwn, is $O(n²)$ for unambiguous grammars~\cite[p. 145]{hopcroft1969formal},
-  \item a general PEG parsers, as used by YAy PEG, is exponential~\cite[p. 1]{moss2014derivatives} ($O(cⁿ)$) and for PEG parsers that use memoization is $O(n)$~\cite{ford2002packrat}
+  \item a general PEG parsers, as used by YAy PEG, is exponential~\cite[p. 1]{moss2014derivatives} ($O(cⁿ)$) and for PEG parsers that use memoization is $O(n)$~\cite{ford2002packrat}.
 \end{itemize}
 
-. We now compare the theoretic runtimes with the measured runtimes shown in Figure~\ref{fig:benchmark_results_generated_above_1000}. The text below lists some of our observations.
+We now compare the theoretic runtimes with the measured runtimes shown in Figure~\ref{fig:benchmark_results_generated_above_1000}. The text below lists some of our observations.
 
 \begin{itemize}
   \item The deterministic (aka non-backtracking) parsers (YAML CPP, YAMBi) show the expected linear behavior.
