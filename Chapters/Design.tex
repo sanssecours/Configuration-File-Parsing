@@ -1083,7 +1083,7 @@ proved more difficult to express in the \gls{PEGTL}. To translate these kind of 
 . As we can see above \cc{with_updated_state} first invokes the rule \cc{UpdateStateRule} to update the state, then it tries to match a sequence of all rules stored in the template parameter pack \cc{Rules}. Depending on the success of \cc{seq<Rules>},
 
 \begin{enumerate}
-  \item the rule \cc{with_updated_state} either applies \cc{RevertStateRule} (third argument of \cc{seq}) and succeeds, if \cc{seq<Rules...>} succeeds, or
+  \item the rule \cc{with_updated_state} either applies \cc{RevertStateRule} (third argument of outermost \cc{seq}) and succeeds, if \cc{seq<Rules...>} succeeds, or
   \item it applies \cc{RevertStateRule} and fails (second argument of \cc{sor}), if \cc{seq<Rules...>} failed
 \end{enumerate}
 
