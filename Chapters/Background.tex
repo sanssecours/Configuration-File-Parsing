@@ -247,7 +247,7 @@ Elektra also uses the \cc{KeySet} structure to add \emph{metadata} to single key
 
 Apart from basic features, most of Elektra’s functionality is realized as \emph{plugin}. This has the advantage, that Elektra’s core can stay minimal only requiring \href{https://en.wikipedia.org/wiki/C99}{C99}, while plugins are able to implement and use OS specific features.
 
-Many different \href{https://www.libelektra.org/plugins}{plugin categories} exist. Elektra needs at least one resolver and one storage plugin. The resolver plugin handles filenames and replaces files on disk. Storage plugins, on the other hand, parse configuration files and convert read data to a \cc{KeySet}. They are also responsible for writing a modified \cc{KeySet} back to a given file.
+Many different \href{https://www.libelektra.org/plugins/readme}{plugin categories} exist. Elektra needs at least one resolver and one storage plugin. The resolver plugin handles filenames and replaces files on disk. Storage plugins, on the other hand, parse configuration files and convert read data to a \cc{KeySet}. They are also responsible for writing a modified \cc{KeySet} back to a given file.
 
 In this thesis we are mostly interested in storage plugins. However, we will also use other plugins to implement common functionality for our \glstext{YAML} storage plugins. For this purpose we use the plugin interface of Elektra to pass key sets between plugins.
 
