@@ -228,7 +228,7 @@ would translate to the \code{KeySet} shown in Figure~\ref{fig:array}.
   \label{fig:array}
 \end{figure}
 
-Since Elektra orders a \code{KeySet} alphabetically, a \cc{Key} with name \code{\#10} would appear before a \cc{Key} with name \code{\#2}. To fix that problem Elektra adds underscores to keys with larger indizes. For example, the 11th element of an array ends with the name \code{\#\_10}.
+Since Elektra orders a \code{KeySet} alphabetically, a \cc{Key} with name \code{\#10} would appear before a \cc{Key} with name \code{\#2}. To fix that problem Elektra adds underscores to keys with larger indices. For example, the 11th element of an array ends with the name \code{\#\_10}.
 
 One important difference between Python’s list type and Elektra’s array type is that arrays do not need to be continuous. For example, it is possible for an Elektra array to only contain elements with the names \code{\#1} and \code{\#3}, while \cc{Key} entries with name \code{\#0} and \code{\#2} are missing.
 
