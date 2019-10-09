@@ -816,7 +816,7 @@ The next section describes some of the implementation challenges we faced when w
 
 \subsection{Recursive Descent Parser}
 
-The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{\glstext{YAML} plugin} we developed used a handwritten recursive descent parser. This technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudo-code.
+The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644cb08e83f0b3305b8aeae546ada52dfe7}{\glstext{YAML} plugin} we developed used a handwritten recursive descent parser. This technique is quite popular, since there exists a natural correspondence between code and grammar rules. Table~\ref{tab:recursive_descent_correspondence} shows the correspondence between \gls{ABNF} grammar rules and matching C like pseudocode.
 
 \begin{table}[H]
   \begin{center}
@@ -890,7 +890,7 @@ The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644c
 While Table~\ref{tab:recursive_descent_correspondence} suggest writing a recursive descent parser is trivial, there are many problems that the code above does not take into account:
 
 \begin{description}
-  \item [Recognizer Only:] The pseudo-code only implements a recognizer for the language. At the end of the parsing process we only know, if the input is part of the language produced by the given grammar or not. Usually we want to \emph{build a data structure}, in our case a \cc{KeySet}, from the given input.
+  \item [Recognizer Only:] The pseudocode only implements a recognizer for the language. At the end of the parsing process we only know, if the input is part of the language produced by the given grammar or not. Usually we want to \emph{build a data structure}, in our case a \cc{KeySet}, from the given input.
 
   \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the author of the \glstext{YAML} data wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
 
