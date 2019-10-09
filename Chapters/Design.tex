@@ -612,7 +612,7 @@ The list below contains a summary of the \glstext{YAML} features that should be 
 
 . The most notable difference to the result of the discussion are the missing support for data types, references and flow collections.
 
-\emph{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of \glstext{YAML}’s data types to the ones supported by Elektra, is not trivial, and hence we decided to not support tags.
+\emph{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of \glstext{YAML}’s data types to the ones supported by Elektra is not trivial. Hence we decided to not support tags.
 
 We also decided against supporting \emph{references}, since this feature allows us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
 
