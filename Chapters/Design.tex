@@ -1005,7 +1005,7 @@ elements : element          # 0
 
 states that the rule \code{elements} should return the same node \code{element} produced (\code{0}), if it matches a single \code{element}. If the rule \code{elements} matched a rule \code{elements} followed by the rule \code{element} (second line), then YAEP creates a new node with the name \code{elements} that contains the nodes produced by the rule \code{elements} as first child (\code{0}) and the node produced by \code{element} as second child (\code{1}).
 
-Since the output of our storage plugin \LinkYAwn{} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the \gls{ANTLR} plugin \LinkYanLR{}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
+Since the output of our storage plugin \LinkYAwn{} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the \gls{ANTLR} plugin \LinkYanLR{}. The most significant difference to the approach used in Yan LR is that we had to write the tree walking code ourselves.
 
 \subsection{PEG Parser}
 \label{sec:peg_parser}
