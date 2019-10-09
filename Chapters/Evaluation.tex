@@ -451,7 +451,7 @@ and obtain the formula:
 
 \subsubsection{Conclusion}
 
-We determined with a high confidence that all of the \glstext{YAML} plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}), at least for the file \FileGeneratedHundredThousand{}. This puts all plugins, into the same computational complexity class. The constant difference between the runtime can still be relatively high though, as we can see in Equation~\ref{eq:benchmark_difference}.
+We determined with a high confidence that all of the \glstext{YAML} plugins show a linear runtime behavior (see Figure~\ref{fig:benchmark_results_generated_above_1000}), at least for the file \FileGeneratedHundredThousand{}. This puts all plugins, into the same computational complexity class. The constant factors between the runtimes can still be relatively high as we can see in Equation~\ref{eq:benchmark_difference}.
 
 The fastest plugin according to the mean of the mean runtimes (see Figure~\ref{fig:benchmark_generated_mean}) is YAwn, if we weigh the results of the two tested operating systems equally. This is interesting, since \citeauthor{earley1970efficient} himself mentions in his dissertation~\cite[p. 122]{earley1970efficient} that his parsing technique was too slow for practical use at the time, as you can see in the quote below.
 
