@@ -163,14 +163,14 @@ In this section we describe some of the concepts of Elektra, the software that p
 
 \subsection{\cc{Key}}
 
-The most basic entity in Elektra is the \cc{Key} structure. A concrete instance of a \cc{Key} contains at least one non-empty attribute, which is the \emph{name} of the \cc{Key}. In the remainder of the thesis we will also often use the term \emph{key} - please notice the non-gray background – to refer to the name of a \cc{Key}.
-
 \begin{figure}
   \centering
     \includegraphics[width=.6\textwidth]{Key.pdf}
   \caption{In Elektra a \cc{Key} stores a single \textcolor{Aqua}{key}-\textcolor{Purple3}{value} pair. The first part of the name specifies the \textcolor{orange}{namespace (NS)}.}
   \label{fig:key}
 \end{figure}
+
+The most basic entity in Elektra is the \cc{Key} structure. A concrete instance of a \cc{Key} contains at least one non-empty attribute, which is the \emph{name} of the \cc{Key}. In the remainder of the thesis we will also often use the term \emph{key} - please notice the non-gray background – to refer to the name of a \cc{Key}.
 
 Besides the name an instance of a \cc{Key} usually also stores a value. Figure~\ref{fig:key} shows an example \cc{Key} with the \textcolor{Aqua}{name} \code{system/elektra/version/infos/licence} and the \textcolor{Purple3}{value} \code{BSD}.
 
