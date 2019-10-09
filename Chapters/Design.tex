@@ -597,20 +597,20 @@ The list below contains a summary of the \glstext{YAML} features that should be 
   \item block and flow collections,
   \item \gls{JSON} schema,
   \item primary tag handle, and
-  \item references
+  \item references.
 \end{itemize}
 
-. In the end we decided to drop some features in the list above and implement the following list of items for the \glstext{YAML} subset:
+In the end we decided to drop some features in the list above and implement the following list of items for the \glstext{YAML} subset:
 
 \begin{itemize}
   \item double quoted scalars,
   \item single quoted scalars,
   \item plain flow scalars,
   \item block collections, and
-  \item core schema (no tag support)
+  \item core schema (no tag support).
 \end{itemize}
 
-. The most notable difference to the result of the discussion are the missing support for data types, references and flow collections.
+The most notable difference to the result of the discussion are the missing support for data types, references and flow collections.
 
 \emph{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of \glstext{YAML}’s data types to the ones supported by Elektra is not trivial. Hence we decided to not support tags.
 
