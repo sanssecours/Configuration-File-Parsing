@@ -924,11 +924,11 @@ The official \href{http://yaml.org}{YAML website} prominently lists known \glste
 
 \subsection{ALL(*) Parser}
 
-The first parser generator we used as part of the thesis was \gls{ANTLR} 4. As we already described in the section “\nameref{sec:parsing}”, ANTLR 4 generates parsing code that uses an adaptive \glstext{LL} algorithm called ALL(*). As target language for the generated parser we used the \href{https://github.com/antlr/antlr4/pull/1210}{C++ target for ANTLR}, which was added to the official repository of ANTLR 4 in 2016.
+The first parser generator we used as part of the thesis was \gls{ANTLR} 4. As we already described in the section “\nameref{sec:parsing}”, \gls{ANTLR} 4 generates parsing code that uses an adaptive \glstext{LL} algorithm called ALL(*). As target language for the generated parser we used the \href{https://github.com/antlr/antlr4/pull/1210}{C++ target for ANTLR}, which was added to the official repository of \gls{ANTLR} 4 in 2016.
 
 \subsubsection{Initial Attempt}
 
-One of the first problems we encountered using ANTLR was the significant leading whitespace used to describe the structure of \glstext{YAML} block \glspl{collection}. In \glstext{YAML} increased leading whitespace starts a new child element, while decreasing amount of leading whitespace ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, \glstext{YAML}’s reference grammar does not use \code{INDENT} and \code{DETEND} \glspl{token}, but uses parameterized \gls{BNF} productions instead. According to the authors of the \glstext{YAML} specification, this is necessary to describe the indentation rules of \glstext{YAML}~\cite{ben2009yaml}:
+One of the first problems we encountered using \gls{ANTLR} was the significant leading whitespace used to describe the structure of \glstext{YAML} block \glspl{collection}. In \glstext{YAML} increased leading whitespace starts a new child element, while decreasing amount of leading whitespace ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, \glstext{YAML}’s reference grammar does not use \code{INDENT} and \code{DETEND} \glspl{token}, but uses parameterized \gls{BNF} productions instead. According to the authors of the \glstext{YAML} specification, this is necessary to describe the indentation rules of \glstext{YAML}~\cite{ben2009yaml}:
 
 \begin{quote}
   Many productions use an explicit indentation level parameter. This is less elegant than Python’s “indent” and “undent” conceptual \glspl{token}. However it is required to formally express \glstext{YAML}’s indentation rules.
@@ -938,7 +938,7 @@ We first tried to parse different levels of whitespace using \href{https://githu
 
 \subsubsection{Indent \& Detend Tokens}
 
-Since the initial attempt for our ANTLR grammar did not show promising results, we looked at how other ANTLR grammars handle significant whitespace.
+Since the initial attempt for our \gls{ANTLR} grammar did not show promising results, we looked at how other \gls{ANTLR} grammars handle significant whitespace.
 
 Bart Kiers created an \href{https://github.com/antlr/grammars-v4/blob/master/python3/Python3.g4}{ANTLR grammar for Python 3}, which captures the start of a document and newline characters inside the lexer. The grammar then uses application-specific code~\cite[p. 48]{parr2013definitive} to fill a stack with the current amount of indentation and emits \code{INDENT} and \code{DETEND} \glspl{token} accordingly. Since this method looked promising, we created a \href{https://github.com/sanssecours/Yan-LR/compare/363be1e...188e5d4}{basic \glstext{YAML} parser that used the same algorithm}. While this approach worked for some \glstext{YAML} documents, we found simple input where the algorithm did not show the expected result. Listing~\ref{lst:correct_list} shows an example input the parser was not able to handle.
 
@@ -950,7 +950,7 @@ Bart Kiers created an \href{https://github.com/antlr/grammars-v4/blob/master/pyt
   \label{lst:correct_list}
 \end{listing}
 
-Another problem of this approach are complex lexer rules for \glstext{YAML} scalars. The cause of this problem are the parameterized BNF rules of the \glstext{YAML} specification, which do not translate well to the basic lexer syntax used to specify characters and character ranges provided by ANTLR.
+Another problem of this approach are complex lexer rules for \glstext{YAML} scalars. The cause of this problem are the parameterized BNF rules of the \glstext{YAML} specification, which do not translate well to the basic lexer syntax used to specify characters and character ranges provided by \gls{ANTLR}.
 
 \subsubsection{Custom Lexer}
 
@@ -978,15 +978,15 @@ The most interesting part in the lexer of the libraries described above, is prob
 
 \end{itemize}
 
-We used the algorithm described above in the final version of our basic ANTLR storage plugin \LinkYanLR{}. For that purpose we wrote a custom \glstext{YAML} lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
+We used the algorithm described above in the final version of our basic \gls{ANTLR} storage plugin \LinkYanLR{}. For that purpose we wrote a custom \glstext{YAML} lexer. Since the lexer takes care of most of the work, the \href{https://github.com/ElektraInitiative/libelektra/blob/48ccea7107584b1aa28f19ab2b65c9b30090f124/src/plugins/yanlr/YAML.g4}{YAML subset grammar} itself is quite simple, spanning about 30 lines.
 
 \subsection{LALR(1) Parser}
 
-After we finished the initial version of the ANTLR plugin \LinkYanLR{} we developed a C++ plugin, that uses a \href{https://www.gnu.org/software/bison}{Bison} parser, called \LinkYAMBi{}.
+After we finished the initial version of the \gls{ANTLR} plugin \LinkYanLR{} we developed a C++ plugin, that uses a \href{https://www.gnu.org/software/bison}{Bison} parser, called \LinkYAMBi{}.
 
-For the lexer of the plugin we used a slightly modified version of Yan LR’s lexer. This was necessary since Bison, unlike ANTLR, does not provide helper methods to operate on a character stream. For that purpose we wrote a simple class that mimics the behavior of ANTLR’s \cpp{ANTLRInputStream}.
+For the lexer of the plugin we used a slightly modified version of Yan LR’s lexer. This was necessary since Bison, unlike \gls{ANTLR}, does not provide helper methods to operate on a character stream. For that purpose we wrote a simple class that mimics the behavior of \gls{ANTLR}’s \cpp{ANTLRInputStream}.
 
-Apart from the parsing algorithm, another difference between Yan LR and YAMBi is the approach on how the plugin translates \glstext{YAML} data to a \cpp{KeySet}. For YAN LR we use a listener interface that operates on the parse tree created by ANTLR. Bison only offers parser actions. These actions contain code that will be called after the parser matches certain parts of the grammar.
+Apart from the parsing algorithm, another difference between Yan LR and YAMBi is the approach on how the plugin translates \glstext{YAML} data to a \cpp{KeySet}. For YAN LR we use a listener interface that operates on the parse tree created by \gls{ANTLR}. Bison only offers parser actions. These actions contain code that will be called after the parser matches certain parts of the grammar.
 
 YAMBi uses parser actions to call methods of a class that stores temporary data to create the \cpp{KeySet}. The code for this approach is actually not that different from the one of the listener we use for Yan LR. The only problematic part was translating code that added a \cpp{Key} for a \glstext{YAML} mapping that contains no value to a \cpp{KeySet}. For Yan LR we just check, if the mapping parser rule matched a value. This data is already available when we enter the rule, since the listener operates on a completed parse tree. In the corresponding grammar rule of the Bison parser this information is not available yet. To solve this problem we added an \href{https://git.libelektra.org/blob/0c47d024256d0824577209d95d69876722af6248/src/plugins/yambi/parser.ypp#L63-L66}{additional action} to the Bison grammar and moved the code that adds an empty key into a later phase of the conversion process.
 
@@ -995,7 +995,7 @@ YAMBi uses parser actions to call methods of a class that stores temporary data 
 
 For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. We used this library, since it uses C and C++ as programming language, which improves the comparability with the other parsing tool we used. We also found another \href{https://bitbucket.org/amirouche/c-earley-parser/src/default/src/earley_items.c}{C Earley Parser implementation} by Amirouche Boubekki. However, his parser looked incomplete and unmaintained.
 
-Unlike ANTLR and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
+Unlike \gls{ANTLR} and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
 
 \begin{shellcode}
 elements : element          # 0
@@ -1005,7 +1005,7 @@ elements : element          # 0
 
 states that the rule \code{elements} should return the same node \code{element} produced (\code{0}), if it matches a single \code{element}. If the rule \code{elements} matched a rule \code{elements} followed by the rule \code{element} (second line), then YAEP creates a new node with the name \code{elements} that contains the nodes produced by the rule \code{elements} as first child (\code{0}) and the node produced by \code{element} as second child (\code{1}).
 
-Since the output of our storage plugin \LinkYAwn{} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the ANTLR plugin \LinkYanLR{}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
+Since the output of our storage plugin \LinkYAwn{} should be a \cc{KeySet} and not an \gls{AST}, we created a function that traverses (“walks”) the \gls{AST}. This function calls certain methods of an auxiliary class \code{Listener} that creates the \cc{KeySet}. We already used this pattern for the \gls{ANTLR} plugin \LinkYanLR{}. The most significant difference to the approach used in Yan LR is, that we had to write the tree walking code ourselves.
 
 \subsection{PEG Parser}
 \label{sec:peg_parser}
@@ -1026,7 +1026,7 @@ All of the previously described parser generators and libraries divide the parsi
   \label{fig:lexing_parsing}
 \end{figure}
 
-Unlike ANTLR, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}{PEGTL} does not use a separate lexing phase. Instead the \gls{PEGTL} parses the input in one sweep using C++ templates to combine simple matching functions into more elaborate parsers. The process of combining parsers this way is also known under the name “parser combinators” (see also Section “\nameref{sec:parsing}”). Besides the possibility to create \emph{custom matching function}, the library also supports:
+Unlike \gls{ANTLR}, Bison and YAEP, the library \href{https://github.com/taocpp/PEGTL}{PEGTL} does not use a separate lexing phase. Instead the \gls{PEGTL} parses the input in one sweep using C++ templates to combine simple matching functions into more elaborate parsers. The process of combining parsers this way is also known under the name “parser combinators” (see also Section “\nameref{sec:parsing}”). Besides the possibility to create \emph{custom matching function}, the library also supports:
 
 \begin{itemize}
   \item \emph{custom actions} to react to matched input, and

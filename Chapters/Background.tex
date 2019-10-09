@@ -41,7 +41,7 @@ Two common methods to create an \glstext{LL} parser are:
 
 \end{enumerate}
 
-Examples of popular active projects that use a handwritten recursive descent parser include \href{http://clang.llvm.org}{Clang}~\cite{bendersky2012clang} and \href{http://gcc.gnu.org}{GCC}~\cite{myers2008cparser}. The \href{http://www.antlr.org/about.html}{about page} for \gls{ANTLR} mentions some projects that use its generated recursive descent parsers. The list includes Twitter, wich uses ANTLR for query parsing and parsers for the languages used in the Apache Hadoop projects Hive and Pig~\cite{parr2013definitive}.
+Examples of popular active projects that use a handwritten recursive descent parser include \href{http://clang.llvm.org}{Clang}~\cite{bendersky2012clang} and \href{http://gcc.gnu.org}{GCC}~\cite{myers2008cparser}. The \href{http://www.antlr.org/about.html}{about page} for \gls{ANTLR} mentions some projects that use its generated recursive descent parsers. The list includes Twitter, wich uses \gls{ANTLR} for query parsing and parsers for the languages used in the Apache Hadoop projects Hive and Pig~\cite{parr2013definitive}.
 
 Some of the latest research developments in \glstext{LL} parsing include \glstext{LL}(*) parsing~\cite{parr2011ll} and its successor \gls{ALL(*)}~\cite{parr2014adaptive}. Both of these algorithms use dynamic lookahead~\cite[p. 1]{parr2011ll}. While \glstext{LL}(*) parsing uses a static algorithm for rule prediction, ALL(*) analyzes the input at runtime to improve prediction. As consequence of this, parsers that use the \gls{ALL(*)} algorithm will be faster after an initial warm-up phase~\cite[p. 3]{parr2014adaptive}. LL(*) is part of \gls{ANTLR}~3~\cite[p. 3]{parr2014adaptive}, while \gls{ANTLR}~4 uses Adaptive \glstext{LL} parsing.
 

@@ -77,7 +77,7 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
                    &                     \\
 \midrule
           Compiler &          Clang 8.0.0\\
-        Generators &          ANTLR 4.7.2\\
+        Generators &          \gls{ANTLR} 4.7.2\\
                    &          Bison 3.4.1\\
          Libraries &       yaml-cpp 0.6.2\\
                    &                \YAEP\\
@@ -99,7 +99,7 @@ Table~\ref{table:benchmark_software} shows the overall software setup for the be
         Base Image & Debian sid (sid-20190506)\\
 \midrule
          Compilers &     Clang 6.0.1/GCC 8.3.0\\
-        Generators &               ANTLR 4.7.2\\
+        Generators &               \gls{ANTLR} 4.7.2\\
                    &               Bison 3.3.2\\
          Libraries &            yaml-cpp 0.6.2\\
                    &                     \YAEP\\
@@ -652,7 +652,7 @@ For a fair size comparison we also have to take the library code itself into con
 
 to determine the code size of version 0.6.2 of the yaml-cpp library. The command reports $8413$ lines of code, showing us that parsing the full \glstext{YAML} standard requires a relatively large amount of code.
 
-If we look at the other YAML plugins, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The higher line counts of YAMBi and YAwn compared to Yan LR are not that surprising, considering that we implemented some functionality already provided by ANTLR, for those plugins ourselves.
+If we look at the other YAML plugins, we had to write the least code for Yan LR, followed by YAMBi, YAwn, and YAy PEG. The higher line counts of YAMBi and YAwn compared to Yan LR are not that surprising, considering that we implemented some functionality already provided by \gls{ANTLR}, for those plugins ourselves.
 
 For YAMBi we wrote two classes,
 
@@ -690,13 +690,13 @@ for the plugin. The other handwritten code take care of parsing ($822$ code line
 
 . If we look at the lexer based plugins, they use between $352$ (YAMBi) and $416$ (Yan LR) code lines for the lexer.
 
-Handwritten code requires manual work, and is therefore the most interesting criteria when we compare the code size of the plugins. However, the difference between the amount of generated code between the ANTLR based Yan LR plugin ($1108$ code lines), and the Bison based YAMBi plugin ($2046$ code lines) is also interesting. One reason for the big difference might be that ANTLR also requires a runtime library, while Bison generates all code needed for the parser. Both of these approaches have advantages and disadvantages. While Bisons’ approach means no additional dependencies, ANTLR’s runtime library provides space advantages. If multiple programs on the same machine use an ANTLR based parser, they can use the same compiled code, which only has to be stored in memory and on disk once.
+Handwritten code requires manual work, and is therefore the most interesting criteria when we compare the code size of the plugins. However, the difference between the amount of generated code between the \gls{ANTLR} based Yan LR plugin ($1108$ code lines), and the Bison based YAMBi plugin ($2046$ code lines) is also interesting. One reason for the big difference might be that \gls{ANTLR} also requires a runtime library, while Bison generates all code needed for the parser. Both of these approaches have advantages and disadvantages. While Bisons’ approach means no additional dependencies, \gls{ANTLR}’s runtime library provides space advantages. If multiple programs on the same machine use an \gls{ANTLR} based parser, they can use the same compiled code, which only has to be stored in memory and on disk once.
 
 \subsection{Conclusion}
 
 If we take the amount of handwritten plugin code as main criteria for the code size comparison, then YAML CPP takes the lead, requiring the least amount of code. This is not surprising, considering that the parsing code of the plugin is part of the external yaml-cpp library, and not part of the plugin code itself.
 
-The parser based plugin with the least amount of code is the ANTLR based Yan LR. The main reason for this is, that ANTLR already generates code for functionality that we had to create ourselves for the other plugins. While writing this support code is usually not that hard, it is certainly an advantage that ANTLR already provides support for common tasks, such as tree walking.
+The parser based plugin with the least amount of code is the \gls{ANTLR} based Yan LR. The main reason for this is, that \gls{ANTLR} already generates code for functionality that we had to create ourselves for the other plugins. While writing this support code is usually not that hard, it is certainly an advantage that \gls{ANTLR} already provides support for common tasks, such as tree walking.
 
 \section{Code Complexity}
 \label{sec:code_complexity}
@@ -772,7 +772,7 @@ Table~\ref{table:cyclomatic_complexity} shows some of the values we measured via
 
 \subsection{Analysis}
 
-The most interesting parts of Table~\ref{table:cyclomatic_complexity} are the last two columns that show the relative amount of code that has a higher cyclomatic complexity than $15$. None of the handwritten plugin code contains any function with a \gls{CC} over this threshold. This is the result of using the static code analyzer \href{http://oclint.org}{OCLint} to check the code while we developed the plugins. Other than that, only the code generated by \gls{ANTLR} contains no code with a cyclomatic complexity over $15$. The cyclomatic complexity of the generated code by Bison is higher, which does not seem that surprising considering that \glstext{LR} parsers, contrary to \glstext{LL} parser, are almost never written by hand, because of their inherent complexity. If we look at the parser libraries and parser generators themselves, \gls{PEGTL} is the library containing the least amount of code over the complexity threshold, followed by yaml-cpp, and ANTLR’s C++ runtime. Bison and \gls{YAEP} are the generator and library that contain the most code with a high cyclomatic complexity.
+The most interesting parts of Table~\ref{table:cyclomatic_complexity} are the last two columns that show the relative amount of code that has a higher cyclomatic complexity than $15$. None of the handwritten plugin code contains any function with a \gls{CC} over this threshold. This is the result of using the static code analyzer \href{http://oclint.org}{OCLint} to check the code while we developed the plugins. Other than that, only the code generated by \gls{ANTLR} contains no code with a cyclomatic complexity over $15$. The cyclomatic complexity of the generated code by Bison is higher, which does not seem that surprising considering that \glstext{LR} parsers, contrary to \glstext{LL} parser, are almost never written by hand, because of their inherent complexity. If we look at the parser libraries and parser generators themselves, \gls{PEGTL} is the library containing the least amount of code over the complexity threshold, followed by yaml-cpp, and \gls{ANTLR}’s C++ runtime. Bison and \gls{YAEP} are the generator and library that contain the most code with a high cyclomatic complexity.
 
 \subsection{Conclusion}
 
@@ -1038,7 +1038,7 @@ We started the comparison by listing the basic error messages for the \glstext{Y
     yaml-cpp: error at line 3, column 1: end of map not found\\
 
     Yan LR &
-    ANTLR &
+    \gls{ANTLR} &
     3:1: mismatched input \textquotesingle- \textquotesingle\ expecting BLOCK\_END\\
 
     YAMBi &
@@ -1075,7 +1075,7 @@ As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the 
     yaml-cpp: error at line 3, column 1: end of map not found\\
 
     Yan LR &
-    ANTLR &
+    \gls{ANTLR} &
     3:1: mismatched input \textquotesingle- \textquotesingle\ expecting \textbf{MAP\_END}\\
 
     YAMBi &
@@ -1099,7 +1099,7 @@ After the slight modifications to the \glstext{YAML} parser plugins we decided t
 
 \subsection{ANTLR}
 
-ANTLR uses an error listener class that provides a callback method that includes access to
+\gls{ANTLR} uses an error listener class that provides a callback method that includes access to
 
 \begin{itemize}
   \item the location,
@@ -1109,7 +1109,7 @@ ANTLR uses an error listener class that provides a callback method that includes
   \item the default error message
 \end{itemize}
 
-for each detected error. As we already saw in Table~\ref{tab:error_messages_improved_list_element_outside}, the default error message provided by ANTLR usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message reported by ANTLR. Since ANTLR uses methods such as \gls{token} deletion and insertion to keep parsing a file, even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
+for each detected error. As we already saw in Table~\ref{tab:error_messages_improved_list_element_outside}, the default error message provided by \gls{ANTLR} usually describes errors already well. For the initial version of the \href{http://libelektra.org/plugins/yanlr}{Yan LR plugin}, we only stored the last error message reported by \gls{ANTLR}. Since \gls{ANTLR} uses methods such as \gls{token} deletion and insertion to keep parsing a file, even if it contains multiple errors~\cite{parr2013definitive}, the last error message usually will not provide the the most obvious information on how to fix an error.
 
 \begin{listing}
   \begin{minted}[autogobble, linenos]{yaml}
@@ -1175,7 +1175,7 @@ to
 
 .
 
-We then looked into the error recovery capabilities of Bison. Unlike ANTLR the generated parser does not do error recovery by default, but rather exits on the first error. To improve the error behavior, Bison offers the possibility to add the predefined \code{error} \gls{token} to a grammar. Every time the Bison parser encounters an error it will produce this \gls{token}~\cite{donnelly2019bison}. We modified the grammar to allow errors inside \glstext{YAML} maps and sequences:
+We then looked into the error recovery capabilities of Bison. Unlike \gls{ANTLR} the generated parser does not do error recovery by default, but rather exits on the first error. To improve the error behavior, Bison offers the possibility to add the predefined \code{error} \gls{token} to a grammar. Every time the Bison parser encounters an error it will produce this \gls{token}~\cite{donnelly2019bison}. We modified the grammar to allow errors inside \glstext{YAML} maps and sequences:
 
 \begin{ccode}
   pairs : pair
@@ -1511,9 +1511,9 @@ According to the interpretation we concluded that all of the plugins with error 
 
 \subsection{Conclusion}
 
-While the parsing libraries do not produce particularly great error messages, at least the ANTLR (Yan LR) and Bison (YAMBi) plugin, provide error messages that are comparable in quality to the ones of the handwritten parsing engine (YAML CPP).
+While the parsing libraries do not produce particularly great error messages, at least the \gls{ANTLR} (Yan LR) and Bison (YAMBi) plugin, provide error messages that are comparable in quality to the ones of the handwritten parsing engine (YAML CPP).
 
-One advantage of Yan LR, YAMBi, and YAwn is that their parsers offer error recovery. They are therefore able to report multiple errors in a file. This is something that YAML CPP is currently not able to do. ANTLR offers error recovery for free, while Bison and YAEP require the addition of error \glspl{token} to the grammar. This can be problematic, since these error \glspl{token} can produce conflicts in the case of Bison, and ambiguous parsing results in the case of YAEP.
+One advantage of Yan LR, YAMBi, and YAwn is that their parsers offer error recovery. They are therefore able to report multiple errors in a file. This is something that YAML CPP is currently not able to do. \gls{ANTLR} offers error recovery for free, while Bison and YAEP require the addition of error \glspl{token} to the grammar. This can be problematic, since these error \glspl{token} can produce conflicts in the case of Bison, and ambiguous parsing results in the case of YAEP.
 
 The parsing plugin that showed the least useful error messages is YAy PEG. While the PEGTL offers basic error handling facilities that are able to provide good error messages for character level errors, producing good error messages for “high-level” errors would probably require a substantial amount of work.
 
@@ -1830,21 +1830,21 @@ To minimize the list of candidates for extension we first eliminate some of them
 After the elimination three possible candidates are left.
 
 \begin{description}[style=multiline, leftmargin=2cm, font=\bfseries]
-  \item[Yan LR] Compared to YAwn, the plugin performed worse in the runtime benchmark. It also requires more memory to parse our example data than YAMBi and YAwn. On the other hand, ANTLR provides a lot of support code we had to write for the other plugins ourselves.
+  \item[Yan LR] Compared to YAwn, the plugin performed worse in the runtime benchmark. It also requires more memory to parse our example data than YAMBi and YAwn. On the other hand, \gls{ANTLR} provides a lot of support code we had to write for the other plugins ourselves.
 
-  \item[YAMBi] The plugin performed well in the runtime performance test on Linux and – compared to Yan LR – only required a relatively small amount of memory for our example data. The plugin does require more support code than Yan LR though. A problem considering the maintainability of the plugin (requirement 4) might be the LR parsing algorithm. If there are any problems like shift/reduce conflicts in the grammar, then a developer usually needs at least some information on how the LR parsing algorithm works to fix the problem. Bison also offers considerable less support code for common parsing task than ANTLR (see Table~\ref{tab:parser_overview}), which could become a problem, e.g. if we are not able to only use parser actions for an extension of the YAMBi plugin.
+  \item[YAMBi] The plugin performed well in the runtime performance test on Linux and – compared to Yan LR – only required a relatively small amount of memory for our example data. The plugin does require more support code than Yan LR though. A problem considering the maintainability of the plugin (requirement 4) might be the LR parsing algorithm. If there are any problems like shift/reduce conflicts in the grammar, then a developer usually needs at least some information on how the LR parsing algorithm works to fix the problem. Bison also offers considerable less support code for common parsing task than \gls{ANTLR} (see Table~\ref{tab:parser_overview}), which could become a problem, e.g. if we are not able to only use parser actions for an extension of the YAMBi plugin.
 
   \item[YAwn] While the plugin showed good runtime performance and the lowest memory usage, we found two disadvantages, compared to YAMBi and Yan LR.
 
   \begin{enumerate}
-    \item \gls{YAEP} is more or less the work of a single author: Vladimir N. Makarov. Recently another author, Alexander Klauer, fixed some of the problems of the project and modernized parts of the code base. However, compared to ANTLR and Bison, the community behind the parsing library is rather small.
+    \item \gls{YAEP} is more or less the work of a single author: Vladimir N. Makarov. Recently another author, Alexander Klauer, fixed some of the problems of the project and modernized parts of the code base. However, compared to \gls{ANTLR} and Bison, the community behind the parsing library is rather small.
 
     \item YAEP requires more support code than Yan LR and even YAMBi. While this support code is not that complicated, it would still something we need to maintain and extend for a more complete support of \glstext{YAML} and the requirements listed in “\nameref{sec:requirements_extended_yaml_plugin}”.
   \end{enumerate}
 
 \end{description}
 
-With all the information above in mind we decided that the best candidate for extension is Yan LR. We think ANTLR’s advantages, such as
+With all the information above in mind we decided that the best candidate for extension is Yan LR. We think \gls{ANTLR}’s advantages, such as
 
 \begin{itemize}
   \item providing the most complete set of support code of all of the tested libraries and generators, and
