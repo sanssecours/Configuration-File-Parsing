@@ -1186,14 +1186,14 @@ Figure~\ref{fig:keyset_large_extended} shows the \cc{KeySet} after the whole con
 
 \subsection{\glstext{YAML} Smith}
 
-Elektra’s storage plugins need to both
+Elektra’s storage plugins need to both:
 
 \begin{enumerate}
   \item convert a configuration file format to a \cc{KeySet}, and
-  \item convert a \cc{KeySet} to a configuration file format
+  \item convert a \cc{KeySet} to a configuration file format.
 \end{enumerate}
 
-. Since the second task is always the same, regardless of the parser library we use, we created a plugin called \href{http://libelektra.org/plugins/yamlsmith}{YAML Smith} that takes care of this task.
+Since the second task is always the same, regardless of the parser library we use, we created a plugin called \href{http://libelektra.org/plugins/yamlsmith}{YAML Smith} that takes care of this task.
 
 This plugin first determines all leaf keys of a \cc{KeySet}. After that it counts the levels of the parent key so it knows how many levels it has to skip for each leaf. The plugin then iterates over each leaf key.
 
