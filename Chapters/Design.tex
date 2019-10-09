@@ -454,7 +454,7 @@ In the following bar charts the term “Yes” refers to a checked box for the s
 
 \paragraph{Schemas}
 
-\textbf{Remark:} One participant checked the box for the core schema without ticking the boxes for the failsafe and JSON schema. Since the core schema is an extended superset of the other two schemas, we counted the participants answers as a “Yes” vote for the failsafe and JSON schema.
+\textbf{Remark:} One participant checked the box for the core schema without ticking the boxes for the failsafe and \gls{JSON} schema. Since the core schema is an extended superset of the other two schemas, we counted the participants answers as a “Yes” vote for the failsafe and \gls{JSON} schema.
 
 \begin{figure}[H]
   \begin{minipage}[t]{0.48\textwidth}
@@ -488,7 +488,7 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    Failsafe Schema + JSON Types:
+    Failsafe Schema + \gls{JSON} Types:
     \begin{minipage}[t]{2cm}
       \begin{itemize}[leftmargin=*]
         \item Null
@@ -512,7 +512,7 @@ In the following bar charts the term “Yes” refers to a checked box for the s
   \end{minipage}
   \begin{minipage}[t]{0.48\textwidth}
     \vspace{0pt}
-    JSON Schema and
+    \gls{JSON} Schema and
       \vspace{-0.5cm}
       \begin{itemize}
         \item Octal/Hex: \yaml{0o123}, \yaml{0xfefe}
@@ -583,7 +583,7 @@ In contrast to the decision about block scalars, the participants preferred the 
 
 The Elektra developers decided against most of the specialized type features of \glstext{YAML}. Only the result count for and against primary tag handles resulted in a draw.
 
-The questions about general type support (schemas) showed that a minimal \glstext{YAML} subset should include all types of the JSON Schema.
+The questions about general type support (schemas) showed that a minimal \glstext{YAML} subset should include all types of the \gls{JSON} Schema.
 
 One of the few specialized features deemed necessary by the participants were anchors and aliases. These two elements can be used to reference the same data multiple times in the same document.
 
@@ -595,7 +595,7 @@ The list below contains a summary of the \glstext{YAML} features that should be 
 \begin{itemize}
   \item double quoted flow scalars,
   \item block and flow collections,
-  \item JSON schema,
+  \item \gls{JSON} schema,
   \item primary tag handle, and
   \item references
 \end{itemize}
@@ -624,7 +624,7 @@ We also decided against supporting \emph{references}, since this feature allows 
        - At First: Yet Another Markup Language
        - Today: YAML Ain’t Markup Language
     - Current Version: YAML 1.2 (2009)
-    - Superset of JSON
+    - Superset of \gls{JSON}
     - Two Styles: Flow Style (Indicator Based) and
                   Block Style (Indentation Based)
     - 3 Different Data Types:
@@ -646,7 +646,7 @@ We also decided against supporting \emph{references}, since this feature allows 
     [{'At First': 'Yet Another Markup Language'},
      {'Today': 'YAML Ain’t Markup Language'}]},
    {'Current Version': 'YAML 1.2 (2009)'},
-   'Superset of JSON',
+   'Superset of \gls{JSON}',
    {'Two Styles': 'Flow Style (Indicator Based) and
                    Block Style (Indentation Based)'},
    {'3 Different Data Types':
