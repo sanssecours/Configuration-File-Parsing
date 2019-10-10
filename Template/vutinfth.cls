@@ -810,6 +810,10 @@
       \vspace{1.2cm}%
       \SignatureFields[y]{\vutinfth@person@author@name}{}%
   \end{SFFont}%
+  \vfill
+  \begin{leftbar}
+  \textbf{Note:} We use hyperlinks quite heavily in this thesis. This makes it easier for you to quickly jump between relevant parts of the text and access various online resources. Please consider this advantage before you print this text.
+  \end{leftbar}
   \cleardoublepage
   \vutinfth@restorelayout
 }%
