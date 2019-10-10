@@ -1237,7 +1237,7 @@ After all these changes the output for the \glstext{YAML} data from Listing~\ref
 
 We already talked about general error strategies for \glstext{PEG} parsers in the Section “\nameref{sec:error_handling}”. PEGTL does neither implement the error handling strategy described by \citeauthor{ford2002packrat}~\cite{ford2002packrat}, nor labelled failures~\cite{maidl2016labeled}. Instead the library offers a grammar rule called \cpp{must}, which states that a certain rule, specified as template argument, has to match at a given position or an error will be raised. We can customize the code executed for a given \cpp{must} rule according to this template argument. Effectively this strategy allows us to specify different error messages for each expected but unmatched rule.
 
-As we described in the section “\nameref{sec:peg_parser}”, we tried to keep the grammar of our PEG parser plugin \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} close to the grammar of the \href{http://yaml.org/spec/1.2/spec}{YAML specification}~\cite{ben2009yaml}. This also meant, that the grammar contained only a single \cpp{must} rule, that makes sure that the grammar matched the whole input:
+As we described in the section “\nameref{sec:peg_parser}”, we tried to keep the grammar of our PEG parser plugin \href{https://libelektra.org/plugins/yaypeg}{YAy PEG} close to the grammar of the \href{http://yaml.org/spec/1.2/spec}{YAML specification}~\cite{ben2009yaml}. This also meant that the grammar contained only a single \cpp{must} rule that makes sure that the grammar matched the whole input:
 
 \begin{cppcode}
   struct yaml : if_must<l_yaml_stream, eof> {};
