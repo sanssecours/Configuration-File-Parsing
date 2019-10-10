@@ -44,7 +44,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 - [ ] Umfrage (eventuell löschen)
 - [x] Struktur von Arbeit beschreiben
 - [ ] Verbessere Argumentation für ANTLR
-- [ ] Erwähne Hilfe von Franz Puntigam in „Acknowledgements“
+- [x] Erwähne Hilfe von Franz Puntigam in „Acknowledgements“
 
 ## Fragen
 
