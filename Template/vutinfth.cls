@@ -838,7 +838,6 @@
   \selectlanguage{english}%
   \chapter*{Acknowledgements}%
 }{%
-  \cleardoublepage
 }%
 \newenvironment{danksagung}{%
   \selectlanguage{naustrian}%
