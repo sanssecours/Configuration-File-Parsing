@@ -40,7 +40,7 @@ bzw. ein wenig mehr vergleichst) sollte die Arbeit gut werden.
 - [x] stärker auf Kontext eingehen (War Stories, Viele Konfigurationsformate, um 2000: XML), Arbeit abgrenzen
 - [x] Methoden vollständig beschreiben
 - [x] Results und Analyse trennen
-- [x] Kleinigkeiten (Zeiten bei Implementierung)
+- [ ] Kleinigkeiten (Zeiten bei Implementierung)
 - [x] Umfrage (eventuell löschen)
 - [x] Struktur von Arbeit beschreiben
 - [ ] Verbessere Argumentation für ANTLR
