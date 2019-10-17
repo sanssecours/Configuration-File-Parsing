@@ -613,7 +613,7 @@ The most notable difference to the result of the discussion are the missing supp
 
 We also decided against supporting \emph{references}, since this feature allows us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
 
-\emph{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the \glstext{YAML} documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant whitespace is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” \glstext{YAML} subset.
+\emph{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the \glstext{YAML} documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant white space is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” \glstext{YAML} subset.
 
 \begin{figure}
   \begin{yamlcode}
@@ -795,7 +795,7 @@ If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_val
     - "Third Element"
 \end{yamlcode}
 
-, since the result would be a \glstext{YAML} node that is neither sequence nor map. To fix this problem we decided to convert the \yaml{___dirdata} node to a sequence element:
+since the result would be a \glstext{YAML} node that is neither sequence nor map. To fix this problem we decided to convert the \yaml{___dirdata} node to a sequence element:
 
 \begin{yamlcode}
   array:
@@ -805,7 +805,7 @@ If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_val
     - "Third Element"
 \end{yamlcode}
 
-. This approach produces valid \glstext{YAML} data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.
+This approach produces valid \glstext{YAML} data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.
 
 \section{Parsers}
 
@@ -887,7 +887,7 @@ The first \href{https://github.com/ElektraInitiative/libelektra/commit/3d2d4644c
 While Table~\ref{tab:recursive_descent_correspondence} suggest writing a recursive descent parser is trivial, there are many problems that the code above does not take into account.
 
 \begin{description}
-  \item [Recognizer Only:] The pseudocode only implements a recognizer for the language. At the end of the parsing process we only know, if the input is part of the language produced by the given grammar or not. Usually we want to \emph{build a data structure}, in our case a \cc{KeySet}, from the given input.
+  \item [Recognizer Only:] The pseudocode only implements a recognizer for the language. At the end of the parsing process we only know whether the input is part of the language produced by the given grammar or not. Usually we want to \emph{build a data structure}, in our case a \cc{KeySet}, from the given input.
 
   \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the author of the data wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
 
@@ -896,7 +896,7 @@ While Table~\ref{tab:recursive_descent_correspondence} suggest writing a recursi
 
 All of the problems above apply regardless of the programming language of the parsing code. Since we implemented the recursive descent parser in C, another issue is the error handling in C itself. The language does not provide a native exception handling mechanism. We therefore used the return value to also transfer the error information between functions. This approach is quite cumbersome, since it basically means that we have to check for an error after each function call.
 
-We used C macros to minimize the code overhead and complexity caused by the error handling. Still, for a very small part of the \glstext{YAML} syntax described in the ABNF grammar of Figure~\ref{cod:abnf_recurive_descent} the parser contained about 374 lines of code (counted with \code{cloc} version 1.72). While smaller feature additions, such as supporting multiple key-value pairs instead of only one key-value pair \href{https://github.com/ElektraInitiative/libelektra/commit/17aa7a6ea5d9261287104213dcba67f4d0a0fcbc}{were quite straightforward} (\textcolor{Green}{14 additions}, \textcolor{Red}{1 deletion}), other modifications, such as supporting block styles would take considerable more effort.
+We used C macros to minimize the code overhead and complexity caused by the error handling. Still, for a very small part of the \glstext{YAML} syntax described in the ABNF grammar of Figure~\ref{cod:abnf_recurive_descent} the parser contained about 374 lines of code (counted with \code{cloc} version 1.72). While smaller feature additions, such as supporting multiple key-value pairs instead of only one key-value pair \href{https://github.com/ElektraInitiative/libelektra/commit/17aa7a6ea5d9261287104213dcba67f4d0a0fcbc}{were quite straightforward} (14 additions, 1 deletion), other modifications, such as supporting block styles would take considerable more effort.
 
 Since the first steps with a handwritten recursive descent parser showed that this approach takes considerable effort we decided against extending the first prototype. Instead we chose to use an already existing handwritten \glstext{YAML} parser.
 
@@ -925,17 +925,17 @@ The first parser generator we used as part of the thesis was \gls{ANTLR} 4. As w
 
 \subsubsection{Initial Attempt}
 
-One of the first problems we encountered using \gls{ANTLR} was the significant leading whitespace used to describe the structure of \glstext{YAML} block \glspl{collection}. In \glstext{YAML} increased leading whitespace starts a new child element, while decreasing amount of leading whitespace ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, \glstext{YAML}’s reference grammar does not use \code{INDENT} and \code{DETEND} \glspl{token}, but uses parameterized \gls{BNF} productions instead. According to the authors of the \glstext{YAML} specification this is necessary to describe the indentation rules of \glstext{YAML}~\cite{ben2009yaml}:
+One of the first problems we encountered using \gls{ANTLR} was the significant leading white space used to describe the structure of \glstext{YAML} block \glspl{collection}. In \glstext{YAML} increased leading white space starts a new child element, while decreasing amount of leading white space ends an element. Users of programing languages such as \href{https://www.python.org}{Python} or \href{https://www.haskell.org}{Haskell} should be familiar with this style. Unlike \href{https://docs.python.org/3/reference/grammar.html}{Python’s grammar}, \glstext{YAML}’s reference grammar does not use \code{INDENT} and \code{DETEND} \glspl{token}, but uses parameterized \gls{BNF} productions instead. According to the authors of the \glstext{YAML} specification this is necessary to describe the indentation rules of \glstext{YAML}~\cite{ben2009yaml}:
 
 \begin{quote}
   Many productions use an explicit indentation level parameter. This is less elegant than Python’s “indent” and “undent” conceptual \glspl{token}. However it is required to formally express \glstext{YAML}’s indentation rules.
 \end{quote}
 
-We first tried to parse different levels of whitespace using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of whitespace. This approach worked, but only for a constant amount of whitespace. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading whitespace matched in the current rule, then the generated parser would be unable to parse simple example input.
+We first tried to parse different levels of white space using \href{https://github.com/sanssecours/Yan-LR/compare/0b0deae...7d9e64e}{\emph{semantic predicates} and \emph{rule arguments}}~\cite{parr1995antlr}. Semantic predicates allow us to disable certain parts of a grammar dynamically, while we can use rule arguments to specify different amount of white space. This approach worked, but only for a constant amount of white space. If we tried to specify a different amount of leading spaces in a grammar rule, dependent on the amount of leading white space matched in the current rule, then the generated parser would be unable to parse simple example input.
 
 \subsubsection{Indent \& Detend Tokens}
 
-Since the initial attempt for our \gls{ANTLR} grammar did not show promising results, we looked at how other \gls{ANTLR} parsers handle significant whitespace.
+Since the initial attempt for our \gls{ANTLR} grammar did not show promising results, we looked at how other \gls{ANTLR} parsers handle significant white space.
 
 Bart Kiers created an \href{https://github.com/antlr/grammars-v4/blob/master/python3/Python3.g4}{ANTLR grammar for Python 3}, which captures the start of a document and newline characters inside the lexer. The grammar then uses application-specific code~\cite[p. 48]{parr2013definitive} to fill a stack with the current amount of indentation and emits \code{INDENT} and \code{DETEND} \glspl{token} accordingly. Since this method looked promising, we created a \href{https://github.com/sanssecours/Yan-LR/compare/363be1e...188e5d4}{basic \glstext{YAML} parser that used the same algorithm}. While this approach worked for some \glstext{YAML} documents, we found simple input where the algorithm did not show the expected result. Listing~\ref{lst:correct_list} shows an example input the parser was not able to handle.
 
@@ -1055,7 +1055,7 @@ struct ns_plain_first : sor<seq<not_at<c_indicator>, ns_char>,
   \item \cc{seq<one<'?', ':', '-'>, at<ns_plain_safe>>}
 \end{enumerate}
 
-in order. It succeeds if one of the argument matches, or fails if all of them fail. The rule \cc{seq} on the other hand tries to match all its template arguments in sequence and either succeeds, if all of them succeed, or fails, if one of them fails. The rules \cc{at} and \cc{not_at} represents the \gls{PEG} predicates \cc{&} and \cc{!}. The predicate rule \cc{at} (\cc{&}) succeeds, if the current input matches the given input and fails, if it does not. The predicate rule \cc{not_at} behaves exactly opposite. Neither of these predicates consumes any input. The only remaining rule is \cc{one}, which tries to match any of the given characters, \cc{'?'}, \cc{':'} or \cc{'-'} in our example.
+in order. It succeeds if one of the argument matches, or fails if all of them fail. The rule \cc{seq} on the other hand tries to match all its template arguments in sequence and either succeeds, if all of them succeed, or fails, if one of them fails. The rules \cc{at} and \cc{not_at} represents the \gls{PEG} predicates \cc{&} and \cc{!}. The predicate rule \cc{at} (\cc{&}) succeeds if the current input matches the given input and fails if it does not. The predicate rule \cc{not_at} behaves exactly opposite. Neither of these predicates consumes any input. The only remaining rule is \cc{one}, which tries to match any of the given characters, \cc{'?'}, \cc{':'} or \cc{'-'} in our example.
 
 While translating the rule \cc{ns-plain-first(c)} was not that hard, other rules that contained nested contextual data such as:
 
@@ -1081,7 +1081,7 @@ proved more difficult to express in the \gls{PEGTL}. To translate these kind of 
 
 \begin{enumerate}
   \item the rule \cc{with_updated_state} either applies \cc{RevertStateRule} (third argument of outermost \cc{seq}) and succeeds, if \cc{seq<Rules...>} succeeds, or
-  \item it applies \cc{RevertStateRule} and fails (second argument of \cc{sor}), if \cc{seq<Rules...>} failed.
+  \item it applies \cc{RevertStateRule} and fails (second argument of \cc{sor}) if \cc{seq<Rules...>} failed.
 \end{enumerate}
 
 We used \cc{with_updated_state} to create rules that update nested versions of the indentation (\cc{n} and \cc{m} in the \glstext{YAML} spec) and context (\cc{c} in the \glstext{YAML} spec). Using this approach we were able to translate all \glstext{YAML} rules for our subset.
@@ -1118,13 +1118,13 @@ regular languages. With this in mind we tested the official \glstext{YAML} lens 
     key: value
 \end{yamlcode}
 
-, but is unable to handle a non-nested mapping:
+but is unable to handle a non-nested mapping:
 
 \begin{yamlcode}
   key: value
 \end{yamlcode}
 
-, and other simple data. With the current state of the \glstext{YAML} lens and the problems of the Augeas plugin in mind, we decided to not look any further into developing an Augeas lens for our \glstext{YAML} subset.
+and other simple data. With the current state of the \glstext{YAML} lens and the problems of the Augeas plugin in mind, we decided to not look any further into developing an Augeas lens for our \glstext{YAML} subset.
 
 \section{Additional Plugins}
 
@@ -1177,7 +1177,7 @@ The plugin then moves the data stored in the parent \cc{Key} to the newly create
   \caption{The Directory Value plugin adds data at the position \code{preset} (\ref{fig:keyset_large_extended}) and then restores the original data (\ref{fig:keyset_large}) at the position \code{postget}.}
 \end{figure}
 
-In addition the plugin insert a new \cc{Key} for every array parent that stores a (non-binary) value, at the first position of the array. In our example, the plugin adds a new \cc{Key} with the value \code{\_\_\_dirdata: Array Value} at the first position of \code{user/yaml/array}, and increases the index of all other array elements by one.
+In addition, the plugin inserts a new \cc{Key} for every array parent that stores a (non-binary) value at the first position of the array. In our example, the plugin adds a new \cc{Key} with the value \code{\_\_\_dirdata: Array Value} at the first position of \code{user/yaml/array} and increases the index of all other array elements by one.
 
 Figure~\ref{fig:keyset_large_extended} shows the \cc{KeySet} after the whole conversion at the position \code{preset}. This \cc{KeySet} is also the input for the Directory Value plugin at the position \code{postget}.
 
