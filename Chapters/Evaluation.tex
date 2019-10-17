@@ -783,15 +783,15 @@ While cyclomatic complexity has “never been unambiguously correlated with defe
 \section{Ease of Extensibility and Composability}
 \label{sec:extensibility}
 
-One advantage of parsing libraries and parser generators over handwritten parsers is that we can update the language grammar without having to rewrite parsing code. This way we can extend the parsed \glstext{YAML} subset easily without many manual code changes. In the first part of the next section we analyze how many code line changes it took to, fix bugs in, and add minor features to, the \glstext{YAML} plugins. The amount of code changes provides a good metric on how much effort it takes to extend the parser plugins.
+One advantage of parsing libraries and parser generators over handwritten parsers is that we can update the language grammar without having to rewrite parsing code. This way we can extend the parsed \glstext{YAML} subset easily without many manual code changes. In the first part of the next section we analyze how many code line changes it took to fix bugs in, and add minor features to, the \glstext{YAML} plugins. The amount of code changes provides a good metric on how much effort it takes to extend the parser plugins.
 
-In the second part of this section we will take a look at how the composability of our parsing code influences the extensibility. One option to create an extensible system is to base it on components. We can reuse these components to keep the amount of code for a new feature or bug fix low. We can imagine that the rules of a grammar represent components in our parsing systems. Parsing systems without a separate lexing phase such as PEGTL take the composability idea one step further. In PEGTL we can compose the parser for the whole grammar out of smaller parser that build on each other. We will analyze, if the component based parser of YAy PEG provides extensibility advantages over the other parsers. We will also answer~\Cref{que:closeness} in this part of the thesis.
+In the second part of this section we will take a look at how the composability of our parsing code influences the extensibility. One option to create an extensible system is to base it on components. We can reuse these components to keep the amount of code for a new feature or bug fix low. We can imagine that the rules of a grammar represent components in our parsing systems. Parsing systems without a separate lexing phase such as PEGTL take the composability idea one step further. In PEGTL we can compose the parser for the whole grammar out of smaller parser that build on each other. We will analyze if the component based parser of YAy PEG provides extensibility advantages over the other parsers. We will also answer~\Cref{que:closeness} in this part of the thesis.
 
 \closeness*
 
 \subsection{Plugin Updates}
 
-In the next subsections we look at the effort it took to, add certain features to, and fix certain bugs in, the \glstext{YAML} plugins.
+In the next subsections we look at the effort it took to add certain features to, and fix certain bugs in, the \glstext{YAML} plugins.
 
 \subsubsection{Method}
 
@@ -911,7 +911,7 @@ According to the \glstext{YAML} specification an empty file corresponds to a nul
 \end{figure}
 
 \begin{sloppypar}
-When we implemented the fixes for the empty document conversion we noticed that we added nearly identical code to the listener (Yan LR, YAwn, YAy PEG) respectively driver (YAMBi) of the plugins. These modifications took \textcolor{Green}{$6$ additions} for Yan LR and \textcolor{Green}{$5$ additions} for the other plugins. We should mention here that we could also have avoided two additional lines for the Yan LR plugin, which consisted of an \cpp{using} statement and the inclusion of an optional header file.
+When we implemented the fixes for the empty document conversion we noticed that we added nearly identical code to the listener (Yan LR, YAwn, YAy PEG) respectively driver (YAMBi) of the plugins. These modifications took \textcolor{Green}{$6$ additions} for Yan LR and \textcolor{Green}{$5$ additions} for the other plugins. We should mention here that we could also have avoided two additional lines for the Yan LR plugin, which consisted of a \cpp{using} statement and the inclusion of an optional header file.
 \end{sloppypar}
 
 The other code line differences were a result of grammar updates to
