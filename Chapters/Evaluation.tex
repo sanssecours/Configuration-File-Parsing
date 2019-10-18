@@ -1060,7 +1060,7 @@ Listing \ref{lst:list_element_outside} shows the erroneous \glstext{YAML} data w
 
 \subsubsection{Interpretation}
 
-As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the parsing engines report the error location for the code from Listing~\ref{lst:list_element_outside} correctly. The error messages also shows that the question, if the first position after a newline is at column 0 or 1, is still open for debate. Other than that we can see that YAML CPP, Yan LR, and YAMBi also show information about the expected element at the error position (end of a block \gls{collection} is missing). YAML CPP provides the best error message, since the plugin also shows which type of end element is missing (end of map). This type of information can also be determined easily in all of the lexer-based parsing engine plugins (Yan LR, YAMBi, YAwn). We modified them accordingly. Table~\ref{tab:error_messages_improved_list_element_outside} shows the slightly improved error messages, highlighting the updated part of the text.
+As we can see in Table~\ref{tab:error_messages_list_element_outside} all of the parsing engines report the error location for the code from Listing~\ref{lst:list_element_outside} correctly. The error messages also shows that the question whether the first position after a newline is at column 0 or 1, is still open for debate. We also see that YAML CPP, Yan LR, and YAMBi show information about the expected element at the error position (end of a block \gls{collection} is missing). YAML CPP provides the best error message, since the plugin also shows which type of end element is missing (end of map). This type of information can also be determined easily in all of the lexer-based parsing engine plugins (Yan LR, YAMBi, YAwn). We modified them accordingly. Table~\ref{tab:error_messages_improved_list_element_outside} shows the slightly improved error messages, highlighting the updated part of the text.
 
 \begin{table}
   \caption{Slightly improved error messages}
@@ -1214,7 +1214,7 @@ After the update the parser produces an error message that looks like this:
             ^
 \end{textcode}
 
-for the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence}. As you can see above, we also added the erroneous input to the error message, just like we did in the Yan LR plugin.
+for the input shown in Listing~\ref{lst:incorrect_indentation_element_without_sequence}. As you can see above, we also added the erroneous input to the error message, just as we did in the Yan LR plugin.
 
 \subsection{YAEP}
 
