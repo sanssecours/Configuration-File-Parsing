@@ -1532,7 +1532,7 @@ Using the information we collected in this chapter it is time to determine the m
   \begin{threeparttable}
   \begin{tabular}{p{2cm}p{2.3cm}p{2.3cm}p{2.3cm}p{2.3cm}p{2.3cm}}
     \toprule
-    & \href{https://github.com/jbeder/yaml-cpp}{yaml-cpp} & \href{http://antlr.org}{ANTLR} & \href{https://www.gnu.org/software/bison}{Bison} & \href{https://github.com/vnmakarov/yaep}{YAEP} & \href{https://github.com/taocpp/PEGTL}{PEGTL}\\
+    & \makecell{\href{https://github.com/jbeder/yaml-cpp}{yaml-cpp}} & \makecell{\href{http://antlr.org}{ANTLR}} & \makecell{\href{https://www.gnu.org/software/bison}{Bison}} & \makecell{\href{https://github.com/vnmakarov/yaep}{YAEP}} & \makecell{\href{https://github.com/taocpp/PEGTL}{PEGTL}}\\
     \midrule
 
     Parser \newline Techniques &
@@ -1637,13 +1637,13 @@ Using the information we collected in this chapter it is time to determine the m
     \end{minipage}
     \\
 
-    Input API (Encoding) & — & ✅ & ❌ & ❌ & ✅\\
-    Token Handling & — & ✅ & ✅ & ❌ & ✅\\
-    AST \newline Support & — & ✅ & ❌ & ✅ & ✅\\
-    Tree \newline Walking & — & ✅ & ❌ & ❌ & ❌\\
-    Tree \newline Rewriting & — & ❌ & ❌ & ✅ & ✅\\
-    Error \newline Listener & — & ✅ & ❌ & ❌ & ❌\\
-    Error \newline Recovery & ❌ & ✅ & ✅\tnote{E} & ✅\tnote{E} & ❌\\
+    Input API (Encoding) & \makecell{\vspace{-0.4cm}{—}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{✅}}\\
+    Token Handling & \makecell{\vspace{-0.4cm}{—}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{✅}}\\
+    AST \newline Support & \makecell{\vspace{-0.4cm}{—}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{✅}}\\
+    Tree \newline Walking & \makecell{\vspace{-0.4cm}{—}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{❌}}\\
+    Tree \newline Rewriting & \makecell{\vspace{-0.4cm}{—}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{✅}}\\
+    Error \newline Listener & \makecell{\vspace{-0.4cm}{—}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{❌}}\\
+    Error \newline Recovery & \makecell{\vspace{-0.4cm}{❌}} & \makecell{\vspace{-0.4cm}{✅}} & \makecell{\vspace{-0.4cm}{✅\tnote{E}}} & \makecell{\vspace{-0.4cm}{✅\tnote{E}}} & \makecell{\vspace{-0.4cm}{❌}}\\
     Language Support &
     \begin{minipage}[t]{\linewidth}
     \begin{itemize}[leftmargin=*, itemsep=-1ex]
