@@ -7,7 +7,7 @@
 %% vutinfth.dtx  (with options: `class')
 %%
 %% This is a generated file.
-%% Copyright (C) 2014-2016 by Thomas Auzinger <thomas@auzinger.name>
+%% Copyright (C) 2014-2019 by Thomas Auzinger <thomas@auzinger.name>
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -26,10 +26,10 @@
 %% This work also consists of the file intro.tex.
 %%
 %% vutinfth.dtx
-%% Copyright (C) 2014-2016 by Thomas Auzinger <thomas@auzinger.name>
+%% Copyright (C) 2014-2019 by Thomas Auzinger <thomas@auzinger.name>
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{Template/vutinfth}
-    [2016/11/12 v1.6 TU Wien Faculty of Informatics thesis template]
+\ProvidesClass{vutinfth}
+    [2019/02/13 v1.8 TU Wien Faculty of Informatics thesis template]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -370,7 +370,6 @@
     }%
   }{}%
 }%
-\CreateData{address}%
 \CreateData{regnumber}%
 \CreateData{firstreviewerdata}%
 \CreateData{secondreviewerdata}%
@@ -805,6 +804,7 @@
   \begin{SFFont}{phv}%
     \sffamily
       \chapter*{\vutinfth@polylingual@StatementChapter}%
+      \vutinfth@person@author@fullname\par
       \vspace{1.2cm}%
       {\normalfont\vutinfth@polylingual@Statement}\par
       \vspace{1.2cm}%
