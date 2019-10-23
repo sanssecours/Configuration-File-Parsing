@@ -736,7 +736,7 @@
   \setlength{\baselineskip}{13.6pt}%
   \setlength{\parskip}{0pt plus 1pt}%
   \begin{SFFont}{phv}%
-    \sffamily
+    % \sffamily
     {\centering
       \vspace*{1.2cm}\par
       \begin{minipage}[t][5cm][b]{\textwidth}%
@@ -802,7 +802,7 @@
   \setlength{\baselineskip}{13.6pt}%
   \setlength{\parskip}{0pt plus 1pt}%
   \begin{SFFont}{phv}%
-    \sffamily
+    % \sffamily
       \chapter*{\vutinfth@polylingual@StatementChapter}%
       \vutinfth@person@author@fullname\par
       \vspace{1.2cm}%
