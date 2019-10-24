@@ -584,8 +584,7 @@ The questions about general type support (schemas) showed that a minimal \glstex
 
 One of the few specialized features deemed necessary by the participants were anchors and aliases. These two elements can be used to reference the same data multiple times in the same document.
 
-\subsubsection{Summary/Decision}
-\label{sec:discussion_summary_decision}
+\subsubsection{Summary}
 
 The list below contains a summary of the \glstext{YAML} features that should be part of a minimal \glstext{YAML} subset according to the results of the discussion:
 
@@ -597,7 +596,25 @@ The list below contains a summary of the \glstext{YAML} features that should be 
   \item references.
 \end{itemize}
 
-In the end we decided to drop some features in the list above and implement the following list of items for the \glstext{YAML} subset:
+\subsubsection{Problems of the Survey}
+
+The questionnaire was done in an early phase of the thesis to gather some insights about YAML features for configuration data. While it showed some interesting results, we noticed problems that made the results unusable for the implementation phase.
+
+One of these problems is the small sample size. With only 9 participants the maximum margin of error for a $95\%$ confidence interval is approximately $32\%$:
+
+% https://www.cs.mcgill.ca/~rwest/wikispeedia/wpcd/wp/m/Margin_of_error.htm
+\[
+  SE =
+  1.96·\sqrt{\frac{\frac{4}{9}·\left(1-\frac{4}{9}\right)}{9}} ≅
+  0.32 (32\%)
+\]
+
+Another problem even applies to results with a high percentage for one of the options, when the margin of error is smaller. The participants were not experts in the area of parsing. At the time of the survey this was also true for the author of the thesis. As a consequence the results included features, such as references, that are not that interesting from a parsing standpoint, but would require significant work in the core of Elektra, something that we consider out of the scope of the thesis.
+
+\subsubsection{Decision}
+\label{sec:discussion_decision}
+
+In the end the decision about the implemented YAML features was largely a results of the implementation phase (see Section~\nameref{sec:parsers}). We built the parser starting with smaller features such as scalar support and then added additional features. We decided to implement the following list of items for the \glstext{YAML} subset:
 
 \begin{itemize}
   \item double quoted scalars,
@@ -606,59 +623,6 @@ In the end we decided to drop some features in the list above and implement the 
   \item block collections, and
   \item core schema (no tag support).
 \end{itemize}
-
-The most notable difference to the result of the discussion are the missing support for data types, references and flow collections.
-
-\emph{Typing} is an interesting feature. From the perspective of the parser, adding support for tags should be easy. However, the translation of \glstext{YAML}’s data types to the ones supported by Elektra is not trivial. Hence we decided to not support tags.
-
-We also decided against supporting \emph{references}, since this feature allows us to specify cyclic data structures, something not supported by Elektra’s \nameref{sec:keyset} data structure.
-
-\emph{Flow collections} are easily readable by a parsing engine, since they contain explicit start and end symbols. Humans on the other hand have problems with complex flow collections~\cite{connor2018flowstyle}, especially if they are not formatted properly. For an example, please take a look at the \glstext{YAML} documents in Figure~\ref{fig:block_collection} and Figure~\ref{fig:flow_collection}, which both save the same data. For a human it is much easier to determine the structure of the data in Figure~\ref{fig:block_collection}. Since configuration data should be easily readable by humans and the significant white space is more interesting from the point of a parsing engine, we decided to only support block collections in our “minimal” \glstext{YAML} subset.
-
-\begin{figure}
-  \begin{yamlcode}
-    - Abbreviation:
-       - At First: Yet Another Markup Language
-       - Today: YAML Ain’t Markup Language
-    - Current Version: YAML 1.2 (2009)
-    - Superset of JSON
-    - Two Styles: Flow Style (Indicator Based) and
-                  Block Style (Indentation Based)
-    - 3 Different Data Types:
-      - Scalar:
-        - "Hello World"
-        - '👋 🌍'
-        - 123
-      - Sequence: [Text, 'Text', "Text", 123.5]
-      - Map: {🔑: Value, see-no-evil monkey: 🙈}
-    - Design Goal: “YAML is easily readable by humans.”
-  \end{yamlcode}
-  \caption{This \gls{YAML} document contains only block collections and flow scalars.}
-  \label{fig:block_collection}
-\end{figure}
-
-\begin{figure}
-\begin{yamlcode}
-  [{'Abbreviation':
-    [{'At First': 'Yet Another Markup Language'},
-     {'Today': 'YAML Ain’t Markup Language'}]},
-   {'Current Version': 'YAML 1.2 (2009)'},
-   'Superset of JSON',
-   {'Two Styles': 'Flow Style (Indicator Based) and
-                   Block Style (Indentation Based)'},
-   {'3 Different Data Types':
-     [{'Scalar': ['Hello World', '👋 🌍', 123]},
-      {'Sequence': ['Text', 'Text', 'Text', 123.5]},
-      {'Map': {'see-no-evil monkey':
-       '🙈', '🔑': 'Value'}}]},
-   {'Design Goal':
-    '“YAML is easily readable by humans.”'}]
-\end{yamlcode}
-  \caption{The \glstext{YAML} document above stores the same data as the one in Figure~\ref{fig:block_collection}, but uses flow collections instead of block collections.}
-  \label{fig:flow_collection}
-\end{figure}
-
-In the end we should mention that other \glstext{YAML} subsets such as \href{https://github.com/crdoconnor/strictyaml}{StrictYAML}, and \href{https://metacpan.org/pod/YAML::Tiny}{YAML Tiny} also do not support references, and only have very limited support for tags and flow collections~\cite{connor2018strictyaml, kennedy2018yamltiny}. We did not consider any of these two subsets, since we simply found out about them after we already implemented the parsing plugins. In the end our YAML subset is similar to YAML Tiny, except that we do not support block and multiline scalars.
 
 \section{Mapping Between Elektra’s Data Types and YAML}
 \label{sec:mapping_elektra_yaml}
@@ -808,6 +772,7 @@ since the result would be a \glstext{YAML} node that is neither sequence nor map
 This approach produces valid \glstext{YAML} data and allows us to distinguish between array parents that store values and parents that do not, by checking the first array element for the value prefix \yaml{___dirdata:}.
 
 \section{Parsers}
+\label{sec:parsers}
 
 The next section describes some of the implementation challenges we faced when we developed our parsing plugins.
 
@@ -1139,7 +1104,7 @@ Since Elektra supports values containing binary data, we can use the Base64 plug
 
 The new \emph{meta mode} uses metadata to mark a key-value pair that contains a base64-encoded value. Instead of a prefix Base64 adds a meta-key \code{type} with the value \code{binary}. Figure~\ref{fig:base64} shows an example, where Elektra uses the Base64 plugin to encode and decode the bytes 0x68 and 0x69 (code points for the ASCII string \yaml{hi}).
 
-We should mention here that we only added support for the Base64 encoded data to the \LinkYAMLCPP{} plugin, since we decided to not support tags for our \glstext{YAML} subset (see Section “\nameref{sec:discussion_summary_decision}”).
+We should mention here that we only added support for the Base64 encoded data to the \LinkYAMLCPP{} plugin, since we decided to not support tags for our \glstext{YAML} subset (see Section “\nameref{sec:discussion_decision}”).
 
 \begin{figure}
   \centering
