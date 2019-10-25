@@ -19,11 +19,15 @@ The goal of this evaluation is to find one or more parser plugins that
 
 To make sure that the plugins are reasonably fast we compare their execution time using runtime benchmarks and answer~\Cref{que:speed}.
 
-  \speed*
+\speed*
 
-For the resource usage we analyze the heap memory consumption. To make sure that the plugins are maintainable we analyze code sizes and take a look at the cyclomatic complexity. We also examine the extensibility and composability of the plugins looking at code changes for specific bug fixes and feature additions. This step will help us to answer~\Cref{que:closeness}.
+For the resource usage we analyze the heap memory consumption and answer~\Cref{que:memory}.
 
-  \closeness*
+\memory*
+
+To make sure that the plugins are maintainable we analyze code sizes and take a look at the cyclomatic complexity. We also examine the extensibility and composability of the plugins looking at code changes for specific bug fixes and feature additions. This step will help us to answer~\Cref{que:closeness}.
+
+\closeness*
 
 To make sure the plugins produce good error messages we also compare these messages for specific input files in a detailed analysis.
 
