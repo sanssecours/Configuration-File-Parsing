@@ -67,14 +67,20 @@ We compare the parsing code according to the following criteria:
   \item error reporting.
 \end{itemize}
 
-In the scope of the above comparison we answer the questions below.
+In the scope of the above comparison we answer the following main research question.
 
-\begin{restatable}{question}{speed}
+\begin{restatable}{question}{main}
+   Which parsing systems allows us to create a configuration parsing plugin that is easily extendable and has low maintainability cost, while offering good runtime performance and low memory overhead.
+\end{restatable}
+
+To answer the main research question we will look at the research questions below.
+
+\begin{restatable}{subquestion}{speed}
   \label{que:speed}
   How does the theoretic runtime complexity of the parsing methods compare to the actual measured runtime of the parsing code?
 \end{restatable}
 
-\begin{restatable}{question}{closeness}
+\begin{restatable}{subquestion}{closeness}
   \label{que:closeness}
   Which parsing technique allows us to stay closest to the definition of the configuration language? Does staying close to the given definition
   allow us to extend and improve the parser and its support code more easily?

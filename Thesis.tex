@@ -202,7 +202,13 @@
   bodyfont=\normalfont\itshape,
   postheadspace=1em,
 ]{questionStyle}
-\declaretheorem[name={Research Question}, style=questionStyle]{question}
+\declaretheorem[name={Main Research Question},
+                style=questionStyle,
+                numbered=no]
+               {question}
+\declaretheorem[name={Research Question},
+                style=questionStyle]
+               {subquestion}
 
 % -- Glossary ------------------------------------------------------------------
 
