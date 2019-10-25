@@ -17,6 +17,8 @@ All of the parser plugins showed a linear peak memory usage increase for a linea
 
 \size*
 
+The parser based on the YAML library yaml-cpp required the least amount of handwritten code. This was not surprising, since we can translate the high level output of the library relatively easily. If we only consider the plugins for which we wrote or generated the parsing code ourselves, then the ANTLR based plugin takes the lead, followed by the plugins based on Bison, \glstext{YAEP} and \glstext{PEGTL}.
+
 \closeness*
 
 We showed that the \gls{PEG} library \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, in the case of YAML, the language specification is rather low-level. This means the extension of the support code that converts the data in Elektra’s data structures takes considerable more effort, than for the lexer based parsers.
