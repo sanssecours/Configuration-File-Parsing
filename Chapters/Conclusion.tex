@@ -5,7 +5,7 @@
 
 In the thesis we compared different parsing techniques using the \nameref{sec:keyset} data structure of the configuration framework \href{https://www.libelektra.org}{Elektra}. The aim of this work was to find the most promising parsing technique for configuration files using a subset of the language \glstext{YAML} as example.
 
-In a \hyperref[sec:evaluation]{detailed evaluation} we determined the answer to our research questions.
+In a \hyperref[sec:evaluation]{detailed evaluation} we determined the answer to our auxiliary research questions.
 
 \speed*
 
@@ -14,6 +14,10 @@ The \hyperref[sec:run_time_performance]{benchmarks} showed a big difference betw
 \closeness*
 
 We showed that the \gls{PEG} library \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, in the case of YAML, the language specification is rather low-level. This means the extension of the support code that converts the data in Elektra’s data structures takes considerable more effort, than for the lexer based parsers.
+
+The answer to the research question above helped us to answer our main research question.
+
+\main*
 
 In the end, \gls{ANTLR}, the parsing engine
 
