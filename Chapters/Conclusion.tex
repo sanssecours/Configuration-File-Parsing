@@ -11,6 +11,12 @@ In a \hyperref[sec:evaluation]{detailed evaluation} we determined the answer to 
 
 The \hyperref[sec:run_time_performance]{benchmarks} showed a big difference between the runtime of the \hyperref[sec:design_challenges_and_decisions]{parsing plugins} especially for large files. However, at least for our example data, all the plugins \hyperref[fig:benchmark_results_generated_above_1000]{showed linear runtime behavior}. Even the PEG parser library \gls{PEGTL} that has a theoretical exponential runtime in the worst case showed this linear behavior. Interestingly, \gls{YAEP}, the library that uses one of the most powerful parsing techniques tested (Earley parsing), showed the \hyperref[fig:benchmark_generated]{best runtime performance on macOS}. On Linux the library was only \hyperref[fig:benchmark_generated]{slightly slower than the fastest parser, based on Bisons’ LALR code}.
 
+\memory*
+
+All of the parser plugins showed a linear peak memory usage increase for a linear increase of the size of the input. The difference between the peak memory usage was substantial, though. The \glstext{YAEP} parser needed the least amount of memory, while the Bison parser required about 20\% more memory. The other parsers required about three, up to more than four times more peak heap memory.
+
+\size*
+
 \closeness*
 
 We showed that the \gls{PEG} library \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, in the case of YAML, the language specification is rather low-level. This means the extension of the support code that converts the data in Elektra’s data structures takes considerable more effort, than for the lexer based parsers.
