@@ -1177,8 +1177,6 @@ shows the improved error message for Listing~\ref{lst:incorrect_indentation}. On
                                           ^
 \end{textcode}
 
-.
-
 \subsection{Bison}
 
 In the first improvement step for the error messages of the Bison parser, we defined alternative names for \glspl{token}, just like we did for Yan LR. Bison supports this feature directly, which means we did not have to write a script to replace the symbols in the generated parser code. After this update the error message from Table~\ref{tab:error_messages_improved_list_element_outside} changed from:
@@ -1192,8 +1190,6 @@ to
 \begin{textcode}
   3:1: syntax error, unexpected element, expecting end of map or key
 \end{textcode}
-
-.
 
 We then looked into the error recovery capabilities of Bison. Unlike \gls{ANTLR} the generated parser does not do error recovery by default, but rather exits on the first error. To improve the error behavior, Bison offers the possibility to add the predefined \code{error} \gls{token} to a grammar. Every time the Bison parser encounters an error it will produce this \gls{token}~\cite{donnelly2019bison}. We modified the grammar to allow errors inside \glstext{YAML} maps and sequences:
 
@@ -1251,7 +1247,7 @@ After all these changes the output for the \glstext{YAML} data from Listing~\ref
             ^
 \end{textcode}
 
-. The only thing missing is the information about the expected type of \gls{token}.
+The only thing missing is the information about the expected type of \gls{token}.
 
 \subsection{PEGTL}
 
@@ -1263,7 +1259,7 @@ As we described in the section “\nameref{sec:peg_parser}”, we tried to keep 
   struct yaml : if_must<l_yaml_stream, eof> {};
 \end{cppcode}
 
-. The code above also explains the initial version of the error message shown in Table~\ref{tab:error_messages_improved_list_element_outside}:
+The code above also explains the initial version of the error message shown in Table~\ref{tab:error_messages_improved_list_element_outside}:
 
 \begin{textcode}
   3:0(18): parse error matching tao::yaypeg::eof
@@ -1277,7 +1273,7 @@ As we described in the section “\nameref{sec:peg_parser}”, we tried to keep 
        ^
 \end{textcode}
 
-. As you can see we also added the erroneous input to the message, just as we did for the other parsing engines.
+As you can see we also added the erroneous input to the message, just as we did for the other parsing engines.
 
 The same single error message, regardless of the error, is not helpful. For good error reporting we need to add other \cpp{must} rules. However, adding failure points (\cpp{must} rules) changes the behavior of the grammar and might even cause the parser to fail on valid input. To minimize the probability of incorrect grammar changes we only added a few rules for situation we were sure that the remainder of a grammar rule had to match. For example, when the parser reads an unescaped single or double quote character (outside of a block scalar) at the beginning of a line or after a white space character, it found a quoted flow scalar. Therefore
 
@@ -1301,7 +1297,7 @@ looks like this:
                       ^
 \end{textcode}
 
-. As you may have noticed we included both error possibilities in the error message, since reacting to both errors independently would require fundamental changes to the grammar.
+As you may have noticed we included both error possibilities in the error message, since reacting to both errors independently would require fundamental changes to the grammar.
 
 \subsection{Final Error Messages}
 
