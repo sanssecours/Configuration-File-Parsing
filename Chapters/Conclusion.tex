@@ -23,6 +23,10 @@ The parser based on the YAML library yaml-cpp required the least amount of handw
 
 We showed that the \gls{PEG} library \gls{PEGTL} allowed us to stay much closer to the representation of the \href{http://yaml.org/spec/1.2/spec.html}{specification of our example language YAML}. This closeness provides utility, when we compare the ease of extensibility of the language grammar. However, in the case of YAML, the language specification is rather low-level. This means the extension of the support code that converts the data in Elektra’s data structures takes considerable more effort, than for the lexer based parsers.
 
+\message*
+
+From the tested parser libraries and generators only ANTLR offers multi-error support without requiring changes to the grammar. The Bison and YAEP parsers on the other hand require manual updates to the grammar to specify error points. These grammar changes also change the interpreted language of these parsers and can cause conflicts (Bison) or ambiguous output (\gls{YAEP}). Overall the error messages produced by the ANTLR, Bison and YAEP parsers are not that great, but comparable to the ones produced by the handwritten recursive descent parser of yaml-cpp. The parser of yaml-cpp does not support error recovery and hence only reports the first syntax error. The library with the most limited built-in error handling capabilities was \gls{PEGTL}. The parser based on this library also showed a common problem among PEG parsers, the inability to always show the correct position of the first syntax error.
+
 The answer to the research question above helped us to answer our main research question.
 
 \main*
