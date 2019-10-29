@@ -647,7 +647,7 @@ For example, the \cc{KeySet} shown in Figure~\ref{fig:keys} would then map to th
   bloc/party/silent: "alarm"
 \end{yamlcode}
 
-. As we can see the resulting \glstext{YAML} file contains quite a lot of redundant data.
+As we can see the resulting \glstext{YAML} file contains quite a lot of redundant data.
 
 In our second solution we take the hierarchical nature of the database into account and split on each part of a key. The result of this approach is the following \glstext{YAML} file:
 
@@ -658,7 +658,7 @@ In our second solution we take the hierarchical nature of the database into acco
       silent: "alarm"
 \end{yamlcode}
 
-. The second solution removes unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the \glstext{YAML} data from above.
+The second solution removes unwanted redundancy and reflects the hierarchy much better. However, the approach also has an obvious downside: What happens if we want to store a value in \code{user/yaml/bloc} or \code{user/yaml/bloc/party}? To answer this question, let us look at a tree representing the \glstext{YAML} data from above.
 
 As we can see in Figure~\ref{fig:tree} the only nodes that store values are the leaves of the tree. Let us assume we also want to store the value \code{chain} in \code{user/yaml/bloc}. Figure~\ref{fig:tree_extended} shows the resulting tree.
 
@@ -715,7 +715,7 @@ Another option to fix our problem would be to use \glstext{YAML}’s sequence ty
         silent: "alarm"
 \end{yamlcode}
 
-. However, this format is quite complicated. If we add support for Elektra’s array type – mapping arrays to \glstext{YAML} sequences – the situation is even worse.
+However, this format is quite complicated. If we add support for Elektra’s array type – mapping arrays to \glstext{YAML} sequences – the situation is even worse.
 
 To solve the problem we use another approach. We reserve the name \yaml{___dirdata} to save values in non-leaf nodes. The code below shows the mapping of our example data:
 
@@ -727,7 +727,7 @@ To solve the problem we use another approach. We reserve the name \yaml{___dirda
       silent: "alarm"
 \end{yamlcode}
 
-. Since we reserved the name \yaml{___dirdata} the value below this key will always be a leaf of the tree.
+Since we reserved the name \yaml{___dirdata} the value below this key will always be a leaf of the tree.
 
 \subsection{Mapping Arrays}
 
@@ -749,7 +749,7 @@ If we use this approach, then the \cc{KeySet} shown in Figure~\ref{fig:array_val
     - "Third Element"
 \end{yamlcode}
 
-. We are left with the problem, where to save the data of the \emph{parent} \cc{Key} of the array elements \code{user/array}. We cannot use the same approach as before:
+We are left with the problem, where to save the data of the \emph{parent} \cc{Key} of the array elements \code{user/array}. We cannot use the same approach as before:
 
 \begin{yamlcode}
   array:
@@ -1013,7 +1013,7 @@ struct ns_plain_first : sor<seq<not_at<c_indicator>, ns_char>,
                                 at<ns_plain_safe>>> {};
 \end{cppcode}
 
-. The rule \cc{sor} represents ordered choice, meaning that it tries to match it’s template arguments:
+The rule \cc{sor} represents ordered choice, meaning that it tries to match it’s template arguments:
 
 \begin{enumerate}
   \item \cc{seq<not_at<c_indicator>, ns_char}, and
@@ -1042,7 +1042,7 @@ proved more difficult to express in the \gls{PEGTL}. To translate these kind of 
       RevertStateRule> {};
 \end{cppcode}
 
-. As we can see above \cc{with_updated_state} first invokes the rule \cc{UpdateStateRule} to update the state, then it tries to match a sequence of all rules stored in the template parameter pack \cc{Rules}. Depending on the success of \cc{seq<Rules>},
+As we can see above \cc{with_updated_state} first invokes the rule \cc{UpdateStateRule} to update the state, then it tries to match a sequence of all rules stored in the template parameter pack \cc{Rules}. Depending on the success of \cc{seq<Rules>},
 
 \begin{enumerate}
   \item the rule \cc{with_updated_state} either applies \cc{RevertStateRule} (third argument of outermost \cc{seq}) and succeeds, if \cc{seq<Rules...>} succeeds, or
@@ -1063,7 +1063,7 @@ As described in the previous section “\nameref{sec:peg_parser}” we already u
   \item does not provide built-in support for advanced features such as tree selection
 \end{itemize}
 
-. In the end we did not think the effort to create yet another parser was worth the time, since at least in theory \gls{PEGTL} seemed to be the better choice.
+In the end we did not think the effort to create yet another parser was worth the time, since at least in theory \gls{PEGTL} seemed to be the better choice.
 
 \subsection{Augeas Lens}
 
