@@ -37,6 +37,27 @@ To make sure the plugins produce good error messages we also compare these messa
 
 \message*
 
+\section{Plugins}
+
+The mapping between the evaluated parsing plugin names and the parser libraries/generators might be not apparent to anyone, but the thesis author. Since we mainly use the plugin name in the evaluation we provide an overview of the mapping in Table~\ref{table:plugins}. The colored text shows how you can memorize the mapping more easily. Apart from YAwn all plugins share at least two consecutive letters with the used parsing library. The name of YAwn is based on the very bad that “pun” that you might have to “yawn” if you get up earl(e)y.
+
+\begin{table}[H]
+  \caption{Plugin Overview}
+  \label{table:plugins}
+  \centering
+  \begin{tabular}{lll}
+\toprule
+Plugin & Library/Generator & Parsing Technique\\
+\midrule
+\tikzcircle{orange} \textcolor{orange}{YAML CPP} & \textcolor{orange}{yaml}-\textcolor{orange}{cpp} & Handwritten Recursive Descent Parser\\
+\tikzcircle{DarkYellow} Y\textcolor{DarkYellow}{an LR} & \textcolor{DarkYellow}{AN}T\textcolor{DarkYellow}{LR} & \gls{ALL(*)}\\
+\tikzcircle{Turquoise3} YAM\textcolor{Turquoise3}{Bi} & \textcolor{Turquoise3}{Bi}son & \gls{LALR}\\
+\tikzcircle{Aqua} \textcolor{Aqua}{YAwn} & \gls{YAEP} & \textcolor{Aqua}{Earl}e\textcolor{Aqua}{y} Parser\\
+\tikzcircle{DarkOrchid} YAy \textcolor{DarkOrchid}{PEG} & \textcolor{DarkOrchid}{PEG}TL & PEG Parser\\
+\bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Performance Analysis}
 
 In the following section we analyze the runtime time and memory usage of our plugins for certain input files. We first describe the overall methodical steps we took for both the runtime and memory benchmarks. Then we describe, measure and analyze both of these criteria in their own sections.
