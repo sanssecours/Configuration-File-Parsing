@@ -702,7 +702,7 @@ We could now save \code{chain} as a map key inside \code{bloc}:
       silent: "alarm"
 \end{yamlcode}
 
-. However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:tree_extended++}).
+However using this approach we are unable to differentiate between the name and the value of a \cc{Key}. For example, if we add a new \cc{Key} with the name \code{user/yaml/bloc/chain} it would just overwrite the value of \code{user/yaml/bloc} (see Figure~\ref{fig:tree_extended++}).
 
 Another option to fix our problem would be to use \glstext{YAML}’s sequence type, and to store the value of a \cc{Key} and the data below the \cc{Key} as first and second element of the sequence:
 
