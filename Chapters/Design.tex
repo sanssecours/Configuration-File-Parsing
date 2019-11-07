@@ -574,7 +574,7 @@ In the following bar charts the term “Yes” refers to a checked box for the s
 
 \subsection{Interpretation}
 
-The results of the survey showed that the participants preferred double quoted flow scalars over single quoted and plain scalars. A reasons for this could be that those scalars are familiar from other languages such as C, and that they are able to express arbitrary data. Asked about block scalar styles most of the Elektra developers did not think that any of the two styles were necessary.
+The results of the survey showed that the participants preferred double quoted flow scalars over single quoted and plain scalars. A reason for this could be that those scalars are familiar from other languages such as C, and that they are able to express arbitrary data. Asked about block scalar styles most of the Elektra developers did not think that any of the two styles were necessary.
 
 In contrast to the decision about block scalars, the participants preferred the block styles of sequences and mappings (\glspl{collection}) over the respective flow style. However, they also decided that a useful \glstext{YAML} subset should include flow \glspl{collection}.
 
@@ -856,12 +856,12 @@ While Table~\ref{tab:recursive_descent_correspondence} suggest writing a recursi
 
   \item [Error Handling:] The code does not contain any error handling. If a given input contains errors, then the author of the data wants to know \emph{where these errors occurred}. Otherwise she or he has to check the whole input.
 
-  \item [Left Recursion:] If we translate a left recursive rules such as \code{\color{color02} rule1 \color{color03} \textbf{=} \color{color02} rule1 \color{color03} / \color{color02} rule2} using the correspondences given in Table~\ref{tab:recursive_descent_correspondence}, then the resulting code would never terminate. This is the case, since \code{\color{color02} rule1} calls \code{{\color{color02} rule1}}, which then calls \code{\color{color02} rule1}, and so on an so forth (infinite recursion).
+  \item [Left Recursion:] If we translate a left recursive rules such as \code{\color{color02} rule1 \color{color03} \textbf{=} \color{color02} rule1 \color{color03} / \color{color02} rule2} using the correspondences given in Table~\ref{tab:recursive_descent_correspondence}, then the resulting code would never terminate. This is the case, since \code{\color{color02} rule1} calls \code{{\color{color02} rule1}}, which then calls \code{\color{color02} rule1}, and so on and so forth (infinite recursion).
 \end{description}
 
 All of the problems above apply regardless of the programming language of the parsing code. Since we implemented the recursive descent parser in C, another issue is the error handling in C itself. The language does not provide a native exception handling mechanism. We therefore used the return value to also transfer the error information between functions. This approach is quite cumbersome, since it basically means that we have to check for an error after each function call.
 
-We used C macros to minimize the code overhead and complexity caused by the error handling. Still, for a very small part of the \glstext{YAML} syntax described in the ABNF grammar of Figure~\ref{cod:abnf_recurive_descent} the parser contained about 374 lines of code (counted with \code{cloc} version 1.72). While smaller feature additions, such as supporting multiple key-value pairs instead of only one key-value pair \href{https://github.com/ElektraInitiative/libelektra/commit/17aa7a6ea5d9261287104213dcba67f4d0a0fcbc}{were quite straightforward} (14 additions, 1 deletion), other modifications, such as supporting block styles would take considerable more effort.
+We used C macros to minimize the code overhead and complexity caused by the error handling. Still, for a very small part of the \glstext{YAML} syntax described in the ABNF grammar of Figure~\ref{cod:abnf_recurive_descent} the parser contained about 374 lines of code (counted with \code{cloc} version 1.72). While smaller feature additions, such as supporting multiple key-value pairs instead of only one key-value pair \href{https://github.com/ElektraInitiative/libelektra/commit/17aa7a6ea5d9261287104213dcba67f4d0a0fcbc}{were quite straightforward} (14 additions, 1 deletion), other modifications, such as supporting block styles would take considerably more effort.
 
 Since the first steps with a handwritten recursive descent parser showed that this approach takes considerable effort we decided against extending the first prototype. Instead we chose to use an already existing handwritten \glstext{YAML} parser.
 
@@ -955,7 +955,7 @@ YAMBi uses parser actions to call methods of a class that stores temporary data 
 \subsection{Earley Parser}
 \label{sec:earley_parser}
 
-For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. We used this library, since it uses C and C++ as programming language, which improves the comparability with the other parsing tool we used. We also found another \href{https://bitbucket.org/amirouche/c-earley-parser/src/default/src/earley_items.c}{C Earley Parser implementation} by Amirouche Boubekki. However, his parser looked incomplete and unmaintained.
+For the Earley parser plugin we used a parsing library called \href{https://github.com/vnmakarov/yaep}{\gls{YAEP}}. We used this library, since it uses C and C++ as programming language, which improves the comparability with the other parsing tools we used. We also found another \href{https://bitbucket.org/amirouche/c-earley-parser/src/default/src/earley_items.c}{C Earley Parser implementation} by Amirouche Boubekki. However, his parser looked incomplete and unmaintained.
 
 Unlike \gls{ANTLR} and Bison, \gls{YAEP} does not generate parsing code, but uses a function to parse input according to a user specified grammar. The output of YAEP is a heterogenous \gls{AST}. To construct the tree the user annotates the grammar with tree construction rules (marked with \code{\#}). For example, the first line in the code:
 
