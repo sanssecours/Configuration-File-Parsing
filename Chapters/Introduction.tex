@@ -107,26 +107,26 @@ The methodological approach for this thesis consists of the steps given below.
 
 \begin{description}[style=multiline, leftmargin=3.2cm, font=\bfseries]
 
-  \item[Literature Review] We determined the current status of parsing techniques suitable for configuration file parsing. We then chose appropriate libraries for the parsing techniques listed in the section “\nameref{sec:aim_of_the_work}”.
+  \item[Literature Review] We determine the current status of parsing techniques suitable for configuration file parsing. We then choose appropriate libraries for the parsing techniques listed in the section “\nameref{sec:aim_of_the_work}”.
 
-  \item[Discussion] To determine a minimal usable subset of \glstext{YAML} we decided about common features required for a new Elektra storage plugin with some of the current developers. For that purpose we demonstrated YAML features and asked, which ones should be supported in a survey.
+  \item[Discussion] To determine a minimal usable subset of \glstext{YAML} we decide about common features required for a new Elektra storage plugin with some of the current developers. For that purpose we demonstrate YAML features and ask, which ones should be supported in a survey.
 
-  \item[Implementation] We wrote, generated and integrated parsing code that handles our minimal \glstext{YAML} subset. In this phase we also added other necessary support code to Elektra.
+  \item[Implementation] We write, generate and integrate parsing code that handles our minimal \glstext{YAML} subset. In this phase we also add other necessary support code to Elektra.
 
-  \item[Comparison] As noted in “\nameref{sec:aim_of_the_work}” we evaluated the different implementations of our minimal \glstext{YAML} subset parsers.
+  \item[Comparison] As noted in “\nameref{sec:aim_of_the_work}” we evaluate the different implementations of our minimal \glstext{YAML} subset parsers.
 
   \begin{description}
-    \item[Runtime Benchmark:] For the runtime comparison we created a benchmark framework to determine the speed of the different parsing code. In this part of the thesis, we answer \Cref{que:speed}.
+    \item[Runtime Benchmark:] For the runtime comparison we create a benchmark framework to determine the speed of the different parsing code. In this part of the thesis, we answer \Cref{que:speed}.
 
     \item[Memory Profiling:] For the memory comparison we use a memory profiling tool to determine the heap memory usage of the \glstext{YAML} plugins and answer \Cref{que:memory}.
 
-    \item[Code Count:] We counted the number of code lines with a code line counting tool. This method allows us to consider only actual code, ignoring blank lines and comments. At the end of this task we answer \Cref{que:size}.
+    \item[Code Count:] We count the number of code lines with a code line counting tool. This method allows us to consider only actual code, ignoring blank lines and comments. At the end of this task we answer \Cref{que:size}.
 
-    \item[Complexity Measurement:] We measured the \gls{CC} of the code using a static analyzer.
+    \item[Complexity Measurement:] We measure the \gls{CC} of the code using a static analyzer.
 
-    \item[Extensibility \& Composability Check:] To analyze the extensibility and composability of the parsing code we looked at the code difference of commits for certain features and bug fixes. We counted the amount of updated code lines to determine the extension effort. This measurement, together with a comparison between the grammar specification of \glstext{YAML} and the code created in this thesis, helps us to determine the answer for \Cref{que:closeness}.
+    \item[Extensibility \& Composability Check:] To analyze the extensibility and composability of the parsing code we look at the code difference of commits for certain features and bug fixes. We count the amount of updated code lines to determine the extension effort. This measurement, together with a comparison between the grammar specification of \glstext{YAML} and the code created in this thesis, helps us to determine the answer for \Cref{que:closeness}.
 
-    \item[Error Reporting:] To determine the quality of the error messages we created erroneous files and compared the quality of the resulting error output. The purpose of this task is to answer \Cref{que:message}.
+    \item[Error Reporting:] To determine the quality of the error messages we create erroneous files and compare the quality of the resulting error output. The purpose of this task is to answer \Cref{que:message}.
   \end{description}
 
 \end{description}
