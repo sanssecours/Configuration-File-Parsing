@@ -241,21 +241,6 @@
 \newacronym{YAML}{YAML}{YAML Ain’t Markup Language}
 \newacronym{YAEP}{YAEP}{Yet Another Earley Parser}
 
-\newglossaryentry{collection}{
-    name = collection,
-    description = {A collection is a data structure used to store multiple items. In \glstext{YAML} the term collection is used to refer to both sequences and maps}
-}
-
-\newglossaryentry{simpleKey}{
-    name = simple key,
-    description = {A simple \glstext{YAML} key is a key that does not start with the explicit mapping key symbol “\yaml{?}”}
-}
-
-\newglossaryentry{token}{
-    name = token,
-    description = {Often parsers do not directly work on the character level. Instead a lexer (aka scanner or tokenizer) assembles parts of the text into tokens (aka symbols). The parser then uses a stream of tokens as input instead of a stream of characters}
-}
-
 \newcommand{\GlsShort}[1]
   {\setacronymstyle{short-long}\gls{#1}\setacronymstyle{long-short}}
 
