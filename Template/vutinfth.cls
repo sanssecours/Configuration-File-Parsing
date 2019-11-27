@@ -5,10 +5,10 @@
 %% The original source files were:
 %%
 %% vutinfth.dtx  (with options: `class')
-%%
+%% 
 %% This is a generated file.
 %% Copyright (C) 2014-2019 by Thomas Auzinger <thomas@auzinger.name>
-%%
+%% 
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
 %% of this license or (at your option) any later version.
@@ -16,20 +16,20 @@
 %%   http://www.latex-project.org/lppl.txt
 %% and version 1.3 or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
-%%
+%% 
 %% This work has the LPPL maintenance status `maintained'.
-%%
+%% 
 %% The Current Maintainer of this work is Thomas Auzinger.
-%%
+%% 
 %% This work consists of the files vutinfth.dtx and vutinfth.ins
 %% and the derived file vutinfth.cls.
 %% This work also consists of the file intro.tex.
-%%
+%% 
 %% vutinfth.dtx
 %% Copyright (C) 2014-2019 by Thomas Auzinger <thomas@auzinger.name>
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{vutinfth}
-    [2019/02/13 v1.8 TU Wien Faculty of Informatics thesis template]
+    [2019/11/11 v1.9 TU Wien Faculty of Informatics thesis template]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -531,31 +531,18 @@
   \setlength{\baselineskip}{\vutinfth@tmp@baselineskip}%
   \setlength{\parskip}{\vutinfth@tmp@parskip}%
 }%
-\newsetlength{\vutinfth@header@placement}{-41.49731pt}%
-\newsetlength{\vutinfth@bar@width}{511bp}%
-\newsetlength{\vutinfth@bar@height}{47bp}%
-\newsetlength{\vutinfth@bar@pivot@x}{330.71bp}%
-\newsetlength{\vutinfth@bar@pivot@y}{25.31bp}%
-\newsetlength{\vutinfth@logo@height}{46bp}%
-\newsetlength{\vutinfth@logo@pivot@x}{4.57bp}%
-\newsetlength{\vutinfth@logo@pivot@y}{5.37bp}%
-\newsetlength{\vutinfth@logo@offset@height}{\vutinfth@logo@height
-  + \vutinfth@bar@pivot@y - \vutinfth@logo@pivot@y}%
-\newsetlength{\vutinfth@logo@offset@x}{-\vutinfth@bar@width
-  + \vutinfth@bar@pivot@x - \vutinfth@logo@pivot@x}%
-\newsetlength{\vutinfth@logo@offset@y}{
-  - \vutinfth@bar@pivot@y + \vutinfth@logo@pivot@y}%
+\newsetlength{\vutinfth@logo@offset@x}{10.6mm}%
+\newsetlength{\vutinfth@logo@offset@y}{22mm}%
+\newsetlength{\vutinfth@logo@width@safe}{74mm}%
+\newsetlength{\vutinfth@logo@height}{11mm}%
+\newsetlength{\vutinfth@header@width}{\paperwidth - \vutinfth@logo@offset@x - \vutinfth@logo@offset@x}%
+\newsetlength{\vutinfth@header@height}{\vutinfth@logo@height}%
+\newsetlength{\vutinfth@header@separator}{-12mm}%
 \newcommand{\vutinfth@header@titlepage}{%
-  \centering
-  \begin{minipage}[b][\vutinfth@logo@offset@height][t]{%
-      \vutinfth@bar@width
-    }%
-    \includegraphics{TU_INF_header}%
-    \hspace*{\vutinfth@logo@offset@x}%
-    \raisebox{\vutinfth@logo@offset@y}{%
-      \includegraphics[scale=1]{TU_INF_Logo_gray}%
-    }%
-  \end{minipage}%
+  \setlength{\unitlength}{1mm}%
+  \begin{picture}(74, 11)%
+    {\includegraphics[height=\vutinfth@logo@height]{Logo-schwarz.pdf}}
+  \end{picture}\hfill
 }%
 \newcommand{\vutinfth@footer@titlepage}{%
   \centering
@@ -565,12 +552,12 @@
     A-1040 Wien \vutinfth@squarebullet\space
     Karlsplatz 13 \vutinfth@squarebullet\space
     Tel. +43-1-58801-0 \vutinfth@squarebullet\space
-    www.tuwien.ac.at%
+    www.tuwien.at%
   \end{minipage}%
 }%
 \makepagestyle{vutinfth@pagestyle@titlepage}%
 \makerunningwidth{vutinfth@pagestyle@titlepage}[\textwidth]{%
-  \vutinfth@bar@width}%
+  \vutinfth@header@width}%
 \makeheadposition{vutinfth@pagestyle@titlepage}{%
   center}{center}{center}{center}%
 \makeevenhead{vutinfth@pagestyle@titlepage}{}{%
@@ -728,8 +715,8 @@
   \thispagestyle{vutinfth@pagestyle@titlepage}%
   \newgeometry{%
     left=2.4cm,right=2.4cm,bottom=2.5cm,top=2cm,
-    headsep=\vutinfth@header@placement,
-    head=2\vutinfth@logo@offset@height
+    headsep=\vutinfth@header@separator,
+    head=\vutinfth@header@height
   }%
   \vutinfth@savelayout
   \setlength{\parindent}{0pt}%
@@ -840,6 +827,7 @@
   \selectlanguage{english}%
   \chapter*{Acknowledgements}%
 }{%
+  \cleardoublepage
 }%
 \newenvironment{danksagung}{%
   \selectlanguage{naustrian}%
