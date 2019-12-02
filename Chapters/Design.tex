@@ -1117,16 +1117,7 @@ We should mention here that we only added support for the Base64 encoded data to
 
 We already described the problem of storing a value in a non-leaf (directory) \cc{Key} in the Section~“\nameref{sec:mapping_elektra_yaml}”. Since the problem is independent of the parser engine and also relevant to other plugins, we implemented the functionality in a plugin named \href{http://libelektra.org/plugins/directoryvalue}{Directory Value}.
 
-The Directory Value plugin adds an additional \cc{Key} with the prefix \yaml{___dirdata} for every non-array \cc{Key} that has children and contains a value in the \code{set} direction (position \code{preset}). For example, for the \cc{KeySet} shown in Figure~\ref{fig:keyset_large}, the plugin adds the \cc{Key}
-
-\begin{itemize}
-  \item \code{user/yaml/bloc/\_\_\_dirdata} and
-  \item \code{user/yaml/bloc/party/\_\_\_dirdata}.
-\end{itemize}
-
-The plugin then moves the data stored in the parent \cc{Key} to the newly created \cc{Key}.
-
-\begin{figure}[H]
+\begin{figure}
   \centering
   \begin{subfigure}[t]{.4\textwidth}
     \includegraphics[width=\linewidth]{KeySetLarge}
@@ -1141,6 +1132,15 @@ The plugin then moves the data stored in the parent \cc{Key} to the newly create
   \end{subfigure}
   \caption{The Directory Value plugin adds data at the position \code{preset} (\ref{fig:keyset_large_extended}) and then restores the original data (\ref{fig:keyset_large}) at the position \code{postget}.}
 \end{figure}
+
+The Directory Value plugin adds an additional \cc{Key} with the prefix \yaml{___dirdata} for every non-array \cc{Key} that has children and contains a value in the \code{set} direction (position \code{preset}). For example, for the \cc{KeySet} shown in Figure~\ref{fig:keyset_large}, the plugin adds the \cc{Key}
+
+\begin{itemize}
+  \item \code{user/yaml/bloc/\_\_\_dirdata} and
+  \item \code{user/yaml/bloc/party/\_\_\_dirdata}.
+\end{itemize}
+
+The plugin then moves the data stored in the parent \cc{Key} to the newly created \cc{Key}.
 
 In addition, the plugin inserts a new \cc{Key} for every array parent that stores a (non-binary) value at the first position of the array. In our example, the plugin adds a new \cc{Key} with the value \code{\_\_\_dirdata: Array Value} at the first position of \code{user/yaml/array} and increases the index of all other array elements by one.
 
