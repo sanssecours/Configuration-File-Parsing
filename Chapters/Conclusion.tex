@@ -13,7 +13,7 @@ The \hyperref[sec:run_time_performance]{benchmarks} showed a big difference betw
 
 \memory*
 
-All of the parser plugins showed a  \hyperref[fig:benchmark_results_memory_lines_above_thousand]{linear peak memory usage} increase for a linear increase of the size of the input. The difference between the peak memory usage was substantial, though. The \glstext{YAEP} parser needed the least amount of memory, while the Bison parser required about 20\% more memory. The other parsers required about three, up to more than four times more peak heap memory.
+All of the parser plugins showed a  \hyperref[fig:benchmark_results_memory_lines_above_thousand]{linear peak memory usage} increase for a linear increase of the size of the input. The difference between the peak memory usage was substantial, though. The \glstext{PEGTL} parser needed the least amount of memory, while the yaml-cpp and Bison parsers required about 14–24\% more memory. The other parsers required approximately 2.4 and 2.8 times more peak heap memory.
 
 \size*
 
